@@ -6,7 +6,11 @@ let
         systemPackages = [
           pkgs.docker
           pkgs.docker-compose
+          pkgs.vim
         ];
+      };
+      users = {
+        mutableUsers = true;
       };
       virtualisation = {
         docker = {
