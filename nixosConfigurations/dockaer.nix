@@ -27,8 +27,9 @@ let
                   base = "172.31.0.0/16";
                   size = 24;
                 }
-              ]
-                };
+              ];
+            };
+            ;
             };
             enable = true;
             enableOnBoot = true;
