@@ -12,8 +12,8 @@ let
         mutableUsers = true;
         users = {
           root = {
-            hashedPassword = $y$j9T$
-              j0JBV3iwFMEbM0TKMvqnv.$92W0gf1Jd61jl/s1DLxUSxViuKyKIW0jZ.I4q6wyDC2;
+            hashedPassword = '$y$j9T$
+              j0JBV3iwFMEbM0TKMvqnv.$92W0gf1Jd61jl/s1DLxUSxViuKyKIW0jZ.I4q6wyDC2';
               };
               };
               };
