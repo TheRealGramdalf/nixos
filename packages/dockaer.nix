@@ -28,21 +28,20 @@ let
                 }
               ];
             };
-            ;
-            };
-            enable = true;
-            enableOnBoot = true;
-            liveRestore = true;
-            storageDriver = "overlay2";
           };
+          enable = true;
+          enableOnBoot = true;
+          liveRestore = true;
+          storageDriver = "overlay2";
         };
       };
     };
-    in
-    inputs.nixos-generators.nixosGenerate {
-    system = "x86_64-linux";
-    format = "proxmox-lxc";
-    modules = [
-      nixosModule
-    ];
-  }
+  };
+in
+inputs.nixos-generators.nixosGenerate {
+  system = "x86_64-linux";
+  format = "proxmox-lxc";
+  modules = [
+    nixosModule
+  ];
+}
