@@ -2,6 +2,7 @@
   description = "Docker nixos LXC";
   inputs = {
     nixpkgs.url = "flake:nixpkgs/nixpkgs-unstable";
+    nixos-generators.follows = "nixpkgs";
   };
   outputs = inputs:
     let

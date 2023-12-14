@@ -17,6 +17,9 @@
     },
     "root": {
       "inputs": {
+        "nixos-generators": [
+          "nixpkgs"
+        ],
         "nixpkgs": "nixpkgs"
       }
     }
