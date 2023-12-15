@@ -8,8 +8,8 @@
         pkgs.docker-compose
       ];
       variables = {
-        STACKS_DIR = /compose/stacks;
-        INCLUDE_DIR = /compose/include;
+        STACKS_DIR = "/compose/stacks";
+        INCLUDE_DIR = "/compose/include";
       };
     };
     virtualisation = {

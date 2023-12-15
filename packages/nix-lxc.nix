@@ -15,6 +15,9 @@ let
           enable = true;
         };
       };
+      system = {
+        stateVersion = "23.11";
+      };
       users = {
         mutableUsers = true;
         users = {
