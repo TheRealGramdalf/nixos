@@ -11,8 +11,8 @@
       };
     in
     {
-      nixosConfigurations = {
-        dockaer = import ./nixosConfigurations/dockaer.nix flakeContext;
+      nixosModules = {
+        docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
       };
       packages = {
         x86_64-linux = {
