@@ -16,7 +16,7 @@
       };
       packages = {
         x86_64-linux = {
-          dockaer = import ./packages/dockaer.nix flakeContext;
+          nix-lxc = import ./packages/nix-lxc.nix flakeContext;
         };
       };
     };
