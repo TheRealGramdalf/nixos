@@ -12,6 +12,9 @@
         INCLUDE_DIR = "/compose/include";
       };
     };
+    networking = {
+      enableIPv6 = false;
+    };
     virtualisation = {
       docker = {
         daemon = {
