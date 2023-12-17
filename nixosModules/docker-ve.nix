@@ -15,6 +15,15 @@
     networking = {
       enableIPv6 = false;
     };
+    services = {
+      openssh = {
+        listenAddresses = [
+          {
+            addr = "0.0.0.0";
+          }
+        ];
+      };
+    };
     virtualisation = {
       docker = {
         daemon = {
