@@ -24,6 +24,9 @@
           }
         ];
       };
+      resolved = {
+        enable = false;
+      };
     };
     virtualisation = {
       docker = {
