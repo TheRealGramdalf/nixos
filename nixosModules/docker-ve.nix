@@ -14,6 +14,9 @@
     };
     networking = {
       enableIPv6 = false;
+      firewall = {
+        enable = false;
+      };
       resolvconf = {
         enable = false;
       };
