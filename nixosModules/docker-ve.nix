@@ -14,6 +14,9 @@
     };
     networking = {
       enableIPv6 = false;
+      resolvconf = {
+        enable = false;
+      };
     };
     services = {
       openssh = {

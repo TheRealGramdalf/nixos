@@ -15,6 +15,7 @@
     {
       nixosModules = {
         docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
+        gettyFix = import ./nixosModules/gettyFix.nix flakeContext;
       };
       packages = {
         x86_64-linux = {
