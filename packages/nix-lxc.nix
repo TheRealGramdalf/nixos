@@ -3,7 +3,6 @@ let
   nixosModule = { config, lib, pkgs, ... }: {
     imports = [
       inputs.self.nixosModules.docker-ve
-      inputs.self.nixosModules.gettyFix
     ];
     config = {
       services = {
