@@ -3,8 +3,7 @@
   inputs = {
     nixos-generators.url = "flake:nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs.url = "flake:nixpkgs";
-    nixpkgs-2.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
   outputs = inputs:
     let
