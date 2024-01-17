@@ -12,6 +12,9 @@
       };
     in
     {
+      nixosConfigurations = {
+        nixos-testing-lxc = import ./nixosModules/nixos-testing-lxc.nix flakeContext;
+      };
       nixosModules = {
         docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
         gettyFix = import ./nixosModules/gettyFix.nix flakeContext;
