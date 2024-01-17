@@ -1,6 +1,16 @@
 { inputs, ... }@flakeContext:
 { config, lib, pkgs, ... }: {
   config = {
+    # Patches for running inside an LXC container
+    systemd.mounts = [{
+      where = "/sys/kernel/debug";
+      enable = false;
+    }];
+    boot.isContainer = true;
+
+    # Enable rebuilding with flakes inside the LXC
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     environment = {
       systemPackages = with pkgs; [
         vim
@@ -19,23 +29,26 @@
         AUTH_BASE_URL = "https://auth.aer.dedyn.io"; 
         AUTH_UI_URL = ''''${AUTH_BASE_URL}/ui/oauth2''; # Don't interpolate the base url with nix
         AUTH_TOKEN_URL = ''''${AUTH_BASE_URL}/oauth2/token''; # ^^
-      };
-    };
+    }};
+
+    # Fix proxmox networking
     networking = {
       enableIPv6 = false;
-      firewall = {
-        enable = false;
-      };
-      resolvconf = {
-        enable = false;
-      };
+      # lxc-level firewall coming soon™
+      firewall.enable = false;
+
+      # Get DNS info from proxmox
+      resolvconf.enable = false;
     };
+    # DNS cache shouldn't happen in the LXC
+    services.resolved.enable = false;
+
+
     services = {
+      # Consume POSIX accounts from Kanidm
       kanidm = {
         enablePam = true;
-        clientSettings = {
-          uri = "https://auth.aer.dedyn.io";
-        };
+        clientSettings.uri = "https://auth.aer.dedyn.io";
         unixSettings = {
           pam_allowed_login_groups = [ "dockaer-login" ];
           default_shell = "/bin/bash";
@@ -46,18 +59,17 @@
           uid_attr_map = "spn";
           gid_attr_map = "spn";
           selinux = true;
-        };
-      };
+      }};
+
+      # Network shares
       samba = {
-        enable = true;
-        shares = {
-          photos = {
-            path = "/tank/photos";
-            "read only" = false;
-            browseable = "yes";
-            "guest ok" = "no";
-            comment = "Ye Olde Photos";
-          };
+        enable = false;
+        shares.photos = {
+          path = "/tank/photos";
+          "read only" = false;
+          browseable = "yes";
+          "guest ok" = "no";
+          comment = "Ye Olde Photos";
         };
         extraConfig = ''
         [global]
@@ -80,41 +92,36 @@
           map to guest = bad user
         ''
       };
-      #avahi.enable = true;
+      avahi.enable = false;
+
       openssh = {
-        listenAddresses = [
-          {
-            addr = "0.0.0.0";
-            port = 22;
-          }
-        ];
-      };
-      resolved = {
-        enable = false;
-      };
-    };
-    virtualisation = {
-      docker = {
-        daemon = {
-          settings = {
-            bridge = "none";
-            ipv6 = false;
-            default-address-pools = [
-              {
-                base = "172.30.0.0/16";
-                size = 24;
-              }
-              {
-                base = "172.31.0.0/16";
-                size = 24;
-              }
-            ];
-          };
-        };
         enable = true;
-        liveRestore = true;
-        storageDriver = "overlay2";
+        settings.PermitRootLogin = "prohibit-password";
+        listenAddresses = [{
+          addr = "0.0.0.0";
+          port = 22;
+        }];
       };
     };
+    users = {
+      mutableUsers = true;
+      users.root.initialHashedPassword = "$y$j9T$j0JBV3iwFMEbM0TKMvqnv.$92W0gf1Jd61jl/s1DLxUSxViuKyKIW0jZ.I4q6wyDC2";
+    };
+    # Docker daemon settings
+    virtualisation.docker.daemon.settings = {
+      bridge = "none";
+      ipv6 = false;
+      default-address-pools = [{
+          base = "172.30.0.0/16";
+          size = 24;
+        }
+        {
+          base = "172.31.0.0/16";
+          size = 24;
+      }];
+    };
+    enable = true;
+    liveRestore = true;
+    storageDriver = "overlay2";
   };
 }
