@@ -13,7 +13,7 @@
     in
     {
       nixosConfigurations = {
-        nixos-testing-lxc = import ./nixosModules/nixos-testing-lxc.nix flakeContext;
+        nixos-testing-lxc = import ./nixosConfigurations/nixos-testing-lxc.nix flakeContext;
       };
       nixosModules = {
         docker-ve = import ./nixosModules/docker-ve.nix flakeContext;

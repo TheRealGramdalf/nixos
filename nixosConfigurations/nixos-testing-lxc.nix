@@ -2,7 +2,7 @@
 let
   nixosModule = { config, lib, pkgs, ... }: {
     imports = [
-      inputs.self.nixosModules.docker-ve
+      inputs.self.nixosModules.nixos-testing-lxc
     ];
   };
 in
