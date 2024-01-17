@@ -15,10 +15,12 @@
       nixosModules = {
         docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
         gettyFix = import ./nixosModules/gettyFix.nix flakeContext;
+        nixos-testing-lxc = import ./nixosModules/nixos-testing-lxc.nix flakeContext;
       };
       packages = {
         x86_64-linux = {
           nix-lxc = import ./packages/nix-lxc.nix flakeContext;
+          nix-lxc-dev = import ./packages/nix-lxc-dev.nix flakeContext;
         };
       };
     };
