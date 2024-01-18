@@ -8,8 +8,20 @@
     }];
     boot.isContainer = true;
 
-    # Enable rebuilding with flakes inside the LXC
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+    nix.settings = {
+      # Enable rebuilding with flakes inside the LXC
+      experimental-features = [ "nix-command" "flakes" ];
+      # Add the nix binary cache to make builds faster
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "binarycache.example.com-1:dsafdafDFW123fdasfa123124FADSAD"
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
 
     environment = {
       systemPackages = with pkgs; [
@@ -29,7 +41,7 @@
         AUTH_BASE_URL = "https://auth.aer.dedyn.io"; 
         AUTH_UI_URL = ''''${AUTH_BASE_URL}/ui/oauth2''; # Don't interpolate the base url with nix
         AUTH_TOKEN_URL = ''''${AUTH_BASE_URL}/oauth2/token''; # ^^
-    }};
+    };};
 
     # Fix proxmox networking
     networking = {
@@ -59,7 +71,7 @@
           uid_attr_map = "spn";
           gid_attr_map = "spn";
           selinux = true;
-      }};
+      };};
 
       # Network shares
       samba = {
@@ -90,7 +102,7 @@
           hosts deny = 0.0.0.0/0
           guest account = nobody
           map to guest = bad user
-        ''
+        '';
       };
       avahi.enable = false;
 
@@ -100,8 +112,7 @@
         listenAddresses = [{
           addr = "0.0.0.0";
           port = 22;
-        }];
-      };
+      }];};
     };
     users = {
       mutableUsers = true;
@@ -120,8 +131,10 @@
           size = 24;
       }];
     };
-    enable = true;
-    liveRestore = true;
-    storageDriver = "overlay2";
+    virtualisation.docker = {
+      enable = true;
+      liveRestore = true;
+      storageDriver = "overlay2";
+    };
   };
 }
