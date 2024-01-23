@@ -2,7 +2,7 @@
 let
   nixosModule = { config, lib, pkgs, ... }: {
     imports = [
-      inputs.self.nixosModules.aer
+      inputs.self.nixosModules.aer-files
       inputs.self.nixosModules.nvchad
     ];
   };

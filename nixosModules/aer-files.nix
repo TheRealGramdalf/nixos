@@ -17,15 +17,9 @@
 
     environment = {
       systemPackages = with pkgs; [
-        vim
+        nvim 
         git
-        docker-compose
-        lazydocker
-	      dive
-        tcpdump
         kanidm
-        iperf3
-        traceroute
         samba
       ];
     };
@@ -96,13 +90,13 @@
         '';
       };
       avahi = {
-	      enable = true;
+	      enable = false;
         openFirewall = true;
 	      hostName = "AER";
 	      allowInterfaces = [ "upstream0" ];
       };
       samba-wsdd = {
-        enable = true;
+        enable = false;
         interface = "upstream0";
 	      hostname = "AER";
       };

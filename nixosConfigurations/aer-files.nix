@@ -3,7 +3,7 @@ let
   nixosModule = { config, lib, pkgs, modulesPath, ... }: {
     imports = [
       (modulesPath + "/virtualisation/proxmox-lxc.nix")
-      inputs.self.nixosModules.docker-ve
+      inputs.self.nixosModules.aer-files
       inputs.self.nixosModules.nvchad
     ];
   };
