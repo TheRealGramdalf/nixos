@@ -77,8 +77,8 @@
           force create mode = 0644
           force directory mode = 2755
           workgroup = AERWIAR
-          server string = samba-aer
-          netbios name = samba-aer
+          server string = aer-files 
+          netbios name = aer-files 
           security = user 
           #use sendfile = yes
           server min protocol = SMB3_00
@@ -92,13 +92,13 @@
       avahi = {
 	      enable = false;
         openFirewall = true;
-	      hostName = "AER";
+	      hostName = "aer-files";
 	      allowInterfaces = [ "upstream0" ];
       };
       samba-wsdd = {
         enable = false;
         interface = "upstream0";
-	      hostname = "AER";
+	      hostname = "aer-files";
       };
 
       openssh = {
