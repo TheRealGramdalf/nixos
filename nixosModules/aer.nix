@@ -5,7 +5,7 @@
       # Enable rebuilding with flakes inside the LXC
       experimental-features = [ "nix-command" "flakes" ];
       # Add the nix binary cache to make builds faster
-      substituters = [
+     substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
       ];
@@ -21,31 +21,23 @@
         git
         docker-compose
         lazydocker
-      	dive
+	      dive
         tcpdump
         kanidm
         iperf3
         traceroute
         samba
       ];
-      variables = {
-        STACKS_DIR = "/compose/stacks";
-        INCLUDE_DIR = "/compose/include";
-        MEDIA_DIR = "/tank/media";
-        FQDN = "aer.dedyn.io";
-        AUTH_BASE_URL = "https://auth.aer.dedyn.io"; 
-        AUTH_UI_URL = ''''${AUTH_BASE_URL}/ui/oauth2''; # Don't interpolate the base url with nix
-        AUTH_TOKEN_URL = ''''${AUTH_BASE_URL}/oauth2/token''; # ^^
-    };};
+    };
 
     # Fix proxmox networking
     networking = {
       enableIPv6 = false;
       # lxc-level firewall coming soon™
-      firewall.enable = false;
+      firewall.enable = true; 
       # Get DNS info from proxmox
       resolvconf.enable = false; 
-	    #^^ Might not be needed?
+  	  #^^ Might not be needed?
     };
     # DNS cache shouldn't happen in the LXC
     services.resolved.enable = false;
@@ -68,8 +60,55 @@
           selinux = true;
       };};
 
-      openssh = {
+      # Network shares
+      samba = {
         enable = true;
+        openFirewall = true;
+        shares.photos = {
+          path = "/tank/photos";
+          "read only" = false;
+          browseable = "yes";
+          "guest ok" = "no";
+          comment = "Ye Olde Photos";
+        };
+        #; Inherit ownership of the parent directory for new files and directories
+        #; Inherit permissions of the parent directory for new files and directories
+        extraConfig = ''
+        [global]
+	        passdb backend = tdbsam:/compose/stacks/kanidm/smb/passdb.tdb 
+          inherit owner = unix only 
+          inherit permissions = yes
+          create mask = 0664
+          directory mask = 2755
+          force create mode = 0644
+          force directory mode = 2755
+          workgroup = AERWIAR
+          server string = samba-aer
+          netbios name = samba-aer
+          security = user 
+          #use sendfile = yes
+          server min protocol = SMB3_00
+          # note: localhost is the ipv6 localhost ::1
+          hosts allow = 192.168.1.0 127.0.0.1
+          hosts deny = 0.0.0.0/0
+          guest account = nobody
+          map to guest = bad user
+        '';
+      };
+      avahi = {
+	      enable = true;
+        openFirewall = true;
+	      hostName = "AER";
+	      allowInterfaces = [ "upstream0" ];
+      };
+      samba-wsdd = {
+        enable = true;
+        interface = "upstream0";
+	      hostname = "AER";
+      };
+
+      openssh = {
+        enable = false;
         settings.PasswordAuthentication = false;
         settings.PermitRootLogin = "prohibit-password";
         listenAddresses = [{
@@ -80,24 +119,6 @@
     users = {
       mutableUsers = true;
       users.root.initialHashedPassword = "$y$j9T$j0JBV3iwFMEbM0TKMvqnv.$92W0gf1Jd61jl/s1DLxUSxViuKyKIW0jZ.I4q6wyDC2";
-    };
-    # Docker daemon settings
-    virtualisation.docker.daemon.settings = {
-      bridge = "none";
-      ipv6 = false;
-      default-address-pools = [{
-          base = "172.30.0.0/16";
-          size = 24;
-        }
-        {
-          base = "172.31.0.0/16";
-          size = 24;
-      }];
-    };
-    virtualisation.docker = {
-      enable = true;
-      liveRestore = true;
-      storageDriver = "overlay2";
     };
   };
 }

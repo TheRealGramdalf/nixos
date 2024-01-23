@@ -13,10 +13,12 @@
     in
     {
       nixosConfigurations = {
+        docker-ve = import ./nixosConfigurations/docker-ve.nix flakeContext;
         nixos-testing-lxc = import ./nixosConfigurations/nixos-testing-lxc.nix flakeContext;
       };
       nixosModules = {
-        docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
+        nvchad = import ./nixosModules/nvchad.nix flakeContext;
+	docker-ve = import ./nixosModules/docker-ve.nix flakeContext;
         gettyFix = import ./nixosModules/gettyFix.nix flakeContext;
         nixos-testing-lxc = import ./nixosModules/nixos-testing-lxc.nix flakeContext;
       };
