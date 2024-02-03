@@ -137,6 +137,7 @@
     thermald.enable = true;
     locate.enable = true;
     flatpak.enable = true;
+    blueman.enable = true;
 
     pipewire = {
       enable = true;

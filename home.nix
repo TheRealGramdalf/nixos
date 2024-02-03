@@ -22,8 +22,8 @@
       pib = "ssh dietpi@192.168.100.5 -t ./start.sh";
       rm = "trash";
       scf = "vim ~/nix/configuration.nix";
-      srb = "sudo nixos-rebuild switch --flake ~/nix#mars-monkey-machine && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
-      srbb = "sudo nixos-rebuild boot --flake ~/nix#mars-monkey-machine && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
+      srb = "sudo nixos-rebuild switch --flake ~/nix#mars-monkey-laptop && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
+      srbb = "sudo nixos-rebuild boot --flake ~/nix#mars-monkey-laptop && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
       ts = "nix run nixpkgs#";
     };
    
