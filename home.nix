@@ -34,8 +34,8 @@
     
     pointerCursor = {
       gtk.enable = true;
-      package = pkgs.capitaine-cursors-themed;
-      name = "Capitaine Cursors";
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
       size = 20;
     };
 
