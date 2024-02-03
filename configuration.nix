@@ -155,6 +155,8 @@
     packages = with pkgs; [
       corefonts
       noto-fonts
+      liberation_ttf
+      (nerdfonts.override { fonts = ["Noto"]; })
     ];
     
     fontconfig.hinting = {
