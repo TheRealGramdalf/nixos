@@ -159,9 +159,13 @@
       (nerdfonts.override { fonts = ["Noto"]; })
     ];
     
-    fontconfig.hinting = {
+    fontconfig = {
       enable = true;
-      style = "full";
+
+      hinting = {
+        enable = true;
+        style = "full";
+      };
     };
   };
 
