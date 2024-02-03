@@ -35,7 +35,7 @@
     pointerCursor = {
       gtk.enable = true;
       package = pkgs.capitaine-cursors-themed;
-      name = "capitaine-cursors-white";
+      name = "capitaine-cursors-light";
       size = 20;
     };
 
