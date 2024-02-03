@@ -35,7 +35,7 @@
     pointerCursor = {
       gtk.enable = true;
       package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
+      name = "Bibata-Modern-Ice";
       size = 16;
     };
 
@@ -187,7 +187,7 @@
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      #gtk-theme = lib.mkForce "adw-gtk3-dark";
+      gtk-theme = lib.mkForce "adw-gtk3-dark";
     };
   };
 }
