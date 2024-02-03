@@ -32,6 +32,13 @@
       MOZ_ENABLE_WAYLAND = "1";
     };
     
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 16;
+    };
+
     packages = with pkgs; [
       andika
       android-tools
@@ -111,6 +118,12 @@
     ];
   };
   
+  /*wayland.windowManager.hyprland.settings = {
+    "$mod" = "SUPER";
+    
+    bind = [
+      "$mod, B, e"*/
+
   programs = {
     home-manager.enable = true;
     bash.enable = true;    
@@ -147,6 +160,16 @@
       package = pkgs.adw-gtk3;
     };
 
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "Noto Sans";
+      size = 12;
+    };
+
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = "0";
     };
@@ -164,7 +187,7 @@
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      gtk-theme = lib.mkForce "adw-gtk3-dark";
+      #gtk-theme = lib.mkForce "adw-gtk3-dark";
     };
   };
 }
