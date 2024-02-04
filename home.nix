@@ -148,7 +148,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Dracula";
+      theme = "Catppuccin-Mocha";
 
       settings = {
         enable_audio_bell = "no";
