@@ -60,6 +60,7 @@
       eza
       fastfetch
       figlet
+      fish
       geogebra6
       gh
       gimp
