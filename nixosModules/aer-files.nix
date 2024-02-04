@@ -2,7 +2,7 @@
 { config, lib, pkgs, ... }: {
   import = with inputs.self; [
     nixosModules.posix-client
-  ]
+  ];
   config = {
     environment = {
       systemPackages = with pkgs; [
@@ -23,7 +23,6 @@
     };
     # DNS cache shouldn't happen in the LXC
     services.resolved.enable = false;
-
 
     services = {
       # Consume POSIX accounts from Kanidm
