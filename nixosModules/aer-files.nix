@@ -1,7 +1,7 @@
 { inputs, ... }@flakeContext:
 { config, lib, pkgs, ... }: {
   config = {
-    import = with inputs.self; [
+    imports = with inputs.self; [
       nixosModules.posix-client
     ];
     environment = {
