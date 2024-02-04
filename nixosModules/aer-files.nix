@@ -1,20 +1,9 @@
 { inputs, ... }@flakeContext:
 { config, lib, pkgs, ... }: {
+  import = with inputs.self; [
+    nixosModules.posix-client
+  ]
   config = {
-    nix.settings = {
-      # Enable rebuilding with flakes inside the LXC
-      experimental-features = [ "nix-command" "flakes" ];
-      # Add the nix binary cache to make builds faster
-     substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-      ];
-      trusted-public-keys = [
-        #"cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" # Included by default, trusted keys is additive
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-    };
-
     environment = {
       systemPackages = with pkgs; [
         neovim 
@@ -39,18 +28,18 @@
     services = {
       # Consume POSIX accounts from Kanidm
       kanidm = {
-        enablePam = true;
-        clientSettings.uri = "https://auth.aer.dedyn.io";
+        # enablePam = true;
+        # clientSettings.uri = "https://auth.aer.dedyn.io";
         unixSettings = {
           pam_allowed_login_groups = [ "dockaer-login" ];
-          default_shell = "/bin/bash";
-          home_prefix = "/home/";
-          home_attr = "uuid";
-          home_alias = "spn";
-          use_etc_skel = false;
-          uid_attr_map = "spn";
-          gid_attr_map = "spn";
-          selinux = true;
+          # default_shell = "/bin/bash";
+          # home_prefix = "/home/";
+          # home_attr = "uuid";
+          # home_alias = "spn";
+          # use_etc_skel = false;
+          # uid_attr_map = "spn";
+          # gid_attr_map = "spn";
+          # selinux = true;
       };};
 
       # Network shares

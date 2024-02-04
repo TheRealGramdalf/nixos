@@ -1,20 +1,6 @@
 { inputs, ... }@flakeContext:
 { config, lib, pkgs, ... }: {
   config = {
-    nix.settings = {
-      # Enable rebuilding with flakes inside the LXC
-      experimental-features = [ "nix-command" "flakes" ];
-      # Add the nix binary cache to make builds faster
-      substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-      ];
-      trusted-public-keys = [
-        #"cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" # Included by default, trusted keys is additive
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-    };
-
     environment = {
       systemPackages = with pkgs; [
         vim
