@@ -1,9 +1,9 @@
 { inputs, ... }@flakeContext:
 { config, lib, pkgs, ... }: {
-  import = with inputs.self; [
-    nixosModules.posix-client
-  ];
   config = {
+    import = with inputs.self; [
+      nixosModules.posix-client
+    ];
     environment = {
       systemPackages = with pkgs; [
         neovim 
