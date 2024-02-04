@@ -17,17 +17,16 @@
 
     environment = {
       systemPackages = with pkgs; [
-        nvim 
+        neovim 
         git
         kanidm
-        samba
+        lsd
       ];
     };
 
     # Fix proxmox networking
     networking = {
       enableIPv6 = false;
-      # lxc-level firewall coming soon™
       firewall.enable = true; 
       # Get DNS info from proxmox
       resolvconf.enable = false; 
@@ -56,53 +55,74 @@
 
       # Network shares
       samba = {
+        package = pkgs.samba4Full;
+        # ^^ Needed to enable mDNS support. Thank you iv.cha! 
+        # See https://github.com/NixOS/nixpkgs/blob/592047fc9e4f7b74a4dc85d1b9f5243dfe4899e3/pkgs/top-level/all-packages.nix#L27268
         enable = true;
         openFirewall = true;
-        shares.photos = {
-          path = "/tank/photos";
-          "read only" = false;
-          browseable = "yes";
-          "guest ok" = "no";
-          comment = "Ye Olde Photos";
+        shares = {
+          photos = {
+            path = "/tank/photos";
+            writable = "true";
+            comment = "Ye Olde Photos";
+          };
+          media = {
+            path = "/tank/media";
+            writable = true;
+            comment = "The Seven Seas";
+          };
+          nixos = {
+            path = "/etc/nixos";
+            writable = true;
+            comment = "NixOS Configurations";
+          };
+          Data = {
+            path = "/tank/Data";
+            writable = true;
+            comment = "All your mushrooms go here";
+          };
         };
-        #; Inherit ownership of the parent directory for new files and directories
-        #; Inherit permissions of the parent directory for new files and directories
         extraConfig = ''
-        [global]
-	        passdb backend = tdbsam:/compose/stacks/kanidm/smb/passdb.tdb 
+          ## Security Settings
+          # Permissions
           inherit owner = unix only 
-          inherit permissions = yes
-          create mask = 0664
-          directory mask = 2755
-          force create mode = 0644
-          force directory mode = 2755
-          workgroup = AERWIAR
-          server string = aer-files 
-          netbios name = aer-files 
+          inherit permissions = yes 
+          # ^^ Overrides `create` and `force create` `mask/mode`
+          # Authentication
+	        passdb backend = tdbsam:/tank/samba-passdb.tdb 
           security = user 
-          #use sendfile = yes
+          hosts allow = 192.168.1. 127.0.0.1
+          hosts deny = ALL
+          guest account = nobody 
+          map to guest = Bad User
+          # guest ok = true
+          #//TODO Look into: `invalid users`
+          # Generic
+          server smb encrypt = required
+          # ^^ Note: Breaks `smbclient -L <ip> -U%`
           server min protocol = SMB3_00
-          # note: localhost is the ipv6 localhost ::1
-          hosts allow = 192.168.1.0 127.0.0.1
-          hosts deny = 0.0.0.0/0
-          guest account = nobody
-          map to guest = bad user
+
+          ## Performance Optimizations & platform compatibility
+          use sendfile = yes
         '';
       };
       avahi = {
-	      enable = false;
+        publish.enable = true;
+        publish.userServices = true;
+        # ^^ Needed for samba to automatically register mDNS records
+        nssmdns4 = true;
+	      enable = true;
         openFirewall = true;
-	      hostName = "aer-files";
 	      allowInterfaces = [ "upstream0" ];
       };
       samba-wsdd = {
-        enable = false;
+        enable = true;
+        openFirewall = true;
         interface = "upstream0";
 	      hostname = "aer-files";
       };
-
       openssh = {
-        enable = false;
+        enable = true;
         settings.PasswordAuthentication = false;
         settings.PermitRootLogin = "prohibit-password";
         listenAddresses = [{
