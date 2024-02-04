@@ -4,7 +4,6 @@ let
     imports = [
       (modulesPath + "/virtualisation/proxmox-lxc.nix")
       inputs.self.nixosModules.aer-files
-      inputs.self.nixosModules.nvchad
     ];
   };
 in

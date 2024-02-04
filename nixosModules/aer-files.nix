@@ -2,6 +2,7 @@
 { config, lib, pkgs, ... }: {
 imports = with inputs.self; [
   nixosModules.posix-client
+  nixosModules.nvchad
 ];
   config = {
     environment = {
