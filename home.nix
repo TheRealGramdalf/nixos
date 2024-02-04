@@ -147,7 +147,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Dark One Nuanced";
+      theme = "Chalk";
 
       settings = {
         enable_audio_bell = "no";
