@@ -15,7 +15,7 @@
       nixosConfigurations = {
         docker-ve = import ./nixosConfigurations/docker-ve.nix flakeContext;
         nixos-testing-lxc = import ./nixosConfigurations/nixos-testing-lxc.nix flakeContext;
-        aer-files = import ./nixosModules/aer-files.nix flakeContext;
+        aer-files = import ./nixosConfigurations/aer-files.nix flakeContext;
       };
       nixosModules = {
         aer-files = import ./nixosModules/aer-files.nix flakeContext; 
