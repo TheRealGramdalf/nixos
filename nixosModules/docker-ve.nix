@@ -19,6 +19,7 @@
       systemPackages = with pkgs; [
         vim
         git
+        lsd
         docker-compose
         lazydocker
       	dive
@@ -34,7 +35,7 @@
         MEDIA_DIR = "/tank/media";
         FQDN = "aer.dedyn.io";
         AUTH_BASE_URL = "https://auth.aer.dedyn.io"; 
-        AUTH_UI_URL = ''''${AUTH_BASE_URL}/ui/oauth2''; # Don't interpolate the base url with nix
+        AUTH_UI_URL = ''''${AUTH_BASE_URL}/ui/oauth2''; # Don't interpolate the base url with nix (so it can be interpolated at runtime)
         AUTH_TOKEN_URL = ''''${AUTH_BASE_URL}/oauth2/token''; # ^^
     };};
 
