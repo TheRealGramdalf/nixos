@@ -145,6 +145,22 @@
     home-manager.enable = true;
     bash.enable = true;    
 
+    kitty = {
+      enable = true; 
+      theme = "Tomorrow Night";
+
+      settings = {
+        enable_audio_bell = "no";
+        copy_on_select = "clipboard";
+        background_opacity = "0.8";
+      };
+
+      font = {
+        size = 12;
+        name = "Noto Sans Mono";
+      };
+    };
+
     git = {
       enable = true;
       userName = "mars-monkey";
