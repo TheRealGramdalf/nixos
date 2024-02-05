@@ -61,6 +61,7 @@
       fastfetch
       figlet
       fish
+      font-awesome
       geogebra6
       gh
       gimp
@@ -148,7 +149,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Catppuccin-Mocha";
+      theme = "Tomorrow Night";
 
       settings = {
         enable_audio_bell = "no";
