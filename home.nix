@@ -149,7 +149,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Dark One Nuanced";
+      theme = "Tokyo Night Moon";
 
       settings = {
         enable_audio_bell = "no";
