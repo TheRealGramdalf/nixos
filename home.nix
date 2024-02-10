@@ -183,7 +183,7 @@
     
     mangohud = {
       enable = true;
-      enableSessionWide = true;
+      enableSessionWide = false;
     };
   };
   
