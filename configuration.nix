@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [];
@@ -126,9 +126,13 @@
   };
 
   programs = {
-    hyprland.enable = true;
     waybar.enable = true;
     virt-manager.enable = true;
+    
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    };
   };
 
   services = {
