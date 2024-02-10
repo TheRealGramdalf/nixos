@@ -55,6 +55,7 @@
       cowsay
       distrobox
       drawing
+      du-dust
       eartag
       electron-mail
       eza
