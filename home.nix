@@ -13,7 +13,7 @@
       cl = "clear";
       gp = "git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
       hcf = "vim ~/nix/home.nix";
-      hrb = "home-manager switch --flake ~/nix#mars-monkey && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
+      #hrb = "home-manager switch --flake ~/nix#mars-monkey && git -C ~/nix commit -a -m 'Local changes autocommit' && git -C ~/nix push";
       hyp = "vim ~/.config/hypr/hyprland.conf";
       up = "nix flake update ~/nix";
       int = "ping -c 5 1.1.1.1";
