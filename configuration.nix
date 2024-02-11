@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, hyprland, ... }:
 
 {
   imports = [];
@@ -133,7 +133,7 @@
     
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      package = hyprland.packages.${pkgs.system}.hyprland;
     };
   };
 
@@ -178,7 +178,6 @@
   security.rtkit.enable = true;
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
     users = {
       "mars-monkey" = import ./home.nix;
     };

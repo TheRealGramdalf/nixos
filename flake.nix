@@ -12,10 +12,10 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs =  { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, hyprland }: {
     nixosConfigurations = {
       "mars-monkey-laptop" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit hyprland; };
 
         modules = [
           ./configuration.nix

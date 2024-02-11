@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, hyprland, ... }:
 
 {  
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
@@ -134,6 +134,11 @@
       touchpad.natural_scroll = "yes";
     };
     
+    general = {
+      gaps_in = "5";
+      gaps_out = "10";
+    };
+
     bind = [
       "$mod, B, exec, librewolf"
     ]
