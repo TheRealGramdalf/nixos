@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [];
+  imports = [ inputs.home-manager.nixosModules."mars-monkey-laptop" ];
 
   boot = {
     kernelModules = [ "kvm-intel" ];
@@ -177,6 +177,13 @@
 
   security.rtkit.enable = true;
 
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "mars-monkey" = import ./home.nix;
+    };
+  };
+
   users = {
     mutableUsers = false;
     
@@ -184,7 +191,6 @@
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
       hashedPassword = "$y$j9T$PPMehWHX4aaQ5oMN3igBV0$zXYtqyL4ez7knABEGRMIYTPk1YERI/aY/qOaxXXq1q5";
-      packages = with pkgs; [ home-manager ];
     };
   };
 
