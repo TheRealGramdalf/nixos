@@ -160,7 +160,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Gruvbox Dark";
+      theme = "Catppuccin-Frappe";
 
       settings = {
         enable_audio_bell = "no";
