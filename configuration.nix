@@ -118,6 +118,8 @@
 
     settings = {
       trusted-users = ["@wheel"];
+      conf-accept-flake-config = true;
+
       experimental-features = [
         "nix-command"
         "flakes"
