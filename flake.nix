@@ -13,15 +13,19 @@
   };
 
   outputs =  { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
+    nixosConfigurations = {# hi this is a comment
       "mars-monkey-laptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         specialArgs = { inherit inputs; };
 
         modules = [
           ./configuration.nix
-          inputs.home-manager.nixosModules."mars-monkey-laptop"
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."mars-monkey" = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          }
         ];
       };
     };

@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.home-manager.nixosModules."mars-monkey-laptop" ];
+  imports = [];
 
   boot = {
     kernelModules = [ "kvm-intel" ];
@@ -177,12 +177,12 @@
 
   security.rtkit.enable = true;
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+  /*home-manager = {
+    specialArgs = { inherit inputs; };
     users = {
       "mars-monkey" = import ./home.nix;
     };
-  };
+  };*/
 
   users = {
     mutableUsers = false;
