@@ -177,12 +177,12 @@
 
   security.rtkit.enable = true;
 
-  /*home-manager = {
-    specialArgs = { inherit inputs; };
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "mars-monkey" = import ./home.nix;
     };
-  };*/
+  };
 
   users = {
     mutableUsers = false;

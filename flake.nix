@@ -12,20 +12,14 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs =  { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {# hi this is a comment
+  outputs =  { nixpkgs, home-manager, ... }@inputs: {
+    nixosConfigurations = {
       "mars-monkey-laptop" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
 
         modules = [
           ./configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."mars-monkey" = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
+          home-manager.nixosModules.home-manager
         ];
       };
     };
