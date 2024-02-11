@@ -122,11 +122,17 @@
   };
   
   wayland.windowManager.hyprland.settings = {
-    "monitor" = ",preferred,auto,1";
-    "exec-once" = "waybar";
+    monitor = ",preferred,auto,1";
+    exec-once = "waybar";
     "$terminal" = "kitty";
     
     "$mod" = "SUPER";
+
+    input = {
+      kb_layout = "us";
+      follow_mouse = "1";
+      touchpad.natural_scroll = "yes";
+    };
     
     bind = [
       "$mod, B, exec, librewolf"
@@ -154,7 +160,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Dracula";
+      theme = "Gruvbox Dark";
 
       settings = {
         enable_audio_bell = "no";
