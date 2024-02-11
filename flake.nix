@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    /*snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };*/
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,7 +17,19 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland }@inputs: {
+  outputs =  { self, nixpkgs, home-manager, hyprland}@inputs: /*inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      
+      snowfall = {
+        
+
+
+*/
+
+
+ {
     nixosConfigurations = {
       "mars-monkey-laptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
