@@ -160,7 +160,7 @@
 
     kitty = {
       enable = true; 
-      theme = "Catppuccin-Frappe";
+      theme = "Catppuccin-Mocha";
 
       settings = {
         enable_audio_bell = "no";
