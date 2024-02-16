@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    # ^^ Todo if needed
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -12,18 +14,22 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, pkgs, lib, config, ... }: {
+  outputs = { 
+    self,
+    inputs, # The `inputs` attribute set defined above
+    pkgs,
+    lib,
+    config,
+    ... # Any additional attributes not explicityly specified here
+  }: {
     
     nixosConfigurations = {
       "ripjaw" = lib.nixosSystem {
-        #specialArgs = { inherit hyprland; };
-        imports = [
-          ./config/hosts/ripjaw/main.nix
-        ];
-        /*modules = [
+        specialArgs = { inherit inputs; };
+        modules = [
           ./config/hosts/ripjaw/main.nix
           home-manager.nixosModules.home-manager
-        ];*/
+        ];
       };
     };
   };
