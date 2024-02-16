@@ -1,6 +1,5 @@
 {
   description = "TheRealGramdalf's experimental config";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -16,10 +15,13 @@
 
   outputs = { 
     self,
-    inputs, # The `inputs` attribute set defined above
-    pkgs,
-    lib,
-    config,
+    nixpkgs,
+    home-manager,
+    hyprland,
+    #inputs, # The `inputs` attribute set defined above?
+    #pkgs,
+    #lib,
+    #config,
     ... # Any additional attributes not explicityly specified here
   }: {
     
@@ -28,7 +30,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./config/hosts/ripjaw/main.nix
-          home-manager.nixosModules.home-manager
+          #home-manager.nixosModules.home-manager
         ];
       };
     };
