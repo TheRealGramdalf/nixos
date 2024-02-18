@@ -6,7 +6,8 @@
   
   boot.loader.grub = {
     enable = true;
-    device = "/dev/disk/by-partlabel/mbr";
+    # This device needs to be an entire disk, not a partition!
+    device = "/dev/disk/by-id/";
   };
 
   fileSystems."/" =
