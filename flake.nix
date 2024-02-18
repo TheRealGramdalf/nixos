@@ -5,34 +5,37 @@
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     # ^^ Todo if needed
 
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #home-manager = {
+    #  url = "github:nix-community/home-manager/master";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { 
     self,
     nixpkgs,
-    home-manager,
-    hyprland,
+    #home-manager,
+    #hyprland,
     #inputs, # The `inputs` attribute set defined above?
-    #pkgs,
-    #lib,
-    #config,
-    ... # Any additional attributes not explicityly specified here
-  }: {
-    
+    ... # Allow additional arguments to be passed without an error
+  }: #@context
+  let
+    # Create convenience shorthands for use in the modules below
+    lib = nixpkgs.lib;
+    #pkgs = import nixpkgs {
+    #  conig.allowUnfree = true;
+    #};
+  in
+  {
     nixosConfigurations = {
       "ripjaw" = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit nixpkgs; };
         modules = [
           ./config/hosts/ripjaw/main.nix
           #home-manager.nixosModules.home-manager
-        ];
-      };
+      ];};
     };
   };
 

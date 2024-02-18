@@ -1,4 +1,4 @@
-{
+{ config, pkgs, ... }: {
   imports = [
     # Commonly used config
     ../../common/posix-client.nix
@@ -10,8 +10,9 @@
     ./configuration.nix
     #./home.nix
   ];
+  system.stateVersion = "24.05";
   networking = {
-    hostname = "ripjaw";
+    hostName = "ripjaw";
     hostId = "a4ed175a";
   };
 }
