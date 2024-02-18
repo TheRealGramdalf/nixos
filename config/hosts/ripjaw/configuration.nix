@@ -1,4 +1,5 @@
 {
+  hardware.enableRedistributableFirmware = true;
   services = {
     
     openssh = {
