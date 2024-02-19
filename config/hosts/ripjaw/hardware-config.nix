@@ -25,7 +25,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-partlabel/ZSYS";
+    { device = "/dev/disk/by-uuid/1B1B-D929";
       fsType = "vfat";
     };
 
