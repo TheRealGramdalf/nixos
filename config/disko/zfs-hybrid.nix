@@ -2,7 +2,9 @@
 {
   disko.devices = {
     disk."zdisk" = {
-      device = "/dev/sda";
+      ##### CHANGE THIS!! #####
+      device = "/dev/disk/by-id/";
+      ##### ^^^^^^^^^^^^^ #####
       type = "disk";
       content = {
         type = "gpt";
@@ -11,7 +13,7 @@
           "mbr" = {
             label = "mbr";
             size = "1M";
-            type = "EF02";
+            type = "EF02"; # Disko will always place type EF02 at the beginning of the disk 
           };
           "zroot" = {
             label = "zroot";
