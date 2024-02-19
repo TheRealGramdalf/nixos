@@ -3,7 +3,7 @@
   disko.devices = {
     disk."zdisk" = {
       ##### CHANGE THIS!! #####
-      device = "/dev/sdb";
+      device = "/dev/disk/by-id/wwn-0x50025385500dc182";
       ##### ^^^^^^^^^^^^^ #####
       type = "disk";
       content = {
