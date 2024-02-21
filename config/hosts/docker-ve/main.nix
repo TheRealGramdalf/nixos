@@ -2,7 +2,6 @@
   imports = [
     # Commonly used config
     ../../common/posix-client.nix
-    ../../common/avahi-client.nix
 
     # Host-specific config
     ./configuration.nix
