@@ -36,6 +36,12 @@
           ./config/hosts/ripjaw/main.nix
           #home-manager.nixosModules.home-manager
       ];};
+      "aerwiar" = lib.nixosSystem {
+        specialArgs = { inherit nixpkgs; };
+        modules = [
+          ./config/hosts/aerwiar/main.nix
+          #home-manager.nixosModules.home-manager
+      ];};
     };
   };
 
