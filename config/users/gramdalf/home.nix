@@ -20,9 +20,9 @@
     '';
     ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
     # zsh prompt. See `~/.zprompt`
-    ".zprompt".source = ./dotfiles/.zprompt;
+    ".zprompt".source = ./legacyDotfiles/.zprompt;
     # zsh colors. See `~/.zcolors`
-    ".zcolors".source = ./dotfiles/.zcolors;
+    ".zcolors".source = ./legacyDotfiles/.zcolors;
     };
     shellAliases = {
       lla = "ls -la";
