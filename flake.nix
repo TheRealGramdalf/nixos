@@ -1,7 +1,15 @@
 {
   description = "TheRealGramdalf's experimental config";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      # See https://mynixos.com/nixpkgs/options/nixpkgs
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     # ^^ Todo if needed
 
@@ -13,31 +21,30 @@
     #hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { 
-    self,
-    nixpkgs,
-    #home-manager,
-    #hyprland,
-    #inputs, # The `inputs` attribute set defined above?
-    ... # Allow additional arguments to be passed without an error
-  }: #@context
+  # Call `outputs` (function) with the contents of the `inputs` attrset as an argument
+  outputs = inputs: #@context
+
+  # Create convenience shorthands
   let
-    # Create convenience shorthands for use in the modules below
-    lib = nixpkgs.lib;
-    #pkgs = import nixpkgs {
-    #  conig.allowUnfree = true;
-    #};
+    # 
+    inherit (inputs.nixpkgs.lib) nixosSystem;
   in
   {
     nixosConfigurations = {
-      "ripjaw" = lib.nixosSystem {
-        specialArgs = { inherit nixpkgs; };
+      "ripjaw" = nixosSystem {
         modules = [
           ./config/hosts/ripjaw/main.nix
           #home-manager.nixosModules.home-manager
       ];};
-      "aerwiar" = lib.nixosSystem {
-        specialArgs = { inherit nixpkgs; };
+      "aerwiar" = nixosSystem {
+        modules = [
+          ./config/hosts/aerwiar/main.nix
+      ];};
+      "aer-files" = nixosSystem {
+        modules = [
+          ./config/hosts/aer-files/main.nix
+      ];};
+      "docker-ve" = nixosSystem {
         modules = [
           ./config/hosts/aerwiar/main.nix
           #home-manager.nixosModules.home-manager
@@ -47,6 +54,9 @@
 
   # Global nix.settings, these are presented to the user as an optional choice on rebuild
   nixConfig = {
+    # Enable rebuilding with flakes
+    experimental-features = [ "nix-command" "flakes" ];
+    # Add the nix-community binary cache to make builds faster
     # See https://nixos.org/manual/nix/stable/command-ref/conf-file.html?highlight=you%20can%20prefix%20the%20name%20of%20the%20setting%20by%20extra-%20to%20append%20to%20the%20previous%20value#file-format
     extra-substituters = [
       "https://nix-community.cachix.org"
