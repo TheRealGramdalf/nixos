@@ -14,7 +14,6 @@
     loader.systemd-boot.enable = true;
   };
 
-  zramSwap.enable = true;
   hardware = {    
     pulseaudio.enable = false;
     
@@ -43,9 +42,6 @@
   };
   
   system = {
-    # TODO
-    stateVersion = "nixos-unstable";
-    
     autoUpgrade = {
       enable = false;
       allowReboot = false;
@@ -61,23 +57,8 @@
   };
   
   nix = {
-    gc = {
-      automatic = true;
-      persistent = true;
-      dates = "19:10";
-      options = "--delete-older-than 3d";
-    };
-
     settings = {
-      substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
       auto-optimise-store = true;
-      
       experimental-features = [
         "nix-command"
         "flakes"
@@ -85,28 +66,18 @@
     };
   };
 
-  nixpkgs = {
-    hostPlatform = lib.mkDefault "x86_64-linux";
-    config = {
-      allowUnfree = true;
-      packageOverrides = in_pkgs : {
-        linuxPackages = in_pkgs.linuxPackages_latest;
-      };
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
   
   i18n.defaultLocale = "en_US.UTF-8";
 #  time.timeZone = "America/Vancouver";
 
   networking = {
-    hostName = "aerwiar";
-    hostId = "16a85224";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
     nameservers = [ "1.1.1.3" "1.0.0.3" ];
     
     firewall = {
-      enable = false;
+      enable = true;
       logRefusedConnections = true;
     };
   };
@@ -176,11 +147,10 @@
   users = {
     mutableUsers = false;
     
-    users.gramdalf = {
+    users."gramdalf" = {
       isNormalUser = true;
       description = "Gramdalf";
       extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "wireshark" ];
-      initialHashedPassword = "$y$j9T$let4idnw1waeMMUPE2u0k0$HCu3esjEks4JnQgomcyeXNEgx4sKASRgyKs2.1Csfl0";
       hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
       shell = pkgs.zsh;
       
