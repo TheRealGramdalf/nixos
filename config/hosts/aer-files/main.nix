@@ -5,7 +5,6 @@
     ../../common/avahi-client.nix
 
     # Host-specific config
-    ./hardware-config.nix
     ./configuration.nix
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
