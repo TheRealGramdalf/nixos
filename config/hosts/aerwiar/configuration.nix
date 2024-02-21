@@ -6,7 +6,6 @@
 {
   imports = [  ];
   boot = {
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     zfs = {
       devNodes = "/dev/disk/by-partlabel";
     };
