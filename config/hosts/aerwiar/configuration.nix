@@ -11,9 +11,7 @@
     };
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
-    loader = {
-      systemd-boot.enable = true;
-    };
+    loader.systemd-boot.enable = true;
   };
 
   zramSwap.enable = true;
