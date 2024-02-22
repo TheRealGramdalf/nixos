@@ -13,10 +13,10 @@
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     # ^^ Todo if needed
 
-    #home-manager = {
-    #  url = "github:nix-community/home-manager/master";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     #hyprland.url = "github:hyprwm/Hyprland";
   };
@@ -28,6 +28,7 @@
   let
     # 
     inherit (inputs.nixpkgs.lib) nixosSystem;
+    inherit (inputs.home-manager.lib) homeManagerConfiguration;
   in
   {
     nixosConfigurations = {
@@ -49,6 +50,13 @@
           ./config/hosts/aerwiar/main.nix
           #home-manager.nixosModules.home-manager
       ];};
+    };
+    homeConfigurations = {
+      "gramdalf" = homeManagerConfiguration {
+        modules = [
+          ./config/users/gramdalf/home.nix
+        ];
+      };
     };
   };
 
