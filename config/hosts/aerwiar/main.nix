@@ -9,6 +9,7 @@
     ./configuration.nix
   ];
   system.stateVersion = "24.05";
+  nixpkgs.config.allowUnfree = true;
   networking = {
     hostName = "aerwiar";
     hostId = "16a85224";

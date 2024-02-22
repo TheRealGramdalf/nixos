@@ -8,6 +8,7 @@
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
   nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
   networking.hostName = "docker-ve";
 }

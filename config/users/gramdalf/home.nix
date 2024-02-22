@@ -1,15 +1,10 @@
 { config, pkgs, lib, ... }:
 
-{  
-  nixpkgs.config = {
-    allowUnfreePredicate = (pkg: true);
-    permittedInsecurePackages = [ "electron-25.9.0" ];
-  };
-
+{
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
-    stateVersion = "23.05";
+    stateVersion = "24.05";
     # Custom txt files (Source: https://github.com/nix-community/home-manager/issues/1493)
     file = {
     # Kanidm client config

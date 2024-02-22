@@ -10,10 +10,7 @@
     ./configuration.nix
     #./home.nix
   ];
-  # Override zfs devnodes for running in a VM
-  #boot.zfs = lib.mkForce {
-  #  devNodes = "/dev/disk/by-path";
-  #};
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
   networking = {
     hostName = "ripjaw";
