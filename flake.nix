@@ -21,14 +21,13 @@
     #hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  # Call `outputs` (function) with the contents of the `inputs` attrset as an argument
-  outputs = inputs: #@context
+  outputs = context@{ nixpkgs, home-manager, nixos-generators, ... }:
 
   # Create convenience shorthands
   let
     # 
-    inherit (inputs.nixpkgs.lib) nixosSystem;
-    inherit (inputs.home-manager.lib) homeManagerConfiguration;
+    inherit (nixpkgs.lib) nixosSystem;
+    inherit (home-manager.lib) homeManagerConfiguration;
   in
   {
     nixosConfigurations = {
@@ -53,6 +52,8 @@
     };
     homeConfigurations = {
       "gramdalf" = homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit context; };
         modules = [
           ./config/users/gramdalf/home.nix
         ];
