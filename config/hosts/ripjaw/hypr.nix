@@ -7,10 +7,14 @@
     };
     waybar.enable = true;
   };
+
+  ## SDDM ##
   services.xserver.enable = true; # Todo: Override this so that x11 isn't needed for hyprland
   services.xserver.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "${pkgs.catppuccin-sddm-corners}";
+    #theme = "${pkgs.catppuccin-sddm-corners}"; # This method is probably preferred, and may be modified in the future
+    theme = "catppuccin-sddm-corners";
   };
+  environment.systemPackages = [ pkgs.catppuccin-sddm-corners ];
 }
