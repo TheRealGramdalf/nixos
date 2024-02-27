@@ -26,6 +26,6 @@
         "--device /dev/sr1:/dev/sr1"
         "--restart unless-stopped"
       ];
-    }
+    };
   };
 }
