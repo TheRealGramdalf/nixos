@@ -1,9 +1,10 @@
 { config, lib, pkgs, ... }: {
+  users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
     home = "/persist/docker-ripjaw";
     uid = 911; # Lord of The Rings: The Twin Towers
-    #group = "911";
+    group = "docker-ripjaw";
   };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
