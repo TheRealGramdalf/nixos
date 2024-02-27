@@ -13,10 +13,6 @@
     ports = [ "8080:8080" ];
     volumes = [
       "/persist/docker-ripjaw/home:/home/arm"
-      "/persist/docker-ripjaw/music:/home/arm/Music"
-      "/persist/docker-ripjaw/logs:/home/arm/logs"
-      "/persist/docker-ripjaw/media:/home/arm/media"
-      "/persist/docker-ripjaw/config:/etc/arm/config"
     ];
     environment = {
       ARM_UID = "911";
