@@ -22,9 +22,9 @@
         # This is needed in order to `mount /dev/sr0 /mnt/dev/sr0` for ripping, which may be avoidable by
         # handling mounts outside of the container, and having `/mnt/dev` bind mounted into the container.
         "--privileged"
-        "--device /dev/sr0:/dev/sr0"
-        "--device /dev/sr1:/dev/sr1"
-        "--restart unless-stopped"
+        "--device=/dev/sr0:/dev/sr0"
+        "--device=/dev/sr1:/dev/sr1"
+        "--restart=on-failure:5"
       ];
     };
   };
