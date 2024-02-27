@@ -24,7 +24,6 @@
         "--privileged"
         "--device=/dev/sr0:/dev/sr0"
         "--device=/dev/sr1:/dev/sr1"
-        "--restart=on-failure:5"
       ];
     };
   };
