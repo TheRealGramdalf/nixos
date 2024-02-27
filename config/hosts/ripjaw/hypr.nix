@@ -5,18 +5,12 @@
       xwayland.enable = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
-    swaylock = {
-      enable = true;
-      #settings = {
-      #  color = "808080";
-      #  font-size = 24;
-      #  indicator-idle-visible = false;
-      #  indicator-radius = 100;
-      #  line-color = "ffffff";
-      #  show-failed-attempts = true;
-      #};
-    };
     waybar.enable = true;
   };
-  security.pam.services.swaylock = {};
+  services.xserver.enable = true; # Todo: Override this so that x11 isn't needed for hyprland
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-sddm-corners";
+  };
 }
