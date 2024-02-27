@@ -3,7 +3,7 @@
     description = "A.R.M. service account";
     home = "/persist/docker-ripjaw";
     uid = 911; # Lord of The Rings: The Twin Towers
-    group = 911;
+    #group = "911";
   };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
