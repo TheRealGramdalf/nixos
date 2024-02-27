@@ -11,6 +11,7 @@
     ./hardware-config.nix
     ./configuration.nix
     ./hypr.nix
+    ./arm.nix
     #./home.nix
   ];
   nixpkgs.config.allowUnfree = true;

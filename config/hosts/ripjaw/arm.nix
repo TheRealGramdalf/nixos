@@ -12,10 +12,10 @@
         "/persist/ripjaw/media:/home/arm/media"
         "/persist/ripjaw/config:/etc/arm/config"
       ];
-      environment = {
-        ARM_UID = "";
-        ARM_GID = "";
-      };
+      #environment = {
+      #  ARM_UID = "";
+      #  ARM_GID = "";
+      #};
       extraOptions = [
         # Needed for ARM to work correctly - by default `CAP_SYS_ADMIN` is dropped
         # which blocks `mount()` calls within the container
