@@ -17,8 +17,13 @@
     theme = "catppuccin-sddm-corners";
   };
   environment.systemPackages = with pkgs; [
+    # Catpuccin SDDM theme
     catppuccin-sddm-corners
     libsForQt5.qt5.qtgraphicaleffects
-    #libsForQt5.qt5.qtsvg
+    #libsForQt5.qt5.qtsvg # Not needed?
+
+    # Add a terminal 
+    kitty # So the default super + m keybind works
+    alacritty
   ];
 }
