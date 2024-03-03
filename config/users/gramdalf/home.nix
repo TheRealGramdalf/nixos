@@ -26,17 +26,6 @@
     shellAliases = {
       lla = "ls -la";
       resu = "sudo !!";
-      scf = "sudo nano ~/nix/system/configuration.nix &&
-            var=$(pwd) &&
-            cd ~/nix &&
-            git add -A &&
-            git commit -m 'Push local changes' &&
-            cd $var";
-      srb = "sudo nixos-rebuild switch --flake ~/nix/system#aerwiar";
-      srbb = "sudo nixos-rebuild boot --flake ~/nix/system#aerwiar";
-      hcf = "nano ~/nix/home/home.nix && pushd ~/nix && git add -A && git commit -m 'Push local changes' && popd ";
-      hrb = "home-manager switch --flake ~/nix/home#gramdalf";
-      gp = "var=$(pwd) && cd ~/nix && git add -A && git commit -m 'Push local repo' && git push && cd $var";
       speedtest = "speedtest-cli";
       provides = "nix-locate -w";
       # Don't overwrite files with `mv`
@@ -54,8 +43,6 @@
     };
     packages = with pkgs; [
       #### GUI ####
-      btrfs-progs
-      btrfs-assistant
       exfatprogs
       handbrake
       appflowy
@@ -199,8 +186,6 @@
       # Misc
       libva-utils
       # ntfs3g - Not needed since 5.15?
-      # Fonts
-      andika
       # Asus ROG drivers
       asusctl
       # DGPU utils
