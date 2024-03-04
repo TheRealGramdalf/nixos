@@ -82,6 +82,7 @@
     };
   };
   services = {
+    kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
     thermald.enable = true;
     locate.enable = true;
