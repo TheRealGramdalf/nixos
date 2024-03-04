@@ -2,7 +2,7 @@
 
 {
   imports = [
-    "./zsh.nix"
+    ./zsh.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
@@ -14,12 +14,6 @@
     stateVersion = "24.05";
     # Custom txt files (Source: https://github.com/nix-community/home-manager/issues/1493)
     file = {
-    # Kanidm client config
-    ".config/kanidm".text = ''
-      uri = "https://auth.aer.dedyn.io"
-      verify_ca = true
-      verify_hostnames = true
-    '';
     ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
     };
     shellAliases = {
