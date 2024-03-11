@@ -6,6 +6,7 @@
       enable = true;
       powerOnBoot = false;
     };
+    # Opengl doesn't seem to be enabled by the gnome module
     opengl = {
       enable = true;
       driSupport = true;
@@ -25,22 +26,15 @@
     };
   };
   services = {
-    fwupd.enable = true;
     locate.enable = true;
     flatpak.enable = true;
     printing.enable = true;
-    gvfs.enable = true;
     gnome = {
       gnome-keyring.enable = true;
       core-utilities.enable = false;
     };
     
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      # libinput.enable = true;
-      excludePackages = [ pkgs.xterm ];
-      
+    xserver = {      
       desktopManager = {
         gnome.enable = true;
         xterm.enable = false;
