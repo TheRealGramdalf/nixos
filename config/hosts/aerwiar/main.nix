@@ -3,6 +3,7 @@
     # Commonly used config
     ../../common/avahi-client.nix
     ../../common/zfs-boot.nix
+    ../../common/pipewire.nix
 
     # Host-specific config
     ./hardware-config.nix

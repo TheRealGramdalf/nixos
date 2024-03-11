@@ -1,12 +1,4 @@
 { config, lib, modulesPath, pkgs, ... }: {
-  imports = [  ];
-  boot = {
-    zfs.devNodes = "/dev/disk/by-partlabel";
-    plymouth.enable = true;
-    tmp.cleanOnBoot = true;
-    loader.systemd-boot.enable = true;
-  };
-
   hardware = {
     bluetooth = {
       enable = true;
@@ -20,10 +12,6 @@
       ];
     };
   };
-  
-  i18n.defaultLocale = "en_US.UTF-8";
-#  time.timeZone = "America/Vancouver";
-
   networking = {
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
@@ -60,13 +48,6 @@
         enable = true;
         wayland = true;
       };
-    };
-    
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
     };
   };
   
