@@ -1,5 +1,7 @@
 { config, lib, modulesPath, pkgs, ... }: {
   hardware = {
+    # Pulse needs to be disabled (pipewire is used instead)
+    pulseaudio.enable = false;
     bluetooth = {
       enable = true;
       powerOnBoot = false;
