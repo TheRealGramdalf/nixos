@@ -80,6 +80,7 @@
     }];
   };
   virtualisation.docker = {
+    package = pkgs.docker_25;
     enable = true;
     liveRestore = true;
     storageDriver = "overlay2";
