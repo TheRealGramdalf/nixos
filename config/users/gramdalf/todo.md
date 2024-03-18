@@ -47,3 +47,4 @@
 - [ ] rounded window corners
 - [ ] borgmatic?
 https://github.com/nix-community/comma
+https://github.com/viperML/nh
