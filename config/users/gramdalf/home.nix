@@ -305,7 +305,6 @@
         "ddterm@amezin.github.com"
         "supergfxctl-gex@asus-linux.org"
         "espresso@coadmunkee.github.com"
-        "ddterm@amezin.github.com"
         "blur-my-shell@aunetx"
         "just-perfection-desktop@just-perfection"
       ];
