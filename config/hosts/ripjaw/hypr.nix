@@ -5,11 +5,12 @@
       xwayland.enable = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
-    waybar.enable = true;
   };
 
   ## SDDM ##
-  services.xserver.enable = true; # Todo: Override this so that x11 isn't needed for hyprland
+  # Todo: Override this so that x11 isn't needed for hyprland
+  # Most of the bloat can probably be fixed with excludePackages
+  services.xserver.enable = true;
   services.xserver.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -24,6 +25,5 @@
 
     # Add a terminal 
     kitty # So the default super + m keybind works
-    alacritty
   ];
 }
