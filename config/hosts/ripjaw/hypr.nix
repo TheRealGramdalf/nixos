@@ -1,11 +1,8 @@
 { config, lib, pkgs, ... }: {
-  programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    };
-  };
+  programs.hyprland.enable = true;
+  # Add a terminal 
+  # So the default super + m keybind works
+  environment.systemPackages = [ pkgs.kitty ];
 
   ## SDDM ##
   # Todo: Override this so that x11 isn't needed for hyprland
@@ -14,16 +11,13 @@
   services.xserver.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    #theme = "${pkgs.catppuccin-sddm-corners}"; # This method is probably preferred, and may be modified in the future
+    #theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners/Main.qml"; # This method is probably preferred
     theme = "catppuccin-sddm-corners";
+    extraPackages = with pkgs [
+      libsForQt5.qt5.qtgraphicaleffects
+      catppuccin-sddm-corners # Might not work
+      #libsForQt5.qt5.qtsvg # Not needed?
+    ];
   };
-  environment.systemPackages = with pkgs; [
-    # Catpuccin SDDM theme
-    catppuccin-sddm-corners
-    libsForQt5.qt5.qtgraphicaleffects
-    #libsForQt5.qt5.qtsvg # Not needed?
 
-    # Add a terminal 
-    kitty # So the default super + m keybind works
-  ];
 }
