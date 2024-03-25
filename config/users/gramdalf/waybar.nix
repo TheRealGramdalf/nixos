@@ -3,12 +3,6 @@
     enable = true;
     systemd.enable = true;
     settings = {
-      backlight = {
-        device = "intel_backlight";
-        format = "{percent}% {icon}";
-        format-icons = [""];
-        min-length = 7;
-      };
       battery = {
         format = "{capacity}% {icon}";
         format-alt = "{time} {icon}";
@@ -30,35 +24,11 @@
         interval = 2;
         min-length = 6;
       };
-      "custom/mail" = {
-        exec = "$HOME/.config/waybar/scripts/checkgmail.py";
-        format = "{} ";
-        interval = 120;
-        on-click = "google-chrome-stable https://mail.google.com/mail/u/0/#inbox ; pkill -SIGRTMIN+9 waybar";
-        signal = 9;
-        tooltip = false;
-      };
       "custom/mem" = {
         exec = "free -h | awk '/Mem:/{printf $3}'";
         format = "{} ";
         interval = 3;
         tooltip = false;
-      };
-      "custom/pacman" = {
-        exec = "(checkupdates;pacman -Qm | aur vercmp) | wc -l";
-        exec-if = "exit 0";
-        format = "{} ";
-        interval = 3600;
-        on-click = "foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar";
-        signal = 8;
-        tooltip = false;
-      };
-      "custom/weather" = {
-        exec = "$HOME/.config/waybar/scripts/wttr.py";
-        format = "{}";
-        interval = 1800;
-        return-type = "json";
-        tooltip = true;
       };
       "hyprland/language" = {
         format-en = "US";
@@ -67,7 +37,7 @@
         tooltip = false;
       };
       "hyprland/submap" = {format = "pon {}";};
-      "hyprland/workspaces" = {disable-scroll = true;};
+      "hyprland/workspaces" = {disable-scroll = false;};
       keyboard-state = {
         capslock = true;
         format = "{icon} ";
@@ -118,7 +88,7 @@
         border: none;
         border-radius: 0;
         /* `otf-font-awesome` is required to be installed for icons */
-        font-family: FontAwesome, JetBrains Mono Bold, sans-serif;
+        font-family: Symbols Nerd Font, JetBrains Mono Bold, sans-serif;
         min-height: 20px;
     }
 
@@ -176,24 +146,6 @@
     }
 
     #keyboard-state {
-        margin-right: 8px;
-        padding-right: 16px;
-        border-radius: 0px 10px 10px 0px;
-        transition: none;
-        color: #ffffff;
-        background: #383c4a;
-    }
-
-    #custom-pacman {
-        padding-left: 16px;
-        padding-right: 8px;
-        border-radius: 10px 0px 0px 10px;
-        transition: none;
-        color: #ffffff;
-        background: #383c4a;
-    }
-
-    #custom-mail {
         margin-right: 8px;
         padding-right: 16px;
         border-radius: 0px 10px 10px 0px;
