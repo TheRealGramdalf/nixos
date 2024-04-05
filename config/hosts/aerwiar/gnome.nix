@@ -22,7 +22,9 @@
     
     firewall = {
       enable = true;
-      logRefusedConnections = true;
+      # logRefusedConnections = false;
+      allowedUDPPorts = [ 53317 ];
+      allowedTCPPorts = [ 53317 ];
     };
   };
   services = {
