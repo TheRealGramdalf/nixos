@@ -178,11 +178,11 @@
       libva-utils
       # ntfs3g - Not needed since 5.15?
       # Asus ROG drivers
-      asusctl
+      #asusctl
       # DGPU utils
-      supergfxctl
+      #supergfxctl
       # Gnome Extensions
-      gnomeExtensions.supergfxctl-gex
+      #gnomeExtensions.supergfxctl-gex
       gnomeExtensions.vitals
       gnomeExtensions.removable-drive-menu
       gnomeExtensions.espresso
@@ -299,11 +299,11 @@
         "disabled"
       ];
       enabled-extensions = [
-        "forge@jmmaranan.com"
+        #"forge@jmmaranan.com"
         "Vitals@CoreCoding.com"
         "drive-menu@gnome-shell-extensions.gcampax.github.com"
         "ddterm@amezin.github.com"
-        "supergfxctl-gex@asus-linux.org"
+        #"supergfxctl-gex@asus-linux.org"
         "espresso@coadmunkee.github.com"
         "blur-my-shell@aunetx"
         "just-perfection-desktop@just-perfection"
