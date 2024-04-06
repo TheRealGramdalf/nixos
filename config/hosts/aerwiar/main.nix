@@ -8,6 +8,7 @@
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
+    ./framework.nix
     #./nvidia.nix
     ./gnome.nix
     #./hypr.nix
