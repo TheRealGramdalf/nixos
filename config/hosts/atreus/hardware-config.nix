@@ -10,6 +10,14 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot = {
+    zfs.devNodes = "/dev/disk/by-partlabel";
+    plymouth.enable = true;
+    tmp.cleanOnBoot = true;
+    loader.systemd-boot.enable = true;
+  };
+  
+
   fileSystems."/" =
     { device = "atreus-zroot/system-state";
       fsType = "zfs";
