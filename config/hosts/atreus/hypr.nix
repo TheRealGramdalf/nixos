@@ -13,9 +13,9 @@
     wayland.enable = true;
     #theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners/Main.qml"; # This method is probably preferred
     theme = "catppuccin-sddm-corners";
-    extraPackages = with pkgs [
-      libsForQt5.qt5.qtgraphicaleffects
-      catppuccin-sddm-corners # Might not work
+    extraPackages = [
+      pkgs.libsForQt5.qt5.qtgraphicaleffects
+      pkgs.catppuccin-sddm-corners # Might not work
       #libsForQt5.qt5.qtsvg # Not needed?
     ];
   };
