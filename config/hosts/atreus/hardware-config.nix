@@ -5,29 +5,34 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "atreus-zpool/system-state";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix" =
-    { device = "atreus-zpool/ephemeral/nix";
-      fsType = "zfs";
-    };
-
-  fileSystems."/home" =
-    { device = "atreus-zpool/safe/home";
+    { device = "atreus-zroot/system-state";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-partlabel/atreus-zboot";
+    { device = "/dev/disk/by-label/atreus-zboot";
       fsType = "vfat";
+    };
+
+  fileSystems."/home" =
+    { device = "atreus-zroot/safe/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/nix" =
+    { device = "atreus-zroot/ephemeral/nix";
+      fsType = "zfs";
+    };
+
+  fileSystems."/persist" =
+    { device = "atreus-zroot/safe/persist";
+      fsType = "zfs";
     };
 
   swapDevices = [ ];
@@ -37,8 +42,8 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
