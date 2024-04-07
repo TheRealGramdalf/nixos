@@ -40,6 +40,10 @@
         modules = [
           ./config/hosts/aerwiar/main.nix
       ];};
+      "atreus" = nixosSystem {
+        modules = [
+          ./config/hosts/atreus/main.nix
+      ];};
       "aer-files" = nixosSystem {
         modules = [
           ./config/hosts/aer-files/main.nix
