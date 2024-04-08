@@ -3,6 +3,7 @@
 {
   imports = [
     ./zsh.nix
+    ./hypr.nix
     ./waybar.nix
     ./anyrun.nix
   ];
