@@ -24,7 +24,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/atreus-zboot";
+    { device = "/dev/disk/by-partlabel/atreus-zboot";
       fsType = "vfat";
     };
 
