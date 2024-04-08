@@ -34,6 +34,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
+    kanidm.enableClient = true;
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
     xserver = {
