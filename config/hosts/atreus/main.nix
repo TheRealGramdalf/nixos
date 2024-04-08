@@ -12,6 +12,7 @@
     ./hardware-config.nix
     ./configuration.nix
     ./hypr.nix
+    ./nvidia.nix
   ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
