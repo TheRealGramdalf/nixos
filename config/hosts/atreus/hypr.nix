@@ -15,7 +15,7 @@
     enable = true;
     excludePackages = with pkgs; [
       xterm
-      # ssh-askpass # Not sure which package it is
+      x11_ssh_askpass
     ];
   };
 
