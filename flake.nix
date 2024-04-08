@@ -18,10 +18,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #anyrun = {
-    #  url = "github:anyrun-org/anyrun";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     #hyprland.url = "github:hyprwm/Hyprland";
   };
