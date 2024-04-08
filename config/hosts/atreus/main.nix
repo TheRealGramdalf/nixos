@@ -11,7 +11,7 @@
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
-    ./hypr.nix
+    ./hypr/hypr.nix
     ./nvidia.nix
   ];
   nixpkgs.config.allowUnfree = true;

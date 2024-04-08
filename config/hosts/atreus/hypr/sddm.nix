@@ -1,14 +1,4 @@
 { config, lib, pkgs, ... }: {
-  programs.hyprland.enable = true;
-  # Add a terminal 
-  # So the default super + m keybind works
-  environment.systemPackages = [ pkgs.kitty ];
-  
-  # Enable networkmanager
-  networking.networkmanager.enable = true;
-
-
-  ## SDDM ##
   # Todo: Override this so that x11 isn't needed for hyprland
   # Most of the bloat can probably be fixed with excludePackages
   services.xserver = {
