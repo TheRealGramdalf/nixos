@@ -2,24 +2,16 @@
 
 {
   imports = [
-    ./zsh.nix
+    #./zsh.nix
     ./hypr.nix
     ./waybar.nix
     ./anyrun.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
   home = {
-    username = "gramdalf";
-    homeDirectory = "/home/gramdalf";
+    #username = "gramdalf";
+    #homeDirectory = "/home/gramdalf";
     stateVersion = "24.05";
-    # Custom txt files (Source: https://github.com/nix-community/home-manager/issues/1493)
-    file = {
-    ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
-    };
     sessionVariables = {
       EDITOR = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
@@ -71,7 +63,6 @@
     ];
   };  
   programs = {
-    home-manager.enable = true;
     bash.enable = true;
     
 /*    firefox = {

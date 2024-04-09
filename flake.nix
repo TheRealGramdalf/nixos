@@ -39,7 +39,6 @@
       "ripjaw" = nixosSystem {
         modules = [
           ./config/hosts/ripjaw/main.nix
-          #home-manager.nixosModules.home-manager
       ];};
       "aerwiar" = nixosSystem {
         modules = [
@@ -48,6 +47,17 @@
       "atreus" = nixosSystem {
         modules = [
           ./config/hosts/atreus/main.nix
+          
+          { users.users."meebling".isNormalUser = true; }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."meebling" = import ./config/users/meebling/home.nix;
+              extraSpecialArgs = { inherit context; };
+            };
+          }
       ];};
       "aer-files" = nixosSystem {
         modules = [
@@ -56,7 +66,6 @@
       "docker-ve" = nixosSystem {
         modules = [
           ./config/hosts/aerwiar/main.nix
-          #home-manager.nixosModules.home-manager
       ];};
     };
     homeConfigurations = {
