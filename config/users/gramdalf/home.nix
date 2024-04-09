@@ -4,6 +4,7 @@
   imports = [
     ./zsh.nix
     ./ddterm.nix
+    ./anyrun.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [

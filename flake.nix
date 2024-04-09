@@ -48,16 +48,16 @@
         modules = [
           ./config/hosts/atreus/main.nix
           
-          { users.users."meebling".isNormalUser = true; }
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."meebling" = import ./config/users/meebling/home.nix;
-              extraSpecialArgs = { inherit context; };
-            };
-          }
+          #{ users.users."meebling".isNormalUser = true; }
+          #home-manager.nixosModules.home-manager
+          #{
+          #  home-manager = {
+          #    useGlobalPkgs = true;
+          #    useUserPackages = true;
+          #    users."meebling" = import ./config/users/meebling/home.nix;
+          #    extraSpecialArgs = { inherit context; };
+          #  };
+          #}
       ];};
       "aer-files" = nixosSystem {
         modules = [
