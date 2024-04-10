@@ -4,6 +4,8 @@
   imports = [
     ./zsh.nix
     ./anyrun.nix
+    ./waybar-interim.nix
+    ./hypr.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
