@@ -6,6 +6,7 @@
     ./anyrun.nix
     ./waybar-interim.nix
     ./hypr.nix
+    ./gtk.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
