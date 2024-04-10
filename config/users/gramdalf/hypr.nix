@@ -2,14 +2,35 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      # UserPreferences
+      "$terminal" = "kitty";
+      "$fileManager" = "nautilus";
+      "$menu" = "anyrun";
+      # Bind prefs
+      "$mainMod" = "SUPER";
+
+      env = [
+        
+      ];
+
+
       input = {
         accel_profile = "flat";
         natural_scroll = true;
         touchpad = {
-          accel_profile = "flat";
+        #  accel_profile = "flat";
           natural_scroll = true;
+          clickfinger_behavior = true;
         };
       };
+      gestures = {
+        workspace_swipe = true;
+      };
+
+      # Binds
+      bind = [
+        "$mainMod, SPACE, exec, $menu"
+      ];
     };
     extraConfig = ''
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -18,16 +39,6 @@
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
-      # Execute your favorite apps at launch
-      # exec-once = waybar & hyprpaper & firefox
-
-      # Source a file (multi-file configs)
-      # source = ~/.config/hypr/myColors.conf
-
-      # Set programs that you use
-      $terminal = kitty
-      $fileManager = dolphin
-      $menu = wofi --show drun
 
       # Some default env vars.
       env = XCURSOR_SIZE,24
@@ -37,16 +48,11 @@
       input {
           kb_layout = us
           kb_variant =
-          kb_model =
+          kb_model ="$mainMod, SPACE, exec, $menu"
           kb_options =
           kb_rules =
 
           follow_mouse = 1
-
-          touchpad {
-              natural_scroll = no
-          }
-
           sensitivity = 0 # -1.0 to 1.0, 0 means no modification.
       }
 
@@ -108,10 +114,6 @@
           new_is_master = true
       }
 
-      gestures {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          workspace_swipe = off
-      }
 
       misc {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -134,8 +136,6 @@
 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      $mainMod = SUPER
-
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = $mainMod, Q, exec, $terminal
       bind = $mainMod, C, killactive, 
