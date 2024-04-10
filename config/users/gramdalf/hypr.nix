@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   wayland.windowManager.hyprland = {
+    enable = true;
     settings = {
       input = {
         accel_profile = "flat";
