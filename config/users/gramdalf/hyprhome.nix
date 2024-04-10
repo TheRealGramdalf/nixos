@@ -10,8 +10,8 @@
     "electron-25.9.0"
   ];
   home = {
-    username = "gramdalf";
-    homeDirectory = "/home/gramdalf";
+    username = "hyprgramdalf";
+    homeDirectory = "/home/hyprgramdalf";
     stateVersion = "24.05";
     # Custom txt files (Source: https://github.com/nix-community/home-manager/issues/1493)
     file = {
