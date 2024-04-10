@@ -7,6 +7,7 @@
     ./waybar-interim.nix
     ./hypr.nix
     ./gtk.nix
+    ./firefox.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
@@ -16,7 +17,7 @@
     username = "hyprgramdalf";
     homeDirectory = "/home/hyprgramdalf";
     stateVersion = "24.05";
-    # Custom txt files (Source: https://github.com/nix-community/home-manager/issues/1493)
+    # Custom txt fI'm getting my Hyprland setup going, and I'm curious if people have an Anyrun iles (Source: https://github.com/nix-community/home-manager/issues/1493)
     file = {
     ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
     };
@@ -39,17 +40,14 @@
       #### GUI ####
       exfatprogs
       handbrake
-      appflowy
       meld
       remmina
       # Shell/terminal
       neovim
       nerdfonts
-      gnome.gnome-terminal
       # Communication
       webcord
       electron-mail
-      jitsi
       zoom-us
       chatterino2
       # Word Processing
@@ -62,12 +60,10 @@
       bitwarden
       denaro
       celeste
-      kodi-wayland
       jellyfin-web
       pika-backup
       protonvpn-gui
       nextcloud-client
-      newsflash # RSS feed reader
       # File editors
       audacity
       # pitivi # Video editor
@@ -81,7 +77,6 @@
       picard # MusicBrainz Tagger
       wireshark
       dive
-      prusa-slicer
       filezilla
       motrix # Download manager
       gnome.gnome-calculator
@@ -94,7 +89,6 @@
       gnome-solanum # Pomodoro timer
       eartag # File tag editor
       evince # Document viewer
-      gcolor3 # Color picker
       clapper # Video viewer
       gnome.eog # Photo viewer
       gnome.gnome-power-manager # Battery stats
@@ -104,9 +98,7 @@
       drawing
       vlc
       gnome.gnome-clocks
-      gnome.gnome-logs
       gnome.gnome-maps
-      gnome.gnome-characters # Emojis and other chars
       gnome.nautilus
       gnome.simple-scan
       #gnome-connections
@@ -122,9 +114,7 @@
       # Settings
       gnome.dconf-editor
       gnome.gnome-tweaks
-      gnome-extension-manager
       # Web browsers
-      librewolf
       brave
       epiphany
       qbittorrent
@@ -135,17 +125,9 @@
       prismlauncher
       steam
       mangohud # System usage stats
-      #### Theming ####
-      adwaita-qt6
-      adwaita-qt
-      qgnomeplatform
-      qgnomeplatform-qt6
-      gradience
-      adw-gtk3
       #### CLI ####
       kanidm # Kanidm client
       exiftool
-      nix-output-monitor
       cmatrix
       android-tools
       speedtest-cli
@@ -181,15 +163,7 @@
   programs = {
     home-manager.enable = true;
     bash.enable = true;
-    
-/*    firefox = {
-      enable = true;
-      package = pkgs.floorp;
-      profiles.gramdalf = {
-         isDefault = true;
-      }
-    };
-*/
+
     vscode = {
       enable = true;
       package = pkgs.vscodium;
