@@ -69,5 +69,21 @@
         curl
      ];
     };
+    users."hyprgramdalf" = {
+      isNormalUser = true;
+      description = "Hyprland Gramdalf";
+      extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "wireshark" ];
+      hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
+      shell = pkgs.zsh;
+      
+      packages = with pkgs; [
+        home-manager
+        git
+        neovim
+        nerdfonts
+        wget
+        curl
+     ];
+    };
   };    
 }

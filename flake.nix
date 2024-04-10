@@ -44,6 +44,10 @@
         modules = [
           ./config/hosts/aerwiar/main.nix
       ];};
+      "hypraerwiar" = nixosSystem {
+        modules = [
+          ./config/hosts/aerwiar/hyprmain.nix
+      ];};
       "atreus" = nixosSystem {
         modules = [
           ./config/hosts/atreus/main.nix
