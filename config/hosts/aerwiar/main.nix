@@ -9,8 +9,7 @@
     ./hardware-config.nix
     ./configuration.nix
     ./framework.nix
-    ./gnome.nix
-    #./hypr.nix
+    ./hypr/hypr.nix
   ];
   system.stateVersion = "24.05";
   nixpkgs.config.allowUnfree = true;
