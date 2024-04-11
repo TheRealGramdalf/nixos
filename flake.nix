@@ -10,9 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
-    # ^^ Todo if needed
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,8 +19,6 @@
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = context@{ nixpkgs, home-manager, nixos-generators, ... }:
@@ -43,10 +38,6 @@
       "aerwiar" = nixosSystem {
         modules = [
           ./config/hosts/aerwiar/main.nix
-      ];};
-      "hypraerwiar" = nixosSystem {
-        modules = [
-          ./config/hosts/aerwiar/hyprmain.nix
       ];};
       "atreus" = nixosSystem {
         modules = [
@@ -74,7 +65,7 @@
     };
     homeConfigurations = {
       "gramdalf" = homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        useGlobalPkgs = true;
         extraSpecialArgs = { inherit context; };
         modules = [
           ./config/users/gramdalf/main.nix
