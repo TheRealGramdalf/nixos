@@ -11,6 +11,7 @@
     QT_QPA_PLATFORM = "wayland;xcb";
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   # Enable networkmanager

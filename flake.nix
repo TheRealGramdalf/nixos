@@ -77,14 +77,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit context; };
         modules = [
-          ./config/users/gramdalf/home.nix
-        ];
-      };
-      "hyprgramdalf" = homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit context; };
-        modules = [
-          ./config/users/gramdalf/hyprhome.nix
+          ./config/users/gramdalf/main.nix
         ];
       };
     };

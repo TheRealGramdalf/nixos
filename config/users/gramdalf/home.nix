@@ -1,18 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./zsh.nix
-    ./hypr/hypr.nix
-    ./firefox.nix
-  ];
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
   home = {
-    username = "hyprgramdalf";
-    homeDirectory = "/home/hyprgramdalf";
+    username = "gramdalf";
+    homeDirectory = "/home/gramdalf";
     stateVersion = "24.05";
     file = {
     ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
@@ -21,7 +12,6 @@
       lla = "ls -la";
       resu = "sudo !!";
       speedtest = "speedtest-cli";
-      provides = "nix-locate -w";
       # Don't overwrite files with `mv`
       mv = "mv -n";
       # Don't overwrite the entire disk with 0s when formatting as NTFS
@@ -30,7 +20,6 @@
     
     sessionVariables = {
       EDITOR = "nvim";
-      MOZ_ENABLE_WAYLAND = "1";
     };
     packages = with pkgs; [
       #### GUI ####
