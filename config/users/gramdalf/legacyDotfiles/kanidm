@@ -1,3 +1,0 @@
-uri = "https://auth.aer.dedyn.io"
-verify_ca = true
-verify_hostnames = true

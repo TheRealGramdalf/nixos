@@ -6,7 +6,6 @@
       # zsh colors. See `~/.zcolors`
       ".zcolors".source = ./legacyDotfiles/.zcolors;
     };
-    packages = with pkgs; [];
   };
   programs.zsh = {
     enable = true;
