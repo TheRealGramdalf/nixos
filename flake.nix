@@ -65,7 +65,8 @@
     };
     homeConfigurations = {
       "gramdalf" = homeManagerConfiguration {
-        useGlobalPkgs = true;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        #useGlobalPkgs = true;
         extraSpecialArgs = { inherit context; };
         modules = [
           ./config/users/gramdalf/main.nix
