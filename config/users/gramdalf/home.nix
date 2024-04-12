@@ -5,9 +5,6 @@
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
     stateVersion = "24.05";
-    file = {
-    ".icons/SpaceKCursors".source = ./assets/SpaceKCursors;
-    };
     shellAliases = {
       lla = "ls -la";
       resu = "sudo !!";
