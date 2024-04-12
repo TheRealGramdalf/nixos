@@ -3,6 +3,7 @@
     ./gtk.nix
     ./waybar.nix
     ./anyrun.nix
+    ./cursor.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
