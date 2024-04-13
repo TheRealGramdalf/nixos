@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
@@ -14,7 +17,7 @@
       # Don't overwrite the entire disk with 0s when formatting as NTFS
       "mkfs.ntfs" = "mkfs.ntfs --quick";
     };
-    
+
     sessionVariables = {
       EDITOR = "nvim";
     };
@@ -141,7 +144,7 @@
       # Misc
       libva-utils
     ];
-  };  
+  };
   programs = {
     home-manager.enable = true;
     bash.enable = true;
@@ -163,7 +166,7 @@
       userName = "TheRealGramdalf";
     };
   };
-  
+
   dconf.settings = {
     "org/gtk/gtk4/settings/file-chooser" = {
       sort-directories-first = true;

@@ -1,3 +1,9 @@
-{ config, lib, modulesPath, pkgs, ... }: {
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}: {
   services.fprintd.enable = true;
 }

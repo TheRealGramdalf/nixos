@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   home = {
     file = {
       # zsh prompt. See `~/.zprompt`
@@ -60,7 +65,7 @@
       bindkey '^[[H' beginning-of-line                  # home
       bindkey '^[[F' end-of-line                        # end
       bindkey '^[[Z' undo                               # shift + tab undo last action
-      # ~/.zprompt 
+      # ~/.zprompt
       [ -f ~/.zprompt ] && source ~/.zprompt || echo "Error: ~/.zprompt does not exist."
       # ~/.zcolors
       [ -f ~/.zcolors ] && source ~/.zcolors || echo "Error: ~/.zcolors does not exist."

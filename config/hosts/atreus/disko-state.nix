@@ -15,7 +15,8 @@
             content = {
               type = "zfs";
               pool = "atreus-zroot";
-          };};
+            };
+          };
           "atreus-zboot" = {
             label = "atreus-zboot";
             size = "100%";
@@ -24,7 +25,8 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-          };};
+            };
+          };
         };
       };
     };
@@ -38,14 +40,15 @@
         xattr = "sa";
         acltype = "posix";
       };
-      
+
       datasets = {
         "ephemeral" = {
           type = "zfs_fs";
           options = {
             canmount = "noauto";
             mountpoint = "legacy";
-        };};
+          };
+        };
         "ephemeral/nix" = {
           type = "zfs_fs";
           mountpoint = "/nix";
@@ -53,44 +56,47 @@
             atime = "off";
             canmount = "noauto";
             mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
-        };};
+          };
+        };
         "safe" = {
           type = "zfs_fs";
           options = {
             canmount = "noauto";
             mountpoint = "legacy";
-        };};
+          };
+        };
         "safe/persist" = {
           type = "zfs_fs";
           mountpoint = "/persist";
           options = {
             canmount = "noauto";
             mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
-        };};
+          };
+        };
         "safe/home" = {
           type = "zfs_fs";
           mountpoint = "/home";
           options = {
             canmount = "noauto";
             mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
-        };};
+          };
+        };
         "system-state" = {
           type = "zfs_fs";
           mountpoint = "/";
           options = {
             canmount = "noauto";
             mountpoint = "legacy";
-        };};
+          };
+        };
       };
       #preMountHook = "zfs snapshot -r zroot@blank";
       # Needs fixing, runs multiple times
     };
   };
 }
-
 # https://github.com/nix-community/disko/issues/298
 # Configure disk format in line with `zpool`, rather than separately
-
 #zpool create -o ashift=12 -O compression=zstd -O xattr=sa -O acltype=posix -O mountpoint=none -R /mnt aerwiar-zpool /dev/disk/by-partlabel/aerwiar-zpool
 #zfs create -o canmount=noauto -o mountpoint=legacy aerwiar-zpool/ephemeral
 #zfs create -o canmount=noauto -o mountpoint=legacy aerwiar-zpool/safe
@@ -101,3 +107,4 @@
 #zfs create -o atime=off aerwiar-zpool/ephemeral/nix
 #zfs snap -r aerwiar-zpool@blank
 #zfs create -o canmount=noauto aerwiar-zpool/safe/persist
+

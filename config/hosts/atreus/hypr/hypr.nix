@@ -1,9 +1,14 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.hyprland.enable = true;
-  # Add a terminal 
+  # Add a terminal
   # So the default super + m keybind works
-  environment.systemPackages = [ pkgs.kitty ];
-  
+  environment.systemPackages = [pkgs.kitty];
+
   # Use wayland pls uwu
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";

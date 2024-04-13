@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Todo: Override this so that x11 isn't needed for hyprland
   # Most of the bloat can probably be fixed with excludePackages
   services.xserver = {

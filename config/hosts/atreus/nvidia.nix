@@ -1,5 +1,11 @@
-{ config, lib, modulesPath, pkgs, ... }: {
-  hardware = {    
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}: {
+  hardware = {
     nvidia = {
       modesetting.enable = true;
       open = false;
@@ -14,6 +20,6 @@
       enable = true;
       enableUserService = true;
     };
-    xserver.videoDrivers = [ "nvidia" ];    
+    xserver.videoDrivers = ["nvidia"];
   };
 }

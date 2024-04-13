@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./gtk.nix
     ./waybar.nix
@@ -36,8 +41,8 @@
         };
       };
       device = {
-          name = "epic-mouse-v1";
-          sensitivity = -0.5;
+        name = "epic-mouse-v1";
+        sensitivity = -0.5;
       };
       gestures = {
         workspace_swipe = true;
@@ -93,7 +98,7 @@
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"        
+        "$mainMod, mouse_up, workspace, e-1"
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -148,10 +153,12 @@
       ];
     };
   };
-  home.file.".config/hypr/mocha.conf".source = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "hyprland";
-    rev = "v1.3";
-    hash = "sha256-jkk021LLjCLpWOaInzO4Klg6UOR4Sh5IcKdUxIn7Dis=";
-  } + "/themes/mocha.conf"; 
+  home.file.".config/hypr/mocha.conf".source =
+    pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "hyprland";
+      rev = "v1.3";
+      hash = "sha256-jkk021LLjCLpWOaInzO4Klg6UOR4Sh5IcKdUxIn7Dis=";
+    }
+    + "/themes/mocha.conf";
 }

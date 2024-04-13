@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.hyprland.enable = true;
-  # Add a terminal 
+  # Add a terminal
   # So the default super + m keybind works
-  environment.systemPackages = [ pkgs.kitty ];
+  environment.systemPackages = [pkgs.kitty];
 
   ## SDDM ##
   # Todo: Override this so that x11 isn't needed for hyprland
@@ -19,5 +24,4 @@
       #libsForQt5.qt5.qtsvg # Not needed?
     ];
   };
-
 }

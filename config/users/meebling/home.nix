@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     #./zsh.nix
     ./hypr/hypr.nix
@@ -61,17 +64,18 @@
       # DGPU utils
       #supergfxctl
     ];
-  };  
+  };
   programs = {
     bash.enable = true;
-    
-/*    firefox = {
+
+    /*
+      firefox = {
       enable = true;
       package = pkgs.floorp;
       profiles.gramdalf = {
          isDefault = true;
       }
     };
-*/
+    */
   };
 }

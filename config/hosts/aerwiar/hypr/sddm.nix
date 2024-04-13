@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Awaiting PR coming to nixos-unstable
   services.xserver = {
     enable = true;

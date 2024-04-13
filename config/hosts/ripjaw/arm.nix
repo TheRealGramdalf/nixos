@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
@@ -10,7 +15,7 @@
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
     image = "automaticrippingmachine/automatic-ripping-machine:latest";
-    ports = [ "8080:8080" ];
+    ports = ["8080:8080"];
     volumes = [
       "/persist/docker-ripjaw/home:/home/arm"
       "/persist/docker-ripjaw/config:/etc/arm/config"

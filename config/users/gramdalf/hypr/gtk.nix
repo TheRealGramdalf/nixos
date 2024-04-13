@@ -1,10 +1,15 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   gtk = {
     enable = true;
     theme = {
       name = "Catppuccin-Macchiato-Compact-Mauve-Dark";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "mauve" ];
+        accents = ["mauve"];
         #tweaks = [ "rimless" "black" ];
         variant = "macchiato";
       };

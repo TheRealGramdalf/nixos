@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = {
     environment = {
       systemPackages = with pkgs; [
@@ -12,22 +17,22 @@
     # Fix proxmox networking
     networking = {
       enableIPv6 = false;
-      firewall.enable = true; 
+      firewall.enable = true;
       # Get DNS info from proxmox
-      resolvconf.enable = false; 
-          #^^ Might not be needed?
+      resolvconf.enable = false;
+      #^^ Might not be needed?
     };
     # DNS cache shouldn't happen in the LXC
     services.resolved.enable = false;
 
     services = {
       # Consume POSIX accounts from Kanidm
-      kanidm.unixSettings.pam_allowed_login_groups = [ "dockaer-login" ];
+      kanidm.unixSettings.pam_allowed_login_groups = ["dockaer-login"];
 
       # Network shares
       samba = {
         package = pkgs.samba4Full;
-        # ^^ Needed to enable mDNS support. Thank you iv.cha! 
+        # ^^ Needed to enable mDNS support. Thank you iv.cha!
         # See https://github.com/NixOS/nixpkgs/blob/592047fc9e4f7b74a4dc85d1b9f5243dfe4899e3/pkgs/top-level/all-packages.nix#L27268
         enable = true;
         openFirewall = true;
@@ -56,15 +61,15 @@
         extraConfig = ''
           ## Security Settings
           # Permissions
-          inherit owner = unix only 
-          inherit permissions = yes 
+          inherit owner = unix only
+          inherit permissions = yes
           # ^^ Overrides `create` and `force create` `mask/mode`
           # Authentication
-                passdb backend = tdbsam:/tank/samba-passdb.tdb 
-          security = user 
+                passdb backend = tdbsam:/tank/samba-passdb.tdb
+          security = user
           hosts allow = 192.168.1. 127.0.0.1
           hosts deny = ALL
-          guest account = nobody 
+          guest account = nobody
           map to guest = Bad User
           # guest ok = true
           #//TODO Look into: `invalid users`
@@ -84,7 +89,7 @@
         nssmdns4 = true;
         enable = true;
         openFirewall = true;
-        allowInterfaces = [ "upstream0" ];
+        allowInterfaces = ["upstream0"];
       };
       samba-wsdd = {
         enable = true;
@@ -96,10 +101,13 @@
         enable = true;
         settings.PasswordAuthentication = false;
         settings.PermitRootLogin = "prohibit-password";
-        listenAddresses = [{
-          addr = "0.0.0.0";
-          port = 22;
-      }];};
+        listenAddresses = [
+          {
+            addr = "0.0.0.0";
+            port = 22;
+          }
+        ];
+      };
     };
     users = {
       mutableUsers = true;

@@ -1,16 +1,20 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.firefox = {
     enable = true;
     profiles."gramdalf" = {
-     isDefault = true;
-     settings = {
-      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
-     };
+      isDefault = true;
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      };
     };
   };
 
-# https://stackoverflow.com/questions/53658303/fetchfromgithub-filter-down-and-use-as-environment-etc-file-source
+  # https://stackoverflow.com/questions/53658303/fetchfromgithub-filter-down-and-use-as-environment-etc-file-source
 
   home.file.".mozilla/firefox/gramdalf/chrome".source = pkgs.fetchFromGitHub {
     owner = "soulhotel";

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, context, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  context,
+  ...
+}: {
   imports = [
     context.anyrun.homeManagerModules.default
   ];

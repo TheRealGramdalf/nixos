@@ -1,4 +1,10 @@
-{ config, lib, modulesPath, pkgs, ... }: {
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}: {
   boot = {
     zfs.devNodes = "/dev/disk/by-partlabel";
     plymouth.enable = true;
@@ -10,7 +16,7 @@
     enable = true;
     scsiLinkPolicy = "med_power_with_dipm";
   };
-  
+
   system = {
     autoUpgrade = {
       enable = false;
@@ -20,23 +26,23 @@
       persistent = false;
     };
   };
-  
+
   nix.settings = {
-      auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+    auto-optimise-store = true;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
-  
+
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
     kanidm.enableClient = true;
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
-  };  
-  
+  };
+
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
@@ -44,13 +50,13 @@
   programs.wireshark.enable = true;
   users = {
     mutableUsers = false;
-    
+
     users."gramdalf" = {
       isNormalUser = true;
       description = "Gramdalf";
-      extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "wireshark" ];
+      extraGroups = ["wheel" "networkmanager" "docker" "adbusers" "wireshark"];
       hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
       shell = pkgs.zsh;
     };
-  };    
+  };
 }

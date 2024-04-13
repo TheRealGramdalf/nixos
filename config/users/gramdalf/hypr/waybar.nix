@@ -1,27 +1,32 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
     #style = ''
     #  @import "mocha.css";
-#
+    #
     #  * {
     #    font-family: FantasqueSansMono Nerd Font;
     #    font-size: 19px;
     #    min-height: 0;
     #  }
-#
+    #
     #  window#waybar {
     #    background: transparent;
     #  }
-#
+    #
     #  #workspaces {
     #    border-radius: 1rem;
     #    background-color: @surface0;
     #    margin-top: 1rem;
     #    margin: 7px 3px 0px 7px;
     #  }
-#
+    #
     #  #workspaces button {
     #    color: @pink;
     #    border-radius: 1rem;
@@ -31,17 +36,17 @@
     #    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.68);
     #    background-color: transparent;
     #  }
-#
+    #
     #  #workspaces button.active {
     #    color: @flamingo;
     #    border-radius: 1rem;
     #  }
-#
+    #
     #  #workspaces button:hover {
     #    color: @rosewater;
     #    border-radius: 1rem;
     #  }
-#
+    #
     #  #tray,
     #  #network,
     #  #backlight,
@@ -55,54 +60,54 @@
     #    padding: 10px 5px 10px 5px;
     #    border-radius: 1rem;
     #  }
-#
+    #
     #  #clock {
     #    color: @lavender;
     #  }
-#
+    #
     #  #battery {
     #    color: @green;
     #  }
-#
+    #
     #  #battery.charging {
     #    color: @green;
     #  }
-#
+    #
     #  #battery.warning:not(.charging) {
     #    color: @red;
     #  }
-#
+    #
     #  #network {
     #      color: @flamingo;
     #  }
-#
+    #
     #  #backlight {
     #    color: @yellow;
     #  }
-#
+    #
     #  #pulseaudio {
     #    color: @pink;
     #  }
-#
+    #
     #  #pulseaudio.muted {
     #      color: @red;
     #  }
-#
+    #
     #  #custom-power {
     #      border-radius: 1rem;
     #      color: @red;
     #      margin-bottom: 1rem;
     #  }
-#
+    #
     #  #tray {
     #    border-radius: 1rem;
     #  }
-#
+    #
     #  tooltip {
     #      background: @base;
     #      border: 1px solid @pink;
     #  }
-#
+    #
     #  tooltip label {
     #      color: @text;
     #  }
@@ -221,88 +226,88 @@
     #  };
     #};
     #settings = {
-      #mainBar = {
-      #  layer = "top";
-      #  position = "top";
-      #  modules-left = ["hyprland/workspaces"];
-      #  modules-center = [];
-      #  modules-right = ["pulseaudio" "network" "backlight" "battery" "clock" "tray" "custom/power"];
-#
-      #  "hyprland/workspaces" = {
-      #    disable-scroll = true;
-      #    sort-by-name = true;
-      #    format = "{icon}";
-      #    format-icons = {default = "";};
-      #  };
-#
-      #  pulseaudio = {
-      #    format = " {icon} ";
-      #    format-muted = "ﱝ";
-      #    format-icons = ["奄" "奔" "墳"];
-      #    tooltip = true;
-      #    tooltip-format = "{volume}%";
-      #  };
-#
-      #  network = {
-      #    format-wifi = " ";
-      #    format-disconnected = "睊";
-      #    format-ethernet = " ";
-      #    tooltip = true;
-      #    tooltip-format = "{signalStrength}%";
-      #  };
-#
-      #  backlight = {
-      #    device = "intel_backlight";
-      #    format = "{icon}";
-      #    format-icons = ["" "" "" "" "" "" "" "" ""];
-      #    tooltip = true;
-      #    tooltip-format = "{percent}%";
-      #  };
-#
-      #  battery = {
-      #    states = {
-      #      warning = 30;
-      #      critical = 15;
-      #    };
-      #    format = "{icon}";
-      #    format-charging = "";
-      #    format-plugged = "";
-      #    format-icons = ["" "" "" "" "" "" "" "" "" "" "" ""];
-      #    tooltip = true;
-      #    tooltip-format = "{capacity}%";
-      #  };
-#
-      #  "custom/power" = {
-      #    tooltip = false;
-      #    on-click = "powermenu";
-      #    format = "襤";
-      #  };
-#
-      #  clock = {
-      #    tooltip-format = ''
-      #      <big>{:%Y %B}</big>
-      #      <tt><small>{calendar}</small></tt>'';
-      #    format-alt = ''
-      #       {:%d
-      #       %m
-      #      %Y}'';
-      #    format = ''
-      #      {:%H
-      #      %M}'';
-      #  };
-#
-      #  tray = {
-      #    icon-size = 21;
-      #    spacing = 10;
-      #  };
-      #};
+    #mainBar = {
+    #  layer = "top";
+    #  position = "top";
+    #  modules-left = ["hyprland/workspaces"];
+    #  modules-center = [];
+    #  modules-right = ["pulseaudio" "network" "backlight" "battery" "clock" "tray" "custom/power"];
+    #
+    #  "hyprland/workspaces" = {
+    #    disable-scroll = true;
+    #    sort-by-name = true;
+    #    format = "{icon}";
+    #    format-icons = {default = "";};
+    #  };
+    #
+    #  pulseaudio = {
+    #    format = " {icon} ";
+    #    format-muted = "ﱝ";
+    #    format-icons = ["奄" "奔" "墳"];
+    #    tooltip = true;
+    #    tooltip-format = "{volume}%";
+    #  };
+    #
+    #  network = {
+    #    format-wifi = " ";
+    #    format-disconnected = "睊";
+    #    format-ethernet = " ";
+    #    tooltip = true;
+    #    tooltip-format = "{signalStrength}%";
+    #  };
+    #
+    #  backlight = {
+    #    device = "intel_backlight";
+    #    format = "{icon}";
+    #    format-icons = ["" "" "" "" "" "" "" "" ""];
+    #    tooltip = true;
+    #    tooltip-format = "{percent}%";
+    #  };
+    #
+    #  battery = {
+    #    states = {
+    #      warning = 30;
+    #      critical = 15;
+    #    };
+    #    format = "{icon}";
+    #    format-charging = "";
+    #    format-plugged = "";
+    #    format-icons = ["" "" "" "" "" "" "" "" "" "" "" ""];
+    #    tooltip = true;
+    #    tooltip-format = "{capacity}%";
+    #  };
+    #
+    #  "custom/power" = {
+    #    tooltip = false;
+    #    on-click = "powermenu";
+    #    format = "襤";
+    #  };
+    #
+    #  clock = {
+    #    tooltip-format = ''
+    #      <big>{:%Y %B}</big>
+    #      <tt><small>{calendar}</small></tt>'';
+    #    format-alt = ''
+    #       {:%d
+    #       %m
+    #      %Y}'';
+    #    format = ''
+    #      {:%H
+    #      %M}'';
+    #  };
+    #
+    #  tray = {
+    #    icon-size = 21;
+    #    spacing = 10;
+    #  };
+    #};
     #};
     settings = {
       mainBar = {
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         modules-center = ["custom/music"];
-        modules-right = [ "tray" "pulseaudio" "backlight" "battery" "clock" "custom/lock" "custom/power"];
+        modules-right = ["tray" "pulseaudio" "backlight" "battery" "clock" "custom/lock" "custom/power"];
         position = "top";
         backlight = {
           device = "intel_backlight";
@@ -364,10 +369,12 @@
       };
     };
   };
-  home.file.".config/waybar/mocha.css".source = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "waybar";
-    rev = "v1.1";
-    hash = "sha256-9lY+v1CTbpw2lREG/h65mLLw5KuT8OJdEPOb+NNC6Fo=";
-  } + "/themes/mocha.css"; 
+  home.file.".config/waybar/mocha.css".source =
+    pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "waybar";
+      rev = "v1.1";
+      hash = "sha256-9lY+v1CTbpw2lREG/h65mLLw5KuT8OJdEPOb+NNC6Fo=";
+    }
+    + "/themes/mocha.css";
 }
