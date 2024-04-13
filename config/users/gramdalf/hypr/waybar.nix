@@ -10,18 +10,18 @@
         font-size: 19px;
         min-height: 0;
       }
-      
+
       window#waybar {
         background: transparent;
       }
-      
+
       #workspaces {
         border-radius: 1rem;
         background-color: @surface0;
         margin-top: 1rem;
         margin: 7px 3px 0px 7px;
       }
-      
+
       #workspaces button {
         color: @pink;
         border-radius: 1rem;
@@ -31,17 +31,17 @@
         transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.68);
         background-color: transparent;
       }
-      
+
       #workspaces button.active {
         color: @flamingo;
         border-radius: 1rem;
       }
-      
+
       #workspaces button:hover {
         color: @rosewater;
         border-radius: 1rem;
       }
-      
+
       #tray,
       #network,
       #backlight,
@@ -55,54 +55,54 @@
         padding: 10px 5px 10px 5px;
         border-radius: 1rem;
       }
-      
+
       #clock {
         color: @lavender;
       }
-      
+
       #battery {
         color: @green;
       }
-      
+
       #battery.charging {
         color: @green;
       }
-      
+
       #battery.warning:not(.charging) {
         color: @red;
       }
-      
+
       #network {
           color: @flamingo;
       }
-      
+
       #backlight {
         color: @yellow;
       }
-      
+
       #pulseaudio {
         color: @pink;
       }
-      
+
       #pulseaudio.muted {
           color: @red;
       }
-      
+
       #custom-power {
           border-radius: 1rem;
           color: @red;
           margin-bottom: 1rem;
       }
-      
+
       #tray {
         border-radius: 1rem;
       }
-      
+
       tooltip {
           background: @base;
           border: 1px solid @pink;
       }
-      
+
       tooltip label {
           color: @text;
       }
@@ -120,7 +120,7 @@
   home.file.".config/waybar/mocha.css".source = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "waybar";
-    rev = "";
-    #hash = "";
+    rev = "v1.1";
+    hash = "sha256-9lY+v1CTbpw2lREG/h65mLLw5KuT8OJdEPOb+NNC6Fo=";
   } + "/themes/mocha.css"; 
 }
