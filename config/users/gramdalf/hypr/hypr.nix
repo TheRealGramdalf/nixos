@@ -10,7 +10,7 @@
     enable = true;
     settings = {
       source = [
-        ~/.config/hypr/mocha.conf
+        "~/.config/hypr/mocha.conf"
       ];
       # UserPreferences
       "$terminal" = "kitty";
