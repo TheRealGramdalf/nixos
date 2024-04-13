@@ -9,6 +9,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      source = [
+        ~/.config/hypr/mocha.conf
+      ];
       # UserPreferences
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
@@ -141,9 +144,14 @@
         allow_tearing = false;
       };
       env = [
-        "XCURSOR_SIZE,24"
         "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
       ];
     };
   };
+  home.file.".config/hypr/mocha.conf".source = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "hyprland";
+    rev = "v1.3";
+    hash = "sha256-jkk021LLjCLpWOaInzO4Klg6UOR4Sh5IcKdUxIn7Dis=";
+  } + "/themes/mocha.conf"; 
 }
