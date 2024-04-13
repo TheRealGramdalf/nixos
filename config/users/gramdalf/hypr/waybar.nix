@@ -333,7 +333,7 @@
         };
         "custom/lock" = {
           format = "";
-          on-click = "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown";
+          on-click = "hyprlock & disown";
           tooltip = false;
         };
         "custom/music" = {
