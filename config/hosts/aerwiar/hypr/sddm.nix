@@ -4,16 +4,7 @@
   pkgs,
   ...
 }: {
-  # Awaiting PR coming to nixos-unstable
-  services.xserver = {
-    enable = true;
-    excludePackages = with pkgs; [
-      xterm
-      x11_ssh_askpass
-    ];
-  };
-
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
     theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners"; # Not including `Main.qml`, since SDDM does this automagically
