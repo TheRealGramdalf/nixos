@@ -7,103 +7,6 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-#style = ''
-    #  @import "mocha.css";
-    #
-    #  * {
-    #    font-family: FantasqueSansMono Nerd Font;
-    #    font-size: 19px;
-    #    min-height: 0;
-    #  }
-    #
-    #  window#waybar {
-    #    background: transparent;
-    #  }
-    #
-    #  #workspaces {
-    #    border-radius: 1rem;
-    #    background-color: @surface0;
-    #    margin-top: 1rem;
-    #    margin: 7px 3px 0px 7px;
-    #  }
-    #
-    #  #workspaces button {
-    #    color: @pink;
-    #    border-radius: 1rem;
-    #    padding-left: 6px;
-    #    margin: 5px 0;
-    #    box-shadow: inset 0 -3px transparent;
-    #    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.68);
-    #    background-color: transparent;
-    #  }
-    #
-    #  #workspaces button.active {
-    #    color: @flamingo;
-    #    border-radius: 1rem;
-    #  }
-    #
-    #  #workspaces button:hover {
-    #    color: @rosewater;
-    #    border-radius: 1rem;
-    #  }
-    #
-    #  #tray,
-    #  #network,
-    #  #backlight,
-    #  #clock,
-    #  #battery,
-    #  #pulseaudio,
-    #  #custom-lock,
-    #  #custom-power {
-    #    background-color: @surface0;
-    #    margin: 7px 3px 0px 7px;
-    #    padding: 10px 5px 10px 5px;
-    #    border-radius: 1rem;
-    #  }
-    #
-    #  #clock {
-    #    color: @lavender;
-    #  }
-    #
-    #  #battery {
-    #    color: @green;
-    #  }
-    #
-    #  #battery.charging {
-    #    color: @green;
-    #  }
-    #
-    #  #battery.warning:not(.charging) {
-    #    color: @red;
-    #  }
-    #
-    #  #network {
-    #      color: @flamingo;
-    #  }
-    #
-    #  #backlight {
-    #    color: @yellow;
-    #  }
-    #
-    #  #pulseaudio {
-    #    color: @pink;
-    #  }
-    #
-    #  #pulseaudio.muted {
-    #      color: @red;
-    #  }
-    #
-    #  #custom-power {
-    #      border-radius: 1rem;
-    #      color: @red;
-    #      margin-bottom: 1rem;
-    #  }
-    #
-    #  #tray {
-    #    border-radius: 1rem;
-    #  }
-    #
-    #'';
     style = ''
       @import "mocha.css";
 
@@ -119,13 +22,30 @@
         margin: 5px 5px;
       }
       
+      /* Make tooltips follow catpuccin */
       tooltip {
         background: @base;
         border: 1px solid @pink;
-      }
-    
+      }    
       tooltip label {
         color: @text;
+      }
+
+      /* Set default padding & background */
+      #custom-music,
+      #tray,
+      #network,
+      #backlight,
+      #clock,
+      #battery,
+      #pulseaudio,
+      #custom-quit,
+      #custom-lock,
+      #custom-reboot,
+      #custom-poweroff {
+        background-color: @surface0;
+        padding: 0.5rem 1rem;
+        margin: 5px 0;
       }
 
       #workspaces {
@@ -133,7 +53,7 @@
         margin: 5px;
         background-color: @surface0;
         margin-left: 1rem;
-              }
+      }
     
       #workspaces button {
         color: @lavender;
@@ -151,18 +71,9 @@
         border-radius: 1rem;
       }
 
-      #custom-music,
-      #tray,
-      #network,
-      #backlight,
-      #clock,
-      #battery,
-      #pulseaudio,
-      #custom-lock,
-      #custom-power {
-        background-color: @surface0;
-        padding: 0.5rem 1rem;
-margin: 5px 0;
+      #tray {
+        margin-right: 1rem;
+        border-radius: 1rem;
       }
 
       #clock {
@@ -202,78 +113,25 @@ margin: 5px 0;
         border-radius: 1rem;
       }
 
-      #custom-lock {
+      /* Powermenu group */
+      #custom-quit {
           border-radius: 1rem 0px 0px 1rem;
           color: @lavender;
       }
-
-      #custom-power {
+      #custom-lock {
+          border-radius: 0;
+          color: @lavender;
+      }
+      #custom-reboot {
+          border-radius: 0;
+          color: @peach;
+      }
+      #custom-poweroff {
           margin-right: 1rem;
-          border-radius: 0px 1rem 1rem 0px;
+          border-radius: 1rem;
           color: @red;
       }
-
-      #tray {
-        margin-right: 1rem;
-        border-radius: 1rem;
-      }
     '';
-    #  pulseaudio = {
-    #    format = " {icon} ";
-    #    format-muted = "ﱝ";
-    #    format-icons = ["奄" "奔" "墳"];
-    #    tooltip = true;
-    #    tooltip-format = "{volume}%";
-    #  };
-    #
-    #  network = {
-    #    format-wifi = " ";
-    #    format-disconnected = "睊";
-    #    format-ethernet = " ";
-    #    tooltip = true;
-    #    tooltip-format = "{signalStrength}%";
-    #  };
-    #
-    #  backlight = {
-    #    device = "intel_backlight";
-    #    format = "{icon}";
-    #    format-icons = ["" "" "" "" "" "" "" "" ""];
-    #    tooltip = true;
-    #    tooltip-format = "{percent}%";
-    #  };
-    #
-    #  battery = {
-    #    states = {
-    #      warning = 30;
-    #      critical = 15;
-    #    };
-    #    format = "{icon}";
-    #    format-charging = "";
-    #    format-plugged = "";
-    #    format-icons = ["" "" "" "" "" "" "" "" "" "" "" ""];
-    #    tooltip = true;
-    #    tooltip-format = "{capacity}%";
-    #  };
-    #
-    #  "custom/power" = {
-    #    tooltip = false;
-    #    on-click = "powermenu";
-    #    format = "襤";
-    #  };
-    #
-    #  clock = {
-    #    tooltip-format = ''
-    #      <big>{:%Y %B}</big>
-    #      <tt><small>{calendar}</small></tt>'';
-    #    format-alt = ''
-    #       {:%d
-    #       %m
-    #      %Y}'';
-    #    format = ''
-    #      {:%H
-    #      %M}'';
-    #  };
-    #};
     settings = {
       mainBar = {
         layer = "top";
@@ -349,7 +207,7 @@ margin: 5px 0;
           sort-by-name = true;
         };
 
-        "custom/power" = {
+        "custom/poweroff" = {
           format = "";
           on-click = "echo 'shutdown now'";
           tooltip = false;
@@ -371,7 +229,7 @@ margin: 5px 0;
             transition-left-to-right = false;
           };
           # The first module in the list is shown as the initial button
-          modules = ["custom/power" "custom/quit" "custom/lock" "custom/reboot"];
+          modules = ["custom/poweroff" "custom/quit" "custom/lock" "custom/reboot"];
           orientation = "inherit";
         };
       };
