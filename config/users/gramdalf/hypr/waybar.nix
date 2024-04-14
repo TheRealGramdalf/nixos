@@ -7,7 +7,7 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    #style = ''
+#style = ''
     #  @import "mocha.css";
     #
     #  * {
@@ -103,14 +103,6 @@
     #    border-radius: 1rem;
     #  }
     #
-    #  tooltip {
-    #      background: @base;
-    #      border: 1px solid @pink;
-    #  }
-    #
-    #  tooltip label {
-    #      color: @text;
-    #  }
     #'';
     style = ''
       @import "mocha.css";
@@ -126,25 +118,34 @@
         color: @text;
         margin: 5px 5px;
       }
+      
+      tooltip {
+        background: @base;
+        border: 1px solid @pink;
+      }
+    
+      tooltip label {
+        color: @text;
+      }
 
       #workspaces {
         border-radius: 1rem;
         margin: 5px;
         background-color: @surface0;
         margin-left: 1rem;
-      }
-
+              }
+    
       #workspaces button {
         color: @lavender;
         border-radius: 1rem;
         padding: 0.4rem;
       }
-
+    
       #workspaces button.active {
         color: @sky;
         border-radius: 1rem;
       }
-
+    
       #workspaces button:hover {
         color: @sapphire;
         border-radius: 1rem;
@@ -152,6 +153,7 @@
 
       #custom-music,
       #tray,
+      #network,
       #backlight,
       #clock,
       #battery,
@@ -160,7 +162,7 @@
       #custom-power {
         background-color: @surface0;
         padding: 0.5rem 1rem;
-        margin: 5px 0;
+margin: 5px 0;
       }
 
       #clock {
@@ -216,30 +218,6 @@
         border-radius: 1rem;
       }
     '';
-    #settings = {
-    #  mainBar = {
-    #    layer = "top";
-    #    "hyprland/workspaces" = {disable-scroll = false;};
-    #    modules-left = ["hyprland/workspaces"];
-    #    modules-center = ["clock"];
-    #    modules-right = [ "tray" "cpu" "backlight" "battery"];
-    #  };
-    #};
-    #settings = {
-    #mainBar = {
-    #  layer = "top";
-    #  position = "top";
-    #  modules-left = ["hyprland/workspaces"];
-    #  modules-center = [];
-    #  modules-right = ["pulseaudio" "network" "backlight" "battery" "clock" "tray" "custom/power"];
-    #
-    #  "hyprland/workspaces" = {
-    #    disable-scroll = true;
-    #    sort-by-name = true;
-    #    format = "{icon}";
-    #    format-icons = {default = "";};
-    #  };
-    #
     #  pulseaudio = {
     #    format = " {icon} ";
     #    format-muted = "ﱝ";
@@ -295,19 +273,13 @@
     #      {:%H
     #      %M}'';
     #  };
-    #
-    #  tray = {
-    #    icon-size = 21;
-    #    spacing = 10;
-    #  };
-    #};
     #};
     settings = {
       mainBar = {
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         modules-center = ["custom/music"];
-        modules-right = ["tray" "pulseaudio" "backlight" "battery" "clock" "custom/lock" "custom/power"];
+        modules-right = ["tray" "pulseaudio" "backlight" "battery" "clock" "group/group-power"];
         position = "top";
         backlight = {
           device = "intel_backlight";
@@ -328,12 +300,27 @@
         clock = {
           format = " {:%H:%M}";
           format-alt = " {:%d/%m/%Y}";
-          timezone = "Asia/Dubai";
+          timezone = "America/Vancouver";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        network = {
+          format-wifi = " ";
+          format-disconnected = "睊";
+          format-ethernet = " ";
+          tooltip = true;
+          tooltip-format = "{signalStrength}%";
         };
         "custom/lock" = {
           format = "";
-          on-click = "hyprlock & disown";
+          on-click =
+            pkgs.writeShellApplication {
+              name = "waybar-lock";
+              runtimeInputs = [pkgs.hyprlock];
+              text = ''
+                hyprlock
+              '';
+            }
+            + /bin/waybar-lock;
           tooltip = false;
         };
         "custom/music" = {
@@ -343,11 +330,6 @@
           interval = 5;
           max-length = 50;
           on-click = "playerctl play-pause";
-          tooltip = false;
-        };
-        "custom/power" = {
-          format = "襤";
-          on-click = "wlogout &";
           tooltip = false;
         };
         pulseaudio = {
@@ -365,6 +347,32 @@
           format = " {icon} ";
           format-icons = {default = "";};
           sort-by-name = true;
+        };
+
+        "custom/power" = {
+          format = "";
+          on-click = "echo 'shutdown now'";
+          tooltip = false;
+        };
+        "custom/quit" = {
+          format = "󰗼";
+          on-click = "echo 'hyprctl dispatch exit'";
+          tooltip = false;
+        };
+        "custom/reboot" = {
+          format = "󰜉";
+          on-click = "echo 'reboot'";
+          tooltip = false;
+        };
+        "group/group-power" = {
+          drawer = {
+            children-class = "not-power";
+            transition-duration = 500;
+            transition-left-to-right = false;
+          };
+          # The first module in the list is shown as the initial button
+          modules = ["custom/power" "custom/quit" "custom/lock" "custom/reboot"];
+          orientation = "inherit";
         };
       };
     };
