@@ -4,6 +4,16 @@
   pkgs,
   ...
 }: {
+  systemd.user.services."waybar" = {
+    Service = {
+      Environment = [
+        # Add `hyprctl` to the path so we can dispatch user actions
+        "PATH=$PATH:${lib.makeBinPath [ pkgs.hyprland ]}"
+        # Uncomment this to do live debugging & styling
+        #"GTK_DEBUG=interactive"
+      ];
+    };
+  };
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -14,6 +24,24 @@
         font-family: FantasqueSansMono Nerd Font;
         font-size: 17px;
         min-height: 0;
+      }
+      /* Set default padding & background */
+      #workspaces,
+      #custom-music,
+      #tray,
+      #network,
+      #backlight,
+      #clock,
+      #battery,
+      #pulseaudio,
+      #custom-quit,
+      #custom-lock,
+      #custom-suspend,
+      #custom-reboot,
+      #custom-poweroff {
+        background-color: @surface0;
+        padding: 0.5rem 1rem;
+        margin: 5px 0;
       }
 
       #waybar {
@@ -31,28 +59,11 @@
         color: @text;
       }
 
-      /* Set default padding & background */
-      #custom-music,
-      #tray,
-      #network,
-      #backlight,
-      #clock,
-      #battery,
-      #pulseaudio,
-      #custom-quit,
-      #custom-lock,
-      #custom-reboot,
-      #custom-poweroff {
-        background-color: @surface0;
-        padding: 0.5rem 1rem;
-        margin: 5px 0;
-      }
 
       #workspaces {
         border-radius: 1rem;
-        margin: 5px;
-        background-color: @surface0;
         margin-left: 1rem;
+        padding: 0;
       }
     
       #workspaces button {
@@ -122,6 +133,10 @@
           border-radius: 0;
           color: @lavender;
       }
+      #custom-suspend {
+          border-radius: 0;
+          color: @lavender;
+      }
       #custom-reboot {
           border-radius: 0;
           color: @peach;
@@ -136,7 +151,7 @@
       mainBar = {
         layer = "top";
         modules-left = ["hyprland/workspaces"];
-        modules-center = ["custom/music"];
+        #modules-center = ["custom/music"];
         modules-right = ["tray" "pulseaudio" "backlight" "battery" "clock" "group/group-power"];
         position = "top";
         backlight = {
@@ -147,8 +162,8 @@
         battery = {
           format = "{icon}";
           format-alt = "{icon}";
-          format-charging = "";
-          format-icons = ["" "" "" "" "" "" "" "" "" "" "" ""];
+          format-charging = "󰂄";
+          format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           format-plugged = "";
           states = {
             critical = 15;
@@ -167,19 +182,6 @@
           format-ethernet = " ";
           tooltip = true;
           tooltip-format = "{signalStrength}%";
-        };
-        "custom/lock" = {
-          format = "";
-          on-click =
-            pkgs.writeShellApplication {
-              name = "waybar-lock";
-              runtimeInputs = [pkgs.hyprlock];
-              text = ''
-                hyprlock
-              '';
-            }
-            + /bin/waybar-lock;
-          tooltip = false;
         };
         "custom/music" = {
           escape = true;
@@ -209,17 +211,27 @@
 
         "custom/poweroff" = {
           format = "";
-          on-click = "echo 'shutdown now'";
+          on-click = "hyprctl dispatch exec 'systemctl poweroff'";
           tooltip = false;
         };
         "custom/quit" = {
           format = "󰗼";
-          on-click = "echo 'hyprctl dispatch exit'";
+          on-click = "hyprctl dispatch exit";
           tooltip = false;
         };
         "custom/reboot" = {
           format = "󰜉";
-          on-click = "echo 'reboot'";
+          on-click = "hyprctl dispatch exec 'systemctl restart'";
+          tooltip = false;
+        };
+        "custom/lock" = {
+          format = "";
+          on-click = "hyprctl dispatch exec 'hyprlock'";
+          tooltip = false;
+        };
+        "custom/suspend" = {
+          format = "󰤄";
+          on-click = "hyprctl dispatch exec 'hyprlock & systemctl suspend'";
           tooltip = false;
         };
         "group/group-power" = {
@@ -229,7 +241,7 @@
             transition-left-to-right = false;
           };
           # The first module in the list is shown as the initial button
-          modules = ["custom/poweroff" "custom/quit" "custom/lock" "custom/reboot"];
+          modules = ["custom/poweroff" "custom/quit" "custom/lock" "custom/suspend" "custom/reboot"];
           orientation = "inherit";
         };
       };
