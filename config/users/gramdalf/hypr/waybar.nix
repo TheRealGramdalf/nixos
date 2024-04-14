@@ -8,7 +8,7 @@
     Service = {
       Environment = [
         # Add `hyprctl` to the path so we can dispatch user actions
-        "PATH=$PATH:${lib.makeBinPath [ pkgs.hyprland ]}"
+        "PATH=$PATH:${lib.makeBinPath [pkgs.hyprland]}"
         # Uncomment this to do live debugging & styling
         #"GTK_DEBUG=interactive"
       ];
@@ -30,7 +30,6 @@
       #custom-music,
       #tray,
       #network,
-      #backlight,
       #clock,
       #battery,
       #pulseaudio,
@@ -49,12 +48,12 @@
         color: @text;
         margin: 5px 5px;
       }
-      
+
       /* Make tooltips follow catpuccin */
       tooltip {
         background: @base;
         border: 1px solid @pink;
-      }    
+      }
       tooltip label {
         color: @text;
       }
@@ -65,18 +64,18 @@
         margin-left: 1rem;
         padding: 0;
       }
-    
+
       #workspaces button {
         color: @lavender;
         border-radius: 1rem;
         padding: 0.4rem;
       }
-    
+
       #workspaces button.active {
         color: @sky;
         border-radius: 1rem;
       }
-    
+
       #workspaces button:hover {
         color: @sapphire;
         border-radius: 1rem;
@@ -105,11 +104,7 @@
         color: @red;
       }
 
-      #backlight {
-        color: @yellow;
-      }
-
-      #backlight, #battery {
+      #battery {
           border-radius: 0;
       }
 
@@ -152,13 +147,8 @@
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         #modules-center = ["custom/music"];
-        modules-right = ["tray" "pulseaudio" "backlight" "battery" "clock" "group/group-power"];
+        modules-right = ["tray" "pulseaudio" "network" "battery" "clock" "group/group-power"];
         position = "top";
-        backlight = {
-          device = "intel_backlight";
-          format = "{icon}";
-          format-icons = ["" "" "" "" "" "" "" "" ""];
-        };
         battery = {
           format = "{icon}";
           format-alt = "{icon}";
@@ -171,17 +161,19 @@
           };
         };
         clock = {
-          format = " {:%H:%M}";
-          format-alt = " {:%d/%m/%Y}";
+          format = "{:%H:%M}";
+          format-alt = "{:%d/%m/%Y}";
           timezone = "America/Vancouver";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
         network = {
-          format-wifi = " ";
-          format-disconnected = "睊";
-          format-ethernet = " ";
+          format-wifi = "{icon}";
+          format-icons = ["󰤟" "󰤢" "󰤥" "󰤨"];
+          format-disconnected = "󰤯";
+          format-ethernet = "󰈀";
           tooltip = true;
-          tooltip-format = "{signalStrength}%";
+          tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
+          tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
         };
         "custom/music" = {
           escape = true;
