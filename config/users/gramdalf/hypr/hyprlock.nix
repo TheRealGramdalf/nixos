@@ -5,7 +5,7 @@
   ...
 }: {
   home.packages = [pkgs.hyprlock];
-  home.file.".config/hypr/hyprlock.conf".text =''
+  home.file.".config/hypr/hyprlock.conf".text = ''
     source = ~/.config/hypr/mocha.conf
 
     $accent = $mauve
@@ -38,9 +38,9 @@
         valign = top
     }
 
-    # DATE 
+    # DATE
     label {
-        monitor = 
+        monitor =
         text = cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"
         color = $text
         font_size = 25
