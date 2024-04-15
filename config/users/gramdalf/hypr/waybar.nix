@@ -29,6 +29,7 @@
       #workspaces,
       #custom-music,
       #tray,
+      #idle_inhibitor,
       #network,
       #clock,
       #battery,
@@ -92,10 +93,6 @@
         margin-right: 1rem;
       }
 
-      #battery {
-        color: @green;
-      }
-
       #battery.charging {
         color: @green;
       }
@@ -108,10 +105,13 @@
           border-radius: 0;
       }
 
-      #pulseaudio {
-        color: @maroon;
+      #idle_inhibitor {
         border-radius: 1rem 0px 0px 1rem;
         margin-left: 1rem;
+      }
+
+      #pulseaudio {
+        color: @maroon;
       }
 
       #custom-music {
@@ -147,7 +147,7 @@
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         #modules-center = ["custom/music"];
-        modules-right = ["tray" "pulseaudio" "network" "battery" "clock" "group/group-power"];
+        modules-right = ["tray" "idle_inhibitor" "pulseaudio" "network" "battery" "clock" "group/group-power"];
         position = "top";
         battery = {
           format = "{icon}";
@@ -183,6 +183,13 @@
           max-length = 50;
           on-click = "playerctl play-pause";
           tooltip = false;
+        };
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
         pulseaudio = {
           format = "{icon} {volume}%";
