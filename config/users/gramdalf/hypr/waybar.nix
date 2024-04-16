@@ -31,6 +31,8 @@
       #tray,
       #idle_inhibitor,
       #bluetooth,
+      #backlight,
+      #backlight-slider,
       #network,
       #clock,
       #battery,
@@ -146,13 +148,36 @@
           border-radius: 1rem;
           color: @red;
       }
+      #backlight {
+        color: @yellow;
+        border-radius: 1rem 0px 0px 1rem;
+      }
+      #backlight-slider slider {
+        min-height: 0px;
+        min-width: 0px;
+        opacity: 0;
+        background-image: none;
+        border: none;
+        box-shadow: none;
+      }
+      #backlight-slider trough {
+        min-width: 80px;
+        min-height: 10px;
+        border-radius: 5px;
+        background-color: black;
+      }
+      #backlight-slider highlight {
+        min-width: 10px;
+        border-radius: 5px;
+        background-color: @text;
+      }
     '';
     settings = {
       mainBar = {
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         #modules-center = ["custom/music"];
-        modules-right = ["tray" "idle_inhibitor" "pulseaudio" "bluetooth" "network" "battery" "clock" "group/group-power"];
+        modules-right = ["tray" "group/group-backlight" "pulseaudio" "bluetooth" "network" "battery" "clock" "group/group-power"];
         position = "top";
         battery = {
           format = "{icon}";
@@ -197,12 +222,30 @@
           on-click = "playerctl play-pause";
           tooltip = false;
         };
+        # Screen backlight group
         idle_inhibitor = {
           format = "{icon}";
           format-icons = {
             activated = "";
             deactivated = "";
           };
+        };
+        backlight = {
+          #device = "intel_backlight";
+          format = "{icon}";
+          format-icons = ["" "" "" "" "" "" "" "" ""];
+          tooltip = false;
+        };
+        "backlight/slider" = {};
+        "group/group-backlight" = {
+          drawer = {
+            children-class = "not-backlight";
+            transition-duration = 500;
+            transition-left-to-right = false;
+          };
+          # The first module in the list is shown as the initial button
+          modules = ["backlight" "idle_inhibitor" "backlight/slider"];
+          orientation = "inherit";
         };
         pulseaudio = {
           format = "{icon} {volume}%";
