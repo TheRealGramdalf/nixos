@@ -10,7 +10,10 @@
   environment.systemPackages = [pkgs.kitty];
   hardware = {
     brillo.enable = true;
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
   };
   # Use wayland pls uwu
   environment.sessionVariables = {
