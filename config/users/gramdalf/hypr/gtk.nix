@@ -8,7 +8,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = ["mauve"];
         #tweaks = [ "rimless" "black" ];
@@ -16,13 +16,8 @@
       };
     };
   };
-  # Now symlink the `~/.config/gtk-4.0/` folder declaratively:
-  xdg.configFile = {
-    "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
-    "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
-    "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
-  };
-  # Enable dark mode (also enables catppuccin, since it is considered a 'dark' variant)
+  # Symlinking the `~/.config/gtk-4.0/` folder is done by home-manager automatically
+  # Enable dark mode for certain apps
   dconf.settings."org/gnome/desktop/interface" = {
     color-scheme = "prefer-dark";
   };
