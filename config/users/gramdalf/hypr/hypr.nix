@@ -12,6 +12,9 @@
     ./hyprlock.nix
     ./hypridle.nix
   ];
+  home.packages = with pkgs; [
+    playerctl
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -100,6 +103,20 @@
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        # Enable XF86 (media) keys
+        #",XF86AudioMedia, exec, "
+        ",XF86AudioPrev, exec, playerctl previous"
+        ",XF86AudioNext, exec, playerctl next"
+        ",XF86AudioPlay, exec, playerctl play-pause"
+        ",XF86AudioStop, exec, playerctl play-pause"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%-"
+
+        ",XF86MonBrightnessUp, exec, brillo -A 5"
+        ",XF86MonBrightnessDown, exec, brillo -U 5"
+        
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
