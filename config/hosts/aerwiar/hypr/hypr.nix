@@ -8,6 +8,7 @@
   # Add a terminal
   # So the default super + m keybind works
   environment.systemPackages = [pkgs.kitty];
+  hardware.brillo.enable = true;
 
   # Use wayland pls uwu
   environment.sessionVariables = {

@@ -54,7 +54,7 @@
     users."gramdalf" = {
       isNormalUser = true;
       description = "Gramdalf";
-      extraGroups = ["wheel" "networkmanager" "docker" "adbusers" "wireshark"];
+      extraGroups = ["wheel" "networkmanager" "docker" "adbusers" "wireshark" "video"];
       hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
       shell = pkgs.zsh;
     };
