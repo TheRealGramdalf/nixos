@@ -10,5 +10,6 @@
     git # Version control
     sysz # Systemctl TUI
     tealdeer # TL;DR for linux commands
+    comma # , Run any command from nixpkgs
   ];
 }
