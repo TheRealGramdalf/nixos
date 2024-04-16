@@ -30,6 +30,7 @@
       #custom-music,
       #tray,
       #idle_inhibitor,
+      #bluetooth,
       #network,
       #clock,
       #battery,
@@ -88,7 +89,7 @@
       }
 
       #clock {
-        color: @blue;
+        color: @rosewater;
         border-radius: 0px 1rem 1rem 0px;
         margin-right: 1rem;
       }
@@ -119,6 +120,10 @@
         border-radius: 1rem;
       }
 
+      #bluetooth {
+        color: @blue;
+      }
+
       /* Powermenu group */
       #custom-quit {
           border-radius: 1rem 0px 0px 1rem;
@@ -147,14 +152,14 @@
         layer = "top";
         modules-left = ["hyprland/workspaces"];
         #modules-center = ["custom/music"];
-        modules-right = ["tray" "idle_inhibitor" "pulseaudio" "network" "battery" "clock" "group/group-power"];
+        modules-right = ["tray" "idle_inhibitor" "pulseaudio" "bluetooth" "network" "battery" "clock" "group/group-power"];
         position = "top";
         battery = {
           format = "{icon}";
           format-alt = "{icon}";
           format-charging = "󰂄";
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-          format-plugged = "";
+          format-plugged = "󱉝";
           states = {
             critical = 15;
             warning = 30;
@@ -174,6 +179,14 @@
           tooltip = true;
           tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
           tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
+        };
+        bluetooth = {
+          tooltip = false;
+          format-on = "󰂯";
+          format-off = "󰂲";
+          format-connected = "󰂱";
+          format-connected-battery = ["󰥇" "󰤾" "󰤿" "󰥀" "󰥁" "󰥂" "󰥃" "󰥄" "󰥅" "󰥆" "󰥈"];
+          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.overskride}";
         };
         "custom/music" = {
           escape = true;

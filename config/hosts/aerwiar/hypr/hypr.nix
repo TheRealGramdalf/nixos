@@ -8,8 +8,10 @@
   # Add a terminal
   # So the default super + m keybind works
   environment.systemPackages = [pkgs.kitty];
-  hardware.brillo.enable = true;
-
+  hardware = {
+    brillo.enable = true;
+    bluetooth.enable = true;
+  };
   # Use wayland pls uwu
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
