@@ -7,7 +7,13 @@
 }: {
   boot = {
     zfs.devNodes = "/dev/disk/by-partlabel";
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "catppuccin-mocha";
+      themePackages = [
+        (pkgs.catppuccin-plymouth.override {variant = "mocha";})
+      ];
+    };
     tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;
   };
@@ -54,7 +60,7 @@
     users."gramdalf" = {
       isNormalUser = true;
       description = "Gramdalf";
-      extraGroups = ["wheel" "networkmanager" "docker" "adbusers" "wireshark" "video"];
+      extraGroups = ["wheel" "docker" "adbusers" "wireshark" "video"];
       hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
       shell = pkgs.zsh;
     };
