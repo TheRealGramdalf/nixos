@@ -25,8 +25,8 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
-  # Enable networkmanager
-  networking.networkmanager.enable = true;
+  # Enable iwd (https://www.reddit.com/r/archlinux/comments/cs0zuh/first_time_i_heard_about_iwd_why_isnt_it_already/)
+  networking.wireless.iwd.enable = true;
   imports = [
     ./sddm.nix
   ];
