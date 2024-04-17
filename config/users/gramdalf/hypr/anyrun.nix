@@ -16,7 +16,7 @@
         rink
         symbols
       ];
-      closeOnClick = true;
+      closeOnClick = false;
       showResultsImmediately = true;
       maxEntries = 20;
       width = {fraction = 0.3;};
