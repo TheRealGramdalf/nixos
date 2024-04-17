@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: {
+  home.packages = [pkgs.glib]; # gsettings
   # Use `nwg-look` to test out themes
   gtk = {
     enable = true;
@@ -13,6 +14,13 @@
         accents = ["mauve"];
         #tweaks = [ "rimless" "black" ];
         variant = "mocha";
+      };
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "mauve";
       };
     };
   };
