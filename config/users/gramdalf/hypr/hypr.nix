@@ -44,15 +44,13 @@
           clickfinger_behavior = true;
         };
       };
-      device = {
-        name = "epic-mouse-v1";
-        sensitivity = -0.5;
-      };
       gestures = {
         workspace_swipe = true;
       };
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.
+        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
+        "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
       ];
       # Binds
       bind = [

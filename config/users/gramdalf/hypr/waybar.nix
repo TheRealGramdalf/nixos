@@ -204,6 +204,7 @@
           tooltip = true;
           tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
           tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
+          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.iwgtk}";
         };
         bluetooth = {
           tooltip = false;
@@ -251,7 +252,7 @@
           format = "{icon} {volume}%";
           format-icons = {default = ["" "" " "];};
           format-muted = "";
-          on-click = "pavucontrol";
+          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.pavucontrol}";
         };
         tray = {
           icon-size = 21;
