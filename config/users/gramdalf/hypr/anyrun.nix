@@ -13,23 +13,22 @@
     config = {
       plugins = with context.anyrun.packages.${pkgs.system}; [
         applications
+        rink
+        symbols
       ];
       closeOnClick = true;
       showResultsImmediately = true;
       maxEntries = 20;
+      width = {fraction = 0.3;};
     };
-    #extraCss = ''
-    #  .some_class {
-    #    background: red;
-    #  }
-    #'';
-
-    #extraConfigFiles."some-plugin.ron".text = ''
-    #  Config(
-    #    // for any other plugin
-    #    // this file will be put in ~/.config/anyrun/some-plugin.ron
-    #    // refer to docs of xdg.configFile for available options
-    #  )
-    #'';
+    extraCss = ''
+      label#match-desc {
+        font-size: 10px;
+      }
+      
+      label#plugin {
+        font-size: 14px;
+      } 
+    '';
   };
 }
