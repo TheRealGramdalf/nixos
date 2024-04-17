@@ -1,0 +1,10 @@
+- https://github.com/KZDKM/Hyprspace
+- https://github.com/hyprland-community/pyprland/wiki/scratchpads
+- https://github.com/hyprland-community/awesome-hyprland
+- https://github.com/hyprwm/contrib?tab=readme-ov-file
+- https://gitlab.com/fazzi/dotfiles/-/blob/hyprland-laptop/.config/waybar/style.css?ref_type=heads
+- https://github.com/dunst-project/dunst
+- https://github.com/SolDoesTech/HyprV4/tree/main/HyprV
+- https://www.reddit.com/r/unixporn/comments/xs0s2c/gnome_minimalistic_catppuccin_w_papirus_icons/
+- ? https://www.gnome-look.org/p/1715570
+- https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme?tab=readme-ov-file
