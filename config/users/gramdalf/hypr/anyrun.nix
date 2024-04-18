@@ -17,9 +17,11 @@
         symbols
       ];
       closeOnClick = false;
-      showResultsImmediately = true;
+      showResultsImmediately = false;
       maxEntries = 20;
-      width = {fraction = 0.3;};
+      width.fraction = 0.3;
+      x.fraction = 0.5;
+      y.fraction = 0.1;
     };
     extraCss = ''
       label#match-desc {
@@ -28,7 +30,10 @@
       
       label#plugin {
         font-size: 14px;
-      } 
+      }
+      #window {
+        background-color = transparent;
+      }
     '';
   };
 }
