@@ -51,6 +51,7 @@
         "suppressevent maximize, class:.*" # You'll probably like this.
         "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
         "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
+        "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
       ];
       # Binds
       bind = [
@@ -114,7 +115,6 @@
 
         ",XF86MonBrightnessUp, exec, brillo -A 5"
         ",XF86MonBrightnessDown, exec, brillo -U 5"
-        
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
