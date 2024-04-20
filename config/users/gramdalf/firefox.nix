@@ -14,6 +14,12 @@
       DisablePocket = true;
       DisableTelemetry = true;
       NetworkPrediction = false;
+      "3rdparty".Extensions = {
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          # Bitwarden
+          environment.base = "https://vault.aer.dedyn.io";
+        };
+      };
       ExtensionSettings = {
         "CanvasBlocker@kkapsner.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/canvasblocker/latest.xpi";
@@ -46,7 +52,6 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
           installation_mode = "force_installed";
           default_area = "navbar";
-          environment.base = "https://vault.aer.dedyn.io";
         };
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
