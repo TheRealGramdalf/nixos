@@ -1,10 +1,11 @@
 {
   description = "TheRealGramdalf's experimental config";
   inputs = {
-    nixpkgs = {
-      # See https://mynixos.com/nixpkgs/options/nixpkgs
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +26,7 @@
     nixpkgs,
     home-manager,
     nixos-generators,
+    nixos-hardware,
     ...
   }:
   # Create convenience shorthands
@@ -42,6 +44,7 @@
       };
       "aerwiar" = nixosSystem {
         modules = [
+          nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
         ];
       };
