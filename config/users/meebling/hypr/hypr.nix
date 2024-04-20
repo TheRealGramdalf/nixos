@@ -8,10 +8,19 @@
     ./gtk.nix
     ./waybar.nix
     ./anyrun.nix
+    ./cursor.nix
+    ./hyprlock.nix
+    ./hypridle.nix
+  ];
+  home.packages = with pkgs; [
+    playerctl
   ];
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      source = [
+        "~/.config/hypr/mocha.conf"
+      ];
       # UserPreferences
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
@@ -35,15 +44,14 @@
           clickfinger_behavior = true;
         };
       };
-      device = {
-        name = "epic-mouse-v1";
-        sensitivity = -0.5;
-      };
       gestures = {
         workspace_swipe = true;
       };
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.
+        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
+        "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
+        "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
       ];
       # Binds
       bind = [
@@ -94,6 +102,19 @@
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        # Enable XF86 (media) keys
+        #",XF86AudioMedia, exec, "
+        ",XF86AudioPrev, exec, playerctl previous"
+        ",XF86AudioNext, exec, playerctl next"
+        ",XF86AudioPlay, exec, playerctl play-pause"
+        ",XF86AudioStop, exec, playerctl play-pause"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%-"
+
+        ",XF86MonBrightnessUp, exec, brillo -A 5"
+        ",XF86MonBrightnessDown, exec, brillo -U 5"
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -117,13 +138,14 @@
         rounding = 10;
         blur = {
           enabled = true;
-          size = 3;
+          size = 2;
           passes = 1;
         };
         drop_shadow = true;
         shadow_range = 4;
         shadow_render_power = 3;
-        col.shadow = "rgba(1a1a1aee)";
+        "col.shadow" = "$surface1";
+        "col.shadow_inactive" = "$surface1";
       };
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
       master.new_is_master = true;
@@ -137,16 +159,23 @@
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        col.inactive_border = "rgba(595959aa)";
+        "col.active_border" = "$mauve";
+        "col.inactive_border" = "$surface0";
         layout = "dwindle";
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
         allow_tearing = false;
       };
       env = [
-        "XCURSOR_SIZE,24"
         "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
       ];
     };
   };
+  home.file.".config/hypr/mocha.conf".source =
+    pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "hyprland";
+      rev = "v1.3";
+      hash = "sha256-jkk021LLjCLpWOaInzO4Klg6UOR4Sh5IcKdUxIn7Dis=";
+    }
+    + "/themes/mocha.conf";
 }
