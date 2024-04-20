@@ -84,6 +84,8 @@
         user_pref("browser.disableResetPrompt", true);
         user_pref("browser.fixup.alternate.enabled", false);
         user_pref("browser.newtab.preload", false);
+        user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+        user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
         user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
         user_pref("browser.newtabpage.enhanced", false);
         user_pref("browser.newtabpage.introShown", true);
