@@ -11,7 +11,7 @@
       PartOf = "graphical-session.target";
       After = "graphical-session.target";
       ConditionEnvironment = "WAYLAND_DISPLAY";
-    }; 
+    };
     Service = {
       Type = "simple";
       ExecStart = pkgs.lib.getExe pkgs.hypridle;

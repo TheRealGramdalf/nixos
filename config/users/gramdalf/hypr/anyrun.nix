@@ -27,7 +27,7 @@
       label#match-desc {
         font-size: 10px;
       }
-      
+
       label#plugin {
         font-size: 14px;
       }
