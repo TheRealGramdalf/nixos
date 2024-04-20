@@ -6,6 +6,7 @@
   ...
 }: {
   boot = {
+    loader.systemd-boot.enable = true;
     zfs.devNodes = "/dev/disk/by-partlabel";
     plymouth = {
       enable = true;
@@ -15,7 +16,6 @@
       ];
     };
     tmp.cleanOnBoot = true;
-    loader.systemd-boot.enable = true;
   };
 
   powerManagement = {
