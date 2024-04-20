@@ -16,7 +16,7 @@
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
-    ./hypr.nix
+    ./hypr/hypr.nix
     ./arm.nix
     #./home.nix
   ];
