@@ -283,12 +283,12 @@
         };
         "custom/lock" = {
           format = "";
-          on-click = "hyprctl dispatch exec 'hyprlock'";
+          on-click = "hyprctl dispatch exec 'loginctl lock-session'";
           tooltip = false;
         };
         "custom/suspend" = {
           format = "󰤄";
-          on-click = "hyprctl dispatch exec 'hyprlock & systemctl suspend'";
+          on-click = "hyprctl dispatch exec 'loginctl lock-session & systemctl suspend'";
           tooltip = false;
         };
         "group/group-power" = {
