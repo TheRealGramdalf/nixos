@@ -10,6 +10,7 @@
     ../../common/zfs-boot.nix
     ../../common/pipewire.nix
     ../../common/tomeutils.nix
+    ../../common/nh.nix
 
     # Host-specific config
     ./hardware-config.nix
