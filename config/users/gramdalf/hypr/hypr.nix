@@ -14,6 +14,7 @@
   ];
   home.packages = with pkgs; [
     playerctl
+    grimblast
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -94,7 +95,6 @@
 
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
@@ -112,6 +112,9 @@
 
         ",XF86MonBrightnessUp, exec, brillo -A 5"
         ",XF86MonBrightnessDown, exec, brillo -U 5"
+
+        # Screenshot
+        ", Print, exec, grimblast copysave area"
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -156,7 +159,7 @@
       general = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         gaps_in = 5;
-        gaps_out = 20;
+        gaps_out = "10, 15, 10, 15";
         border_size = 2;
         "col.active_border" = "$mauve";
         "col.inactive_border" = "$surface0";
