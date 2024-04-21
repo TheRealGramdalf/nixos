@@ -7,6 +7,5 @@
 }: {
   services = {
     fprintd.enable = true;
-
   };
 }

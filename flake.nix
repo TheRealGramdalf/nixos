@@ -1,11 +1,10 @@
 {
   description = "TheRealGramdalf's experimental config";
   inputs = {
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,25 +51,25 @@
         modules = [
           ./config/hosts/atreus/main.nix
 
-          { users.users."meebling".isNormalUser = true; }
+          {users.users."meebling".isNormalUser = true;}
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               users."meebling" = import ./config/users/meebling/main.nix;
-              extraSpecialArgs = { inherit context; };
+              extraSpecialArgs = {inherit context;};
             };
           }
 
-          { users.users."meeblingthedevilish".isNormalUser = true; }
+          {users.users."meeblingthedevilish".isNormalUser = true;}
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               users."meeblingthedevilish" = import ./config/users/meebling/devilish.nix;
-              extraSpecialArgs = { inherit context; };
+              extraSpecialArgs = {inherit context;};
             };
           }
         ];
