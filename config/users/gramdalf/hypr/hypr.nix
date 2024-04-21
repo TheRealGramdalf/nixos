@@ -46,8 +46,9 @@
       };
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.
-        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
+        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride" # Make overskride/iwgtk a popup window, move out later
         "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
+        "float, move onscreen 50% 50%, class:iwgtk" # For the password prompt
         # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
       ];
@@ -115,6 +116,9 @@
 
         # Screenshot
         ", Print, exec, grimblast copysave area"
+
+        # Reload hyprland
+        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
       ];
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
