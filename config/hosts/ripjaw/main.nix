@@ -12,13 +12,12 @@
     ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/fonts.nix
+    ../../common/hypr/hypr.nix
 
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
-    ./hypr/hypr.nix
     ./arm.nix
-    #./home.nix
   ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";

@@ -12,11 +12,11 @@
     ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/fonts.nix
+    ../../common/hypr/hypr.nix
 
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
-    ./hypr/hypr.nix
     ./nvidia.nix
   ];
   nixpkgs.config.allowUnfree = true;
