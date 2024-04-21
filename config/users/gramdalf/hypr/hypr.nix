@@ -31,10 +31,6 @@
       monitor = ",preferred,auto,auto";
       input = {
         kb_layout = "us";
-        #kb_variant =
-        kb_model = "$mainMod, SPACE, exec, $menu";
-        #kb_options =
-        #kb_rules =
         follow_mouse = 1;
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
         accel_profile = "flat";
@@ -51,6 +47,7 @@
         "suppressevent maximize, class:.*" # You'll probably like this.
         "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
         "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
+        # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
       ];
       # Binds
@@ -131,6 +128,8 @@
           "borderangle, 1, 8, default"
           "fade, 1, 7, default"
           "workspaces, 1, 6, default"
+          # Make special workspaces (scratchpad) slide in vertically
+          "specialWorkspace, 1, 6, default, slidefadevert"
         ];
       };
       decoration = {
