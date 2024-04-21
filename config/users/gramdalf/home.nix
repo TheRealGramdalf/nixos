@@ -20,6 +20,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      FLAKE = "~/nix";
     };
     packages = with pkgs; [
       #### GUI ####
@@ -54,7 +55,7 @@
       # pitivi # Video editor
       blender
       gimp
-      calibre
+      #calibre # https://github.com/NixOS/nixpkgs/issues/305577
       drawio
       # Utilities
       btop
