@@ -278,7 +278,7 @@
         };
         "custom/reboot" = {
           format = "󰜉";
-          on-click = "hyprctl dispatch exec 'systemctl restart'";
+          on-click = "hyprctl dispatch exec 'systemctl reboot'";
           tooltip = false;
         };
         "custom/lock" = {
