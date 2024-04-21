@@ -1,7 +1,7 @@
 {
   users.users = {
-    "meebling".hashedPasswordFile = "/etc/passwdfile.meebling";
-    "meeblingthedevilish".hashedPasswordFile = "/etc/passwdfile.meeblingthedevilish";
+    "meebling".hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
+    "meeblingthedevilish".hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
   };
   hardware.enableRedistributableFirmware = true;
   services = {

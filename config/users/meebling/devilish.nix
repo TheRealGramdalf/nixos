@@ -11,8 +11,6 @@
     ./steam.nix
   ];
   home = {
-    username = "meeblingthedevilish";
-    homeDirectory = "/home/meeblingthedevilish";
     stateVersion = "24.05";
   };
 }

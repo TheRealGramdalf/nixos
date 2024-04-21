@@ -10,8 +10,6 @@
     ./home.nix
   ];
   home = {
-    username = "meebling";
-    homeDirectory = "/home/meeblingthedevilish";
     stateVersion = "24.05";
   };
 }
