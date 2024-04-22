@@ -4,10 +4,15 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./firefox/adblock.nix
+    ./firefox/darkreader.nix
+    ./firefox/telemetry.nix
+  ];
   programs.firefox = {
     enable = true;
     policies = {
-      DNSOverHTTPS = {Enabled = false;};
+      DNSOverHTTPS.Enabled = false;
       DisableAppUpdate = true;
       DisableFirefoxAccounts = true;
       DisableFirefoxStudies = true;
@@ -21,16 +26,6 @@
         };
       };
       ExtensionSettings = {
-        "CanvasBlocker@kkapsner.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/canvasblocker/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-        "ClearURLs@kevinr" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
         "treestyletab@piro.sakura.ne.jp" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/tree-style-tab/latest.xpi";
           installation_mode = "force_installed";
@@ -50,16 +45,6 @@
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
           # Bitwarden
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
           installation_mode = "force_installed";
           default_area = "navbar";
         };
@@ -134,7 +119,6 @@
         user_pref("extensions.shield-recipe-client.api_url", "");
         user_pref("extensions.shield-recipe-client.enabled", false);
         user_pref("extensions.webservice.discoverURL", "");
-        user_pref("keyword.enabled", false);
         user_pref("media.autoplay.default", 0);
         user_pref("media.autoplay.enabled", true);
         user_pref("media.eme.enabled", false);
