@@ -202,6 +202,7 @@
           format-disconnected = "󰤯";
           format-ethernet = "󰈀";
           tooltip = true;
+          tooltip-format = ""; # An empty format will hide the tooltip
           tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
           tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
           on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.iwgtk}";
@@ -277,17 +278,17 @@
         };
         "custom/reboot" = {
           format = "󰜉";
-          on-click = "hyprctl dispatch exec 'systemctl restart'";
+          on-click = "hyprctl dispatch exec 'systemctl reboot'";
           tooltip = false;
         };
         "custom/lock" = {
           format = "";
-          on-click = "hyprctl dispatch exec 'hyprlock'";
+          on-click = "hyprctl dispatch exec 'loginctl lock-session'";
           tooltip = false;
         };
         "custom/suspend" = {
           format = "󰤄";
-          on-click = "hyprctl dispatch exec 'hyprlock & systemctl suspend'";
+          on-click = "hyprctl dispatch exec 'loginctl lock-session & systemctl suspend'";
           tooltip = false;
         };
         "group/group-power" = {

@@ -14,6 +14,7 @@
   ];
   home.packages = with pkgs; [
     playerctl
+    grimblast
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -28,13 +29,17 @@
       # Bind prefs
       "$mainMod" = "SUPER";
 
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        # name,resolution,position,scale
+
+        # Built-in display
+        "eDP-2, 2560x1600@165, 0x0, 1.6, vrr,1"
+
+        # Fallback for plugging in random monitors
+        ",highres, auto, auto"
+      ];
       input = {
         kb_layout = "us";
-        #kb_variant =
-        kb_model = "$mainMod, SPACE, exec, $menu";
-        #kb_options =
-        #kb_rules =
         follow_mouse = 1;
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
         accel_profile = "flat";
@@ -49,8 +54,10 @@
       };
       windowrulev2 = [
         "suppressevent maximize, class:.*" # You'll probably like this.
-        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride org.twosheds.iwgtk" # Make overskride/iwgtk a popup window, move out later
+        "float, move onscreen 50% 50%, class:io.github.kaii_lb.Overskride" # Make overskride/iwgtk a popup window, move out later
         "float, move onscreen 50% 50%, class:org.twosheds.iwgtk"
+        "float, move onscreen 50% 50%, class:iwgtk" # For the password prompt
+        # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
       ];
       # Binds
@@ -97,18 +104,26 @@
 
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
         # Enable XF86 (media) keys
-        #",XF86AudioMedia, exec, "
+        #",XF86AudioMedia, exec, " # Not sure what this one does
         ",XF86AudioPrev, exec, playerctl previous"
         ",XF86AudioNext, exec, playerctl next"
         ",XF86AudioPlay, exec, playerctl play-pause"
         ",XF86AudioStop, exec, playerctl play-pause"
+
+        # Screenshot
+        ", Print, exec, grimblast copysave area"
+
+        # Reload hyprland
+        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
+      ];
+      # bind[r]e[peat]
+      binde = [
         ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
         ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ 5%-"
@@ -131,6 +146,8 @@
           "borderangle, 1, 8, default"
           "fade, 1, 7, default"
           "workspaces, 1, 6, default"
+          # Make special workspaces (scratchpad) slide in vertically
+          "specialWorkspace, 1, 6, default, slidefadevert"
         ];
       };
       decoration = {
@@ -157,7 +174,7 @@
       general = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         gaps_in = 5;
-        gaps_out = 20;
+        gaps_out = "10, 15, 10, 15";
         border_size = 2;
         "col.active_border" = "$mauve";
         "col.inactive_border" = "$surface0";
