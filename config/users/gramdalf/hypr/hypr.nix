@@ -29,7 +29,15 @@
       # Bind prefs
       "$mainMod" = "SUPER";
 
-      monitor = ",highres,auto,auto";
+      monitor = [
+        # name,resolution,position,scale
+
+        # Built-in display
+        "eDP-2, 2560x1600@165, 0x0, 1.6, vrr,1"
+
+        # Fallback for plugging in random monitors
+        ",highres, auto, auto"
+      ];
       input = {
         kb_layout = "us";
         follow_mouse = 1;
