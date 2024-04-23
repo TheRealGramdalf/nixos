@@ -24,7 +24,7 @@
           # Clear browsing data
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/clear-browsing-data/latest.xpi";
           installation_mode = "force_installed";
-          default_area = "navbar";
+          default_area = "menupanel";
         };
       };
     };
