@@ -17,51 +17,36 @@
         };
       };
     };
-    profiles."gramdalf".settings = {
-      # Bookmarks are built in to sideberry
-      "browser.toolbars.bookmarks.visibility" = "never";
-      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    profiles."gramdalf" = {
+      settings = {
+        # Bookmarks are built in to sideberry
+        "browser.toolbars.bookmarks.visibility" = "never";
+        # Required to enable `userChrome.css`
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      };
       userChrome = ''
-      #main-window[titlepreface*="[Sidebery]"] #navigator-toolbox {
-        --toolbar-bgcolor: #242631;
-        display: flex !important;
-        background-color: var(--toolbar-bgcolor) !important;
-      }
+      /* Hide the native tab bar when sideberry is active */
 
-      #main-window[titlepreface*="[Sidebery]"] #TabsToolbar .titlebar-spacer,
-      #main-window[titlepreface*="[Sidebery]"] #TabsToolbar .toolbar-items {
-        display: none !important;
+      #main-window #titlebar {
+        overflow: hidden;
+        transition: height 0.3s 0.3s !important;
       }
+      /* Default state: Set initial height to enable animation */
+      #main-window #titlebar { height: 3em !important; }
+      #main-window[uidensity="touch"] #titlebar { height: 3.35em !important; }
+      #main-window[uidensity="compact"] #titlebar { height: 2.7em !important; }
+      /* Hidden state: Hide native tabs strip */
+      #main-window[titlepreface*="​"] #titlebar { height: 0 !important; }
+      /* Hidden state: Fix z-index of active pinned tabs */
+      #main-window[titlepreface*="​"] #tabbrowser-tabs { z-index: 0 !important; }
+      /* Todo: make the close button (`toolbarbutton.titlebar-button.titlebar-close`) visible when native bar is disabled */
 
-      #main-window[titlepreface*="[Sidebery]"] #TabsToolbar .titlebar-buttonbox {
-        margin-right: 12px !important;
-      }
-
-      #main-window[titlepreface*="[Sidebery]"] #nav-bar {
-        flex-grow: 1 !important;
-      }
-
+      /* Hide the sidebars' dropdown menu & splitter */
+      #sidebar-splitter,
       #sidebar-header {
         display: none;
-      }
-
-      #sidebar-splitter {
-        --sidebar-border-color: var(--chrome-content-separator-color);
-      }
-
-      #navigator-toolbox {
-        --toolbarbutton-hover-background: hsla(0, 0%, 70%, 0.2);
-      }
-
-      #urlbar-background {
-        --toolbar-field-border-color: transparent;
-        --toolbar-field-background-color: transparent;
-        --toolbar-field-focus-border-color: #a86595;
-        --toolbar-field-focus-background-color: #242631;
-        --arrowpanel-border-color: #a86595;
       }
       '';
     };
   };
 }
-
