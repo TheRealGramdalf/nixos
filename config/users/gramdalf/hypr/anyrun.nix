@@ -15,6 +15,7 @@
         applications
         rink
         symbols
+        randr
       ];
       closeOnClick = false;
       showResultsImmediately = false;
