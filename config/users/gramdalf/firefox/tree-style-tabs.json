@@ -1,0 +1,40 @@
+{
+    "__ConfigsMigration__userValeusSameToDefaultAreCleared": true,
+    "chunkedUserStyleRules0": "LyogU2hvdyB0aXRsZSBvZiB1bnJlYWQgdGFicyB3aXRoIHJlZCBhbmQgaXRhbGljIGZvbnQgKi8KLyoKOnJvb3Quc2lkZWJhciB0YWItaXRlbS51bnJlYWQgLmxhYmVsLWNvbnRlbnQgewogIGNvbG9yOiByZWQgIWltcG9ydGFudDsKICBmb250LXN0eWxlOiBpdGFsaWMgIWltcG9ydGFudDsKfQoqLwoKLyogQWRkIHByaXZhdGUgYnJvd3NpbmcgaW5kaWNhdG9yIHBlciB0YWIgKi8KLyoKOnJvb3Quc2lkZWJhciB0YWItaXRlbS5wcml2YXRlLWJyb3dzaW5nIHRhYi1sYWJlbDpiZWZvcmUgewogIGNvbnRlbnQ6ICLwn5W2IjsKfQoqLw==",
+    "configsVersion": 31,
+    "labelOverflowStyle": "crop",
+    "notifiedFeaturesVersion": 9,
+    "optionsExpandedSections": [
+      "section-appearance",
+      "section-addons",
+      "section-advanced",
+      "section-drag",
+      "section-treeBehavior",
+      "section-newTab",
+      "section-newTabWithOwner",
+      "section-contextMenu",
+      "section-debug"
+    ],
+    "parentTabOperationBehaviorMode": 1,
+    "showContextualIdentitiesSelector": true,
+    "showExpertOptions": true,
+    "showNewTabActionSelector": false,
+    "syncDevices": {
+      "device-1713745055061-36886": {
+        "id": "device-1713745055061-36886",
+        "name": "Firefox on Linux",
+        "icon": "device-desktop",
+        "timestamp": 1713745055061
+      }
+    },
+    "userStyleRules": "",
+    "userStyleRules0": "",
+    "userStyleRules1": "",
+    "userStyleRules2": "",
+    "userStyleRules3": "",
+    "userStyleRules4": "",
+    "userStyleRules5": "",
+    "userStyleRules6": "",
+    "userStyleRules7": "",
+    "userStyleRulesFieldHeight": "147px"
+  }
