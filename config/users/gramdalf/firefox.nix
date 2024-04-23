@@ -8,6 +8,7 @@
     ./firefox/bitwarden.nix
     ./firefox/adblock.nix
     ./firefox/darkreader.nix
+    ./firefox/sideberry.nix
     ./firefox/telemetry.nix
     ./firefox/privacy.nix
     ./firefox/general.nix
@@ -18,21 +19,8 @@
   # - https://mozilla.github.io/policy-templates
   programs.firefox = {
     enable = true;
-    policies = {
-      ExtensionSettings = {
-        "{ce9f4b1f-24b8-4e9a-9051-b9e472b1b2f2}" = {
-          # Clear browsing data
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/clear-browsing-data/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-      };
-    };
     profiles."gramdalf" = {
       isDefault = true;
-      settings = {
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = false;
-      };
       search.default = "DuckDuckGo";
       search.force = true;
     };
