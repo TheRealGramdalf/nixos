@@ -33,6 +33,8 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = false;
       };
+      search.default = "DuckDuckGo";
+      search.force = true;
     };
   };
 
