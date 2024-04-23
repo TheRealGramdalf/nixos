@@ -1,7 +1,13 @@
 {
   users.users = {
-    "meebling".hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
-    "meeblingthedevilish".hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+    "meebling" = {
+      hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
+      extraGroups = ["video" "network"];
+    };
+    "meeblingthedevilish" = {
+      hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+      extraGroups = ["video" "network"];
+    };
   };
   hardware.enableRedistributableFirmware = true;
   services = {

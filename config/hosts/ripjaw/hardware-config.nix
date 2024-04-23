@@ -28,11 +28,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1B1B-D929";
-    fsType = "vfat";
-  };
-
   fileSystems."/home" = {
     device = "zroot/safe/home";
     fsType = "zfs";
@@ -46,6 +41,12 @@
   fileSystems."/persist" = {
     device = "zroot/safe/persist";
     fsType = "zfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/1B1B-D929";
+    fsType = "vfat";
+    neededForBoot = false;
   };
 
   swapDevices = [];

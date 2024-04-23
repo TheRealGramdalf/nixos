@@ -26,11 +26,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-partlabel/atreus-zboot";
-    fsType = "vfat";
-  };
-
   fileSystems."/home" = {
     device = "atreus-zroot/safe/home";
     fsType = "zfs";
@@ -44,6 +39,12 @@
   fileSystems."/persist" = {
     device = "atreus-zroot/safe/persist";
     fsType = "zfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-partlabel/atreus-zboot";
+    fsType = "vfat";
+    neededForBoot = false;
   };
 
   swapDevices = [];

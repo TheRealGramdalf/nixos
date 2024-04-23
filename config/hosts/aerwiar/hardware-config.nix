@@ -24,6 +24,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/persist" = {
+    device = "aerwiar-zpool/safe/persist";
+    fsType = "zfs";
+  };
+
   fileSystems."/home/gramdalf" = {
     device = "aerwiar-zpool/safe/home/gramdalf";
     fsType = "zfs";
@@ -32,6 +37,7 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/aerwiar-zboot";
     fsType = "vfat";
+    neededForBoot = false;
   };
 
   swapDevices = [];
