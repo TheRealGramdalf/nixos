@@ -3,22 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
-  lock-false = {
-    Value = false;
-    Status = "locked";
-  };
-  lock-true = {
-    Value = true;
-    Status = "locked";
-  };
-in {
+}: {
   programs.firefox = {
     policies = {
-      DisableFirefoxStudies = lock-true;
-      DisablePocket = lock-true;
-      DisableTelemetry = lock-true;
-      "UserMessaging" = {
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableTelemetry = true;
+      UserMessaging = {
         WhatsNew = true;
         ExtensionRecommendations = false;
         FeatureRecommendations = false;

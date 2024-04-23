@@ -15,7 +15,7 @@
 in {
   programs.firefox = {
     policies = {
-      SearchSuggestEnabled = lock-false;
+      SearchSuggestEnabled = false;
       FirefoxHome = {
         Search = true;
         TopSites = false;
