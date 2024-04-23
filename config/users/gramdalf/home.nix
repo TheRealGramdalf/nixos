@@ -20,7 +20,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      FLAKE = "~/nix";
+      FLAKE = "nix";
     };
     packages = with pkgs; [
       #### GUI ####
