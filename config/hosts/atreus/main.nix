@@ -6,7 +6,7 @@
 }: {
   imports = [
     # Commonly used config
-    ../../common/posix-client.nix
+    #../../common/posix-client.nix
     ../../common/avahi-client.nix
     ../../common/zfs-boot.nix
     ../../common/pipewire.nix
