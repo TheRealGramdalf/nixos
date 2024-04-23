@@ -17,7 +17,7 @@
         };
       };
     };
-    profiles."gramdalf" = {
+    profiles."meebling" = {
       settings = {
         # Bookmarks are built in to sideberry
         "browser.toolbars.bookmarks.visibility" = "never";

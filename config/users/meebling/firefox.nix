@@ -19,7 +19,7 @@
   # - https://mozilla.github.io/policy-templates
   programs.firefox = {
     enable = true;
-    profiles."gramdalf" = {
+    profiles."meebling" = {
       isDefault = true;
       search.default = "DuckDuckGo";
       search.force = true;
