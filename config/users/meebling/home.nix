@@ -25,7 +25,7 @@
       # pitivi # Video editor
       blender
       gimp
-      calibre
+      #calibre
       drawio
       # Utilities
       inkscape
