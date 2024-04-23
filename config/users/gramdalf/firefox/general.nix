@@ -10,8 +10,8 @@
       # DisableProfileRefresh #?
       ExtensionSettings = {
         # Remember to import the default config
-        "treestyletab@piro.sakura.ne.jp" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/tree-style-tab/latest.xpi";
+        "{3c078156-979c-498b-8990-85f7987dd929}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
           installation_mode = "force_installed";
           default_area = "menupanel";
         };
