@@ -1,8 +1,8 @@
 {
   "ifLazyLoading": true,
   "isUseDiscarded": true,
-  "isRestoreWindowPosition": false,
-  "ifSupportTst": true,
+  "isRestoreWindowPosition": true,
+  "ifSupportTst": false,
   "tstDelay": 150,
   "saveTabGroups": false,
   "ifSavePrivateWindow": false,
@@ -35,6 +35,6 @@
   "dateFormat": "YYYY.MM.DD HH:mm:ss",
   "truncateTitle": true,
   "isShowOpenButtons": true,
-  "isShowOptionsPageWhenUpdated": false,
+  "isShowOptionsPageWhenUpdated": true,
   "isDebugMode": false
 }
