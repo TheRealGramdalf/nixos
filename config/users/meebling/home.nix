@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ./hypr/hypr.nix
+    ./firefox.nix
+  ];
   home = {
     sessionVariables = {
       EDITOR = "nvim";
