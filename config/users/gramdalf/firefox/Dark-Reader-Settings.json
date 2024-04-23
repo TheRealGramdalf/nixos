@@ -1,0 +1,7 @@
+{
+    "disabledFor": [
+        "*.aer.dedyn.io"
+    ],
+    "previewNewDesign": true,
+    "detectDarkTheme": true
+}
