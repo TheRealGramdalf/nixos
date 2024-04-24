@@ -7,14 +7,13 @@
   imports = [
     # Commonly used config
     #../../common/posix-client.nix
-    ../../common/avahi-client.nix
     ../../common/zfs-boot.nix
     ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/fonts.nix
     ../../common/hypr/hypr.nix
     ../../common/nh.nix
-    ../../common/ntp.nix
+    ../../common/lan.nix
 
     # Host-specific config
     ./hardware-config.nix
