@@ -13,6 +13,7 @@
     ../../common/tomeutils.nix
     ../../common/fonts.nix
     ../../common/hypr/hypr.nix
+    ../../common/nh.nix
 
     # Host-specific config
     ./hardware-config.nix
