@@ -12,6 +12,7 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/hypr/hypr.nix
+    ../../common/ntp.nix
 
     # Host-specific config
     ./hardware-config.nix

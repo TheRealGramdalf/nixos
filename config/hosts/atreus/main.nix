@@ -14,6 +14,7 @@
     ../../common/fonts.nix
     ../../common/hypr/hypr.nix
     ../../common/nh.nix
+    ../../common/ntp.nix
 
     # Host-specific config
     ./hardware-config.nix
