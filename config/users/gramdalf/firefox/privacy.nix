@@ -32,31 +32,20 @@ in {
         ImproveSuggest = false;
         Locked = true;
       };
-      DisableFirefoxStudies = lock-true;
-      DisablePocket = lock-true;
-      DisableTelemetry = lock-true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableTelemetry = true;
       UserMessaging = {
         WhatsNew = true;
-        ExtensionRecommendations = lock-false;
-        FeatureRecommendations = lock-false;
-        UrlbarInterventions = lock-false;
-        SkipOnboarding = lock-true;
-        MoreFromMozilla = lock-false;
+        ExtensionRecommendations = false;
+        FeatureRecommendations = false;
+        UrlbarInterventions = false;
+        SkipOnboarding = true;
+        MoreFromMozilla = false;
+        Locked = true;
       };
       # Ad-hoc user preferences, managed by policy
       Preferences = {
-        "privacy.donottrackheader.enabled" = lock-true;
-        "privacy.donottrackheader" = {
-          Value = 1;
-          Status = "locked";
-        };
-        "privacy.firstparty.isolate" = lock-true;
-        "privacy.query_stripping" = lock-true;
-        "privacy.trackingprotection.enabled" = lock-true;
-        "privacy.trackingprotection.cryptomining.enabled" = lock-true;
-        "privacy.trackingprotection.fingerprinting.enabled" = lock-true;
-        "privacy.trackingprotection.pbmode.enabled" = lock-true;
-        "usercontext.about_newtab_segregation.enabled" = lock-true;
         "network.http.speculative-parallel-limit" = {
           Value = 0;
           Status = "locked";
@@ -72,18 +61,32 @@ in {
         "network.prefetch-next" = lock-false;
         "network.predictor.enabled" = lock-false;
         "network.predictor.enable-prefetch" = lock-false;
-        # Crash reports
-        "breakpad.reportURL" = {
-          Value = "";
-          Status = "locked";
-        };
         "browser.startup.homepage_override.mstone" = "ignore";
         # Not sure if these overlap
         "extensions.getAddons.showPane" = lock-false;
         "extensions.htmlaboutaddons.recommendations.enabled" = lock-false;
         "datareporting.policy.dataSubmissionEnabled" = lock-false;
+        
+        # These won't work because mozilla
         "datareporting.healthreport.uploadEnabled" = lock-false;
         "toolkit.telemetry.enabled" = lock-false;
+        # Crash reports
+        "breakpad.reportURL" = {
+          Value = "";
+          Status = "locked";
+        };
+        "privacy.donottrackheader.enabled" = lock-true;
+        "privacy.donottrackheader" = {
+          Value = 1;
+          Status = "locked";
+        };
+        "privacy.firstparty.isolate" = lock-true;
+        "privacy.query_stripping" = lock-true;
+        "privacy.trackingprotection.enabled" = lock-true;
+        "privacy.trackingprotection.cryptomining.enabled" = lock-true;
+        "privacy.trackingprotection.fingerprinting.enabled" = lock-true;
+        "privacy.trackingprotection.pbmode.enabled" = lock-true;
+        "usercontext.about_newtab_segregation.enabled" = lock-true;
       };
     };
   };
