@@ -66,27 +66,6 @@ in {
         "extensions.getAddons.showPane" = lock-false;
         "extensions.htmlaboutaddons.recommendations.enabled" = lock-false;
         "datareporting.policy.dataSubmissionEnabled" = lock-false;
-        
-        # These won't work because mozilla
-        "datareporting.healthreport.uploadEnabled" = lock-false;
-        "toolkit.telemetry.enabled" = lock-false;
-        # Crash reports
-        "breakpad.reportURL" = {
-          Value = "";
-          Status = "locked";
-        };
-        "privacy.donottrackheader.enabled" = lock-true;
-        "privacy.donottrackheader" = {
-          Value = 1;
-          Status = "locked";
-        };
-        "privacy.firstparty.isolate" = lock-true;
-        "privacy.query_stripping" = lock-true;
-        "privacy.trackingprotection.enabled" = lock-true;
-        "privacy.trackingprotection.cryptomining.enabled" = lock-true;
-        "privacy.trackingprotection.fingerprinting.enabled" = lock-true;
-        "privacy.trackingprotection.pbmode.enabled" = lock-true;
-        "usercontext.about_newtab_segregation.enabled" = lock-true;
       };
     };
   };
