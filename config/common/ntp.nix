@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  services.chronyd = {
+  services.chrony = {
     directory = "/persist/chrony";
     enable = true;
   };
