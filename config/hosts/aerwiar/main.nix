@@ -6,13 +6,12 @@
 }: {
   imports = [
     # Commonly used config
-    ../../common/avahi-client.nix
     ../../common/zfs-boot.nix
     ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/hypr/hypr.nix
-    ../../common/ntp.nix
+    ../../common/lan.nix
 
     # Host-specific config
     ./hardware-config.nix
