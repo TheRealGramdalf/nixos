@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }: {
   users.groups."docker-ripjaw".gid = 911;

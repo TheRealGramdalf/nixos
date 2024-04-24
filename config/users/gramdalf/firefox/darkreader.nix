@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }: {
   # Make sure to load `dark-reader-settings.json` after first install, since there is (currently) no way of declarative configuration

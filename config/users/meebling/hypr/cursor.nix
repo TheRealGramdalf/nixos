@@ -1,8 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
-  context,
   ...
 }: {
   home.pointerCursor = {

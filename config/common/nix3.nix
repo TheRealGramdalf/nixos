@@ -1,4 +1,4 @@
-{config, ...}: {
+{ ...}: {
   nix.settings = {
     # Enable rebuilding with flakes
     experimental-features = ["nix-command" "flakes"];
