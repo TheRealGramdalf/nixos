@@ -33,7 +33,7 @@
         # name,resolution,position,scale
 
         # Built-in display
-        "eDP-1, 1920x1080@300, 0x0, 1.6, vrr,1"
+        "eDP-1, 1920x1080@300, 0x0, 1, vrr,1"
 
         # Fallback for plugging in random monitors
         ",highres, auto, auto"
