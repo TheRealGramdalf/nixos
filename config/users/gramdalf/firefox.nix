@@ -9,7 +9,6 @@
     ./firefox/adblock.nix
     ./firefox/darkreader.nix
     ./firefox/sideberry.nix
-    ./firefox/telemetry.nix
     ./firefox/privacy.nix
     ./firefox/general.nix
   ];
