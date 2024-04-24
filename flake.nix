@@ -39,6 +39,16 @@
       "ripjaw" = nixosSystem {
         modules = [
           ./config/hosts/ripjaw/main.nix
+          {users.users."games".isNormalUser = true;}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."games" = import ./config/users/games/main.nix;
+              extraSpecialArgs = {inherit context;};
+            };
+          }
         ];
       };
       "aerwiar" = nixosSystem {
