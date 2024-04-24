@@ -10,7 +10,7 @@
     theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners"; # Not including `Main.qml`, since SDDM does this automagically
     extraPackages = [
       pkgs.libsForQt5.qt5.qtgraphicaleffects
-      #libsForQt5.qt5.qtsvg # Not needed?
+      pkgs.libsForQt5.qt5.qtsvg # Not needed?
     ];
   };
 }
