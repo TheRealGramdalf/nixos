@@ -19,7 +19,6 @@
     settings = {
       source = [
         "~/.config/hypr/mocha.conf"
-        "~/.config/hypr/mutable.conf"
       ];
       # UserPreferences
       "$terminal" = "wezterm";
