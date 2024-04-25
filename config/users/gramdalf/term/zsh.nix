@@ -62,8 +62,6 @@
       bindkey '^[[H' beginning-of-line                  # home
       bindkey '^[[F' end-of-line                        # end
       bindkey '^[[Z' undo                               # shift + tab undo last action
-      # ~/.zprompt
-      [ -f ~/.zprompt ] && source ~/.zprompt || echo "Error: ~/.zprompt does not exist."
       # ~/.zcolors
       [ -f ~/.zcolors ] && source ~/.zcolors || echo "Error: ~/.zcolors does not exist."
       # enable auto-suggestions based on the history
@@ -76,8 +74,6 @@
       if [ -f /etc/zsh_command_not_found ]; then
           . /etc/zsh_command_not_found
       fi
-      # Configure the shell prompt
-      configure_prompt
     '';
     sessionVariables = {
       TIMEFMT = "$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'";
