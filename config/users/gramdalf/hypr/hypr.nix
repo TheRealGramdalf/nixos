@@ -21,7 +21,6 @@
         "~/.config/hypr/mocha.conf"
       ];
       # UserPreferences
-      "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
       "$menu" = "anyrun";
       # Bind prefs
@@ -57,16 +56,17 @@
         "float, move onscreen 50% 50%, class:iwgtk" # For the password prompt
         # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
+
+        "float,class:org.wezfurlong.wezterm"
       ];
       # Binds
       bind = [
         "$mainMod, SPACE, exec, $menu"
-        "$mainMod, Q, exec, $terminal"
+        "$mainMod, return, exec, [float;tile] wezterm start --always-new-process"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," #dwindle
         "$mainMod, J, togglesplit," #dwindle
 
