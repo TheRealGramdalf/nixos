@@ -2,6 +2,7 @@
   imports = [
     ./zsh.nix
     ./wezterm.nix
+    ./nushell.nix
   ];
   programs.starship = {
     enable = true;
