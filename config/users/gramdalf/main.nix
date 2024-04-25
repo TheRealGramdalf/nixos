@@ -4,7 +4,6 @@
 }: {
   imports = [
     ./home.nix
-    ./zsh.nix
     ./hypr/hypr.nix
     ./firefox.nix
     ./term/main.nix
