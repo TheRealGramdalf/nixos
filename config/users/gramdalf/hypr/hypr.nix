@@ -19,9 +19,10 @@
     settings = {
       source = [
         "~/.config/hypr/mocha.conf"
+        "~/.config/hypr/mutable.conf"
       ];
       # UserPreferences
-      "$terminal" = "kitty";
+      "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
       "$menu" = "anyrun";
       # Bind prefs

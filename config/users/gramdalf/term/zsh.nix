@@ -4,9 +4,9 @@
   home = {
     file = {
       # zsh prompt. See `~/.zprompt`
-      ".zprompt".source = ./legacyDotfiles/.zprompt;
+      ".zprompt".source = ./.zprompt;
       # zsh colors. See `~/.zcolors`
-      ".zcolors".source = ./legacyDotfiles/.zcolors;
+      ".zcolors".source = ./.zcolors;
     };
   };
   programs.zsh = {

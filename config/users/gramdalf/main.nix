@@ -7,6 +7,7 @@
     ./zsh.nix
     ./hypr/hypr.nix
     ./firefox.nix
+    ./term/main.nix
   ];
   nixpkgs.config = {
     allowUnfree = true;
