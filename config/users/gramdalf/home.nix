@@ -29,6 +29,7 @@
       # Shell/terminal
       neovim
       nerdfonts
+      wl-clipboard
       # Communication
       webcord
       electron-mail

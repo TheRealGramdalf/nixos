@@ -48,7 +48,6 @@
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
-  programs.zsh.enable = true;
   programs.wireshark.enable = true;
   users = {
     mutableUsers = false;
@@ -58,7 +57,7 @@
       description = "Gramdalf";
       extraGroups = ["wheel" "docker" "adbusers" "wireshark" "video"];
       hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
-      shell = pkgs.zsh;
+      shell = pkgs.nushellFull;
     };
   };
 }
