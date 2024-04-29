@@ -1,6 +1,5 @@
 {
   imports = [
-    ./zsh.nix
     ./wezterm.nix
     ./nushell.nix
   ];
