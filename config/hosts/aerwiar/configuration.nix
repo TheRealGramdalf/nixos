@@ -39,6 +39,11 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  hardware.opengl.extraPackages = with pkgs; [
+    libva
+    libvdpau
+  ];
+
   services = {
     kanidm.enableClient = true;
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
@@ -48,7 +53,11 @@
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
-  programs.wireshark.enable = true;
+  programs = {
+    wireshark.enable = true;
+    adb.enable = true;
+  };
+
   users = {
     mutableUsers = false;
 
