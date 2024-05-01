@@ -287,7 +287,7 @@
         };
         "custom/suspend" = {
           format = "󰤄";
-          on-click = "hyprctl dispatch exec 'loginctl lock-session & systemctl suspend'";
+          on-click = "hyprctl dispatch exec 'loginctl lock-session & sleep 0.5 && systemctl suspend'";
           tooltip = false;
         };
         "group/group-power" = {
