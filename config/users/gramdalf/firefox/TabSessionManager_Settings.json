@@ -1,7 +1,7 @@
 {
   "ifLazyLoading": true,
   "isUseDiscarded": true,
-  "isRestoreWindowPosition": true,
+  "isRestoreWindowPosition": false,
   "ifSupportTst": false,
   "tstDelay": 150,
   "saveTabGroups": false,
@@ -35,6 +35,6 @@
   "dateFormat": "YYYY.MM.DD HH:mm:ss",
   "truncateTitle": true,
   "isShowOpenButtons": true,
-  "isShowOptionsPageWhenUpdated": true,
+  "isShowOptionsPageWhenUpdated": false,
   "isDebugMode": false
 }
