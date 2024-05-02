@@ -14,9 +14,10 @@ in {
     ./firefox/bitwarden.nix
     ./firefox/adblock.nix
     ./firefox/darkreader.nix
-    ./firefox/sideberry.nix
     ./firefox/privacy.nix
+    ./firefox/hwaccel.nix
     ./firefox/general.nix
+    ./sideberry.nix
   ];
   # For policy info, see:
   # - https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265/7
