@@ -14,7 +14,7 @@
     };
     tmp.cleanOnBoot = true;
   };
-
+  environment.systemPackages = [pkgs.ntfs3g];
   powerManagement = {
     enable = true;
     scsiLinkPolicy = "med_power_with_dipm";
