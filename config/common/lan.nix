@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   services.chrony = lib.mkDefault {
     directory = "/persist/chrony";
     enable = true;

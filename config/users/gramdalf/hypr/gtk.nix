@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [pkgs.glib]; # gsettings
   # Use `nwg-look` to test out themes
   gtk = {

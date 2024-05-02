@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [pkgs.hyprlock];
   home.file.".config/hypr/hyprlock.conf".text = ''
     source = ~/.config/hypr/mocha.conf

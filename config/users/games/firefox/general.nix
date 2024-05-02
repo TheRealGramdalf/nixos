@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   programs.firefox = {
     policies = {
       AppAutoUpdate = false;

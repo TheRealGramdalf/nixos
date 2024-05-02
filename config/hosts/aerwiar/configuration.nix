@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   boot = {
     loader.systemd-boot.enable = true;
     zfs.devNodes = "/dev/disk/by-partlabel";

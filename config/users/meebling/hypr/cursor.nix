@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.pointerCursor = {
     size = 24;
     gtk.enable = true;
