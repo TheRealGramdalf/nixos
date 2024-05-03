@@ -32,6 +32,7 @@
         # Fallback for plugging in random monitors
         ",highres, auto, auto"
       ];
+      xwayland.force_zero_scaling = true;
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -41,6 +42,7 @@
         touchpad = {
           natural_scroll = true;
           clickfinger_behavior = true;
+          tap-to-click = false; # What's palm rejection?
         };
       };
       gestures = {
