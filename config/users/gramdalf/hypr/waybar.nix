@@ -26,6 +26,7 @@
       }
       /* Set default padding & background */
       #workspaces,
+      #window,
       #custom-music,
       #tray,
       #idle_inhibitor,
@@ -43,7 +44,7 @@
       #custom-poweroff {
         background-color: @surface0;
         padding: 0.5rem 1rem;
-        margin: 5px 0;
+        margin: 5px 0 0 0;
       }
 
       #waybar {
@@ -81,6 +82,10 @@
 
       #workspaces button:hover {
         color: @sapphire;
+        border-radius: 1rem;
+      }
+
+      #window {
         border-radius: 1rem;
       }
 
@@ -175,7 +180,7 @@
       mainBar = {
         layer = "top";
         modules-left = ["hyprland/workspaces"];
-        #modules-center = ["custom/music"];
+        #modules-center = ["hyprland/window"];
         modules-right = ["tray" "group/group-backlight" "pulseaudio" "bluetooth" "network" "battery" "clock" "group/group-power"];
         position = "top";
         battery = {
@@ -263,6 +268,10 @@
           format = " {icon} ";
           format-icons = {default = "";};
           sort-by-name = true;
+        };
+        "hyprland/window" = {
+          "max-length" = 200;
+          "separate-outputs" = true;
         };
 
         "custom/poweroff" = {
