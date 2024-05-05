@@ -12,7 +12,6 @@
              if the --flake option was given. This file may be a sym‐
              link to a flake.nix in an actual flake; thus /etc/nixos
              need not be a flake.
-- [X] spacek cursors | Use the file symlink option to link from github to ~/.local/share/icons
 - [ ] Mouse
     - [ ] MB4,5 DEL
     - [ ] 
@@ -22,5 +21,4 @@
 - [ ] strings
 - [ ] ADB bug report: adb --help displays `install [-lrtsdg]` but does not explain `-s` or `-l`
 - [ ] borgmatic?
-https://github.com/nix-community/comma
-https://github.com/viperML/nh
+- [ ] https://docs.waydro.id/faq/setting-up-waydroid-only-sessions
