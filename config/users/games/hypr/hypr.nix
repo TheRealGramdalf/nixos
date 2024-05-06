@@ -27,12 +27,13 @@
       monitor = [
         # name,resolution,position,scale
 
-        # Built-in display
-        "eDP-1, 1920x1080@300, 0x0, 1, vrr,1"
+        # TV
+        #"eDP-2, 2560x1600@165, 0x0, 1.6, vrr,1"
 
         # Fallback for plugging in random monitors
         ",highres, auto, auto"
       ];
+      xwayland.force_zero_scaling = true;
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -42,6 +43,7 @@
         touchpad = {
           natural_scroll = true;
           clickfinger_behavior = true;
+          tap-to-click = false; # What's palm rejection?
         };
       };
       gestures = {
@@ -54,6 +56,8 @@
         "float, move onscreen 50% 50%, class:iwgtk" # For the password prompt
         # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
+
+        "float,class:org.wezfurlong.wezterm"
       ];
       # Binds
       bind = [
@@ -63,7 +67,6 @@
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo," #dwindle
         "$mainMod, J, togglesplit," #dwindle
 
