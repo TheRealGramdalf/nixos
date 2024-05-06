@@ -38,7 +38,6 @@
         follow_mouse = 1;
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
         accel_profile = "flat";
-        natural_scroll = true;
         touchpad = {
           natural_scroll = true;
           clickfinger_behavior = true;
