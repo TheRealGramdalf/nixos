@@ -13,6 +13,6 @@
       extraConfig = ''
         IdentityFile = ~/.ssh/gramdalf-key
       ''
-    }
+    };
   };
 }
