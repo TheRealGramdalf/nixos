@@ -12,7 +12,7 @@
       enable = true;
       extraConfig = ''
         IdentityFile = ~/.ssh/gramdalf-key
-      ''
+      '';
     };
   };
 }
