@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.hyprland.enable = true;
   # Add a terminal
-  # So the default super + m keybind works
+  # So the default super + Q keybind works
   environment.systemPackages = [pkgs.kitty];
   hardware = {
     brillo.enable = true;
@@ -9,6 +9,10 @@
       enable = true;
       powerOnBoot = false;
     };
+  };
+
+  services = {
+    udisks2.enable = true;
   };
   # Use wayland pls uwu
   environment.sessionVariables = {
