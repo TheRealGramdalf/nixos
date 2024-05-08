@@ -54,8 +54,6 @@
         "float, move onscreen 50% 50%, class:iwgtk" # For the password prompt
         # Add title: Extension: (Bitwarden - Free Password Manager) - Bitwarden — Mozilla Firefox
         "bordercolor $red,xwayland:1" # Set the bordercolor to red if window is Xwayland
-
-        "float,class:org.wezfurlong.wezterm"
       ];
       # Binds
       bind = [
@@ -113,7 +111,7 @@
         ",XF86AudioStop, exec, playerctl play-pause"
 
         # Screenshot
-        ", Print, exec, grimblast copysave area"
+        ", Print, exec, grimblast copysave area --freeze"
 
         # Reload hyprland
         "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
