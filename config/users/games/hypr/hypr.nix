@@ -114,7 +114,7 @@
         ",XF86AudioStop, exec, playerctl play-pause"
 
         # Screenshot
-        ", Print, exec, grimblast copysave area"
+        ", Print, exec, grimblast copysave area --freeze"
 
         # Reload hyprland
         "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
@@ -150,12 +150,13 @@
       decoration = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         rounding = 10;
+        # Performance tweaks
         blur = {
-          enabled = true;
+          enabled = false;
           size = 2;
           passes = 1;
         };
-        drop_shadow = true;
+        drop_shadow = false;
         shadow_range = 4;
         shadow_render_power = 3;
         "col.shadow" = "$surface1";
