@@ -49,7 +49,11 @@
               ];
               users."games" = import ./config/users/games/main.nix;
             };
-            users.users."games".isNormalUser = true;
+            users.users."games" = {
+              isNormalUser = true;
+              hashedPasswordFile = "/persist/secrets/passwdfile.games";
+              extraGroups = ["video" "network"];
+            };
           }
         ];
       };
@@ -74,8 +78,17 @@
               users."meebling" = import ./config/users/meebling/main.nix;
               users."meeblingthedevilish" = import ./config/users/meebling/devilish.nix;
             };
-            users.users."meebling".isNormalUser = true;
-            users.users."meeblingthedevilish".isNormalUser = true;
+            users.mutableUsers = false;
+            users.users."meebling" = {
+              isNormalUser = true;
+              hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
+              extraGroups = ["video" "network"];
+            };
+            users.users."meeblingthedevilish" = {
+              isNormalUser = true;
+              hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+              extraGroups = ["video" "network"];
+            };
           }
         ];
       };
