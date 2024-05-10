@@ -38,15 +38,18 @@
       "ripjaw" = nixosSystem {
         modules = [
           ./config/hosts/ripjaw/main.nix
-          {users.users."games".isNormalUser = true;}
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."games" = import ./config/users/games/main.nix;
               extraSpecialArgs = {inherit context;};
+              sharedModules = [
+                ./mods/home/hypr/hyprkeys.nix
+              ];
+              users."games" = import ./config/users/games/main.nix;
             };
+            users.users."games".isNormalUser = true;
           }
         ];
       };
@@ -59,27 +62,20 @@
       "atreus" = nixosSystem {
         modules = [
           ./config/hosts/atreus/main.nix
-
-          {users.users."meebling".isNormalUser = true;}
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = {inherit context;};
+              sharedModules = [
+                ./mods/home/hypr/hyprkeys.nix
+              ];
               users."meebling" = import ./config/users/meebling/main.nix;
-              extraSpecialArgs = {inherit context;};
-            };
-          }
-
-          {users.users."meeblingthedevilish".isNormalUser = true;}
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
               users."meeblingthedevilish" = import ./config/users/meebling/devilish.nix;
-              extraSpecialArgs = {inherit context;};
             };
+            users.users."meebling".isNormalUser = true;
+            users.users."meeblingthedevilish".isNormalUser = true;
           }
         ];
       };
