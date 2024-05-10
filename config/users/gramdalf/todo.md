@@ -22,3 +22,4 @@
 - [ ] ADB bug report: adb --help displays `install [-lrtsdg]` but does not explain `-s` or `-l`
 - [ ] borgmatic?
 - [ ] https://docs.waydro.id/faq/setting-up-waydroid-only-sessions
+- https://github.com/drozdziak1/nixos-pikvm
