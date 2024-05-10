@@ -29,13 +29,10 @@
   networking.wireless.iwd = {
     enable = true;
     settings = {
+      General.EnableNetworkConfiguration = (assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true);
       Network = {
-        EnableNetworkConfiguration = (assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true);
         NameResolvingService = "resolvconf";
-        RoutePriorityOffset = 300;
-      };
-      Settings = {
-        AutoConnect = true;
+        #RoutePriorityOffset = 300;
       };
     };
   };
