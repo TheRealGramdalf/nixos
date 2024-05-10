@@ -36,6 +36,8 @@
       };
     };
   };
+  # Create the `network` group as expected by iwd
+  users.groups."network" = null;
   imports = [
     ./sddm.nix
   ];
