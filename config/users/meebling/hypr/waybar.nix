@@ -13,6 +13,10 @@
       ];
     };
   };
+  home.packages = [
+    pkgs.iwgtk
+    pkgs.overskride
+  ];
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -209,7 +213,7 @@
           tooltip-format = ""; # An empty format will hide the tooltip
           tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
           tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
-          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.iwgtk}";
+          on-click = "hyprctl dispatch exec iwgtk";
         };
         bluetooth = {
           tooltip = false;
@@ -217,7 +221,7 @@
           format-off = "󰂲";
           format-connected = "󰂱";
           format-connected-battery = ["󰥇" "󰤾" "󰤿" "󰥀" "󰥁" "󰥂" "󰥃" "󰥄" "󰥅" "󰥆" "󰥈"];
-          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.overskride}";
+          on-click = "hyprctl dispatch exec overskride";
         };
         "custom/music" = {
           escape = true;
