@@ -26,6 +26,8 @@
   fileSystems."/persist" = {
     device = "aerwiar-zpool/safe/persist";
     fsType = "zfs";
+    # Required for `hashedPasswordFile` to work properly
+    neededForBoot = true;
   };
 
   fileSystems."/home/gramdalf" = {
