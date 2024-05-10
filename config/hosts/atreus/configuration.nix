@@ -8,6 +8,5 @@
       openFirewall = true;
       enable = true;
     };
-    kanidm.unixSettings.pam_allowed_login_groups = ["atreus-login"];
   };
 }
