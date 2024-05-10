@@ -36,7 +36,6 @@
       dialect # Translate app
       drawing
       gnome.nautilus
-      gnome.simple-scan
     ];
   };
   programs = {
