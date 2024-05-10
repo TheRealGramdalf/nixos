@@ -71,7 +71,9 @@ in {
         ])
       ];
       bind = mkMerge [
-        (optionals cfg.screenshot.enable ["grimblast ${cfg.screenshot.args}"])
+        (optionals cfg.screenshot.enable [
+          ",PRINT, exec, grimblast ${cfg.screenshot.args}"
+        ])
         (optionals cfg.media.enable [
           ",XF86AudioPrev, exec, playerctl previous"
           ",XF86AudioNext, exec, playerctl next"
@@ -110,8 +112,6 @@ in {
           # Special workspace (scratchpad)
           "$mainMod, S, togglespecialworkspace, magic"
         ])
-      ];
-      bindm = mkMerge [
         (optionals cfg.workspaces.enable [
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
