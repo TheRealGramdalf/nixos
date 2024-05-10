@@ -1,5 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprkeys.nix
+    ./hypr/hyprkeys.nix
   ];
 }

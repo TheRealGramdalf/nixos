@@ -45,7 +45,7 @@
               useUserPackages = true;
               extraSpecialArgs = {inherit context;};
               sharedModules = [
-                ./mods/home/hypr/hyprkeys.nix
+                ./mods/home/main.nix
               ];
               users."games" = import ./config/users/games/main.nix;
             };
@@ -69,7 +69,7 @@
               useUserPackages = true;
               extraSpecialArgs = {inherit context;};
               sharedModules = [
-                ./mods/home/hypr/hyprkeys.nix
+                ./mods/home/main.nix
               ];
               users."meebling" = import ./config/users/meebling/main.nix;
               users."meeblingthedevilish" = import ./config/users/meebling/devilish.nix;
