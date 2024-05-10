@@ -112,6 +112,7 @@
 
         # Screenshot
         ", Print, exec, grimblast copysave area --freeze"
+        ", Print SHIFT, exec, grimblast copysave output"
 
         # Reload hyprland
         "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
