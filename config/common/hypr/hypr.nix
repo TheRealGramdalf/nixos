@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, config, ...}: {
   programs.hyprland.enable = true;
   # Add a terminal
   # So the default super + Q keybind works
@@ -24,8 +24,21 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
+  networking.dhcpcd.enable = false;
   # Enable iwd (https://www.reddit.com/r/archlinux/comments/cs0zuh/first_time_i_heard_about_iwd_why_isnt_it_already/)
-  networking.wireless.iwd.enable = true;
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      Network = {
+        EnableNetworkConfiguration = (assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true);
+        NameResolvingService = "resolvconf";
+        RoutePriorityOffset = 300;
+      };
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
   imports = [
     ./sddm.nix
   ];
