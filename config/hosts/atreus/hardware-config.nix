@@ -38,6 +38,8 @@
   fileSystems."/persist" = {
     device = "atreus-zroot/safe/persist";
     fsType = "zfs";
+    # Required for `hashedPasswordFile` to work properly
+    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
