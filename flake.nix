@@ -82,12 +82,12 @@
             users.users."meebling" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
-              extraGroups = ["video" "network"];
+              extraGroups = ["video" "netdev"];
             };
             users.users."meeblingthedevilish" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "network"];
+              extraGroups = ["video" "netdev"];
             };
           }
         ];

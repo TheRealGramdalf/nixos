@@ -36,8 +36,8 @@
       };
     };
   };
-  # Create the `network` group as expected by iwd
-  users.groups."network".gid = null;
+  # Create the `netdev` group as expected by iwd
+  users.groups."netdev".gid = null;
   imports = [
     ./sddm.nix
   ];
