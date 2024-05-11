@@ -35,17 +35,24 @@
       General.EnableNetworkConfiguration = (assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true);
       Network = {
         NameResolvingService = "resolvconf";
-        #RoutePriorityOffset = 300;
+        RoutePriorityOffset = 300;
       };
     };
   };
   # Create the `netdev` group as expected by iwd
   users.groups."netdev".gid = null;
+  # Adding `https://wiki.archlinux.org/title/Iwd#Allow_any_user_to_read_status_information` may fix `iwd` not launching
 
   systemd.network.networks."69-ether" = {
+    # Match all non-virtual (veth) ethernet connections 
     matchConfig = {
-      Name = "en* eth*";
+      Type = "ether";
+      Kind = "!*";
     };
+    # Prefer a wired connection over wireless
+    dhcpV4Config.RouteMetric = 100;
+    # Further prefer ipv6
+    dhcpV6Config.RouteMetric = 200;
     networkConfig = {
       DHCP = true;
       IPv6PrivacyExtensions = true;
