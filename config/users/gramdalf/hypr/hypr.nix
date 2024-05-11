@@ -7,7 +7,7 @@
     ./hyprlock.nix
     ./hypridle.nix
   ];
-  tomeutils.scratchpad.enable = true;
+  tomeutils.hyprkeys.workspaces.scratchpad.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
