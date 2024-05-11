@@ -40,7 +40,7 @@
     };
   };
   # Create the `netdev` group as expected by iwd
-  users.groups."netdev".gid = null;
+  users.groups."netdev" = {};
   # Adding `https://wiki.archlinux.org/title/Iwd#Allow_any_user_to_read_status_information` may fix `iwd` not launching
 
   systemd.network.networks."69-ether" = {
