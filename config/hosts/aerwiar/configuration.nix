@@ -54,16 +54,4 @@
     wireshark.enable = true;
     adb.enable = true;
   };
-
-  users = {
-    mutableUsers = false;
-
-    users."gramdalf" = {
-      isNormalUser = true;
-      description = "Gramdalf";
-      extraGroups = ["wheel" "docker" "adbusers" "wireshark" "video"];
-      hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
-      shell = pkgs.nushellFull;
-    };
-  };
 }

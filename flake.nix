@@ -61,6 +61,25 @@
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit context;};
+              sharedModules = [
+                ./mods/home/main.nix
+              ];
+              users."gramdalf" = import ./config/users/gramdalf/main.nix;
+            };
+            users.mutableUsers = false;
+            users.users."gramdalf" = {
+              isNormalUser = true;
+              extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "wireshark"];
+              hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
+              shell = pkgs.nushellFull;
+            };
+          }
         ];
       };
       "atreus" = nixosSystem {
