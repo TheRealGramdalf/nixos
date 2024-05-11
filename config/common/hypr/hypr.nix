@@ -27,6 +27,7 @@
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
   systemd.network.enable = true;
+  networking.useNetworkd = true;
   # Enable iwd (https://www.reddit.com/r/archlinux/comments/cs0zuh/first_time_i_heard_about_iwd_why_isnt_it_already/)
   networking.wireless.iwd = {
     enable = true;
@@ -40,6 +41,16 @@
   };
   # Create the `netdev` group as expected by iwd
   users.groups."netdev".gid = null;
+
+  systemd.network.networks."69-ether" = {
+    matchConfig = {
+      Name = "en* eth*";
+    };
+    networkConfig = {
+      DHCP = true;
+      IPv6PrivacyExtensions = true;
+    };
+  };
   imports = [
     ./sddm.nix
   ];
