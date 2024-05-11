@@ -77,7 +77,6 @@
               isNormalUser = true;
               extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "wireshark"];
               hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
-              shell = pkgs.nushellFull;
             };
           }
         ];

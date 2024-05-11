@@ -46,7 +46,7 @@
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
   };
-
+  users.users."gramdalf".shell = pkgs.nushellFull;
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
