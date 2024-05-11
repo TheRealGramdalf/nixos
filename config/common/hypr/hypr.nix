@@ -25,6 +25,8 @@
   };
 
   networking.dhcpcd.enable = false;
+  networking.useDHCP = false;
+  systemd.network.enable = true;
   # Enable iwd (https://www.reddit.com/r/archlinux/comments/cs0zuh/first_time_i_heard_about_iwd_why_isnt_it_already/)
   networking.wireless.iwd = {
     enable = true;
