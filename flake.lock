@@ -63,6 +63,22 @@
         "type": "github"
       }
     },
+    "inputmodule-pr": {
+      "locked": {
+        "lastModified": 1715193112,
+        "narHash": "sha256-79COy5X2oy+hacZFu3+Xpy4zUjQQCtVkT6Z3AKMT+6M=",
+        "owner": "Nixos",
+        "repo": "nixpkgs",
+        "rev": "790a99b65bc925df3b4e30d9eba03d34e8644a29",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Nixos",
+        "repo": "nixpkgs",
+        "rev": "790a99b65bc925df3b4e30d9eba03d34e8644a29",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1712450863,
@@ -135,6 +151,7 @@
       "inputs": {
         "anyrun": "anyrun",
         "home-manager": "home-manager",
+        "inputmodule-pr": "inputmodule-pr",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"

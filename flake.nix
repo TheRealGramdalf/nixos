@@ -19,6 +19,10 @@
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    inputmodule-pr = {
+      url = "github:Nixos/nixpkgs/790a99b65bc925df3b4e30d9eba03d34e8644a29";
+    };
   };
 
   outputs = context @ {
@@ -58,6 +62,7 @@
         ];
       };
       "aerwiar" = nixosSystem {
+        specialArgs = {inherit context;};
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
@@ -77,7 +82,9 @@
               isNormalUser = true;
               extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "wireshark"];
               hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
+              group = "gramdalf";
             };
+            users.groups."gramdalf" = {};
           }
         ];
       };
@@ -117,7 +124,7 @@
       };
       "docker-ve" = nixosSystem {
         modules = [
-          ./config/hosts/aerwiar/main.nix
+          ./config/hosts/docker-ve/main.nix
         ];
       };
     };
