@@ -61,13 +61,13 @@ in {
       binde = mkMerge [
         (optionals cfg.volume.enable [
           ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-          ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${builtins.toString cfg.volume.steps}%+"
-          ",XF86AudioLowerVolume, exec, wpctl -l 1.0 @DEFAULT_SINK@ ${builtins.toString cfg.volume.steps}%-"
+          ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%+"
+          ",XF86AudioLowerVolume, exec, wpctl -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%-"
         ])
 
         (optionals cfg.brightness.enable [
-          ",XF86MonBrightnessUp, exec, brillo -A ${builtins.toString cfg.brightness.steps}"
-          ",XF86MonBrightnessDown, exec, brillo -U ${builtins.toString cfg.brightness.steps}"
+          ",XF86MonBrightnessUp, exec, brillo -A ${toString cfg.brightness.steps}"
+          ",XF86MonBrightnessDown, exec, brillo -U ${toString cfg.brightness.steps}"
         ])
       ];
       bind = mkMerge [
