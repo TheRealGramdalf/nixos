@@ -56,4 +56,5 @@
     wireshark.enable = true;
     adb.enable = true;
   };
+  tomeutils.vapor.enable = true;
 }

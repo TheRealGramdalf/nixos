@@ -106,7 +106,7 @@
       gnome.gnome-boxes
       # Games
       prismlauncher
-      steam
+      #steam
       mangohud # System usage stats
       #### CLI ####
       kanidm # Kanidm client

@@ -66,6 +66,7 @@
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
+          ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {

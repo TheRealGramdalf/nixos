@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.tomutils.vapor;
+  cfg = config.tomeutils.vapor;
   gamescopeCfg = osConfig.programs.gamescope;
 
   #steam-gamescope = let
@@ -23,7 +23,7 @@ let
   #    Type=Application
   #  '').overrideAttrs (_: { passthru.providedSessions = [ "steam" ]; });
 in {
-  options.programs.steam = {
+  options.tomeutils.vapor = {
     enable = mkEnableOption "steam";
 
     package = mkOption {
@@ -122,13 +122,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    asserts = [
-      (assert lib.asserts.assertMsg (osConfig.tomeutils.vapor.enable == true) "Vapor must be enabled system-wide for steam to work"; "")
-    ];
+    #asserts = [
+    #  (assert lib.asserts.assertMsg (osConfig.tomeutils.vapor.enable == true) "Vapor must be enabled system-wide for steam to work"; "")
+    #];
     home.packages = [
       cfg.package
       cfg.package.run
-    ]
+    ];
     # ++ lib.optional cfg.gamescopeSession.enable steam-gamescope;
 
     # Windowrules for steam (src: https://www.reddit.com/r/hyprland/comments/183tmfy/comment/kark334)
