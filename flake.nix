@@ -91,6 +91,7 @@
       "atreus" = nixosSystem {
         modules = [
           ./config/hosts/atreus/main.nix
+          ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {

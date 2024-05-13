@@ -9,4 +9,5 @@
       enable = true;
     };
   };
+  tomeutils.vapor.enable = true;
 }
