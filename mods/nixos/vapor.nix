@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.tomutils.vapor;
+  cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
 
   steam-gamescope = let
@@ -23,7 +23,7 @@ let
       Type=Application
     '').overrideAttrs (_: { passthru.providedSessions = [ "steam" ]; });
 in {
-  options.tomutils.vapor = {
+  options.tomeutils.vapor = {
     enable = mkEnableOption "system-wide support for steam in userspace";
 
     remotePlay.openFirewall = mkOption {
