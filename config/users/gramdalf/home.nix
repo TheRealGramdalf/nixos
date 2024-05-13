@@ -103,6 +103,7 @@
       tor-browser
       # Hypervisors
       bottles
+      gnome.gnome-boxes
       # Games
       prismlauncher
       steam
