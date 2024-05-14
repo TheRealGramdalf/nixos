@@ -1,4 +1,4 @@
-{...}: {
+{ pkgs, ...}: {
   tomeutils.vapor = {
     enable = true;
     extraCompatPackages = [

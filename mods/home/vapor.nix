@@ -89,32 +89,6 @@ in {
       '';
     };
 
-
-    #gamescopeSession = mkOption {
-    #  description = "Run a GameScope driven Steam session from your display-manager";
-    #  default = {};
-    #  type = types.submodule {
-    #    options = {
-    #      enable = mkEnableOption "GameScope Session";
-    #      args = mkOption {
-    #        type = types.listOf types.str;
-    #        default = [ ];
-    #        description = ''
-    #          Arguments to be passed to GameScope for the session.
-    #        '';
-    #      };
-#
-    #      env = mkOption {
-    #        type = types.attrsOf types.str;
-    #        default = { };
-    #        description = ''
-    #          Environmental variables to be passed to GameScope for the session.
-    #        '';
-    #      };
-    #    };
-    #  };
-    #};
-
     extest.enable = mkEnableOption ''
       Load the extest library into Steam, to translate X11 input events to
       uinput events (e.g. for using Steam Input on Wayland)
@@ -122,18 +96,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    #asserts = [
-    #  (assert lib.asserts.assertMsg (osConfig.tomeutils.vapor.enable == true) "Vapor must be enabled system-wide for steam to work"; "")
-    #];
+    assertions = [
+      ({assertion = osConfig.tomeutils.vapor.enable == true; message = "Vapor must be enabled system-wide for steam to work properly";})
+    ];
     home.packages = [
       cfg.package
       cfg.package.run
     ];
     # ++ lib.optional cfg.gamescopeSession.enable steam-gamescope;
 
-    # Windowrules for steam (src: https://www.reddit.com/r/hyprland/comments/183tmfy/comment/kark334)
-    #windowrule=float,^(.*.exe)$
-    #windowrule=float,^(steam_app_.*)$
-    #windowrule=float,^(steam_proton)$
+    #wayland.windowManager.hyprland.settings = lib.mkIf (config.wayland.windowManager.hyprland.enable) {
+    #  windowrulev2 = [
+      # Windowrules for steam (src: https://www.reddit.com/r/hyprland/comments/183tmfy/comment/kark334)
+      #windowrule=float,^(.*.exe)$
+      #windowrule=float,^(steam_app_.*)$
+      #windowrule=float,^(steam_proton)$
+    #  ];
+    #};
   };
 }
