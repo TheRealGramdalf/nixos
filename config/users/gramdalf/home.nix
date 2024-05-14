@@ -18,6 +18,7 @@
       FLAKE = "nix";
     };
     packages = with pkgs; [
+      wlr-randr
       #### GUI ####
       exfatprogs
       handbrake
