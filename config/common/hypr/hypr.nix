@@ -24,6 +24,22 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
+  systemd = {
+  user.services."polkit-agent" = {
+    description = "polkit-kde-agent for Hyprland";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
   systemd.network.enable = true;
@@ -43,6 +59,7 @@
   users.groups."netdev" = {};
   # Adding `https://wiki.archlinux.org/title/Iwd#Allow_any_user_to_read_status_information` may fix `iwd` not launching
 
+  systemd.services."systemd-networkd-wait-online".enable = lib.mkForce false;
   systemd.network.networks."69-ether" = {
     # Match all non-virtual (veth) ethernet connections 
     matchConfig = {
