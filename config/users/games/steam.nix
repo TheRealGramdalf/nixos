@@ -1,5 +1,3 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    steam
-  ];
+  tomeutils.vapor.enable = true;
 }

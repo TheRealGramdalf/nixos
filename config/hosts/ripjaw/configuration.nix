@@ -7,4 +7,5 @@
     };
     kanidm.unixSettings.pam_allowed_login_groups = ["ripjaw-login"];
   };
+  tomeutils.vapor.enable = true;
 }

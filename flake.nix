@@ -42,6 +42,7 @@
       "ripjaw" = nixosSystem {
         modules = [
           ./config/hosts/ripjaw/main.nix
+          ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
