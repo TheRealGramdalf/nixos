@@ -49,6 +49,7 @@
   users.users."gramdalf".shell = pkgs.nushellFull;
 
   virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
   # Docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
