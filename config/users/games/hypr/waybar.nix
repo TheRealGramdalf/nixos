@@ -130,6 +130,14 @@
         color: @blue;
       }
 
+      /* Fix the rounder corner thing (mostly) */
+      #group-power:hover > * > * {
+        border-radius: 0 1rem 1rem 0;
+      }
+      #group-backlight:hover > * > * {
+        border-radius: 0;
+      }
+
       /* Powermenu group */
       #custom-quit {
           border-radius: 1rem 0px 0px 1rem;
@@ -296,7 +304,7 @@
         };
         "custom/suspend" = {
           format = "󰤄";
-          on-click = "hyprctl dispatch exec 'loginctl lock-session & sleep 0.5 && systemctl suspend'";
+          on-click = "hyprctl dispatch exec 'systemctl suspend'";
           tooltip = false;
         };
         "group/group-power" = {

@@ -13,10 +13,6 @@
       ];
     };
   };
-  home.packages = [
-    pkgs.iwgtk
-    pkgs.overskride
-  ];
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -134,6 +130,14 @@
         color: @blue;
       }
 
+      /* Fix the rounder corner thing (mostly) */
+      #group-power:hover > * > * {
+        border-radius: 0 1rem 1rem 0;
+      }
+      #group-backlight:hover > * > * {
+        border-radius: 0;
+      }
+
       /* Powermenu group */
       #custom-quit {
           border-radius: 1rem 0px 0px 1rem;
@@ -213,7 +217,7 @@
           tooltip-format = ""; # An empty format will hide the tooltip
           tooltip-format-wifi = "<big>{essid}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>\n<small>󱨂 {signalStrength}</small>";
           tooltip-format-ethernet = "<big>{ifname}</big>\n<small>󰩟 {ipaddr}/{cidr}</small>";
-          on-click = "hyprctl dispatch exec iwgtk";
+          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.iwgtk}";
         };
         bluetooth = {
           tooltip = false;
@@ -221,7 +225,7 @@
           format-off = "󰂲";
           format-connected = "󰂱";
           format-connected-battery = ["󰥇" "󰤾" "󰤿" "󰥀" "󰥁" "󰥂" "󰥃" "󰥄" "󰥅" "󰥆" "󰥈"];
-          on-click = "hyprctl dispatch exec overskride";
+          on-click = "hyprctl dispatch exec ${pkgs.lib.getExe pkgs.overskride}";
         };
         "custom/music" = {
           escape = true;
