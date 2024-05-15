@@ -8,5 +8,5 @@
   };
   environment.systemPackages = [
     pks.razergenie
-  ]
+  ];
 }
