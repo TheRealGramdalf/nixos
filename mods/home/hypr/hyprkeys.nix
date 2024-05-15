@@ -62,7 +62,7 @@ in {
         (optionals cfg.volume.enable [
           ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
           ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%+"
-          ",XF86AudioLowerVolume, exec, wpctl -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%-"
+          ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%-"
         ])
 
         (optionals cfg.brightness.enable [
