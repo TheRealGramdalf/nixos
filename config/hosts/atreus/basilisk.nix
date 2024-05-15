@@ -7,6 +7,6 @@
     ];
   };
   environment.systemPackages = [
-    pks.razergenie
+    pkgs.razergenie
   ];
 }
