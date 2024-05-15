@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.hyprland.enable = true;
   # Add a terminal
   # So the default super + Q keybind works
@@ -27,15 +32,15 @@
   # initialClass: org.kde.polkit-kde-authentication-agent-1
   systemd.user.services."polkit-agent" = {
     description = "polkit-kde-agent for Hyprland";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
     serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
+      Type = "simple";
+      ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 
@@ -47,7 +52,7 @@
   networking.wireless.iwd = {
     enable = true;
     settings = {
-      General.EnableNetworkConfiguration = (assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true);
+      General.EnableNetworkConfiguration = assert lib.asserts.assertMsg (config.networking.dhcpcd.enable == false) "You only need one DHCP daemon"; true;
       Network = {
         NameResolvingService = "resolvconf";
         RoutePriorityOffset = 300;
@@ -60,7 +65,7 @@
 
   systemd.services."systemd-networkd-wait-online".enable = lib.mkForce false;
   systemd.network.networks."69-ether" = {
-    # Match all non-virtual (veth) ethernet connections 
+    # Match all non-virtual (veth) ethernet connections
     matchConfig = {
       Type = "ether";
       Kind = "!*";

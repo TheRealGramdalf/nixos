@@ -1,8 +1,10 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
 
@@ -14,14 +16,14 @@ let
       gamescope --steam ${toString cfg.gamescopeSession.args} -- steam -tenfoot -pipewire-dmabuf
     '';
 
-  gamescopeSessionFile =
-    (pkgs.writeTextDir "share/wayland-sessions/steam.desktop" ''
-      [Desktop Entry]
-      Name=Steam
-      Comment=A digital distribution platform
-      Exec=${steam-gamescope}/bin/steam-gamescope
-      Type=Application
-    '').overrideAttrs (_: { passthru.providedSessions = [ "steam" ]; });
+  gamescopeSessionFile = (pkgs.writeTextDir "share/wayland-sessions/steam.desktop" ''
+    [Desktop Entry]
+    Name=Steam
+    Comment=A digital distribution platform
+    Exec=${steam-gamescope}/bin/steam-gamescope
+    Type=Application
+  '')
+  .overrideAttrs (_: {passthru.providedSessions = ["steam"];});
 in {
   options.tomeutils.vapor = {
     enable = mkEnableOption "system-wide support for steam in userspace";
@@ -58,7 +60,7 @@ in {
           enable = mkEnableOption "GameScope Session";
           args = mkOption {
             type = types.listOf types.str;
-            default = [ ];
+            default = [];
             description = ''
               Arguments to be passed to GameScope for the session.
             '';
@@ -66,7 +68,7 @@ in {
 
           env = mkOption {
             type = types.attrsOf types.str;
-            default = { };
+            default = {};
             description = ''
               Environmental variables to be passed to GameScope for the session.
             '';
@@ -77,7 +79,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.opengl = { # this fixes the "glXChooseVisual failed" bug, context: https://github.com/NixOS/nixpkgs/issues/47932
+    hardware.opengl = {
+      # this fixes the "glXChooseVisual failed" bug, context: https://github.com/NixOS/nixpkgs/issues/47932
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
@@ -96,28 +99,31 @@ in {
     # optionally enable 32bit pulseaudio support if pulseaudio is enabled
     hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 
-
     programs.gamescope.enable = mkDefault cfg.gamescopeSession.enable;
-    services.displayManager.sessionPackages = mkIf cfg.gamescopeSession.enable [ gamescopeSessionFile ];
-
+    services.displayManager.sessionPackages = mkIf cfg.gamescopeSession.enable [gamescopeSessionFile];
 
     networking.firewall = lib.mkMerge [
       (mkIf (cfg.remotePlay.openFirewall || cfg.localNetworkGameTransfers.openFirewall) {
-        allowedUDPPorts = [ 27036 ]; # Peer discovery
+        allowedUDPPorts = [27036]; # Peer discovery
       })
 
       (mkIf cfg.remotePlay.openFirewall {
-        allowedTCPPorts = [ 27036 ];
-        allowedUDPPortRanges = [ { from = 27031; to = 27035; } ];
+        allowedTCPPorts = [27036];
+        allowedUDPPortRanges = [
+          {
+            from = 27031;
+            to = 27035;
+          }
+        ];
       })
 
       (mkIf cfg.dedicatedServer.openFirewall {
-        allowedTCPPorts = [ 27015 ]; # SRCDS Rcon port
-        allowedUDPPorts = [ 27015 ]; # Gameplay traffic
+        allowedTCPPorts = [27015]; # SRCDS Rcon port
+        allowedUDPPorts = [27015]; # Gameplay traffic
       })
 
       (mkIf cfg.localNetworkGameTransfers.openFirewall {
-        allowedTCPPorts = [ 27040 ]; # Data transfers
+        allowedTCPPorts = [27040]; # Data transfers
       })
     ];
   };

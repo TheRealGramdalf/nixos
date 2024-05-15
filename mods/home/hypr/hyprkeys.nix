@@ -1,17 +1,24 @@
-{ config, lib, pkgs, osConfig, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  osConfig,
+  ...
+}: let
   inherit (lib) types;
   inherit (lib) mkEnableOption mkMerge mkOption optionals;
   cfg = config.tomeutils.hyprkeys;
 in {
   ###### Definition
   options.tomeutils.hyprkeys = {
-    enable = mkEnableOption "selected keybinds"
-    // { default = (config.wayland.windowManager.hyprland.enable); };
+    enable =
+      mkEnableOption "selected keybinds"
+      // {default = config.wayland.windowManager.hyprland.enable;};
 
     volume = {
-      enable = mkEnableOption "volume keybinds (Volume +/-, mute)"
-      // { default = (osConfig.services.pipewire.enable); };
+      enable =
+        mkEnableOption "volume keybinds (Volume +/-, mute)"
+        // {default = osConfig.services.pipewire.enable;};
       steps = mkOption {
         type = types.int;
         default = 5;
@@ -19,22 +26,27 @@ in {
       };
     };
 
-    media.enable = mkEnableOption "media keybinds (Play/Pause, seek track), powered by `playerctl`"
-    // { default = (osConfig.services.pipewire.enable); };
+    media.enable =
+      mkEnableOption "media keybinds (Play/Pause, seek track), powered by `playerctl`"
+      // {default = osConfig.services.pipewire.enable;};
 
-    reload.enable = mkEnableOption "hyprland/waybar reload keybind (ctrl + alt + delete)"
-    // { default = true; };
+    reload.enable =
+      mkEnableOption "hyprland/waybar reload keybind (ctrl + alt + delete)"
+      // {default = true;};
 
     workspaces = {
-      enable = mkEnableOption "basic workspace keybinds, based on the hyprland starter config"
-      // { default = true; };
-      scratchpad.enable = mkEnableOption "a drop-down style special workspace"
-      // { default = false; };
+      enable =
+        mkEnableOption "basic workspace keybinds, based on the hyprland starter config"
+        // {default = true;};
+      scratchpad.enable =
+        mkEnableOption "a drop-down style special workspace"
+        // {default = false;};
     };
 
     brightness = {
-      enable = mkEnableOption "brightness keybinds"
-      // { default = (osConfig.hardware.brillo.enable); };
+      enable =
+        mkEnableOption "brightness keybinds"
+        // {default = osConfig.hardware.brillo.enable;};
       steps = mkOption {
         type = types.int;
         default = 5;
@@ -42,8 +54,9 @@ in {
       };
     };
     screenshot = {
-      enable = mkEnableOption "screenshot (printscreen) keybinds, powered by `grimblast`"
-      // { default = true; };
+      enable =
+        mkEnableOption "screenshot (printscreen) keybinds, powered by `grimblast`"
+        // {default = true;};
       args = mkOption {
         type = types.str;
         default = "copysave area --freeze";
@@ -120,8 +133,8 @@ in {
       ];
       animations.animation = mkMerge [
         (optionals cfg.workspaces.scratchpad.enable [
-        # Make special workspaces (scratchpad) slide in vertically
-        "specialWorkspace, 1, 6, default, slidefadevert"
+          # Make special workspaces (scratchpad) slide in vertically
+          "specialWorkspace, 1, 6, default, slidefadevert"
         ])
       ];
     };
