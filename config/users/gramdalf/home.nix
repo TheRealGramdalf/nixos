@@ -104,10 +104,8 @@
       tor-browser
       # Hypervisors
       bottles
-      gnome.gnome-boxes
       # Games
       prismlauncher
-      #steam
       mangohud # System usage stats
       #### CLI ####
       kanidm # Kanidm client
