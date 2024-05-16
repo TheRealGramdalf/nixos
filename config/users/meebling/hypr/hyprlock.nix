@@ -1,9 +1,9 @@
 { lib, ...}: {
   programs.hyprlock = {
     enable = true;
-    importantPrefixes = lib.mkForce [
+    # Fix variables being sorted in front of `source`
+    importantPrefixes = [
       "source"
-      "$"
       "monitor"
       "size"
     ];
