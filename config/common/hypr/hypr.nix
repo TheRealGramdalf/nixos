@@ -5,9 +5,15 @@
   ...
 }: {
   programs.hyprland.enable = true;
+  environment.systemPackages = with pkgs; [
   # Add a terminal
   # So the default super + Q keybind works
-  environment.systemPackages = [pkgs.kitty];
+    kitty
+    # qt wayland support
+    libsForQt5.qt5.qtwayland
+    # qt6
+    kdePackages.qtwayland
+  ];
   hardware = {
     brillo.enable = true;
     bluetooth = {
