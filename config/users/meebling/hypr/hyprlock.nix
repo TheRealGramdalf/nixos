@@ -1,19 +1,8 @@
-{ lib, ...}: {
+{ ...}: {
   programs.hyprlock = {
     enable = true;
-    # Fix variables being sorted in front of `source`
-    importantPrefixes = [
-      "source"
-      "monitor"
-      "size"
-    ];
     settings = {
       source = "~/.config/hypr/mocha.conf";
-
-      "$accent" = "$mauve";
-      "$accentAlpha" = "$mauveAlpha";
-      "$font" = "JetBrainsMono Nerd Font";
-
       general = {
         disable_loading_bar = true;
         hide_cursor = true;
@@ -35,7 +24,7 @@
           text = ''cmd[update:30000] echo "$(date +"%R")"'';
           color = "$text";
           font_size = 90;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "-30, 0";
           halign = "right";
           valign = "top";
@@ -47,7 +36,7 @@
           text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
           color = "$text";
           font_size = 25;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "-30, -150";
           halign = "right";
           valign = "top";
@@ -59,7 +48,7 @@
       #image {
       #    path = ~/.face
       #    size = 100
-      #    border_color = $accent
+      #    border_color = $mauve
       #
       #    position = 0, 75
       #    halign = center
@@ -74,15 +63,15 @@
         dots_size = 0.2;
         dots_spacing = 0.2;
         dots_center = true;
-        outer_color = "$accent";
+        outer_color = "$mauve";
         inner_color = "$surface0";
         font_color = "$text";
         fade_on_empty = false;
-        placeholder_text = ''
-          <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>
+        placeholder_text = ''          ;
+                    <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$mauveAlpha">$USER</span></span>;
         '';
         hide_input = false;
-        check_color = "$accent";
+        check_color = "$mauve";
         fail_color = "$red";
         fail_text = ''
           <i>$FAIL <b>($ATTEMPTS)</b></i>
