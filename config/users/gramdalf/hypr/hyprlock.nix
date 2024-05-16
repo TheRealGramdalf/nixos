@@ -1,6 +1,12 @@
-{ ...}: {
+{ lib, ...}: {
   programs.hyprlock = {
     enable = true;
+    importantPrefixes = lib.mkForce [
+      "source"
+      "$"
+      "monitor"
+      "size"
+    ];
     settings = {
       source = "~/.config/hypr/mocha.conf";
 
@@ -72,8 +78,8 @@
         inner_color = "$surface0";
         font_color = "$text";
         fade_on_empty = false;
-        placeholder_text = ''          ;
-                    <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>;
+        placeholder_text = ''
+          <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>
         '';
         hide_input = false;
         check_color = "$accent";
