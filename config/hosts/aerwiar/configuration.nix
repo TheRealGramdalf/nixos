@@ -20,16 +20,6 @@
     scsiLinkPolicy = "med_power_with_dipm";
   };
 
-  system = {
-    autoUpgrade = {
-      enable = false;
-      allowReboot = false;
-      operation = "boot";
-      dates = "daily";
-      persistent = false;
-    };
-  };
-
   nix.settings = {
     experimental-features = [
       "nix-command"
