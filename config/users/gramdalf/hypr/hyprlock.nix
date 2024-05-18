@@ -67,8 +67,8 @@
         inner_color = "$surface0";
         font_color = "$text";
         fade_on_empty = false;
-        placeholder_text = ''          ;
-                    <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$mauveAlpha">$USER</span></span>;
+        placeholder_text = ''
+          <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$mauveAlpha">$USER</span></span>
         '';
         hide_input = false;
         check_color = "$mauve";
