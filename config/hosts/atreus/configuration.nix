@@ -9,5 +9,8 @@
       enable = true;
     };
   };
-  tomeutils.vapor.enable = true;
+  tomeutils = {
+    vapor.enable = true;
+    adhde.enable = true;
+  };
 }

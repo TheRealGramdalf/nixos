@@ -16,6 +16,11 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+
   boot.loader.grub = {
     enable = true;
     # This device needs to be an entire disk, not a partition!
