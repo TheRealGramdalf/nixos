@@ -13,6 +13,14 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+  hardware = {
+    brillo.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
+  };
+
   fileSystems."/" = {
     device = "aerwiar-zpool/system-state";
     fsType = "zfs";

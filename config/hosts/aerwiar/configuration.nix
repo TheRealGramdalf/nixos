@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+
+  tomeutils.adhde.enable = true;
+
   boot = {
     loader.systemd-boot.enable = true;
     zfs.devNodes = "/dev/disk/by-partlabel";
