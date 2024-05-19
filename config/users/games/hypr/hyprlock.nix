@@ -11,7 +11,7 @@
       # BACKGROUND
       background = {
         monitor = "";
-        path = "~/.config/background";
+        #path = "~/.config/background";
         blur_passes = 0;
         # Used as the fallback if `path` doesn't exist
         color = "$base";
