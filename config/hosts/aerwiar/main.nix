@@ -2,7 +2,6 @@
   imports = [
     # Commonly used config
     ../../common/zfs-boot.nix
-    ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/nh.nix
 

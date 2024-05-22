@@ -20,6 +20,7 @@ in {
       };
     };
     qtwayland.enable = mkEnableOption "support for QT applications" // {default = cfg.enable;};
+    pipewire.enable = mkEnableOption "pipewire with compatibility settings" // {default = cfg.enable;};
 
     polkit-agent = {
       enable = mkEnableOption "a user systemd service for kde-polkit-agent, the priviledge escalation GUI" // {default = config.security.polkit.enable;};
@@ -48,6 +49,16 @@ in {
         libsForQt5.qt5.qtwayland
         kdePackages.qtwayland # qt6
       ];
+    })
+
+    (mkIf cfg.pipewire.enable {
+      services.pipewire = {
+        enable = true;
+        audio.enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+        wireplumber.enable = true;
+      };
     })
 
     (mkIf cfg.useWayland {

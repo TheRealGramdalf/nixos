@@ -2,12 +2,9 @@
   imports = [
     # Commonly used config
     ../../common/posix-client.nix
-    ../../common/lan.nix
     ../../common/zfs-boot.nix
-    ../../common/pipewire.nix
     ../../common/tomeutils.nix
     ../../common/fonts.nix
-    ../../common/hypr/hypr.nix
     ../../common/nh.nix
 
     # Host-specific config
