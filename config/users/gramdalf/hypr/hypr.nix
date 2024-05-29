@@ -8,6 +8,7 @@
     ./hypridle.nix
   ];
   tomeutils.hyprkeys.workspaces.scratchpad.enable = true;
+  services.cliphist.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
