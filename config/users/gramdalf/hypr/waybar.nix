@@ -17,172 +17,186 @@
     enable = true;
     systemd.enable = true;
     style = ''
-      @import "mocha.css";
+        @import "mocha.css";
 
-      * {
-        font-family: FantasqueSansMono Nerd Font;
-        font-size: 17px;
-        min-height: 0;
-      }
-      /* Set default padding & background */
-      #workspaces,
-      #window,
-      #custom-music,
-      #tray,
-      #idle_inhibitor,
-      #bluetooth,
-      #backlight,
-      #backlight-slider,
-      #network,
-      #clock,
-      #battery,
-      #pulseaudio,
-      #custom-quit,
-      #custom-lock,
-      #custom-suspend,
-      #custom-reboot,
-      #custom-poweroff {
-        background-color: @surface0;
-        padding: 0.5rem 1rem;
-        margin: 5px 0 0 0;
-      }
+        * {
+          font-family: FantasqueSansMono Nerd Font;
+          font-size: 17px;
+          min-height: 0;
+        }
+        /* Set default padding & background */
+        #workspaces,
+        #window,
+        #custom-music,
+        #tray,
+        #idle_inhibitor,
+        #bluetooth,
+        #backlight,
+        #backlight-slider,
+        #network,
+        #clock,
+        #battery,
+        #pulseaudio,
+        #custom-quit,
+        #custom-lock,
+        #custom-suspend,
+        #custom-reboot,
+        #custom-poweroff {
+          background-color: @surface0;
+          padding: 0.5rem 1rem;
+          margin: 5px 0 0 0;
+        }
 
-      #waybar {
-        background: transparent;
-        color: @text;
-        margin: 5px 5px;
-      }
+        #waybar {
+          background: transparent;
+          color: @text;
+          margin: 5px 5px;
+        }
 
-      /* Make tooltips follow catpuccin */
-      tooltip {
-        background: @base;
-        border: 1px solid @pink;
-      }
-      tooltip label {
-        color: @text;
-      }
+        /* Make tooltips follow catpuccin */
+        tooltip {
+          background: @base;
+          border: 1px solid @pink;
+        }
+        tooltip label {
+          color: @text;
+        }
 
 
-      #workspaces {
-        border-radius: 1rem;
-        margin-left: 1rem;
-        padding: 0;
-      }
+        #workspaces {
+          border-radius: 1rem;
+          margin-left: 1rem;
+          padding: 0;
+        }
 
-      #workspaces button {
-        color: @lavender;
-        border-radius: 1rem;
-        padding: 0.4rem;
-      }
-
-      #workspaces button.active {
-        color: @sky;
-        border-radius: 1rem;
-      }
-
-      #workspaces button:hover {
-        color: @sapphire;
-        border-radius: 1rem;
-      }
-
-      #window {
-        border-radius: 1rem;
-      }
-
-      #tray {
-        margin-right: 1rem;
-        border-radius: 1rem;
-      }
-
-      #clock {
-        color: @rosewater;
-        border-radius: 0px 1rem 1rem 0px;
-        margin-right: 1rem;
-      }
-
-      #battery.charging {
-        color: @green;
-      }
-
-      #battery.warning:not(.charging) {
-        color: @red;
-      }
-
-      #battery {
-          border-radius: 0;
-      }
-
-      #idle_inhibitor {
-        border-radius: 1rem 0px 0px 1rem;
-        margin-left: 1rem;
-      }
-
-      #pulseaudio {
-        color: @maroon;
-      }
-
-      #custom-music {
-        color: @mauve;
-        border-radius: 1rem;
-      }
-
-      #bluetooth {
-        color: @blue;
-      }
-
-      /* Fix the rounder corner thing (mostly) */
-      #group-power:hover > * > * {
-        border-radius: 0 1rem 1rem 0;
-      }
-      #group-backlight:hover > * > * {
-        border-radius: 0;
-      }
-
-      /* Powermenu group */
-      #custom-quit {
-          border-radius: 1rem 0px 0px 1rem;
+        #workspaces button {
           color: @lavender;
-      }
-      #custom-lock {
-          border-radius: 0;
-          color: @lavender;
-      }
-      #custom-suspend {
-          border-radius: 0;
-          color: @lavender;
-      }
-      #custom-reboot {
-          border-radius: 0;
-          color: @peach;
-      }
-      #custom-poweroff {
+          border-radius: 1rem;
+          padding: 0.4rem;
+        }
+
+        #workspaces button.active {
+          color: @sky;
+          border-radius: 1rem;
+        }
+
+        #workspaces button:hover {
+          color: @sapphire;
+          border-radius: 1rem;
+        }
+
+        #window {
+          border-radius: 1rem;
+        }
+
+        #tray {
           margin-right: 1rem;
           border-radius: 1rem;
+        }
+
+        #clock {
+          color: @rosewater;
+          border-radius: 0px 1rem 1rem 0px;
+          margin-right: 1rem;
+        }
+
+        #battery.charging {
+          color: @green;
+        }
+
+        #battery.warning:not(.charging) {
           color: @red;
+        }
+
+        #battery.critical:not(.charging) {
+          color: @red;
+        }
+
+      #battery.critical:not(.charging) {
+          background-color: #f53c3c;
+          color: #ffffff;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
       }
-      #backlight {
-        color: @yellow;
-        border-radius: 1rem 0px 0px 1rem;
-      }
-      #backlight-slider slider {
-        min-height: 0px;
-        min-width: 0px;
-        opacity: 0;
-        background-image: none;
-        border: none;
-        box-shadow: none;
-      }
-      #backlight-slider trough {
-        min-width: 80px;
-        min-height: 10px;
-        border-radius: 5px;
-        background-color: black;
-      }
-      #backlight-slider highlight {
-        min-width: 10px;
-        border-radius: 5px;
-        background-color: @text;
-      }
+
+        #battery {
+            border-radius: 0;
+        }
+
+        #idle_inhibitor {
+          border-radius: 1rem 0px 0px 1rem;
+          margin-left: 1rem;
+        }
+
+        #pulseaudio {
+          color: @maroon;
+        }
+
+        #custom-music {
+          color: @mauve;
+          border-radius: 1rem;
+        }
+
+        #bluetooth {
+          color: @blue;
+        }
+
+        /* Fix the rounder corner thing (mostly) */
+        #group-power:hover > * > * {
+          border-radius: 0 1rem 1rem 0;
+        }
+        #group-backlight:hover > * > * {
+          border-radius: 0;
+        }
+
+        /* Powermenu group */
+        #custom-quit {
+            border-radius: 1rem 0px 0px 1rem;
+            color: @lavender;
+        }
+        #custom-lock {
+            border-radius: 0;
+            color: @lavender;
+        }
+        #custom-suspend {
+            border-radius: 0;
+            color: @lavender;
+        }
+        #custom-reboot {
+            border-radius: 0;
+            color: @peach;
+        }
+        #custom-poweroff {
+            margin-right: 1rem;
+            border-radius: 1rem;
+            color: @red;
+        }
+        #backlight {
+          color: @yellow;
+          border-radius: 1rem 0px 0px 1rem;
+        }
+        #backlight-slider slider {
+          min-height: 0px;
+          min-width: 0px;
+          opacity: 0;
+          background-image: none;
+          border: none;
+          box-shadow: none;
+        }
+        #backlight-slider trough {
+          min-width: 80px;
+          min-height: 10px;
+          border-radius: 5px;
+          background-color: black;
+        }
+        #backlight-slider highlight {
+          min-width: 10px;
+          border-radius: 5px;
+          background-color: @text;
+        }
     '';
     settings = {
       mainBar = {
@@ -203,11 +217,32 @@
           };
         };
         clock = {
-          format = "{:%H:%M}";
+          # Use `I` for 12hr, `H` for 24hr format
+          format = "{:%I:%M}";
           format-alt = "{:%d/%m/%Y}";
           timezone = "America/Vancouver";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          #"format"= "{=%H=%M}  ";
+          #"format-alt"= "{=%A; %B %d; %Y (%R)}  ";
+          calendar = {
+            mode = "month";
+            weeks-pos = "right";
+            "format" = {
+              "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
+              "days" = "<span color='#ecc6d9'><b>{}</b></span>";
+              "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
+              "months" = "<span color='#ffead3'><b>{}</b></span>";
+              "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
+            };
+          };
+          actions = {
+            on-click-right = "mode";
+            on-scroll-up = "shift_up";
+            on-scroll-down = "shift_down";
+            on-click-middle = "shift_reset";
+          };
         };
+
         network = {
           format-wifi = "{icon}";
           format-icons = ["󰤟" "󰤢" "󰤥" "󰤨"];
