@@ -16,14 +16,15 @@ with lib; let
       gamescope --steam ${toString cfg.gamescopeSession.args} -- steam -tenfoot -pipewire-dmabuf
     '';
 
-  gamescopeSessionFile = (pkgs.writeTextDir "share/wayland-sessions/steam.desktop" ''
-    [Desktop Entry]
-    Name=Steam
-    Comment=A digital distribution platform
-    Exec=${steam-gamescope}/bin/steam-gamescope
-    Type=Application
-  '')
-  .overrideAttrs (_: {passthru.providedSessions = ["steam"];});
+  gamescopeSessionFile =
+    (pkgs.writeTextDir "share/wayland-sessions/steam.desktop" ''
+      [Desktop Entry]
+      Name=Steam
+      Comment=A digital distribution platform
+      Exec=${steam-gamescope}/bin/steam-gamescope
+      Type=Application
+    '')
+    .overrideAttrs (_: {passthru.providedSessions = ["steam"];});
 in {
   options.tomeutils.vapor = {
     enable = mkEnableOption "system-wide support for steam in userspace";

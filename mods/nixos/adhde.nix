@@ -139,7 +139,7 @@ in {
       # Create the `netdev` group as expected by iwd. Why doesn't this happen by default? The bald frog knows.
       users.groups."netdev" = {};
       # Adding `https://wiki.archlinux.org/title/Iwd#Allow_any_user_to_read_status_information` may fix `iwd` not launching
-    
+
       # this tends to slow down rebuilds, and in general isn't useful for most GUI machines
       systemd.services."systemd-networkd-wait-online".enable = lib.mkForce false;
       # This allows you to plug in random ethernet cables and obtain an address via DHCP

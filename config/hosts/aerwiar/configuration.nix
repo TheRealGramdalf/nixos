@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-
   tomeutils.adhde.enable = true;
 
   boot = {

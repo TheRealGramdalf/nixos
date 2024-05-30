@@ -67,10 +67,11 @@ in {
 
   # Implementation
   config = lib.mkIf cfg.enable (mkMerge [
-    
-    {# Set the mainmod in case it isn't elsewhere
-    wayland.windowManager.hyprland.settings."$mainMod" = lib.mkDefault "SUPER";}
-    
+    {
+      # Set the mainmod in case it isn't elsewhere
+      wayland.windowManager.hyprland.settings."$mainMod" = lib.mkDefault "SUPER";
+    }
+
     (mkIf cfg.volume.enable {
       # bind[r]e[peat]
       wayland.windowManager.hyprland.settings.binde = [
@@ -107,7 +108,7 @@ in {
 
     (mkIf cfg.reload.enable {
       wayland.windowManager.hyprland.settings.bind = [
-        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"  
+        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
       ];
     })
 
@@ -144,7 +145,7 @@ in {
         ];
       };
     })
-    
+
     (mkIf cfg.workspaces.scratchpad.enable {
       wayland.windowManager.hyprland.settings = {
         bind = [
