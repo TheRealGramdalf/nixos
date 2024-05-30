@@ -218,21 +218,19 @@
         };
         clock = {
           # Use `I` for 12hr, `H` for 24hr format
-          format = "{:%I:%M}";
-          format-alt = "{:%d/%m/%Y}";
+          format = "{:%I:%M %p}";
+          format-alt = "{:%b %d, %Y}";
           timezone = "America/Vancouver";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
-          #"format"= "{=%H=%M}  ";
-          #"format-alt"= "{=%A; %B %d; %Y (%R)}  ";
           calendar = {
             mode = "month";
             weeks-pos = "right";
-            "format" = {
-              "today" = "<span color='#ff6699'><b><u>{}</u></b></span>";
-              "days" = "<span color='#ecc6d9'><b>{}</b></span>";
-              "weeks" = "<span color='#99ffdd'><b>W{}</b></span>";
-              "months" = "<span color='#ffead3'><b>{}</b></span>";
-              "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
+            format = {
+              today = "<span color='#ff6699'><b><u>{}</u></b></span>";
+              days = "<span color='#ecc6d9'><b>{}</b></span>";
+              weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+              months = "<span color='#ffead3'><b>{}</b></span>";
+              weekdays = "<span color='#ffcc66'><b>{}</b></span>";
             };
           };
           actions = {
