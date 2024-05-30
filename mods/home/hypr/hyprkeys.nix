@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) types;
-  inherit (lib) mkEnableOption mkMerge mkOption optionals;
+  inherit (lib) mkEnableOption mkMerge mkOption mkIf;
   cfg = config.tomeutils.hyprkeys;
 in {
   ###### Definition
@@ -66,38 +66,54 @@ in {
   };
 
   # Implementation
-  config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings = {
-      # Set the mainmod in case it isn't elsewhere
-      "$mainMod" = lib.mkDefault "SUPER";
+  config = lib.mkIf cfg.enable (mkMerge [
+    
+    {# Set the mainmod in case it isn't elsewhere
+    wayland.windowManager.hyprland.settings."$mainMod" = lib.mkDefault "SUPER";}
+    
+    (mkIf cfg.volume.enable {
       # bind[r]e[peat]
-      binde = mkMerge [
-        (optionals cfg.volume.enable [
-          ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-          ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%+"
-          ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%-"
-        ])
-
-        (optionals cfg.brightness.enable [
-          ",XF86MonBrightnessUp, exec, brillo -A ${toString cfg.brightness.steps}"
-          ",XF86MonBrightnessDown, exec, brillo -U ${toString cfg.brightness.steps}"
-        ])
+      wayland.windowManager.hyprland.settings.binde = [
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_SINK@ ${toString cfg.volume.steps}%-"
       ];
-      bind = mkMerge [
-        (optionals cfg.screenshot.enable [
-          ",PRINT, exec, grimblast ${cfg.screenshot.args}"
-        ])
-        (optionals cfg.media.enable [
-          ",XF86AudioPrev, exec, playerctl previous"
-          ",XF86AudioNext, exec, playerctl next"
-          ",XF86AudioPlay, exec, playerctl play-pause"
-          ",XF86AudioStop, exec, playerctl play-pause"
-        ])
-        (optionals cfg.reload.enable [
-          # Reload hyprland
-          "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
-        ])
-        (optionals cfg.workspaces.enable [
+    })
+
+    (mkIf cfg.brightness.enable {
+      # bind[r]e[peat]
+      wayland.windowManager.hyprland.settings.binde = [
+        ",XF86MonBrightnessUp, exec, brillo -A ${toString cfg.brightness.steps}"
+        ",XF86MonBrightnessDown, exec, brillo -U ${toString cfg.brightness.steps}"
+      ];
+    })
+
+    (mkIf cfg.media.enable {
+      wayland.windowManager.hyprland.settings.bind = [
+        ",XF86AudioPrev, exec, playerctl previous"
+        ",XF86AudioNext, exec, playerctl next"
+        ",XF86AudioPlay, exec, playerctl play-pause"
+        ",XF86AudioStop, exec, playerctl play-pause"
+      ];
+      home.packages = [pkgs.playerctl];
+    })
+
+    (mkIf cfg.screenshot.enable {
+      wayland.windowManager.hyprland.settings.bind = [
+        ",PRINT, exec, grimblast ${cfg.screenshot.args}"
+      ];
+      home.packages = [pkgs.grimblast];
+    })
+
+    (mkIf cfg.reload.enable {
+      wayland.windowManager.hyprland.settings.bind = [
+        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"  
+      ];
+    })
+
+    (mkIf cfg.workspaces.enable {
+      wayland.windowManager.hyprland.settings = {
+        bind = [
           # Switch workspaces with mainMod + [0-9]
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
@@ -120,27 +136,26 @@ in {
           "$mainMod SHIFT, 8, movetoworkspace, 8"
           "$mainMod SHIFT, 9, movetoworkspace, 9"
           "$mainMod SHIFT, 0, movetoworkspace, 10"
-        ])
-        (optionals cfg.workspaces.scratchpad.enable [
-          # Special workspace (scratchpad)
-          "$mainMod, S, togglespecialworkspace, magic"
-        ])
-        (optionals cfg.workspaces.enable [
+        ];
+        bindm = [
           # Scroll through existing workspaces with mainMod + scroll
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-        ])
-      ];
-      animations.animation = mkMerge [
-        (optionals cfg.workspaces.scratchpad.enable [
+        ];
+      };
+    })
+    
+    (mkIf cfg.workspaces.scratchpad.enable {
+      wayland.windowManager.hyprland.settings = {
+        bind = [
+          # Special workspace (scratchpad)
+          "$mainMod, S, togglespecialworkspace, magic"
+        ];
+        animations.animation = [
           # Make special workspaces (scratchpad) slide in vertically
           "specialWorkspace, 1, 6, default, slidefadevert"
-        ])
-      ];
-    };
-    home.packages = mkMerge [
-      (optionals cfg.screenshot.enable [pkgs.grimblast])
-      (optionals cfg.media.enable [pkgs.playerctl])
-    ];
-  };
+        ];
+      };
+    })
+  ]);
 }
