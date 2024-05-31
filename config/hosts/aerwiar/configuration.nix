@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   tomeutils.adhde.enable = true;
 
+  # Enable GVFS for SMB etc. mounts in userspace
+  services.gvfs.enable = true;
+
   boot = {
     loader.systemd-boot.enable = true;
     zfs.devNodes = "/dev/disk/by-partlabel";
