@@ -127,7 +127,7 @@ in {
           message = "`systemd-networkd` and `iwd` have integrated DHCP clients. Enabling another will cause conflicts/loss of networking";
         }
         {
-          assertion = (config.services.avahi.enable == false);
+          assertion = config.services.avahi.enable == false;
           message = "Avahi conflicts with `resolved`s (and by proxy `iwd`s) mDNS implementation. Disable one of them.";
         }
       ];
@@ -196,7 +196,7 @@ in {
       # avahi can act as any combination of responder, resolver or none.
       # the primary advantage of avahi is it's ability to publish records other than hostnames, such as SMB shares
 
-      # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled. 
+      # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
       services.resolved.extraConfig = ''
         [Resolve]
         MulticastDNS = true
