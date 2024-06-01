@@ -1,6 +1,4 @@
 {pkgs, ...}: {
-  tomeutils.adhde.enable = true;
-
   # Enable GVFS for SMB etc. mounts in userspace
   services.gvfs.enable = true;
 
@@ -52,5 +50,8 @@
     wireshark.enable = true;
     adb.enable = true;
   };
-  tomeutils.vapor.enable = true;
+  tomeutils = {
+    vapor.enable = true;
+    adhde.enable = true;
+  };
 }
