@@ -1,0 +1,5 @@
+- The Dragon Prince:
+  - https://thedragonprince.com/the-dragon-prince-season-3-key-art/
+  - https://thedragonprince.com/tales-of-xadia-your-tale-begins-now/
+  - https://thedragonprince.com/s4-keyart-mages/
+  - https://thedragonprince.com/first-look-s4-flashback-art/
