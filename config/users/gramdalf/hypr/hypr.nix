@@ -6,6 +6,7 @@
     ./cursor.nix
     ./hyprlock.nix
     ./hypridle.nix
+    ./hyprpaper.nix
   ];
   tomeutils.hyprkeys.workspaces.scratchpad.enable = true;
   services.cliphist.enable = true;
