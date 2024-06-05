@@ -3,10 +3,10 @@
     enable = true;
     settings = {
       preload = [
-        "./paper/DPR-mages.png"
+        "${./paper/DPR-mages.png}"
       ];
       wallpaper = [
-        "./paper/DPR-mages.png"
+        ", ${./paper/DPR-mages.png}"
       ];
     };
   };
