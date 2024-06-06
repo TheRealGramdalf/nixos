@@ -54,6 +54,7 @@
               ];
               users."games" = import ./config/users/games/main.nix;
             };
+            users.mutableUsers = false;
             users.users."games" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.games";

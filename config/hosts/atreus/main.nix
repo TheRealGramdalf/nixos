@@ -6,6 +6,7 @@
     ../../common/tomeutils.nix
     ../../common/fonts.nix
     ../../common/nh.nix
+    ../../common/backdoor.nix
 
     # Host-specific config
     ./hardware-config.nix
