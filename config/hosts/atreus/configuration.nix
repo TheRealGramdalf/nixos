@@ -9,6 +9,11 @@
       enable = true;
     };
   };
+
+  systemd.sysusers.enable = true;
+  system.etc.overlay.enable = true;
+  boot.initrd.systemd.enable = true;
+
   tomeutils = {
     vapor.enable = true;
     adhde.enable = true;
