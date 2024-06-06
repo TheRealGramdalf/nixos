@@ -4,6 +4,6 @@
     gtk.enable = true;
     x11.enable = true;
     package = pkgs.catppuccin-cursors.mochaLavender;
-    name = "Catppuccin-Mocha-Lavender-Cursors";
+    name = "catppuccin-mocha-lavender-cursors";
   };
 }
