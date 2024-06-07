@@ -101,16 +101,4 @@
     };
   };
 }
-# https://github.com/nix-community/disko/issues/298
-# Configure disk format in line with `zpool`, rather than separately
-#zpool create -o ashift=12 -O compression=zstd -O xattr=sa -O acltype=posix -O mountpoint=none -R /mnt aerwiar-zpool /dev/disk/by-partlabel/aerwiar-zpool
-#zfs create -o canmount=noauto -o mountpoint=legacy aerwiar-zpool/ephemeral
-#zfs create -o canmount=noauto -o mountpoint=legacy aerwiar-zpool/safe
-#zfs create -o canmount=noauto -o mountpoint=legacy aerwiar-zpool/system-state
-#zfs create -o readonly=on aerwiar-zpool/system-state/boot
-#zfs create -o readonly=on aerwiar-zpool/safe/home
-#zfs create aerwiar-zpool/safe/home/gramdalf
-#zfs create -o atime=off aerwiar-zpool/ephemeral/nix
-#zfs snap -r aerwiar-zpool@blank
-#zfs create -o canmount=noauto aerwiar-zpool/safe/persist
 
