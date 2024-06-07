@@ -96,8 +96,7 @@
           };
         };
       };
-      #preMountHook = "zfs snapshot -r zroot@blank";
-      # Needs fixing, runs multiple times
+      postCreateHook = "zfs snapshot -r zroot@blank";
     };
   };
 }
