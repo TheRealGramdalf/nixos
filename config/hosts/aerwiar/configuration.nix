@@ -11,7 +11,13 @@
   boot.initrd.systemd.enable = true;
 
   boot = {
-    loader.systemd-boot.enable = true;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        editor = false;
+      };
+      timeout = 0;
+    };
     zfs.devNodes = "/dev/disk/by-partlabel";
     plymouth = {
       enable = true;

@@ -16,7 +16,7 @@
     };
 
     anyrun = {
-      url = "github:anyrun-org/anyrun";
+      url = "github:anyrun-org/anyrun/9e14b5946e413b87efc697946b3983d5244a1714";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
