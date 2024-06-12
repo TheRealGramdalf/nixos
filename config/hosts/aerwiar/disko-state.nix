@@ -9,16 +9,16 @@
       content = {
         type = "gpt";
         partitions = {
-          "atreus-zroot" = {
-            label = "atreus-zroot";
+          "aerwiar-zroot" = {
+            label = "aerwiar-zroot";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "atreus-zroot";
+              pool = "aerwiar-zroot";
             };
           };
-          "atreus-zboot" = {
-            label = "atreus-zboot";
+          "aerwiar-zboot" = {
+            label = "aerwiar-zboot";
             size = "100%";
             type = "EF00";
             content = {
@@ -30,7 +30,7 @@
         };
       };
     };
-    zpool."atreus-zroot" = {
+    zpool."aerwiar-zroot" = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
