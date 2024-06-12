@@ -1,4 +1,10 @@
 {pkgs, ...}: {
+
+  tomeutils.adhde = {
+    enable = true;
+    hypridle.sleep = true;
+  };
+
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
