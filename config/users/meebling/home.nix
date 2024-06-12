@@ -6,7 +6,7 @@
 
   tomeutils.adhde = {
     enable = true;
-    hypridle.sleep = true;
+    idle.sleep = true;
   };
   
   home = {

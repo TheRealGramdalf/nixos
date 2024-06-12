@@ -25,7 +25,7 @@ in {
     gtk.enable = mkEnableOption "a GTK theme/icon theme to make things look nice" // {default = true;};
     cursor.enable = mkEnableOption "a cursor theme to make things look nice" // {default = true;};
 
-    hypridle = {
+    idle = {
       enable = mkEnableOption "Hypridle, an idle management daemon for session locking/power saving" // {default = true;};
       sleep = mkEnableOption "the sleep timer. Note that Hypridle will always start `hyprlock` before sleep." // {default = false;};
     };
@@ -113,7 +113,7 @@ in {
       ];
     })
 
-    (mkIf cfg.hypridle.enable {
+    (mkIf cfg.idle.enable {
       assertions = [
         {
           assertion = (cfg.hyprlock.enable == true);
@@ -139,7 +139,7 @@ in {
               on-timeout = "hyprctl dispatch exec 'loginctl lock-session'"; # command to run when timeout has passed
             }
 
-            (mkIf cfg.hypridle.sleep {
+            (mkIf cfg.idle.sleep {
               timeout = 600; # 10m
               on-timeout = "hyprctl dispatch exec 'systemctl suspend'";
             })
