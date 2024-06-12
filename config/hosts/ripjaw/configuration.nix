@@ -4,10 +4,7 @@
 
   # Enable 24.05 /etc overlay 
   #systemd.sysusers.enable = true;
-  system.etc.overlay = {
-    enable = true;
-    mutable = false;
-  };
+  system.etc.overlay.enable = true;
   boot.initrd.systemd.enable = true;
 
   #users.users."cbe7b78d-c5ac-48cc-9615-b8117b4d4b77".extraGroups = ["video" "netdev"];
