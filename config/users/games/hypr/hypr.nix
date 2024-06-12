@@ -1,11 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./gtk.nix
     ./waybar.nix
-    ./anyrun.nix
-    ./cursor.nix
-    ./hyprlock.nix
-    ./hypridle.nix
   ];
   home.packages = with pkgs; [
     playerctl

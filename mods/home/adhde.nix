@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   lib,
   pkgs,
   context,
@@ -103,7 +104,7 @@ in {
             background-color = transparent;
           }
         '';
-      }
+      };
     })
 
     (mkIf cfg.anyrun.bind {
@@ -115,7 +116,7 @@ in {
     (mkIf cfg.hypridle.enable {
       assertions = [
         {
-          assertion = (config.hyprlock.enable == true);
+          assertion = (cfg.hyprlock.enable == true);
           message = "`hypridle` will leave your system unlocked if `hyprlock` is not enabled";
         }
       ];

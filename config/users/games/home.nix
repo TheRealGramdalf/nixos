@@ -3,6 +3,12 @@
     ./hypr/hypr.nix
     ./firefox.nix
   ];
+
+  tomeutils.adhde = {
+    enable = true;
+    hypridle.sleep = true;
+  };
+  
   home = {
     sessionVariables = {
       EDITOR = "nvim";
