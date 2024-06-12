@@ -2,11 +2,10 @@
   # Enable GVFS for SMB etc. mounts in userspace
   services.gvfs.enable = true;
 
-  # Enable 24.05 sysusers/etc overlay experimental features
-  systemd.sysusers.enable = true;
+  # Enable 24.05 /etc overlay 
+  #systemd.sysusers.enable = true;
   system.etc.overlay = {
     enable = true;
-    mutable = false;
   };
   boot.initrd.systemd.enable = true;
 

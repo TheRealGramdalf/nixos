@@ -1,7 +1,8 @@
 {
   hardware.enableRedistributableFirmware = true;
 
-  systemd.sysusers.enable = true;
+  # Enable 24.05 /etc overlay 
+  #systemd.sysusers.enable = true;
   system.etc.overlay = {
     enable = true;
     mutable = false;
