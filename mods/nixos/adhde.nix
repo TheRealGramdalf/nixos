@@ -43,7 +43,11 @@ in {
 
   ##### Implementation
   config = mkIf cfg.enable (mkMerge [
-    {programs.hyprland.enable = true;}
+    {
+      programs.hyprland.enable = true;
+      # Enable support for hyprlock in userspace
+      security.pam.services.hyprlock = {};
+    }
 
     (mkIf cfg.qtwayland.enable {
       environment.systemPackages = with pkgs; [
