@@ -108,7 +108,7 @@ in {
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = osConfig.tomeutils.vapor.enable == true;
+        assertion = osConfig.tomeutils.vapor.enable;
         message = "Vapor must be enabled system-wide for steam to work properly";
       }
     ];

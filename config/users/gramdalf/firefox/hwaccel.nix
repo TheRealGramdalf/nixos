@@ -1,4 +1,4 @@
-{...}: let
+_: let
   lock-true = {Value = true; Status = "locked";};
 in {
   programs.firefox.policies = {

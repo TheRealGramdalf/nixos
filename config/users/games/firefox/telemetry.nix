@@ -1,4 +1,4 @@
-{...}: {
+_: {
   programs.firefox = {
     policies = {
       DisableFirefoxStudies = true;

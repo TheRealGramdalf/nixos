@@ -127,11 +127,11 @@ in {
     (mkIf cfg.entworking.enable {
       assertions = [
         {
-          assertion = (config.networking.dhcpcd.enable == false) && (config.networking.useDHCP == false);
+          assertion = (!config.networking.dhcpcd.enable) && (!config.networking.useDHCP);
           message = "`systemd-networkd` and `iwd` have integrated DHCP clients. Enabling another will cause conflicts/loss of networking";
         }
         {
-          assertion = config.services.avahi.enable == false;
+          assertion = !config.services.avahi.enable;
           message = "Avahi conflicts with `resolved`s (and by proxy `iwd`s) mDNS implementation. Disable one of them.";
         }
       ];

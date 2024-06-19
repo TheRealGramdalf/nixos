@@ -116,7 +116,7 @@ in {
     (mkIf cfg.idle.enable {
       assertions = [
         {
-          assertion = (cfg.hyprlock.enable == true);
+          assertion = cfg.hyprlock.enable;
           message = "`hypridle` will leave your system unlocked if `hyprlock` is not enabled";
         }
       ];
@@ -151,7 +151,7 @@ in {
     (mkIf cfg.hyprlock.enable {
       assertions = [
         {
-          assertion = (osConfig.tomeutils.adhde.enable == true);
+          assertion = osConfig.tomeutils.adhde.enable;
           message = "`hyprlock` requires OS level PAM configuration to work properly. Enable the NixOS Module to set it up.";
         }
       ];

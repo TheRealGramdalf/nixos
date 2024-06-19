@@ -1,4 +1,4 @@
-{...}: {
+_: {
   programs.firefox = {
     policies = {
       "3rdparty".Extensions."uBlock0@raymondhill.net" = {
