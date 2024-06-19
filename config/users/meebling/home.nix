@@ -8,7 +8,7 @@
     enable = true;
     idle.sleep = true;
   };
-  
+
   home = {
     sessionVariables = {
       EDITOR = "nvim";

@@ -33,7 +33,6 @@ in {
 
   ##### Implementation
   config = mkIf cfg.enable (mkMerge [
-
     (mkIf cfg.gtk.enable {
       home.packages = [pkgs.glib]; # gsettings
       # Use `nwg-look` to test out themes
@@ -62,7 +61,7 @@ in {
       };
     })
 
-    (mkIf cfg.cursor.enable{
+    (mkIf cfg.cursor.enable {
       home.pointerCursor = {
         size = 24;
         gtk.enable = true;
@@ -71,7 +70,6 @@ in {
         name = "catppuccin-mocha-lavender-cursors";
       };
     })
-
 
     (mkIf cfg.anyrun.enable {
       programs.anyrun = {
@@ -170,7 +168,8 @@ in {
             color = "$base";
           };
           label = [
-            { # TIME
+            {
+              # TIME
               monitor = "";
               text = ''cmd[update:30000] echo "$(date +"%R")"'';
               color = "$text";
@@ -180,7 +179,8 @@ in {
               halign = "right";
               valign = "top";
             }
-            { # DATE
+            {
+              # DATE
               monitor = "";
               text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
               color = "$text";

@@ -7,7 +7,7 @@
   tomeutils.adhde = {
     enable = true;
   };
-  
+
   home = {
     sessionVariables = {
       EDITOR = "nvim";

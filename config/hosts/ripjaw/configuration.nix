@@ -2,7 +2,7 @@
   hardware.enableRedistributableFirmware = true;
   services.kanidm.unixSettings.pam_allowed_login_groups = ["ripjaw-login"];
 
-  # Enable 24.05 /etc overlay 
+  # Enable 24.05 /etc overlay
   #systemd.sysusers.enable = true;
   system.etc.overlay.enable = true;
   boot.initrd.systemd.enable = true;
