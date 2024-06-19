@@ -28,7 +28,6 @@
   outputs = context @ {
     nixpkgs,
     home-manager,
-    nixos-generators,
     nixos-hardware,
     ...
   }:

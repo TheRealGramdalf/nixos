@@ -6,9 +6,7 @@
   context,
   ...
 }: let
-  inherit (lib) types;
-  inherit (lib) mkEnableOption mkMerge mkOption mkIf optionals;
-  inherit (lib.asserts) assertMsg;
+  inherit (lib) mkEnableOption mkMerge mkIf;
   cfg = config.tomeutils.adhde;
 in {
   imports = [

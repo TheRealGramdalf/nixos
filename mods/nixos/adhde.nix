@@ -5,8 +5,7 @@
   ...
 }: let
   inherit (lib) types;
-  inherit (lib) mkEnableOption mkMerge mkOption mkIf optionals;
-  inherit (lib.asserts) assertMsg;
+  inherit (lib) mkEnableOption mkMerge mkOption mkIf;
   cfg = config.tomeutils.adhde;
 in {
   options.tomeutils.adhde = {
