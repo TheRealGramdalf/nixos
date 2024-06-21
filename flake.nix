@@ -120,6 +120,11 @@
           }
         ];
       };
+      "aer" = nixosSystem {
+        modules = [
+          ./config/hosts/aer/main.nix
+        ];
+      };
       "aer-files" = nixosSystem {
         modules = [
           ./config/hosts/aer-files/main.nix
