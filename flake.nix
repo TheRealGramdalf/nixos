@@ -36,7 +36,21 @@
     inherit (nixpkgs.lib) nixosSystem;
     inherit (home-manager.lib) homeManagerConfiguration;
   in {
+    ## Dev stuff
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+      name = "hecker";
+      meta.description = "The default development shell for my NixOS configurations";
+
+      # packages available in the dev shell
+      packages = with nixpkgs.legacyPackages.x86_64-linux; [
+        alejandra # nix formatter
+        git # flakes require git, and so do I
+        statix # lints and suggestions
+        deadnix # clean up unused nix code
+        just
+      ];
+    };
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
         modules = [
