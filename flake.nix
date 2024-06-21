@@ -21,7 +21,7 @@
     };
 
     inputmodule-pr = {
-      url = "github:Nixos/nixpkgs/790a99b65bc925df3b4e30d9eba03d34e8644a29";
+      url = "github:Nixos/nixpkgs/dcdb09bc9cb7f91962e284965d85f13088ccb1b9";
     };
   };
 
