@@ -1,7 +1,7 @@
 # UEFI only GPT
 let
   host = "aer";
-  diskid = "";
+  diskid = "ata-KINGSTON_SVP100S264G_80PS106ETESZ";
 in {
   disko.devices = {
     disk."zdisk" = {
