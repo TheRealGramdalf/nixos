@@ -12,7 +12,7 @@
         compression = "zstd"; # More CPU heavy, but better compressratio
         xattr = "sa"; # Store extra attributes with metadata, good for performance
         acltype = "posix"; # Allows extra attributes i.e. SELinux/SMB
-        dnodesize = "auto"; # Requires a feature, but sizes metadata nodes more efficiently
+        dnodesize = "auto"; # Requires a feature (ZFS 0.8.4+), but sizes metadata nodes more efficiently
         normalization = "formD"; # Validate and normalize file names, good for SMB
       };
 
@@ -22,14 +22,21 @@
         };
         "photos" = {
           type = "zfs_fs";
-          options.atime = "on";
+          options = {
+            atime = "on";
+            recordsize = "1M";
+          };
         };
         "paperless" = {
           type = "zfs_fs";
+          options.recordsize = "1M";
         };
         "media" = {
           type = "zfs_fs";
-          options.atime = "on";
+          options = {
+            atime = "on";
+            recordsize = "1M";
+          };
         };
       };
       postCreateHook = "zfs snapshot -r tank@blank";
