@@ -1,5 +1,8 @@
-{config, lib, ...}: 
-let 
+{
+  config,
+  lib,
+  ...
+}: let
   name = "vault";
   cfg = config.services.vaultwarden;
 in {

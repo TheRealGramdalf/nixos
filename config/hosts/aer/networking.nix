@@ -1,5 +1,4 @@
-{config, ...}: 
-let
+{config, ...}: let
   eno1 = "enp1s0f0"; # Double check this
   eno2 = "enp1s0f1"; # ^
   eno3 = "enp2s0f0";

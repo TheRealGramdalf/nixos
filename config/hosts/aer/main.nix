@@ -3,7 +3,7 @@
     #./docker.nix
     ./networking.nix
     ./hardware.nix
-    
+
     # Services
     ./services/services.nix
   ];

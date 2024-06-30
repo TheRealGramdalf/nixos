@@ -1,5 +1,4 @@
-{config, ...}:
-let
+{config, ...}: let
   cfg = config.services.kanidm;
   name = "kanidm";
   dataDir = "/persist/services/kanidm";
@@ -27,7 +26,7 @@ in {
       home_alias = "spn";
     };
   };
-  
+
   services.caddy.virtualHosts."${cfg.serverSettings.domain}" = {
     listenAddresses = [
       "${cfg.serverSettings.bindaddress}"

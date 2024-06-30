@@ -1,5 +1,4 @@
 _: {
-
   boot.zfs = {
     extraPools = [
       "tank"
