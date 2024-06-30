@@ -38,7 +38,7 @@
           type = "zfs_fs";
           options = {
             # To keep in sync with the Kanidm DB
-            recordsize = "64k"
+            recordsize = "64k";
           };
         };
         "services/vaultwarden" = {
