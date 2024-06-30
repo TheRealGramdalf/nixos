@@ -15,14 +15,10 @@ in {
     };
     clientSettings.uri = cfg.serverSettings.origin;
   };
-
-  services.traefik.dynamicConfigOptions = {
-    http.routers.${name} = {
-      rule = "Host(`${cfg.serverSettings.domain}`)";
-      service = ${name};
-    };
-    http.services.${name}.loadbalancer.servers = [
-      {url = "${cfg.serverSettings.bindaddress}";}
+  
+  services.caddy.virtualHosts."${cfg.serverSettings.domain}" = {
+    listenAddresses = [
+      "${cfg.serverSettings.bindaddress}"
     ];
   };
 }

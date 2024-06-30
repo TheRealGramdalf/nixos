@@ -1,9 +1,11 @@
 {
   imports = [
-    ./smb.nix
-    ./traefik.nix
     ./kanidm.nix
-    ./dashy.nix
+    ./caddy.nix
+    ./smb.nix
+    #./dashy.nix
     ./vaultwarden.nix
-  ]
+    #./paperless.nix
+    #./jellyfin.nix
+  ];
 }
