@@ -16,6 +16,8 @@
       mv = "mv -n";
       # Don't overwrite the entire disk with 0s when formatting as NTFS
       "mkfs.ntfs" = "mkfs.ntfs --quick";
+      # Needs to be a function, but should work otherwise
+      # json2nix = "nix eval --impure --expr 'builtins.fromJSON (builtins.readFile $@)'"
     };
 
     sessionVariables = {
