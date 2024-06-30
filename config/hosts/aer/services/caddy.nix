@@ -7,6 +7,6 @@
     globalConfig = ''
       #debug
       grace_period 10s
-    ''
+    '';
   };
 }
