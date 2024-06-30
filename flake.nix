@@ -60,19 +60,21 @@
           {
             home-manager = {
               useGlobalPkgs = true;
-              useUserPackages = true;
+              useUserPackages = false;
+              useSystemUsers = false;
               extraSpecialArgs = {inherit context;};
               sharedModules = [
                 ./mods/home/main.nix
               ];
-              users."games" = import ./config/users/games/main.nix;
+              #users."games" = import ./config/users/games/main.nix;
+              users."nonexistinguser" = import ./config/users/games/main.nix;
             };
             users.mutableUsers = false;
-            users.users."games" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.games";
-              extraGroups = ["video" "network"];
-            };
+            #users.users."games" = {
+            #  isNormalUser = true;
+            #  hashedPasswordFile = "/persist/secrets/passwdfile.games";
+            #  extraGroups = ["video" "network"];
+            #};
           }
         ];
       };

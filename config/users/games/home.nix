@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, lib, ...}: {
   imports = [
     ./hypr/hypr.nix
     ./firefox.nix
@@ -9,6 +9,8 @@
   };
 
   home = {
+    username = lib.mkForce "nonexistinguser";
+    homeDirectory = lib.mkForce "/home/${config.home.username}";
     sessionVariables = {
       EDITOR = "nvim";
     };
