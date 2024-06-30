@@ -1,6 +1,5 @@
 {config, ...}: let
   cfg = config.services.kanidm;
-  name = "kanidm";
   dataDir = "/persist/services/kanidm";
 in {
   # Temporary fix for nixpkgs#323674
