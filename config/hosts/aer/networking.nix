@@ -12,13 +12,13 @@ in {
     dhcpcd.enable = false;
   };
   systemd.network = {
+    enable = true;
     # wait-online might be useful if a single interface can be used
     wait-online.enable = false;
-    network.enable = true;
     networks = {
       "10-ingress" = {
         name = "${eno1}";
-        gateway = "192.168.1.1";
+        gateway = ["192.168.1.1"];
         address = ["192.168.1.5/24"];
       };
       "14-recovery" = {
@@ -31,7 +31,7 @@ in {
   };
   services = {
     resolved = {
-      llmnr = false;
+      llmnr = "false";
       enable = true;
       fallbackDns = [
         "1.1.1.1"
