@@ -1,24 +1,25 @@
 # UEFI only GPT
-{
+let
+  host = "aer";
+  diskid = "";
+in {
   disko.devices = {
     disk."zdisk" = {
-      ##### CHANGE THIS!! #####
-      device = "/dev/disk/by-id/";
-      ##### ^^^^^^^^^^^^^ #####
+      device = "/dev/disk/by-id/${diskid}";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          "aer-zroot" = {
-            label = "aer-zroot";
+          "${host}-zroot" = {
+            label = "${host}-zroot";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "aer-zroot";
+              pool = "${host}-zroot";
             };
           };
-          "aer-zboot" = {
-            label = "aer-zboot";
+          "${host}-zboot" = {
+            label = "${host}-zboot";
             size = "100%";
             type = "EF00";
             content = {
@@ -30,67 +31,62 @@
         };
       };
     };
-    zpool."aer-zroot" = {
+    zpool."${host}-zroot" = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
         # These are inherited to all child datasets as the default value
-        mountpoint = "none";
-        compression = "zstd";
-        xattr = "sa";
-        acltype = "posix";
+        canmount = "off"; # ...Except for `canmount`
+        mountpoint = "none"; # Don't mount the main pool anywhere
+        atime = "off"; # atime generally sucks, only enable it when needed
+        compression = "zstd"; # Slightly more CPU heavy, but better compressratio
+        xattr = "sa"; # Store extra attributes with metadata, good for performance
+        acltype = "posix"; # Allows extra attributes i.e. SELinux
+        dnodesize = "auto"; # Requires a feature, but sizes metadata nodes more efficiently
+        normalization = "formD"; # Validate and normalize file names, good for SMB
       };
 
       datasets = {
         "ephemeral" = {
           type = "zfs_fs";
           options = {
-            canmount = "noauto";
-            mountpoint = "legacy";
+            canmount = "off";
+            mountpoint = "none";
           };
         };
         "ephemeral/nix" = {
           type = "zfs_fs";
+          # fstab, not zfsprop
           mountpoint = "/nix";
           options = {
-            atime = "off";
-            canmount = "noauto";
-            mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
+            mountpoint = "legacy";
           };
         };
         "safe" = {
           type = "zfs_fs";
           options = {
-            canmount = "noauto";
-            mountpoint = "legacy";
+            canmount = "off";
+            mountpoint = "none";
           };
         };
         "safe/persist" = {
           type = "zfs_fs";
+          # fstab, not zfsprop
           mountpoint = "/persist";
           options = {
-            canmount = "noauto";
-            mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
-          };
-        };
-        "safe/home" = {
-          type = "zfs_fs";
-          mountpoint = "/home";
-          options = {
-            canmount = "noauto";
-            mountpoint = "legacy"; # See https://github.com/nix-community/disko/issues/298#issuecomment-1949322912
+            mountpoint = "legacy";
           };
         };
         "system-state" = {
           type = "zfs_fs";
+          # fstab, not zfsprop
           mountpoint = "/";
           options = {
-            canmount = "noauto";
             mountpoint = "legacy";
           };
         };
       };
-      postCreateHook = "zfs snapshot -r zroot@blank";
+      postCreateHook = "zfs snapshot -r ${host}-zroot@blank";
     };
   };
 }

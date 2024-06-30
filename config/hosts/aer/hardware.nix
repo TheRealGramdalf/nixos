@@ -4,8 +4,29 @@ _: {
     extraPools = [
       "tank"
       "medusa"
-      "aer-zpool"
     ];
+  };
+
+  fileSystems."/" = {
+    device = "aer-zpool/system-state";
+    fsType = "zfs";
+  };
+
+  fileSystems."/nix" = {
+    device = "aer-zpool/ephemeral/nix";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persist" = {
+    device = "aer-zpool/safe/persist";
+    fsType = "zfs";
+    # Required for `hashedPasswordFile` etc. to work properly
+    neededForBoot = true;
+  };
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    editor = false;
   };
 
   fileSystems."/boot" = {
