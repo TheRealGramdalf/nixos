@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   services = {
     # Network shares
     samba = {
