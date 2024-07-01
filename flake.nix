@@ -41,7 +41,8 @@
     devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
       name = "hecker";
       meta.description = "The default development shell for my NixOS configurations";
-
+      # Enable flakes/nix3 for convenience
+      NIX_CONFIG = "extra-experimental-features = nix-command flakes";
       # packages available in the dev shell
       packages = with nixpkgs.legacyPackages.x86_64-linux; [
         alejandra # nix formatter
