@@ -139,6 +139,12 @@
           ./config/hosts/aer/main.nix
         ];
       };
+      "aer-test" = nixosSystem {
+        modules = [
+          ./config/hosts/aer/main.nix
+          ./config/hosts/aer/vm.nix
+        ];
+      };
       "aer-files" = nixosSystem {
         modules = [
           ./config/hosts/aer-files/main.nix
