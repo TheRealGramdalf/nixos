@@ -8,17 +8,17 @@ _: {
   };
 
   fileSystems."/" = {
-    device = "aer-zpool/system-state";
+    device = "aer-zroot/system-state";
     fsType = "zfs";
   };
 
   fileSystems."/nix" = {
-    device = "aer-zpool/ephemeral/nix";
+    device = "aer-zroot/ephemeral/nix";
     fsType = "zfs";
   };
 
   fileSystems."/persist" = {
-    device = "aer-zpool/safe/persist";
+    device = "aer-zroot/safe/persist";
     fsType = "zfs";
     # Required for `hashedPasswordFile` etc. to work properly
     neededForBoot = true;
