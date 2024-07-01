@@ -1,6 +1,8 @@
 {lib, ...}: {
   # Fix ZFS devnodes in a VM
   boot.zfs.devNodes = lib.mkForce "/dev/disk/by-path";
+  # Fix `nixos-rebuild *`
+  networking.hostName = lib.mkForce "aer-test";
   # Add a password for logging in via the VM console
   users.users."root".password = "none";
   systemd.network.networks."20-ether" = {
