@@ -14,4 +14,9 @@
     hostName = "aer";
     hostId = "943c5a42";
   };
+
+  environment.systemPackages = with pkgs [
+    git
+    sysz
+  ]
 }
