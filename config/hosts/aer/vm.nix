@@ -1,4 +1,6 @@
 _: {
+  # Fix ZFS devnodes in a VM
+  boot.zfs.devNodes = "/dev/disk/by-partuuid";
   # Add a password for logging in via the VM console
   users.users."root".password = "none";
   systemd.network.networks."20-ether" = {
