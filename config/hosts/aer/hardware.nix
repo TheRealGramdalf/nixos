@@ -1,5 +1,6 @@
 _: {
   boot.zfs = {
+    devNodes = "/dev/disk/by-partlabel";
     extraPools = [
       "tank"
       "medusa"
