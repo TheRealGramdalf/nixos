@@ -1,7 +1,43 @@
 # Medusa: dual mirrored SSD pool for service data
-{
+let
+  pool = "medusa";
+  disk = {
+    "intel-1" = "disk/by-id/ata-INTEL_SSDSC2BP480G4_BTJR4423020Y480BGN";
+    "intel-2" = "disk/by-id/ata-INTEL_SSDSC2BP480G4_BTJR4423014N480BGN";
+  };
+in {
   disko.devices = {
-    zpool."medusa" = {
+    disk = {
+      "intel-1" = {
+        type = "disk";
+        device = "/dev/${disk.intel-1}";
+        content = {
+          type = "gpt";
+          partitions."zfs" = {
+            size = "100%";
+            content = {
+              type = "zfs";
+              pool = "${pool}";
+            };
+          };
+        };
+      };
+      "intel-2" = {
+        type = "disk";
+        device = "/dev/${disk.intel-1}";
+        content = {
+          type = "gpt";
+          partitions."zfs" = {
+            size = "100%";
+            content = {
+              type = "zfs";
+              pool = "${pool}";
+            };
+          };
+        };
+      };
+    };
+    zpool.${pool} = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
@@ -57,7 +93,7 @@
           type = "zfs_fs";
         };
       };
-      postCreateHook = "zfs snapshot -r medusa@blank";
+      postCreateHook = "zfs snapshot -r ${pool}@blank";
     };
   };
 }
