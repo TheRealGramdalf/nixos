@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   imports = [
     #./docker.nix
     ./networking.nix
@@ -16,8 +16,8 @@
     hostId = "943c5a42";
   };
 
-  environment.systemPackages = with pkgs [
+  environment.systemPackages = with pkgs; [
     git
     sysz
-  ]
+  ];
 }
