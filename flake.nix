@@ -49,6 +49,7 @@
         git # flakes require git, and so do I
         statix # lints and suggestions
         deadnix # clean up unused nix code
+        disko # Declarative disk partitioning, easier than `nix run`
         just
       ];
     };
