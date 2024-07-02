@@ -39,6 +39,7 @@ in {
     };
     zpool.${pool} = {
       type = "zpool";
+      mode = "mirror";
       options.ashift = "12";
       rootFsOptions = {
         # These are inherited to all child datasets as the default value
