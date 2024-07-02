@@ -7,6 +7,7 @@ in {
     environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
     serviceConfig.BindPaths = [
       "${dataDir}"
+      "${dataDir}/db" # This is technically a different filesystem, so it isn't mounted correctly by default
     ];
   };
   services.kanidm = {
