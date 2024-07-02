@@ -3,7 +3,12 @@
   dataDir = "/persist/services/kanidm";
 in {
   # Temporary fix for nixpkgs#323674
-  systemd.services."kanidm".environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
+  systemd.services."kanidm" = {
+    environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
+    serviceConfig.BindPaths = [
+      "${dataDir}"
+    ];
+  };
   services.kanidm = {
     enableServer = true;
     enablePam = true;
