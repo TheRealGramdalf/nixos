@@ -40,7 +40,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     libva
     libvdpau
   ];
@@ -50,7 +50,8 @@
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
   };
-  users.users."gramdalf".shell = pkgs.nushellFull;
+  # This should be set in the terminal, since setting it here causes issues with `/etc/shells`
+  users.users."gramdalf".shell = pkgs.nushell;
 
   virtualisation.libvirtd = {
     enable = true;

@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+# TODO Needs updating due to opengl cleanup
 with lib; let
   cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
@@ -80,11 +81,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.opengl = {
+    hardware.graphics = {
       # this fixes the "glXChooseVisual failed" bug, context: https://github.com/NixOS/nixpkgs/issues/47932
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
     hardware.steam-hardware.enable = true;
 

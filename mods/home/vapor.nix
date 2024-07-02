@@ -59,7 +59,7 @@ in {
               if prev ? extraLibraries
               then prev.extraLibraries pkgs
               else [];
-            additionalLibs = with osConfig.hardware.opengl;
+            additionalLibs = with osConfig.hardware.graphics;
               if pkgs.stdenv.hostPlatform.is64bit
               then [package] ++ extraPackages
               else [package32] ++ extraPackages32;
