@@ -52,10 +52,19 @@
   };
   users.users."gramdalf".shell = pkgs.nushellFull;
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      vhostUserPackages = [pkgs.virtiofsd]; # Enables virtiofs shares
+      #package = pkgs.qemu_kvm; # Look into, to save disk space?
+    }
+  };
   programs.virt-manager.enable = true;
   # Docker
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false; # This increases startup time by 10 seconds on it's own. Not useful unless docker is always running.
+  };
   virtualisation.docker.storageDriver = "overlay2";
   programs = {
     wireshark.enable = true;
