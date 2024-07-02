@@ -57,7 +57,7 @@
     qemu = {
       vhostUserPackages = [pkgs.virtiofsd]; # Enables virtiofs shares
       #package = pkgs.qemu_kvm; # Look into, to save disk space?
-    }
+    };
   };
   programs.virt-manager.enable = true;
   # Docker
