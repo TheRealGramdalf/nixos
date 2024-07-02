@@ -19,6 +19,7 @@
   # Enable guest utils for qemu/spice
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
+  services.u9fs.enable = true;
 
   # Made with `nixos-generate-config --show-hardware-config --root /mnt
   boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sr_mod" "virtio_blk"];
