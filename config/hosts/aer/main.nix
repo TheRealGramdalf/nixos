@@ -19,6 +19,6 @@
   environment.systemPackages = with pkgs; [
     git
     sysz
-    nvim
+    neovim
   ];
 }
