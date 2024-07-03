@@ -1,7 +1,7 @@
 {
   imports = [
     ./kanidm.nix
-    ./caddy.nix
+    ./traefik.nix
     ./smb.nix
     #./dashy.nix
     ./vaultwarden.nix
