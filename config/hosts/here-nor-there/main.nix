@@ -3,6 +3,7 @@
     ./networking.nix
     ./hardware.nix
     ./smb.nix
+    ./ssh.nix
   ];
   # Enable rebuilding with flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
