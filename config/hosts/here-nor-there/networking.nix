@@ -14,8 +14,8 @@ in {
     networks = {
       "10-ingress" = {
         name = "${eno1}";
-        gateway = ["10.0.0.5"];
-        address = ["10.0.0.1/24"];
+        gateway = ["10.0.0.1"];
+        address = ["10.0.0.5/24"];
       };
     };
   };
