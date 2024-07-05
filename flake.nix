@@ -161,7 +161,7 @@
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ({ pkgs, ... }: {
             environment.systemPackages = [ pkgs.neovim ];
             users.users."root".openssh.authorizedKeys.keys = [
