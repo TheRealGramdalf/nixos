@@ -17,6 +17,14 @@ in {
         gateway = ["10.0.0.1"];
         address = ["10.0.0.5/24"];
       };
+      "69-ether" = {
+        # Match all non-virtual (veth) ethernet connections
+        matchConfig = {
+          Type = "ether";
+          Kind = "!*";
+        };
+        networkConfig.DHCP = true;
+      };
     };
   };
   services = {
