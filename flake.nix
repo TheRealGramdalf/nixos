@@ -145,6 +145,7 @@
         modules = [
           ./config/hosts/aer/main.nix
           ./config/hosts/aer/vm.nix
+          ./mods/nixos/main.nix
         ];
       };
       "aer-files" = nixosSystem {
@@ -155,6 +156,19 @@
       "docker-ve" = nixosSystem {
         modules = [
           ./config/hosts/docker-ve/main.nix
+        ];
+      };
+      "iso" = nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ({ pkgs, ... }: {
+            environment.systemPackages = [ pkgs.neovim ];
+            users.users."root".openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5ibKzd+V2eR1vmvBAfSWcZmPB8zUYFMAN3FS6xY9ma"
+            ];
+          })
+          ./config/common/nix3.nix
         ];
       };
     };
