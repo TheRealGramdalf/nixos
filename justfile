@@ -12,3 +12,5 @@ clean:
   statix fix
   nix fmt
 
+geniso:
+  nix build .#nixosConfigurations.iso.config.system.build.isoImage
