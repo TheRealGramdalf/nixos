@@ -12,7 +12,7 @@
   system.stateVersion = "24.05";
   networking = {
     hostName = "here-nor-there";
-    hostId = "";
+    hostId = "8425e349";
   };
 
   environment.systemPackages = with pkgs; [
