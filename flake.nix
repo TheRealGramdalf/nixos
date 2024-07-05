@@ -158,17 +158,26 @@
           ./config/hosts/docker-ve/main.nix
         ];
       };
+      "here-nor-there" = nixosSystem {
+        modules = [
+          ./config/hosts/here-nor-there/main.nix
+        ];
+      };
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ({ pkgs, ... }: {
+          ./config/common/nix3.nix
+          ({ pkgs, modulesPath, ... }: {
+            imports = [
+              "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+            ];
             environment.systemPackages = [ pkgs.neovim ];
             users.users."root".openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5ibKzd+V2eR1vmvBAfSWcZmPB8zUYFMAN3FS6xY9ma"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKkR0w0kYy8ad6ulnF9o7ULZXOMy7kOdoxXzTEi5dqcq"
             ];
+            services.openssh.openFirewall = true;
           })
-          ./config/common/nix3.nix
         ];
       };
     };
