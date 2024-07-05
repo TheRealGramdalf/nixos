@@ -2,9 +2,17 @@
 
 {
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.zfs = {
+    devNodes = "/dev/disk/by-partlabel";
+    extraPools = [
+      
+    ];
+  };
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    editor = false;
+  };
 
     fileSystems."/" =
     { device = "herenorthere-zroot/system-state";
