@@ -6,6 +6,7 @@
       uid = 1000;
       group = "smb";
       description = "SMB share user";
+      isNormalUser = true;
     };
   };
   
