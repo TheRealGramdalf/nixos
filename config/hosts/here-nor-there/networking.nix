@@ -30,7 +30,7 @@ in {
   services = {
     resolved = {
       llmnr = "false";
-      enable = true;
+      enable = false;
       fallbackDns = [
         "1.1.1.1"
         "1.0.0.1"

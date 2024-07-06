@@ -145,6 +145,9 @@ in {
         # (as far as I can tell) systemd-networkd is a fully fledged daemon that can handle many of the same configuration files,
         # scripted networking is essentially a bunch of bash scripts which achieve the same function via `ifconfig` or `ip`
         useNetworkd = true;
+        firewall.allowedUDPPorts = [
+          5353
+        ];
       };
 
       # Wireless (Wifi)
@@ -200,10 +203,13 @@ in {
       # the primary advantage of avahi is it's ability to publish records other than hostnames, such as SMB shares
 
       # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
-      services.resolved.extraConfig = ''
-        [Resolve]
-        MulticastDNS = true
-      '';
+      services.resolved = {
+        llmnr = false;
+        extraConfig = ''
+          [Resolve]
+          MulticastDNS = true
+        '';
+      };
       # Disable avahi due to it's low level of integration with systemd-networkd
       # Avahi may still be desirable on static devices like servers, where `allowinterfaces` can be tuned properly
       services.avahi.enable = false;
