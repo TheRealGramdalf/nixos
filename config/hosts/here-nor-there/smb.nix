@@ -40,10 +40,6 @@
 
         # Generic
         server role = standalone
-        # troubleshooting
-        #server smb encrypt = required
-        # ^^ Note: Breaks `smbclient -L <ip> -U%`
-        #server min protocol = SMB3_00
 
         ## Performance Optimizations & platform compatibility
         use sendfile = yes
