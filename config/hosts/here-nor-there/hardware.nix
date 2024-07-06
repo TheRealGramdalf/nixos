@@ -9,6 +9,7 @@
     ];
   };
 
+  boot.loader.timeout = 0;
   boot.loader.systemd-boot = {
     enable = true;
     editor = false;

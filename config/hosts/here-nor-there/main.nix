@@ -19,5 +19,6 @@
     git
     sysz
     neovim
+    btop
   ];
 }
