@@ -37,6 +37,7 @@
         guest account = smb
 
         # Generic
+        server role = standalone
         server smb encrypt = required
         # ^^ Note: Breaks `smbclient -L <ip> -U%`
         server min protocol = SMB3_00
