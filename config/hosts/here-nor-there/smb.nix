@@ -1,27 +1,26 @@
 {pkgs, ...}: {
+  # Create smb user
+  users = {
+    groups."smb".gid = 1000;
+    users."smb" = {
+      uid = 1000;
+      group = "smb";
+      description = "SMB share user";
+    };
+  };
+  
   services = {
-    # Network shares
     samba = {
-      enable = false;
+      enable = true;
       package = pkgs.samba4Full;
       # ^^ Needed to enable mDNS support. Thank you iv.cha!
       # See https://github.com/NixOS/nixpkgs/blob/592047fc9e4f7b74a4dc85d1b9f5243dfe4899e3/pkgs/top-level/all-packages.nix#L27268
       openFirewall = true;
       shares = {
         photos = {
-          path = "/tank/photos";
+          path = "/data";
           writable = true;
-          comment = "Ye Olde Photos";
-        };
-        media = {
-          path = "/tank/media";
-          writable = true;
-          comment = "The Seven Seas";
-        };
-        Data = {
-          path = "/tank/Data";
-          writable = true;
-          comment = "All your mushrooms go here";
+          comment = "Hamms' Server Data";
         };
       };
       extraConfig = ''
@@ -32,14 +31,9 @@
         # ^^ Overrides `create` and `force create` `mask/mode`
 
         # Authentication
-        passdb backend = tdbsam:/tank/samba-passdb.tdb
         security = user
-        hosts allow = 192.168.1. 127.0.0.1
-        hosts deny = ALL
-        guest account = nobody
-        map to guest = Bad User
-        # guest ok = true
-        #//TODO Look into: `invalid users`
+        guest ok = true
+        guest account = smb
 
         # Generic
         server smb encrypt = required
