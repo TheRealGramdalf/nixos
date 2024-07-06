@@ -21,6 +21,7 @@
         "data" = {
           path = "/data";
           writable = true;
+          "guest ok" = true;
           comment = "Hamms' Server Data";
         };
       };
@@ -33,14 +34,15 @@
 
         # Authentication
         security = user
-        guest ok = true
         guest account = smb
+        guest ok = true
 
         # Generic
         server role = standalone
-        server smb encrypt = required
+        # troubleshooting
+        #server smb encrypt = required
         # ^^ Note: Breaks `smbclient -L <ip> -U%`
-        server min protocol = SMB3_00
+        #server min protocol = SMB3_00
 
         ## Performance Optimizations & platform compatibility
         use sendfile = yes
