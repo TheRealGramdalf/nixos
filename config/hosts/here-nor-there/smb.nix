@@ -36,6 +36,7 @@
         security = user
         guest account = smb
         guest ok = true
+        map to guest = Bad User
 
         # Generic
         server role = standalone
