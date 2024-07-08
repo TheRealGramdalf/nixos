@@ -5,35 +5,20 @@
   ...
 }: let
   inherit (lib.types) nullOr bool int float str lazyAttrsOf listOf path literalExpression oneOf attrsOf submodule;
-  inherit (lib) optional optionals getExe mkIf optionalAttrs recursiveUpdate mkOption mkEnableOption mkPackageOption mapAttrsToList;
+  inherit (lib) mkMerge optional optionals getExe mkIf optionalAttrs mkOption mkEnableOption mkPackageOption mapAttrsToList mkDefault;
   inherit (builtins) toJSON;
   inherit (pkgs) writeText;
   cfg = config.services.cone;
-  jsonValue = let
-    valueType =
-      nullOr (oneOf [
-        bool
-        int
-        float
-        str
-        (lazyAttrsOf valueType)
-        (listOf valueType)
-      ])
-      // {
-        description = "JSON value";
-        emptyValue.value = {};
-      };
-  in
-    valueType;
+  jsonValue = (pkgs.formats.json {}).type;
 
   dynamicFile =
     if (cfg.dynamic.file == null && cfg.dynamic.dir == null)
-    then (builtins.toJSON cfg.dynamic.settings)
+    then writeText "dynamic_config.json" (builtins.toJSON cfg.dynamic.settings)
     else cfg.dynamic.file;
 
   staticFile =
     if cfg.static.file == null
-    then (builtins.toJSON cfg.static.settings)
+    then writeText "static_config.json" (builtins.toJSON cfg.static.settings)
     else cfg.static.file;
 
   finalStaticFile =
@@ -50,7 +35,7 @@ in {
   options.services.cone = {
     # TODO
     # - [x] inherit lib.types, remove `with`
-    # - [] Figure out dynamic folder logic/assertions
+    # - [x] Figure out dynamic folder logic/assertions
     # - [] Add "virtualHosts" convenience feature?
     # - [x] Remove `config` from static/dynamic
     # - [] Fix defaultText, example (replace with `'' ''`), etc.
@@ -59,7 +44,7 @@ in {
     # - [] Use statix?
     # - [] If using virtualHost, make it top level (services.traefik.virthosts), and make it a convenience function. Make it assert conflictions with dynamic file
     # - [] Replace default text with clear logic examples
-    # - [] check rfc 42 https://github.com/NixOS/rfcs/blob/master/rfcs/0042-config-option.md
+    # - [x] check rfc 42 https://github.com/NixOS/rfcs/blob/master/rfcs/0042-config-option.md
     # - [] Make virtualhost use a different mechanism (tmpfiles?) to create dynamic config, so that the systemd service doesn't need to be restarted (the service definition isn't changed)
     #   if simply using `nixos-rebuild switch` (for minimal downtime).
     # - [] Check docker, see if running a standalone binary works with the docker backend. If not, note the pitfalls
@@ -94,10 +79,20 @@ in {
         type = jsonValue;
         default = {entryPoints.http.address = ":80";};
         example = {
-          entryPoints.web.address = ":8080";
-          entryPoints.http.address = ":80";
-
-          api = {};
+          entryPoints = {
+            "web" = {
+              address = ":80";
+              http.redirections.entryPoint = {
+                permanent = true;
+                scheme = "https";
+                to = "websecure";
+              };
+            };
+            "websecure" = {
+              address = ":443";
+              asDefault = true;
+            };
+          };
         };
       };
     };
@@ -114,7 +109,7 @@ in {
       };
       dir = mkOption {
         default = null;
-        example = literalExpression "/run/traefik/dynamic-config";
+        example = literalExpression "/etc/traefik/dynamic-config";
         type = nullOr path;
         description = ''
           Path to the directory traefik should watch.
@@ -158,8 +153,10 @@ in {
       default = {};
       example = {
         "dashboard".settings = {
-          traefik.http.routers."api".service = "api@internal";
-          traefik.http.services."api".loadbalancer.server.port = 8080;
+          http.routers."api" = {
+            service = "api@internal";
+            rule = "Host(`192.168.122.217`)";
+          };
         };
       };
       description = ''
@@ -236,6 +233,14 @@ in {
         message = "extraFiles requires the dynamic file provider to be set to directory";
       }
     ];
+
+    services.cone.static.settings = mkIf (cfg.dynamic.dir != null || cfg.dynamic.file != null) {
+      providers.file = {
+        directory = mkIf (cfg.dynamic.dir != null) cfg.dynamic.dir;
+        filename = mkIf (cfg.dynamic.file != null) cfg.dynamic.file;
+        watch = mkDefault true;
+      };
+    };
     systemd.services.traefik = {
       description = "Traefik web server";
       wants = ["network-online.target"];
@@ -251,7 +256,7 @@ in {
             umask 077
             ${getExe pkgs.envsubst} -i "${staticFile}" > "${finalStaticFile}"
           '');
-        ExecStart = "${getExe cfg.package} --configfile=${finalStaticFile}"; # ${mkIf cfg.providers ...}
+        ExecStart = "${getExe cfg.package} --configfile=${finalStaticFile}";
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
@@ -265,7 +270,13 @@ in {
         PrivateDevices = true;
         ProtectHome = true;
         ProtectSystem = "full";
-        ReadWritePaths = [cfg.dataDir];
+        ReadWritePaths = [
+          cfg.dataDir
+        ];
+        ReadOnlyPaths = [
+        ]
+        ++ optional (cfg.dynamic.dir != null) cfg.dynamic.dir;
+
         RuntimeDirectory = "traefik";
       };
     };
@@ -274,14 +285,16 @@ in {
       rules =
         [
         ]
-        ++ optional (cfg.user == "traefik") "d '${cfg.dataDir}' 0700 ${cfg.user} ${cfg.group} - -"
-        ++ optionals (cfg.dynamic.dir != null) (mapAttrsToList (key: value: "L+ '${cfg.dynamic.dir}/${key}' '${writeText key (toJSON value.settings)}' 0444 - - - -") cfg.extraFiles);
+        ++ optional (cfg.user == "traefik") "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group} - -"
+        ++ optional (cfg.dynamic.dir != null) "d ${cfg.dynamic.dir} 0700 ${cfg.user} ${cfg.group} - -"
+        # Clean all old tmpfiles in the dynamic directory
+        ++ optional (cfg.dynamic.dir != null) "e ${cfg.dynamic.dir} - - - 0 -"
+        ++ optionals (cfg.dynamic.dir != null) (mapAttrsToList (key: value: "L+ ${cfg.dynamic.dir}/${key} 0444 - - - ${writeText key (toJSON value.settings)}") cfg.extraFiles);
     };
     users.users = optionalAttrs (cfg.user == "traefik") {
       traefik = {
         group = cfg.group;
         isSystemUser = true;
-        home = cfg.dataDir; #?
       };
     };
     users.groups = optionalAttrs (cfg.group == "traefik") {
