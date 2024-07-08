@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    #./docker.nix
+    ./docker.nix
     ./networking.nix
     ./hardware.nix
     ./ssh.nix
