@@ -113,6 +113,10 @@ in {
         type = nullOr path;
         description = ''
           Path to the directory traefik should watch.
+          ::: {.warning}
+          Files in this directory matching the glob _nixos-* will be deleted as part of 
+          systemd-tmpfiles-resetup.service, _**regardless of their origin.**_
+          :::
         '';
       };
 
@@ -127,7 +131,6 @@ in {
             rule = "Host(`localhost`)";
             service = "service1";
           };
-
           http.services."service1".loadBalancer.servers = [{url = "http://localhost:8080";}];
         };
       };
@@ -288,8 +291,9 @@ in {
         ++ optional (cfg.user == "traefik") "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group} - -"
         ++ optional (cfg.dynamic.dir != null) "d ${cfg.dynamic.dir} 0700 ${cfg.user} ${cfg.group} - -"
         # Clean all old tmpfiles in the dynamic directory
-        ++ optional (cfg.dynamic.dir != null) "e ${cfg.dynamic.dir} - - - 0 -"
-        ++ optionals (cfg.dynamic.dir != null) (mapAttrsToList (key: value: "L+ ${cfg.dynamic.dir}/${key} 0444 - - - ${writeText key (toJSON value.settings)}") cfg.extraFiles);
+        ++ optional (cfg.dynamic.dir != null) "r ${cfg.dynamic.dir}/_nixos-* - - - - -"
+        # Only files ending in (yml|yaml|toml) are accepted by traefik, even though JSON is valid yaml
+        ++ optionals (cfg.dynamic.dir != null) (mapAttrsToList (key: value: "L+ ${cfg.dynamic.dir}/_nixos-${key}.yml 0444 - - - ${writeText key (toJSON value.settings)}") cfg.extraFiles);
     };
     users.users = optionalAttrs (cfg.user == "traefik") {
       traefik = {
