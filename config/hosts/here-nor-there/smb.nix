@@ -9,7 +9,7 @@
       isNormalUser = true;
     };
   };
-  
+
   services = {
     samba = {
       enable = true;

@@ -167,13 +167,17 @@
         system = "x86_64-linux";
         modules = [
           ./config/common/nix3.nix
-          ({ pkgs, modulesPath, ... }: {
+          ({
+            pkgs,
+            modulesPath,
+            ...
+          }: {
             imports = [
               "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
             ];
             environment.systemPackages = with pkgs; [
               neovim
-              git 
+              git
             ];
             users.users."root".openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5ibKzd+V2eR1vmvBAfSWcZmPB8zUYFMAN3FS6xY9ma"
