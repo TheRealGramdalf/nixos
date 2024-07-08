@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) types;
+  inherit (lib.types) listOf str nullOr bool;
   inherit (lib) mkEnableOption mkMerge mkOption mkIf;
   cfg = config.tomeutils.adhde;
 in {
@@ -14,7 +14,7 @@ in {
     udiskie = {
       enable = mkEnableOption "a user systemd service for udiskie, the userspace removable media mounting GUI" // {default = true;};
       args = mkOption {
-        type = types.nullOr (types.listOf types.str);
+        type = nullOr (listOf str);
         default = ["--tray" "--no-automount"];
         description = "Verbatim args passed to `udiskie`";
       };
@@ -25,7 +25,7 @@ in {
     polkit-agent = {
       enable = mkEnableOption "a user systemd service for kde-polkit-agent, the priviledge escalation GUI" // {default = config.security.polkit.enable;};
       args = mkOption {
-        type = types.nullOr (types.listOf types.str);
+        type = nullOr (listOf str);
         default = [];
         description = "Verbatim args passed to `polkit-kde-agent`";
       };
@@ -34,7 +34,7 @@ in {
     entworking.enable = mkEnableOption "entworking, a modern network configuration backed by IWD, systemd-networkd and Avahi" // {default = cfg.enable;};
     # This needs tweaking to allow for other desktop environments
     useWayland = mkOption {
-      type = types.bool;
+      type = bool;
       default = cfg.enable;
       description = "Whether to hint xwayland apps that they should use wayland natively";
     };
@@ -204,7 +204,7 @@ in {
 
       # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
       services.resolved = {
-        llmnr = false;
+        llmnr = "false";
         extraConfig = ''
           [Resolve]
           MulticastDNS = true
