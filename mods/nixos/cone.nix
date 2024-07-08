@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib.types) nullOr bool int float str lazyAttrsOf listOf path literalExpression oneOf attrsOf submodule;
-  inherit (lib) mkMerge optional optionals getExe mkIf optionalAttrs mkOption mkEnableOption mkPackageOption mapAttrsToList mkDefault;
+  inherit (lib.types) nullOr str listOf path literalExpression attrsOf submodule;
+  inherit (lib) optional optionals getExe mkIf optionalAttrs mkOption mkEnableOption mkPackageOption mapAttrsToList mkDefault;
   inherit (builtins) toJSON;
   inherit (pkgs) writeText;
   cfg = config.services.cone;
@@ -114,7 +114,7 @@ in {
         description = ''
           Path to the directory traefik should watch.
           ::: {.warning}
-          Files in this directory matching the glob _nixos-* will be deleted as part of 
+          Files in this directory matching the glob _nixos-* will be deleted as part of
           systemd-tmpfiles-resetup.service, _**regardless of their origin.**_
           :::
         '';

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   boot.initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "usbhid" "usb_storage" "sd_mod"];

@@ -1,4 +1,4 @@
-{config, ...}: let
+_: let
   eno1 = "enp0s25"; # Double check this
 in {
   networking = {
