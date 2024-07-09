@@ -13,6 +13,7 @@
     # Services
     ./services/services.nix
   ];
+  time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
