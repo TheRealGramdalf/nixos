@@ -30,9 +30,11 @@ in {
     User = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
   };
 
-  services.caddy.virtualHosts."${name}.aer.dedyn.io" = {
-    listenAddresses = [
-      "http://${cfg.config.ROCKET_ADDRESS}:${cfg.config.ROCKET_PORT}"
-    ];
+  services.cone.extraFiles."vault".settings = {
+    http.routers."vault" = {
+      service = "vault";
+      rule = "Host(`vault.aer.dedyn.io`)";
+    };
+    http.services."vault".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.config.ROCKET_PORT}";}];
   };
 }
