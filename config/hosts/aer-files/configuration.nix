@@ -64,7 +64,7 @@
           inherit permissions = yes
           # ^^ Overrides `create` and `force create` `mask/mode`
           # Authentication
-                passdb backend = tdbsam:/tank/samba-passdb.tdb
+          passdb backend = tdbsam:/tank/samba-passdb.tdb
           security = user
           hosts allow = 192.168.1. 127.0.0.1
           hosts deny = ALL
