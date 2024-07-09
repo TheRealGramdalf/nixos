@@ -81,7 +81,7 @@ in {
         "services/vaultwarden" = {
           type = "zfs_fs";
         };
-        "services/caddy" = {
+        "services/traefik" = {
           type = "zfs_fs";
         };
         "services/dashy" = {
