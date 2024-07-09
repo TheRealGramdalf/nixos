@@ -61,6 +61,7 @@ in {
             mountpoint = "/persist/secrets";
           };
         };
+        "secrets/traefik".type = "zfs_fs";
         "services" = {
           type = "zfs_fs";
           options = {
@@ -68,9 +69,7 @@ in {
             mountpoint = "/persist/services";
           };
         };
-        "services/kanidm" = {
-          type = "zfs_fs";
-        };
+        "services/kanidm".type = "zfs_fs";
         "services/kanidm/db" = {
           type = "zfs_fs";
           options = {
@@ -78,21 +77,11 @@ in {
             recordsize = "64k";
           };
         };
-        "services/vaultwarden" = {
-          type = "zfs_fs";
-        };
-        "services/traefik" = {
-          type = "zfs_fs";
-        };
-        "services/dashy" = {
-          type = "zfs_fs";
-        };
-        "services/jellyfin" = {
-          type = "zfs_fs";
-        };
-        "services/paperless" = {
-          type = "zfs_fs";
-        };
+        "services/vaultwarden".type = "zfs_fs";
+        "services/traefik".type = "zfs_fs";
+        "services/dashy".type = "zfs_fs";
+        "services/jellyfin".type = "zfs_fs";
+        "services/paperless".type = "zfs_fs";
       };
       postCreateHook = "zfs snapshot -r ${pool}@blank";
     };
