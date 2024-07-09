@@ -1,5 +1,5 @@
 {config, ...}: let
-  cfg = config.services.traefik;
+  cfg = config.services.cone;
 in {
   services.cone = {
     enable = true;
