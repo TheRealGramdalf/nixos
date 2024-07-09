@@ -26,6 +26,15 @@ in {
         address = ["10.0.0.1/24"];
         networkConfig.DHCPServer = true;
       };
+      # If all else fails, get a DHCP address
+      "69-ether" = {
+        # Match all non-virtual (veth) ethernet connections
+        matchConfig = {
+          Type = "ether";
+          Kind = "!*";
+        };
+        networkConfig.DHCP = true;
+      };
     };
   };
   services = {
