@@ -24,7 +24,7 @@ in {
       };
       "intel-2" = {
         type = "disk";
-        device = "/dev/${disk.intel-1}";
+        device = "/dev/${disk.intel-2}";
         content = {
           type = "gpt";
           partitions."zfs" = {
