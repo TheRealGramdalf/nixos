@@ -2,10 +2,10 @@
   imports = [
     ./kanidm.nix
     ./traefik.nix
-    ./smb.nix
+    #./smb.nix
     #./dashy.nix
-    ./vaultwarden.nix
+    #./vaultwarden.nix
     #./paperless.nix
-    ./jellyfin.nix
+    #./jellyfin.nix
   ];
 }
