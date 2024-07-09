@@ -7,7 +7,7 @@ in {
     environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
     serviceConfig.BindPaths = [
       "${dataDir}"
-      "${dataDir}/db" # This is technically a different filesystem, so it isn't mounted correctly by default
+      "${dataDir}/db" # This is either technically a different filesystem, or getting borked by the path merge function, so it isn't mounted correctly by default
     ];
   };
   services.kanidm = {
@@ -32,9 +32,11 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."${cfg.serverSettings.domain}" = {
-    listenAddresses = [
-      "${cfg.serverSettings.bindaddress}"
-    ];
+  services.cone.extraFiles."auth".settings = {
+    http.routers."auth" = {
+      service = "auth";
+      rule = "Host(`${cfg.serverSettings.domain}`)";
+    };
+    http.services."auth".loadBalancer.servers = [{url = "https://${cfg.serverSettings.bindaddress}";}];
   };
 }
