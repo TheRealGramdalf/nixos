@@ -21,11 +21,6 @@
     then writeText "static_config.json" (builtins.toJSON cfg.static.settings)
     else cfg.static.file;
 
-  finalStaticFile =
-    if cfg.environmentFiles == []
-    then staticFile
-    else "/run/traefik/config.json";
-
   configNote = ''
     ::: {.note}
     Traefik config is serialized to JSON, which is considered valid YAML since 1.2
@@ -55,6 +50,7 @@ in {
     # - [x] Remove `createHome` and `homeDir`, use systemd tmpfiles instead
     # - [] Use `note` syntax
     # - [] https://github.com/NixOS/nixpkgs/blob/6fd558c210c90f72c8116a0ea509f4280356d2bb/nixos/modules/services/web-servers/caddy/default.nix#L345C5-L345C63
+    # - [] Use `supplementaryGroups` for docker, since otherwise files managed by the `tmpfiles` rules are owned by group docker
 
     # CHANGELOG
     # - Removed usage of `with`, replacing it with `inherit` instead
@@ -219,8 +215,13 @@ in {
       type = listOf path;
       example = ["/run/secrets/traefik.env"];
       description = ''
-        Files to load as environment file. Environment variables from this file
-        will be substituted into the static configuration file using envsubst.
+        Files to load as environment file just before Traefik starts.
+        This can be used to pass secrets such as [DNS challenge API tokens](https://doc.traefik.io/traefik/https/acme/#providers) or [EAB credentials](https://doc.traefik.io/traefik/reference/static-configuration/env/).
+        ```
+        DESEC_TOKEN=
+        TRAEFIK_CERTIFICATESRESOLVERS_<NAME>_ACME_EAB_HMACENCODED=
+        TRAEFIK_CERTIFICATESRESOLVERS_<NAME>_ACME_EAB_KID=
+        ```
       '';
     };
   };
@@ -253,13 +254,7 @@ in {
       startLimitBurst = 5;
       serviceConfig = {
         EnvironmentFile = cfg.environmentFiles;
-        ExecStartPre =
-          optional (cfg.environmentFiles != [])
-          (pkgs.writeShellScript "pre-start" ''
-            umask 077
-            ${getExe pkgs.envsubst} -i "${staticFile}" > "${finalStaticFile}"
-          '');
-        ExecStart = "${getExe cfg.package} --configfile=${finalStaticFile}";
+        ExecStart = "${getExe cfg.package} --configfile=${staticFile}";
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
