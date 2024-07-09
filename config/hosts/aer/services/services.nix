@@ -6,6 +6,6 @@
     #./dashy.nix
     ./vaultwarden.nix
     #./paperless.nix
-    #./jellyfin.nix
+    ./jellyfin.nix
   ];
 }
