@@ -11,7 +11,7 @@
     ../../common/nix3.nix
 
     # Services
-    ./services/services.nix
+    #./services/services.nix
   ];
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
