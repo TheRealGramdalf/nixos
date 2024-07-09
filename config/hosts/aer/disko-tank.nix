@@ -17,10 +17,8 @@
       };
 
       datasets = {
-        "smb" = {
-          type = "zfs_fs";
-        };
-        "photos" = {
+        "smb".type = "zfs_fs";
+        "smb/photos" = {
           type = "zfs_fs";
           options = {
             atime = "on";
