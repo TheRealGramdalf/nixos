@@ -3,7 +3,13 @@
 in {
   services.cone = {
     enable = true;
+    # Traefik's user/group must be local, since it's required for `kanidm-unixd` to function properly
     group = "docker";
+    dataDir = "/persist/services/traefik";
+    dynamic.dir = "/persist/services/traefik/dynamic-config";
+    environmentFiles = [
+      "/persist/secrets/traefik/traefik.env"
+    ];
     extraFiles = {
       "dashboard".settings = {
         http.routers."dashboard" = {
@@ -15,9 +21,6 @@ in {
         http.middlewares.local-only.ipallowlist.sourcerange = "192.168.1.0/24";
       };
     };
-    # Traefik's user/group must be local, since it's required for `kanidm-unixd` to function properly
-    dataDir = "/persist/services/traefik";
-    dynamic.dir = "/persist/services/traefik/dynamic-config";
     static.settings = {
       log.level = "DEBUG";
       providers.docker = {
@@ -33,16 +36,16 @@ in {
         insecure = true;
       };
       certificatesResolvers = {
-        "letsencrypt".acme = {
-          caServer = "https://acme-v02.api.letsencrypt.org/directory";
-          dnsChallenge = {
-            delayBeforeCheck = "30s";
-            disablePropagationCheck = true;
-            provider = "desec";
-          };
-          email = "gramdalftech@gmail.com";
-          storage = "${cfg.dataDir}/certs/letsencrypt.json";
-        };
+        #"letsencrypt".acme = {
+        #  caServer = "https://acme-v02.api.letsencrypt.org/directory";
+        #  dnsChallenge = {
+        #    delayBeforeCheck = "30s";
+        #    disablePropagationCheck = true;
+        #    provider = "desec";
+        #  };
+        #  email = "gramdalftech@gmail.com";
+        #  storage = "${cfg.dataDir}/certs/letsencrypt.json";
+        #};
         "letsencrypt-staging".acme = {
           caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
           dnsChallenge = {
@@ -56,16 +59,12 @@ in {
         "zerossl".acme = {
           caServer = "https://acme.zerossl.com/v2/DV90";
           dnsChallenge = {
-            delayBeforeCheck = "30s";
-            disablePropagationCheck = true;
+            #delayBeforeCheck = "30s";
+            #disablePropagationCheck = true;
             provider = "desec";
           };
-          eab = {
-            hmacEncoded = "hmac";
-            kid = "kid";
-          };
           email = "gramdalftech@gmail.com";
-          storage = "${cfg.dataDir}/traefik/certs/zerossl.json";
+          storage = "${cfg.dataDir}/certs/zerossl.json";
         };
       };
       entryPoints = {
@@ -84,7 +83,7 @@ in {
           address = ":443";
           asDefault = true;
           http.tls = {
-            certResolver = "letsencrypt";
+            certResolver = "zerossl";
             domains = [
               {
                 main = "aer.dedyn.io";
