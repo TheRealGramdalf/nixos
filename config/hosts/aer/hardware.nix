@@ -7,6 +7,7 @@ _: {
     ];
   };
 
+  hardware.enableAllFirmware = true;
   boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "mpt3sas" "mvsas" "mptsas" "usb_storage" "usbhid" "sd_mod" ];
   boot.kernelModules = [ "kvm-intel" ];
 
