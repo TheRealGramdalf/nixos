@@ -3,13 +3,21 @@
 in {
   services.cone = {
     enable = true;
-    extraFiles."dashboard".settings = {
-      traefik.http.routers."api".service = "api@internal";
-      traefik.http.services."api".loadbalancer.server.port = 8080;
+    group = "docker";
+    extraFiles = {
+      "dashboard".settings = {
+        http.routers."dashboard" = {
+          service = "api@internal";
+          rule = "Host(`192.168.122.152`)";
+        };
+      };
+      "middlewares".settings = {
+        http.middlewares.local-only.ipallowlist.sourcerange = "192.168.1.0/24";
+      };
     };
     # Traefik's user/group must be local, since it's required for `kanidm-unixd` to function properly
     dataDir = "/persist/services/traefik";
-    dynamic.dir = "/run/traefik/dynamic-config";
+    dynamic.dir = "/persist/services/traefik/dynamic-config";
     static.settings = {
       log.level = "DEBUG";
       providers.docker = {
@@ -89,7 +97,12 @@ in {
     };
   };
   networking.firewall = {
-    allowedUDPPorts = [80 443];
-    allowedTCPPorts = [80 443];
+    allowedUDPPorts = [80 443 8080];
+    allowedTCPPorts = [80 443 8080];
   };
+  networking.hosts = {
+    "127.0.0.1" = [
+      "${config.services.kanidm.serverSettings.domain}"
+    ]
+  }
 }
