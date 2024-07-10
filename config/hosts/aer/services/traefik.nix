@@ -76,7 +76,7 @@ in {
           address = ":443";
           asDefault = true;
           http.tls = {
-            certResolver = "letsencrypt-staging";
+            certResolver = "letsencrypt";
             domains = [
               {
                 main = "aer.dedyn.io";
