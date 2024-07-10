@@ -8,7 +8,7 @@
 in {
   services.vaultwarden = {
     enable = true;
-    environmentFile = "/persist/secrets/vaultwarden.env";
+    environmentFile = "/persist/secrets/vaultwarden/vaultwarden.env";
     config = {
       DOMAIN = "https://vault.aer.dedyn.io";
       ROCKET_ADDRESS = "::1";
