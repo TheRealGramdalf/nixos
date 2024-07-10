@@ -92,8 +92,8 @@ in {
     };
   };
   networking.firewall = {
-    allowedUDPPorts = [80 443 8080];
-    allowedTCPPorts = [80 443 8080];
+    allowedUDPPorts = [80 443];
+    allowedTCPPorts = [80 443];
   };
   networking.hosts = {
     "127.0.0.1" = [
