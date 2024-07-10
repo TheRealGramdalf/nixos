@@ -42,7 +42,7 @@ in {
           # Might be circumvented by creating a DOH sysd-resolvd server and using that instead
           dnsChallenge = {
             # This delay happens multiple times for some reason
-            delayBeforeCheck = "10s";
+            delayBeforeCheck = "30s";
             disablePropagationCheck = true;
             provider = "desec";
           };
