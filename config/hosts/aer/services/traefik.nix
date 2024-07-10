@@ -42,9 +42,8 @@ in {
           # Might be circumvented by creating a DOH sysd-resolvd server and using that instead
           dnsChallenge = {
             # This delay happens multiple times for some reason
-            # These may not be necessary with DESEC, since it looks like it uses the API directly
-            #delayBeforeCheck = "30s";
-            #disablePropagationCheck = true;
+            delayBeforeCheck = "30s";
+            disablePropagationCheck = true;
             provider = "desec";
           };
           email = "gramdalftech@gmail.com";
@@ -53,8 +52,8 @@ in {
         "letsencrypt-staging".acme = {
           caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
           dnsChallenge = {
-            #delayBeforeCheck = "30s";
-            #disablePropagationCheck = true;
+            delayBeforeCheck = "30s";
+            disablePropagationCheck = true;
             provider = "desec";
           };
           email = "gramdalftech@gmail.com";
