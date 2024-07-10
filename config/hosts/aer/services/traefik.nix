@@ -79,12 +79,12 @@ in {
           asDefault = true;
           http.tls = {
             certResolver = "letsencrypt";
-            domains = [
-              {
-                main = "aer.dedyn.io";
-                sans = ["*.aer.dedyn.io"];
-              }
-            ];
+            #domains = [
+            #  {
+            #    main = "aer.dedyn.io";
+            #    sans = ["*.aer.dedyn.io"];
+            #  }
+            #];
           };
         };
       };
