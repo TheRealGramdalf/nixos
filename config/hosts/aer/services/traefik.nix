@@ -56,16 +56,6 @@ in {
           email = "gramdalftech@gmail.com";
           storage = "${cfg.dataDir}/certs/letsencrypt-staging.json";
         };
-        "zerossl".acme = {
-          caServer = "https://acme.zerossl.com/v2/DV90";
-          dnsChallenge = {
-            #delayBeforeCheck = "30s";
-            #disablePropagationCheck = true;
-            provider = "desec";
-          };
-          email = "gramdalftech@gmail.com";
-          storage = "${cfg.dataDir}/certs/zerossl.json";
-        };
       };
       entryPoints = {
         "traefik" = {
@@ -83,7 +73,7 @@ in {
           address = ":443";
           asDefault = true;
           http.tls = {
-            certResolver = "zerossl";
+            certResolver = "letsencrypt-staging";
             domains = [
               {
                 main = "aer.dedyn.io";
