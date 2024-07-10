@@ -11,7 +11,7 @@ in {
     environmentFile = "/persist/secrets/vaultwarden/vaultwarden.env";
     config = {
       DOMAIN = "https://vault.aer.dedyn.io";
-      ROCKET_ADDRESS = "::1";
+      ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = "8222";
       SENDS_ALLOWED = true;
       LOGIN_RATELIMIT_MAX_BURST = 10;
