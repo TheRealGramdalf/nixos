@@ -45,6 +45,8 @@
       onlyoffice-bin # For improved compatibility over libreoffice
       vscodium
       obsidian
+      # Add graphviz for dot. nox = no xorg
+      graphviz-nox
       pandoc
       # Services
       bitwarden
