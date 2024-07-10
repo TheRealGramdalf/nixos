@@ -5,12 +5,13 @@
 }: let
   name = "vault";
   cfg = config.services.vaultwarden;
+  dataDir = "/persist/services/vaultwarden";
 in {
   services.vaultwarden = {
     enable = true;
     environmentFile = "/persist/secrets/vaultwarden/vaultwarden.env";
     config = {
-      DATA_FOLDER= "/persist/secrets/vaultwarden";
+      DATA_FOLDER = ${dataDir};
       DOMAIN = "https://vault.aer.dedyn.io";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = "8222";
