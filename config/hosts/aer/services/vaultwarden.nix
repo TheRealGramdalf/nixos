@@ -36,6 +36,7 @@ in {
     serviceConfig = {
       User = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
       Group = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
+      ReadWritePaths = ["${dataDir}"];
     };
   };
 
