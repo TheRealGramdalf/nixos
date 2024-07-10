@@ -10,6 +10,7 @@ in {
     enable = true;
     environmentFile = "/persist/secrets/vaultwarden/vaultwarden.env";
     config = {
+      DATA_FOLDER= "/persist/secrets/vaultwarden";
       DOMAIN = "https://vault.aer.dedyn.io";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = "8222";
