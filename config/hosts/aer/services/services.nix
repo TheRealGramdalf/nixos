@@ -4,7 +4,7 @@
     ./traefik.nix
     #./smb.nix
     #./dashy.nix
-    #./vaultwarden.nix
+    ./vaultwarden.nix
     #./paperless.nix
     #./jellyfin.nix
   ];

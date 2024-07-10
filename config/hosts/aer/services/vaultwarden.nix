@@ -28,13 +28,14 @@ in {
   };
   systemd.services."vaultwarden".serviceConfig = {
     User = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
+    Group = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15"
   };
 
-  services.cone.extraFiles."vault".settings = {
-    http.routers."vault" = {
-      service = "vault";
-      rule = "Host(`vault.aer.dedyn.io`)";
+  services.cone.extraFiles."${name}".settings = {
+    http.routers."${name}" = {
+      service = "${name}";
+      rule = "Host(`${name}.aer.dedyn.io`)";
     };
-    http.services."vault".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.config.ROCKET_PORT}";}];
+    http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.config.ROCKET_PORT}";}];
   };
 }
