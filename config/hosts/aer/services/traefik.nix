@@ -36,20 +36,23 @@ in {
         insecure = true;
       };
       certificatesResolvers = {
-        #"letsencrypt".acme = {
-        #  caServer = "https://acme-v02.api.letsencrypt.org/directory";
-        #  dnsChallenge = {
-        #    delayBeforeCheck = "30s";
-        #    disablePropagationCheck = true;
-        #    provider = "desec";
-        #  };
-        #  email = "gramdalftech@gmail.com";
-        #  storage = "${cfg.dataDir}/certs/letsencrypt.json";
-        #};
+        "letsencrypt".acme = {
+          caServer = "https://acme-v02.api.letsencrypt.org/directory";
+          # Required due to split DNS, since OpenWRT forces DNS servers
+          # Might be circumvented by creating a DOH sysd-resolvd server and using that instead
+          dnsChallenge = {
+            # This delay happens multiple times for some reason
+            delayBeforeCheck = "10s";
+            disablePropagationCheck = true;
+            provider = "desec";
+          };
+          email = "gramdalftech@gmail.com";
+          storage = "${cfg.dataDir}/certs/letsencrypt.json";
+        };
         "letsencrypt-staging".acme = {
           caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
           dnsChallenge = {
-            delayBeforeCheck = "30s";
+            delayBeforeCheck = "10s";
             disablePropagationCheck = true;
             provider = "desec";
           };
@@ -73,7 +76,7 @@ in {
           address = ":443";
           asDefault = true;
           http.tls = {
-            certResolver = "letsencrypt-staging";
+            certResolver = "letsencrypt";
             domains = [
               {
                 main = "aer.dedyn.io";
