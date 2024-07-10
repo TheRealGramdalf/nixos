@@ -14,7 +14,8 @@ in {
       "dashboard".settings = {
         http.routers."dashboard" = {
           service = "api@internal";
-          rule = "Host(`192.168.122.152`)";
+          rule = "Host(`traefik.aer.dedyn.io`)";
+          middlewares = ["local-only"];
         };
       };
       "middlewares".settings = {
