@@ -9,7 +9,7 @@
       openFirewall = true;
       shares = {
         photos = {
-          path = "/tank/photos";
+          path = "/tank/smb/photos";
           writable = true;
           comment = "Ye Olde Photos";
         };
@@ -19,7 +19,7 @@
           comment = "The Seven Seas";
         };
         Data = {
-          path = "/tank/Data";
+          path = "/tank/smb/Data";
           writable = true;
           comment = "All your mushrooms go here";
         };
@@ -32,7 +32,7 @@
         # ^^ Overrides `create` and `force create` `mask/mode`
 
         # Authentication
-        passdb backend = tdbsam:/tank/samba-passdb.tdb
+        passdb backend = tdbsam:/tank/smb/samba-passdb.tdb
         security = user
         hosts allow = 192.168.1. 127.0.0.1
         hosts deny = ALL
