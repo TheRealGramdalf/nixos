@@ -268,6 +268,7 @@ in
       after = ["time-sync.target" "network-online.target"];
       wants = ["time-sync.target" "network-online.target"];
       before = ["radiusd.service"];
+      wantedBy = ["multi-user.target"];
       serviceConfig = lib.mkMerge [
         # Merge paths and ignore existing prefixes needs to sidestep mkMerge
         (defaultServiceConfig // {
@@ -318,6 +319,7 @@ in
       # While it seems confusing, we need to be after nscd.service so that the
       # Conflicts will triger and then automatically stop it.
       conflicts = ["nscd.service"];
+      wantedBy = ["multi-user.target"];
 
       restartTriggers = [ unixConfigFile clientConfigFile ];
       serviceConfig = lib.mkMerge [
@@ -360,6 +362,7 @@ in
         "kanidm-unixd.service"
       ];
       requires=["kanidm-unixd.service"];
+      wantedBy = ["multi-user.target"];
       restartTriggers = [ unixConfigFile clientConfigFile ];
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/kanidm_unixd_tasks";
