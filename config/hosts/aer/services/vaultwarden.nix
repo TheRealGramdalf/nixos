@@ -34,6 +34,11 @@ in {
       config.systemd.services."kanidm".name
       config.systemd.services."traefik".name
     ];
+    wants = [
+      config.systemd.services."kanidm-unixd".name
+      config.systemd.services."kanidm".name
+      config.systemd.services."traefik".name
+    ];
     serviceConfig = {
       User = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
       Group = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
