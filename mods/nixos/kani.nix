@@ -307,7 +307,7 @@ in
       after = [
         "chronyd.service"
         "ntpd.service"
-        "nscd.service"
+        #"nscd.service"
         "network-online.target"
       ];
       before = [
@@ -316,9 +316,9 @@ in
         "nss-user-lookup.target"
       ];
       wants = ["nss-user-lookup.target"];
-      # While it seems confusing, we need to be after nscd.service so that the
-      # Conflicts will triger and then automatically stop it.
-      conflicts = ["nscd.service"];
+      ## While it seems confusing, we need to be after nscd.service so that the
+      ## Conflicts will triger and then automatically stop it.
+      #conflicts = ["nscd.service"];
       wantedBy = ["multi-user.target"];
 
       restartTriggers = [ unixConfigFile clientConfigFile ];
