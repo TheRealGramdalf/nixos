@@ -34,8 +34,6 @@
         # Authentication
         passdb backend = tdbsam:/tank/smb/samba-passdb.tdb
         security = user
-        hosts allow = 192.168.1. 127.0.0.1
-        hosts deny = ALL
         guest account = nobody
         map to guest = Bad User
         # guest ok = true
