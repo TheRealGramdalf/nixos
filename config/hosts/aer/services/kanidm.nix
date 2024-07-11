@@ -1,5 +1,5 @@
 {config, lib, ...}: let
-  cfg = config.services.kanidm;
+  cfg = config.services.kani;
   dataDir = "/persist/services/kanidm";
 in {
   # Temporary fix for nixpkgs#323674
@@ -10,7 +10,7 @@ in {
       "${dataDir}/db" # This is either technically a different filesystem, or getting borked by the path merge function, so it isn't mounted correctly by default
     ];
   };
-  services.kanidm = {
+  services.kani = {
     enableServer = true;
     enablePam = true;
     serverSettings = {
@@ -29,26 +29,6 @@ in {
       pam_allowed_login_groups = [];
       home_attr = "uuid";
       home_alias = "spn";
-    };
-  };
-
-  systemd.services."kanidm-unixd" = {
-    unitConfig = {
-      after = lib.mkForce [
-        "chronyd.service"
-        "ntpd.service"
-        "nscd.service"
-        "network-online.target"
-      ];
-      before = lib.mkForce [
-        "systemd-user-sessions.service"
-        "sshd.service"
-        "nss-user-lookup.target"
-      ];
-      wants = lib.mkForce ["nss-user-lookup.target"];
-      # While it seems confusing, we need to be after nscd.service so that the
-      # Conflicts will triger and then automatically stop it.
-      conflicts = lib.mkForce ["nscd.service"];
     };
   };
 
