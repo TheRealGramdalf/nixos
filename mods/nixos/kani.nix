@@ -1,6 +1,6 @@
 { config, lib, options, pkgs, ... }:
 let
-  cfg = config.services.kanidm;
+  cfg = config.services.kani;
   settingsFormat = pkgs.formats.toml { };
   # Remove null values, so we can document optional values that don't end up in the generated TOML file.
   filterConfig = lib.converge (lib.filterAttrsRecursive (_: v: v != null));
@@ -64,7 +64,7 @@ let
 
 in
 {
-  options.services.kanidm = {
+  options.services.kani = {
     enableClient = lib.mkEnableOption "the Kanidm client";
     enableServer = lib.mkEnableOption "the Kanidm server";
     enablePam = lib.mkEnableOption "the Kanidm PAM and NSS integration";
@@ -229,14 +229,14 @@ in
           '';
         }
         {
-          assertion = !cfg.enableClient || options.services.kanidm.clientSettings.isDefined;
+          assertion = !cfg.enableClient || options.services.kani.clientSettings.isDefined;
           message = ''
             <option>services.kanidm.clientSettings</option> needs to be configured
             if the client is enabled.
           '';
         }
         {
-          assertion = !cfg.enablePam || options.services.kanidm.clientSettings.isDefined;
+          assertion = !cfg.enablePam || options.services.kani.clientSettings.isDefined;
           message = ''
             <option>services.kanidm.clientSettings</option> needs to be configured
             for the PAM daemon to connect to the Kanidm server.
