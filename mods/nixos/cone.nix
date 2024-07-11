@@ -51,7 +51,7 @@ in {
     # - [] Use `note` syntax
     # - [] https://github.com/NixOS/nixpkgs/blob/6fd558c210c90f72c8116a0ea509f4280356d2bb/nixos/modules/services/web-servers/caddy/default.nix#L345C5-L345C63
     # - [] Use `supplementaryGroups` for docker, since otherwise files managed by the `tmpfiles` rules are owned by group docker
-
+    # - [] Assertion for extraFiles and traefik.enable
     # CHANGELOG
     # - Removed usage of `with`, replacing it with `inherit` instead
     # - Do not always assume the systemd user must be created by NixOS
