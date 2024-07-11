@@ -32,6 +32,12 @@ in {
     };
   };
 
+  networking.hosts = {
+    "127.0.0.1" = [
+      "${cfg.serverSettings.domain}"
+    ];
+  };
+
   services.cone.extraFiles."auth".settings = {
     http.routers."auth" = {
       service = "auth";

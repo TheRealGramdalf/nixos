@@ -95,9 +95,4 @@ in {
     allowedUDPPorts = [80 443];
     allowedTCPPorts = [80 443];
   };
-  networking.hosts = {
-    "127.0.0.1" = [
-      "${config.services.kanidm.serverSettings.domain}"
-    ];
-  };
 }
