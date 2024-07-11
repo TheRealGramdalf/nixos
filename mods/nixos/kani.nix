@@ -265,8 +265,9 @@ in
 
     systemd.services.kanidm = lib.mkIf cfg.enableServer {
       description = "kanidm identity management daemon";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      after = ["time-sync.target" "network-online.target"];
+      wants = ["time-sync.target" "network-online.target"];
+      before = ["radiusd.service"];
       serviceConfig = lib.mkMerge [
         # Merge paths and ignore existing prefixes needs to sidestep mkMerge
         (defaultServiceConfig // {
@@ -301,9 +302,23 @@ in
     };
 
     systemd.services.kanidm-unixd = lib.mkIf cfg.enablePam {
-      description = "Kanidm PAM daemon";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      description = "Kanidm Local Client Resolver";
+      after = [
+        "chronyd.service"
+        "ntpd.service"
+        "nscd.service"
+        "network-online.target"
+      ];
+      before = [
+        "systemd-user-sessions.service"
+        "sshd.service"
+        "nss-user-lookup.target"
+      ];
+      wants = ["nss-user-lookup.target"];
+      # While it seems confusing, we need to be after nscd.service so that the
+      # Conflicts will triger and then automatically stop it.
+      conflicts = ["nscd.service"];
+
       restartTriggers = [ unixConfigFile clientConfigFile ];
       serviceConfig = lib.mkMerge [
         defaultServiceConfig
@@ -338,9 +353,13 @@ in
 
     systemd.services.kanidm-unixd-tasks = lib.mkIf cfg.enablePam {
       description = "Kanidm PAM home management daemon";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "kanidm-unixd.service" ];
-      partOf = [ "kanidm-unixd.service" ];
+      after=[
+        "chronyd.service"
+        "ntpd.service"
+        "network-online.target"
+        "kanidm-unixd.service"
+      ];
+      requires=["kanidm-unixd.service"];
       restartTriggers = [ unixConfigFile clientConfigFile ];
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/kanidm_unixd_tasks";
