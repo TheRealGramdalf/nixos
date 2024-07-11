@@ -401,7 +401,7 @@ in
       (lib.mkIf cfg.enableServer {
         "kanidm/server.toml".source = serverConfigFile;
       })
-      (lib.mkIf options.services.kanidm.clientSettings.isDefined {
+      (lib.mkIf options.services.kani.clientSettings.isDefined {
         "kanidm/config".source = clientConfigFile;
       })
       (lib.mkIf cfg.enablePam {
