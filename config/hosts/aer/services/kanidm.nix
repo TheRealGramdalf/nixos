@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, lib, ...}: let
   cfg = config.services.kanidm;
   dataDir = "/persist/services/kanidm";
 in {
@@ -29,6 +29,26 @@ in {
       pam_allowed_login_groups = [];
       home_attr = "uuid";
       home_alias = "spn";
+    };
+  };
+
+  systemd.services."kanidm-unixd" = {
+    unitConfig = {
+      after = lib.mkForce [
+        "chronyd.service"
+        "ntpd.service"
+        "nscd.service"
+        "network-online.target"
+      ];
+      before = lib.mkForce [
+        "systemd-user-sessions.service"
+        "sshd.service"
+        "nss-user-lookup.target"
+      ];
+      wants = lib.mkForce ["nss-user-lookup.target"];
+      # While it seems confusing, we need to be after nscd.service so that the
+      # Conflicts will triger and then automatically stop it.
+      conflicts = lib.mkForce ["nscd.service"];
     };
   };
 
