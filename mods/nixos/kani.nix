@@ -68,6 +68,7 @@ in
     enableClient = lib.mkEnableOption "the Kanidm client";
     enableServer = lib.mkEnableOption "the Kanidm server";
     enablePam = lib.mkEnableOption "the Kanidm PAM and NSS integration";
+    enablePamTasks = lib.mkEnableOption "the kanidm-unixd-tasks daemon";
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
@@ -315,7 +316,7 @@ in
         "sshd.service"
         "nss-user-lookup.target"
       ];
-      wants = ["nss-user-lookup.target"];
+      wants = ["nss-user-lookup.target" "network-online.target"];
       ## While it seems confusing, we need to be after nscd.service so that the
       ## Conflicts will triger and then automatically stop it.
       #conflicts = ["nscd.service"];
@@ -353,7 +354,7 @@ in
       environment.RUST_LOG = "info";
     };
 
-    systemd.services.kanidm-unixd-tasks = lib.mkIf cfg.enablePam {
+    systemd.services.kanidm-unixd-tasks = lib.mkIf cfg.enablePamTasks {
       description = "Kanidm PAM home management daemon";
       after=[
         "chronyd.service"
@@ -361,6 +362,7 @@ in
         "network-online.target"
         "kanidm-unixd.service"
       ];
+      wants = ["network-online.target"];
       requires=["kanidm-unixd.service"];
       wantedBy = ["multi-user.target"];
       restartTriggers = [ unixConfigFile clientConfigFile ];
