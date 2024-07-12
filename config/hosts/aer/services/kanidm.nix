@@ -32,8 +32,6 @@ in {
     };
   };
 
-  services.nscd.enable = false;
-
   networking.hosts = {
     "127.0.0.1" = [
       "${cfg.serverSettings.domain}"
