@@ -34,7 +34,7 @@ in {
       #config.systemd.services."kanidm".name
       #config.systemd.services."traefik".name
     ];
-    wants = [
+    requires = [
       config.systemd.services."kanidm-unixd".name
       #config.systemd.services."kanidm".name
       #config.systemd.services."traefik".name
