@@ -1,6 +1,8 @@
 { config, lib, options, pkgs, ... }:
 let
   cfg = config.services.kani;
+  inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce;
+  inherit (lib.types) str nullOr strMatching submodule path enum listOf ints;
   settingsFormat = pkgs.formats.toml { };
   # Remove null values, so we can document optional values that don't end up in the generated TOML file.
   filterConfig = lib.converge (lib.filterAttrsRecursive (_: v: v != null));
@@ -65,38 +67,38 @@ let
 in
 {
   options.services.kani = {
-    enableClient = lib.mkEnableOption "the Kanidm client";
-    enableServer = lib.mkEnableOption "the Kanidm server";
-    enablePam = lib.mkEnableOption "the Kanidm PAM and NSS integration";
-    enablePamTasks = lib.mkEnableOption "the kanidm-unixd-tasks daemon";
+    enableClient = mkEnableOption "the Kanidm client";
+    enableServer = mkEnableOption "the Kanidm server";
+    enablePam = mkEnableOption "the Kanidm PAM and NSS integration";
+    enablePamTasks = mkEnableOption "the kanidm-unixd-tasks daemon";
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
-    serverSettings = lib.mkOption {
-      type = lib.types.submodule {
+    serverSettings = mkOption {
+      type = submodule {
         freeformType = settingsFormat.type;
 
         options = {
-          bindaddress = lib.mkOption {
+          bindaddress = mkOption {
             description = "Address/port combination the webserver binds to.";
             example = "[::1]:8443";
-            type = lib.types.str;
+            type = str;
           };
           # Should be optional but toml does not accept null
-          ldapbindaddress = lib.mkOption {
+          ldapbindaddress = mkOption {
             description = ''
               Address and port the LDAP server is bound to. Setting this to `null` disables the LDAP interface.
             '';
             example = "[::1]:636";
             default = null;
-            type = lib.types.nullOr lib.types.str;
+            type = nullOr str;
           };
-          origin = lib.mkOption {
+          origin = mkOption {
             description = "The origin of your Kanidm instance. Must have https as protocol.";
             example = "https://idm.example.org";
-            type = lib.types.strMatching "^https://.*";
+            type = strMatching "^https://.*";
           };
-          domain = lib.mkOption {
+          domain = mkOption {
             description = ''
               The `domain` that Kanidm manages. Must be below or equal to the domain
               specified in `serverSettings.origin`.
@@ -107,50 +109,50 @@ in
             '';
             example = "example.org";
             default = null;
-            type = lib.types.nullOr lib.types.str;
+            type = nullOr str;
           };
-          db_path = lib.mkOption {
+          db_path = mkOption {
             description = "Path to Kanidm database.";
             default = "/var/lib/kanidm/kanidm.db";
             readOnly = true;
-            type = lib.types.path;
+            type = path;
           };
-          tls_chain = lib.mkOption {
+          tls_chain = mkOption {
             description = "TLS chain in pem format.";
-            type = lib.types.path;
+            type = path;
           };
-          tls_key = lib.mkOption {
+          tls_key = mkOption {
             description = "TLS key in pem format.";
-            type = lib.types.path;
+            type = path;
           };
-          log_level = lib.mkOption {
+          log_level = mkOption {
             description = "Log level of the server.";
             default = "info";
-            type = lib.types.enum [ "info" "debug" "trace" ];
+            type = enum [ "info" "debug" "trace" ];
           };
-          role = lib.mkOption {
+          role = mkOption {
             description = "The role of this server. This affects the replication relationship and thereby available features.";
             default = "WriteReplica";
-            type = lib.types.enum [ "WriteReplica" "WriteReplicaNoUI" "ReadOnlyReplica" ];
+            type = enum [ "WriteReplica" "WriteReplicaNoUI" "ReadOnlyReplica" ];
           };
           online_backup = {
-            path = lib.mkOption {
+            path = mkOption {
               description = "Path to the output directory for backups.";
-              type = lib.types.path;
+              type = path;
               default = "/var/lib/kanidm/backups";
             };
-            schedule = lib.mkOption {
+            schedule = mkOption {
               description = "The schedule for backups in cron format.";
-              type = lib.types.str;
+              type = str;
               default = "00 22 * * *";
             };
-            versions = lib.mkOption {
+            versions = mkOption {
               description = ''
                 Number of backups to keep.
 
                 The default is set to `0`, in order to disable backups by default.
               '';
-              type = lib.types.ints.unsigned;
+              type = ints.unsigned;
               default = 0;
               example = 7;
             };
@@ -166,14 +168,14 @@ in
       '';
     };
 
-    clientSettings = lib.mkOption {
-      type = lib.types.submodule {
+    clientSettings = mkOption {
+      type = submodule {
         freeformType = settingsFormat.type;
 
-        options.uri = lib.mkOption {
+        options.uri = mkOption {
           description = "Address of the Kanidm server.";
           example = "http://127.0.0.1:8080";
-          type = lib.types.str;
+          type = str;
         };
       };
       description = ''
@@ -184,20 +186,20 @@ in
       '';
     };
 
-    unixSettings = lib.mkOption {
-      type = lib.types.submodule {
+    unixSettings = mkOption {
+      type = submodule {
         freeformType = settingsFormat.type;
 
         options = {
-          pam_allowed_login_groups = lib.mkOption {
+          pam_allowed_login_groups = mkOption {
             description = "Kanidm groups that are allowed to login using PAM.";
             example = "my_pam_group";
-            type = lib.types.listOf lib.types.str;
+            type = listOf str;
           };
-          hsm_pin_path = lib.mkOption {
+          hsm_pin_path = mkOption {
             description = "Path to a HSM pin.";
             default = "/var/cache/kanidm-unixd/hsm-pin";
-            type = lib.types.path;
+            type = path;
           };
         };
       };
@@ -210,7 +212,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enableClient || cfg.enableServer || cfg.enablePam) {
+  config = mkIf (cfg.enableClient || cfg.enableServer || cfg.enablePam) {
     assertions =
       [
         {
@@ -254,7 +256,7 @@ in
         }
       ];
 
-    environment.systemPackages = lib.mkIf cfg.enableClient [ cfg.package ];
+    environment.systemPackages = mkIf cfg.enableClient [ cfg.package ];
 
     systemd.tmpfiles.settings."10-kanidm" = {
       ${cfg.serverSettings.online_backup.path}.d = {
@@ -264,13 +266,13 @@ in
       };
     };
 
-    systemd.services.kanidm = lib.mkIf cfg.enableServer {
+    systemd.services.kanidm = mkIf cfg.enableServer {
       description = "kanidm identity management daemon";
       after = ["time-sync.target" "network-online.target"];
       wants = ["time-sync.target" "network-online.target"];
       before = ["radiusd.service"];
       wantedBy = ["multi-user.target"];
-      serviceConfig = lib.mkMerge [
+      serviceConfig = mkMerge [
         # Merge paths and ignore existing prefixes needs to sidestep mkMerge
         (defaultServiceConfig // {
           BindReadOnlyPaths = mergePaths (defaultServiceConfig.BindReadOnlyPaths ++ certPaths);
@@ -293,9 +295,9 @@ in
           AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
           CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
           # This would otherwise override the CAP_NET_BIND_SERVICE capability.
-          PrivateUsers = lib.mkForce false;
+          PrivateUsers = mkForce false;
           # Port needs to be exposed to the host network
-          PrivateNetwork = lib.mkForce false;
+          PrivateNetwork = mkForce false;
           RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
           TemporaryFileSystem = "/:ro";
         }
@@ -303,7 +305,7 @@ in
       environment.RUST_LOG = "info";
     };
 
-    systemd.services.kanidm-unixd = lib.mkIf cfg.enablePam {
+    systemd.services.kanidm-unixd = mkIf cfg.enablePam {
       description = "Kanidm Local Client Resolver";
       after = [
         "chronyd.service"
@@ -323,7 +325,7 @@ in
       wantedBy = ["multi-user.target"];
 
       restartTriggers = [ unixConfigFile clientConfigFile ];
-      serviceConfig = lib.mkMerge [
+      serviceConfig = mkMerge [
         defaultServiceConfig
         {
           CacheDirectory = "kanidm-unixd";
@@ -346,7 +348,7 @@ in
             "/run/kanidm-unixd:/var/run/kanidm-unixd"
           ];
           # Needs to connect to kanidmd
-          PrivateNetwork = lib.mkForce false;
+          PrivateNetwork = mkForce false;
           RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
           TemporaryFileSystem = "/:ro";
         }
@@ -354,7 +356,7 @@ in
       environment.RUST_LOG = "info";
     };
 
-    systemd.services.kanidm-unixd-tasks = lib.mkIf cfg.enablePamTasks {
+    systemd.services.kanidm-unixd-tasks = mkIf cfg.enablePamTasks {
       description = "Kanidm PAM home management daemon";
       after=[
         "chronyd.service"
@@ -399,33 +401,33 @@ in
     };
 
     # These paths are hardcoded
-    environment.etc = lib.mkMerge [
-      (lib.mkIf cfg.enableServer {
+    environment.etc = mkMerge [
+      (mkIf cfg.enableServer {
         "kanidm/server.toml".source = serverConfigFile;
       })
-      (lib.mkIf options.services.kani.clientSettings.isDefined {
+      (mkIf options.services.kani.clientSettings.isDefined {
         "kanidm/config".source = clientConfigFile;
       })
-      (lib.mkIf cfg.enablePam {
+      (mkIf cfg.enablePam {
         "kanidm/unixd".source = unixConfigFile;
       })
     ];
 
-    system.nssModules = lib.mkIf cfg.enablePam [ cfg.package ];
+    system.nssModules = mkIf cfg.enablePam [ cfg.package ];
 
-    system.nssDatabases.group = lib.optional cfg.enablePam "kanidm";
-    system.nssDatabases.passwd = lib.optional cfg.enablePam "kanidm";
+    system.nssDatabases.group = mkIf cfg.enablePam ["kanidm"];
+    system.nssDatabases.passwd = mkIf cfg.enablePam ["kanidm"];
 
-    users.groups = lib.mkMerge [
-      (lib.mkIf cfg.enableServer {
+    users.groups = mkMerge [
+      (mkIf cfg.enableServer {
         kanidm = { };
       })
-      (lib.mkIf cfg.enablePam {
+      (mkIf cfg.enablePam {
         kanidm-unixd = { };
       })
     ];
-    users.users = lib.mkMerge [
-      (lib.mkIf cfg.enableServer {
+    users.users = mkMerge [
+      (mkIf cfg.enableServer {
         kanidm = {
           description = "Kanidm server";
           isSystemUser = true;
@@ -433,7 +435,7 @@ in
           packages = [ cfg.package ];
         };
       })
-      (lib.mkIf cfg.enablePam {
+      (mkIf cfg.enablePam {
         kanidm-unixd = {
           description = "Kanidm PAM daemon";
           isSystemUser = true;
