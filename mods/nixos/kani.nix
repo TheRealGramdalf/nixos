@@ -263,13 +263,13 @@ in
             the instance it follows.
           '';
         }
-        {
-          assertion = cfg.enablePam config.services.nscd.enable -> config.services.nscd.enableNsncd;
+        (mkIf cfg.enablePam {
+          assertion = (config.services.nscd.enable -> config.services.nscd.enableNsncd);
           message = ''
             Kanidm-unixd implements it's own cache, which conflicts with the cache implemented by nscd.
             Use {option}services.nscd.enableNsncd, the non caching reimplementation of nscd instead. 
           '';
-        }
+        })
       ];
 
     environment.systemPackages = mkIf cfg.enableClient [ cfg.package ];
