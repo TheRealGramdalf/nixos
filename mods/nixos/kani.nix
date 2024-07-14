@@ -254,6 +254,13 @@ in
             the instance it follows.
           '';
         }
+        {
+          assertion = cfg.enablePam config.services.nscd.enable -> config.services.nscd.enableNsncd;
+          message = ''
+            Kanidm-unixd implements it's own cache, which conflicts with the cache implemented by nscd.
+            Use {option}services.nscd.enableNsncd, the non caching reimplementation of nscd instead. 
+          '';
+        }
       ];
 
     environment.systemPackages = mkIf cfg.enableClient [ cfg.package ];
@@ -310,7 +317,6 @@ in
       after = [
         "chronyd.service"
         "ntpd.service"
-        #"nscd.service"
         "network-online.target"
       ];
       before = [
@@ -319,9 +325,6 @@ in
         "nss-user-lookup.target"
       ];
       wants = ["nss-user-lookup.target" "network-online.target"];
-      ## While it seems confusing, we need to be after nscd.service so that the
-      ## Conflicts will triger and then automatically stop it.
-      #conflicts = ["nscd.service"];
       wantedBy = ["multi-user.target"];
 
       restartTriggers = [ unixConfigFile clientConfigFile ];
