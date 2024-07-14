@@ -22,7 +22,7 @@
     else cfg.static.file;
 
   finalStaticFile =
-    if cfg.useEnvSubst
+    if cfg.useEnvSubst == false
     then staticFile
     else "/run/traefik/config.json";
 
