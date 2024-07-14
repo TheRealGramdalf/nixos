@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib.types) nullOr str listOf path literalExpression attrsOf submodule;
-  inherit (lib) optional optionals getExe mkIf optionalAttrs mkOption mkEnableOption mkPackageOption mapAttrsToList mkDefault;
+  inherit (lib.types) nullOr str listOf path literalExpression attrsOf submodule bool;
+  inherit (lib) optional optionals getExe mkIf optionalAttrs mkOption mkEnableOption mkPackageOption mapAttrsToList mkDefault mkRenamedOptionModule;
   inherit (builtins) toJSON;
   inherit (pkgs) writeText;
   cfg = config.services.cone;
@@ -20,6 +20,11 @@
     if cfg.static.file == null
     then writeText "static_config.json" (builtins.toJSON cfg.static.settings)
     else cfg.static.file;
+
+  finalStaticFile =
+    if cfg.useEnvSubst
+    then staticFile
+    else "/run/traefik/config.json";
 
   configNote = ''
     ::: {.note}
@@ -36,21 +41,21 @@ in {
     # - [] Fix defaultText, example (replace with `'' ''`), etc.
     # - [?] Fix tmpfiles rules, readWritePaths
     # - [x] Follow caddy for user creation (don't assume it's always created)
-    # - [] Use statix?
+    # - [x] Use statix?
     # - [] If using virtualHost, make it top level (services.traefik.virthosts), and make it a convenience function. Make it assert conflictions with dynamic file
     # - [] Replace default text with clear logic examples
     # - [x] check rfc 42 https://github.com/NixOS/rfcs/blob/master/rfcs/0042-config-option.md
-    # - [] Make virtualhost use a different mechanism (tmpfiles?) to create dynamic config, so that the systemd service doesn't need to be restarted (the service definition isn't changed)
+    # - [x] Make virtualhost use a different mechanism (tmpfiles?) to create dynamic config, so that the systemd service doesn't need to be restarted (the service definition isn't changed)
     #   if simply using `nixos-rebuild switch` (for minimal downtime).
-    # - [] Check docker, see if running a standalone binary works with the docker backend. If not, note the pitfalls
+    # - [x] Check docker, see if running a standalone binary works with the docker backend. If not, note the pitfalls
     # - [] Add descr. for options used by the module
     # - [] nixos Tests?
     # - [] Package pinning?
     # - [] Configuration test via https://github.com/traefik/traefik/issues/10804 (need to grab schema from traefik pkg, add schema output to traefik pkg)
     # - [x] Remove `createHome` and `homeDir`, use systemd tmpfiles instead
-    # - [] Use `note` syntax
+    # - [x] Use `note` syntax
     # - [] https://github.com/NixOS/nixpkgs/blob/6fd558c210c90f72c8116a0ea509f4280356d2bb/nixos/modules/services/web-servers/caddy/default.nix#L345C5-L345C63
-    # - [] Use `supplementaryGroups` for docker, since otherwise files managed by the `tmpfiles` rules are owned by group docker
+    # - [x] Use `supplementaryGroups` for docker, since otherwise files managed by the `tmpfiles` rules are owned by group docker
     # - [] Assertion for extraFiles and traefik.enable
     # CHANGELOG
     # - Removed usage of `with`, replacing it with `inherit` instead
@@ -110,7 +115,7 @@ in {
         description = ''
           Path to the directory traefik should watch.
           ::: {.warning}
-          Files in this directory matching the glob _nixos-* will be deleted as part of
+          Files in this directory matching the glob _nixos-* (reserved for extraFiles) will be deleted as part of
           systemd-tmpfiles-resetup.service, _**regardless of their origin.**_
           :::
         '';
@@ -140,8 +145,8 @@ in {
             type = jsonValue;
             description = "Dynamic configuration for Traefik, written in nix.";
             example = {
-              traefik.http.routers."api".service = "api@internal";
-              traefik.http.services."api".loadbalancer.server.port = 8080;
+              http.routers."api".service = "api@internal";
+              http.services."api".loadbalancer.server.port = 8080;
             };
           };
           options.name = mkOption {
@@ -159,8 +164,12 @@ in {
         };
       };
       description = ''
-        Extra dynamic configuration files to write. These are placed in `cfg.dynamic.dir` upon activation.
-        This allows configuration to be upated without restarting the primary daemon, which would cause interruptions.
+        Extra dynamic configuration files to write. These are placed in `cfg.dynamic.dir` upon activation,
+        allowing configuration to be upated without restarting the primary daemon.
+        ::: {.note}
+        Due to [a limitation in Traefik](); any syntax error in a dynamic configuration will cause the entire file provider to be ignored.
+        This may cause interuption in service, which may include access to the traefik dashboard, if enabled and configured to use [traefik-ception]().
+        :::
       '';
     };
 
@@ -197,9 +206,29 @@ in {
       type = str;
       example = "docker";
       description = ''
-        Group under which traefik runs.
-        For the docker backend this needs to be set to `docker` instead.
+        Primary group under which traefik runs.
+        For the docker backend, prefer {option}supplementaryGroups
 
+        ::: {.note}
+        If left as the default value this group will automatically be created
+        on system activation, otherwise you are responsible for
+        ensuring the group exists before the traefik service starts.
+        :::
+      '';
+    };
+
+    supplementaryGroups = mkOption {
+      default = [];
+      type = listOf str;
+      example = ["docker"];
+      description = ''
+        Additional groups under which traefik runs.
+        This can be used to give additional permissions, such as required by the `docker` provider.
+
+        ::: {.note}
+        With the `docker` provider, traefik manages connection to containers via the docker socket,
+        which requires membership of the `docker` group for write access 
+        :::
         ::: {.note}
         If left as the default value this group will automatically be created
         on system activation, otherwise you are responsible for
@@ -222,8 +251,31 @@ in {
         TRAEFIK_CERTIFICATESRESOLVERS_<NAME>_ACME_EAB_HMACENCODED=
         TRAEFIK_CERTIFICATESRESOLVERS_<NAME>_ACME_EAB_KID=
         ```
+        ::: {.warn}
+        The traefik static configuration methods (env, CLI, and file) are mutually exclusive.
+        Rather than setting secret values with the traefik environment variable syntax,
+        it is recommended to set arbitray environment variables, then reference them with `$VARNAME` in e.g.
+        {option}static.settings. 
+        :::
       '';
     };
+    useEnvSubst = mkOption {
+      # Should this be enabled by default if using env files, as it adds (?) start time and closure size
+      default = (cfg.environmentFiles != []);
+      type = bool;
+      example = true;
+      description = ''
+        Whether to use [`envSubst`]() in the ExecStartPre phase to augment the generated static config. See {environmentFiles}
+      '';
+    };
+
+    imports = [
+      (mkRenamedOptionModule ["services" "cone" "staticConfigFile"] ["services" "cone" "static" "file"])
+      (mkRenamedOptionModule ["services" "cone" "staticConfigOptions"] ["services" "cone" "static" "settings"])
+      (mkRenamedOptionModule ["services" "cone" "dynamicConfigFile"] ["services" "cone" "dynamic" "file"])
+      (mkRenamedOptionModule ["services" "cone" "dynamicConfigOptions"] ["services" "cone" "dynamic" "settings"])
+    ];
+
   };
 
   config = mkIf cfg.enable {
@@ -246,7 +298,7 @@ in {
       };
     };
     systemd.services.traefik = {
-      description = "Traefik web server";
+      description = "Traefik reverse proxy";
       wants = ["network-online.target"];
       after = ["network-online.target"];
       wantedBy = ["multi-user.target"];
@@ -254,10 +306,17 @@ in {
       startLimitBurst = 5;
       serviceConfig = {
         EnvironmentFile = cfg.environmentFiles;
-        ExecStart = "${getExe cfg.package} --configfile=${staticFile}";
-        Type = "simple";
+        ExecStartPre =
+          optional (cfg.useEnvSubst)
+          (pkgs.writeShellScript "pre-start" ''
+            umask 077
+            ${getExe pkgs.envsubst} -i "${staticFile}" > "${finalStaticFile}"
+          '');
+        ExecStart = "${getExe cfg.package} --configfile=${finalStaticFile}";
+        Type = "simple"; # Should this also be notify/notify-reload?
         User = cfg.user;
         Group = cfg.group;
+        SupplementaryGroups = mkIf (cfg.supplementaryGroups != []) cfg.supplementaryGroups;
         Restart = "on-failure";
         AmbientCapabilities = "cap_net_bind_service";
         CapabilityBoundingSet = "cap_net_bind_service";
