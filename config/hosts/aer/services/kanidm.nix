@@ -13,7 +13,6 @@ in {
   services.kani = {
     enableServer = true;
     enablePam = true;
-    enablePamTasks = true;
     serverSettings = {
       log_level = "debug";
       origin = "https://auth.aer.dedyn.io";
