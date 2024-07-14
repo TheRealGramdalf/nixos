@@ -79,7 +79,7 @@ in
     The kanidm-unixd-tasks daemon is not required for PAM and nsswitch functionality.
     If disabled, your system will function as usual. It is however strongly recommended due to the features it provides supporting Kanidm's capabilities.
     :::
-    '' // {default = cfg.enablePam};
+    '' // {default = cfg.enablePam;};
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
