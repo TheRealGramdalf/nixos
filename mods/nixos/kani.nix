@@ -25,7 +25,7 @@ let
   defaultServiceConfig = {
     ## Upstream recommendations
     # Setting the type to `notify` enables additional healthchecks
-    Type = "notify";
+    Type = "simple";
     NotifyAccess = "all";
     ## NixOS specific
     BindReadOnlyPaths = [
