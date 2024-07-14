@@ -26,6 +26,7 @@ let
     ## Upstream recommendations
     # Setting the type to `notify` enables additional healthchecks
     Type = "notify";
+    NotifyAccess = "all";
     ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
