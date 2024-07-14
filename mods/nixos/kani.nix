@@ -23,6 +23,10 @@ let
     in filteredPaths ++ filteredNew) [];
 
   defaultServiceConfig = {
+    ## Upstream recommendations
+    # Setting the type to `notify` enables additional healthchecks
+    Type = "notify";
+    ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
       "-/etc/resolv.conf"
@@ -70,7 +74,12 @@ in
     enableClient = mkEnableOption "the Kanidm client";
     enableServer = mkEnableOption "the Kanidm server";
     enablePam = mkEnableOption "the Kanidm PAM and NSS integration";
-    enablePamTasks = mkEnableOption "the kanidm-unixd-tasks daemon";
+    enablePamTasks = mkEnableOption ''the kanidm-unixd-tasks daemon, which handles home creation of users home directories.
+    ::: {.note}
+    The kanidm-unixd-tasks daemon is not required for PAM and nsswitch functionality.
+    If disabled, your system will function as usual. It is however strongly recommended due to the features it provides supporting Kanidm's capabilities.
+    :::
+    '' // {default = cfg.enablePam};
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
