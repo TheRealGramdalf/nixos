@@ -23,14 +23,13 @@ let
     in filteredPaths ++ filteredNew) [];
 
   defaultServiceConfig = {
-    ## Upstream recommendations
     # Setting the type to `notify` enables additional healthchecks
     Type = "notify";
     NotifyAccess = "all";
-    #BindPaths = ["/run/systemd/notify"];
     ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
+      # Required for the notification to go through
       "/run/systemd/notify"
       "-/etc/resolv.conf"
       "-/etc/nsswitch.conf"
