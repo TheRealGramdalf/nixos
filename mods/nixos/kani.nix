@@ -25,7 +25,7 @@ let
   defaultServiceConfig = {
     # Setting the type to `notify` enables additional healthchecks
     Type = "notify";
-    NotifyAccess = "all";
+    #NotifyAccess = "all";
     ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
