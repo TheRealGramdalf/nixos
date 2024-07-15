@@ -25,8 +25,9 @@ let
   defaultServiceConfig = {
     ## Upstream recommendations
     # Setting the type to `notify` enables additional healthchecks
-    Type = "simple";
+    Type = "notify";
     NotifyAccess = "all";
+    BindPaths = ["/run/systemd/notify"];
     ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
