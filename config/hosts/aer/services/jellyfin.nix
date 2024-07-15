@@ -3,7 +3,13 @@ _: let
   port = "8920";
 in {
   #    image = "lscr.io/linuxserver/jellyfin:10.8.13";
-  systemd.services."jellyfin".environment = {
+  systemd.services."jellyfin" = {
+    after = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    requires = [
+      config.systemd.services."kanidm-unixd".name
+    ];
   };
   services.jellyfin = {
     enable = true;
