@@ -31,13 +31,9 @@ in {
   systemd.services."vaultwarden" = {
     after = [
       config.systemd.services."kanidm-unixd".name
-      #config.systemd.services."kanidm".name
-      #config.systemd.services."traefik".name
     ];
     requires = [
       config.systemd.services."kanidm-unixd".name
-      #config.systemd.services."kanidm".name
-      #config.systemd.services."traefik".name
     ];
     serviceConfig = {
       User = lib.mkForce "5fa90349-b863-4d5e-b6c6-5a6f303fdb15";
