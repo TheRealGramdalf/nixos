@@ -30,6 +30,6 @@ in {
       service = "${name}";
       rule = "Host(`${name}.aer.dedyn.io`)";
     };
-    http.services."${name}".loadBalancer.servers = [{url = "https://127.0.0.1:${port}";}];
+    http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${port}";}];
   };
 }
