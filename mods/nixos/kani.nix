@@ -29,7 +29,7 @@ let
     ## NixOS specific
     BindReadOnlyPaths = [
       "/nix/store"
-      # Required for the notification to go through
+      # Required for the healthcheck notification to go through
       "/run/systemd/notify"
       "-/etc/resolv.conf"
       "-/etc/nsswitch.conf"
