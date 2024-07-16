@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, lib, ...}: let
   cfg = config.services.postgresql;
   cfg2 = config.services.pgadmin;
   name = "db";
@@ -11,8 +11,8 @@ in {
   };
 
   systemd.services."pgadmin".serviceConfig = {
-    User = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
-    Group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+    User = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+    Group = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     EnvironmentFile = [
       "/persist/secrets/pgadmin/pgadmin.env"
     ];
