@@ -49,7 +49,6 @@
       # Binds
       bind = [
         "$mainMod, SPACE, exec, $menu"
-        "$mainMod, return, exec, [float;tile] wezterm start --always-new-process"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
