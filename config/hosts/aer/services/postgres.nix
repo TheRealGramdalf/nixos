@@ -13,7 +13,8 @@ in {
     enable = true;
     dataDir = "/persist/services/postgres";
     identMap = ''
-      aer postgres-aer@auth.aer.dedyn.io postgres-aer@auth.aer.dedyn.io
+      # Let other names login as themselves
+      superuser_map      /^(.*)$   \1
     '';
   };
 
