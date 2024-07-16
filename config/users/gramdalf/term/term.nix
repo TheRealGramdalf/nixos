@@ -32,7 +32,7 @@ _: {
         search-box-match=["cdd6f4" "313244"];
 
         jump-labels=["11111b" "fab387"];
-        urls="89b4fa"
+        urls="89b4fa";
       };
     };
   };
