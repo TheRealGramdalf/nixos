@@ -13,7 +13,7 @@ in {
   };
   services.jellyfin = {
     enable = true;
-    dataDir = "/tank/media";
+    dataDir = "/persist/services/jellyfin/data";
     cacheDir = "/persist/services/jellyfin/cache";
     configDir = "/persist/services/jellyfin/config";
     user = "a08522ec-569d-41bb-ba65-635573489df1";
