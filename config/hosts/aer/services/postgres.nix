@@ -94,7 +94,7 @@ in {
   };
 
   services.cone.extraFiles = {
-    #"postgres" = {
+    #"postgres".settings = {
     #  http.routers.${name} = {
     #    rule = "Host(`${name}.aer.dedyn.io`)";
     #    service = ${name};
@@ -103,7 +103,7 @@ in {
     #    {url = "127.0.0.1:${cfg.port}";}
     #  ];
     #};
-    "postgres-ui" = {
+    "postgres-ui".settings = {
       http.routers."${name}-ui" = {
         rule = "Host(`${name}.aer.dedyn.io`)";
         service = "${name}-ui";
