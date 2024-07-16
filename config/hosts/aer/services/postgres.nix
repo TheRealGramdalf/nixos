@@ -17,15 +17,15 @@ in {
     '';
   };
 
-  systemd.services."pgadmin".serviceConfig = {
-    User = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
-    Group = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
-    EnvironmentFile = [
-      "/persist/secrets/pgadmin/pgadmin.env"
-    ];
-  };
+  #systemd.services."pgadmin".serviceConfig = {
+  #  User = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+  #  Group = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+  #  EnvironmentFile = [
+  #    "/persist/secrets/pgadmin/pgadmin.env"
+  #  ];
+  #};
   services.pgadmin = {
-    enable = true;
+    enable = false;
     initialEmail = "root@localhost";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
