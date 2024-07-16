@@ -110,7 +110,7 @@ in {
         middlewares = ["local-only"];
       };
       http.services."${name}-ui".loadbalancer.servers = [
-        {url = "http://127.0.0.1:${cfg2.port}";}
+        {url = "http://127.0.0.1:${toString cfg2.port}";}
       ];
     };
   };
