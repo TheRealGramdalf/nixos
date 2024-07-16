@@ -13,10 +13,10 @@ in {
     enable = true;
     package = pkgs.postgresql_16;
     dataDir = "/persist/services/postgres";
-    #identMap = ''
-    #  # Let other names login as themselves
-    #  superuser_map      /^(.*)$   \1
-    #'';
+    identMap = ''
+      # Let other names login as themselves
+      superuser_map      /^(.*)$   \1
+    '';
   };
 
   #systemd.services."pgadmin".serviceConfig = {
