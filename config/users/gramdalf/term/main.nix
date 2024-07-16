@@ -1,6 +1,6 @@
 {
   imports = [
-    ./wezterm.nix
+    ./term.nix
     ./nushell.nix
   ];
   programs = {
