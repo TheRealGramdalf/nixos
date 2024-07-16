@@ -12,6 +12,9 @@ in {
   services.postgresql = {
     enable = true;
     dataDir = "/persist/services/postgres";
+    identMap = ''
+      aer postgres-aer@auth.aer.dedyn.io postgres-aer@auth.aer.dedyn.io
+    '';
   };
 
   systemd.services."pgadmin".serviceConfig = {
