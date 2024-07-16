@@ -10,10 +10,19 @@ in {
     dataDir = "/persist/services/db";
   };
 
-  systemd.services."pgadmin"
+  systemd.services."pgadmin".serviceConfig = {
+    User = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+    Group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+    EnvironmentFile = [
+      "/persist/secrets/pgadmin/pgadmin.env"
+    ];
+  };
   services.pgadmin = {
     enable = true;
+    initialEmail = "root@localhost";
+    initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
+      DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
       ##########################################################################
@@ -30,7 +39,7 @@ in {
           # Oauth client id
           OAUTH2_CLIENT_ID = "${clientid}";
           # Oauth secret
-          OAUTH2_CLIENT_SECRET = "None";
+          OAUTH2_CLIENT_SECRET = "os.getenv(\"OAUTH2_CLIENT_SECRET\")";
           # URL to generate a token;
           # Ex: https://github.com/login/oauth/access_token
           OAUTH2_TOKEN_URL = "${authurl}/oauth2/token";
@@ -49,7 +58,7 @@ in {
           # The claim which is used for the username. If the value is empty the
           # email is used as username, but if a value is provided;
           # the claim has to exist.
-          OAUTH2_USERNAME_CLAIM = "None";
+          OAUTH2_USERNAME_CLAIM = "preferred_username";
           # Font-awesome icon, ex: fa-github
           OAUTH2_ICON = "fa-lock";
           # UI button colour, ex: #0000ff
@@ -97,10 +106,11 @@ in {
     "postgres-ui" = {
       http.routers."${name}-ui" = {
         rule = "Host(`${name}.aer.dedyn.io`)";
-        service = ${name};
+        service = "${name}-ui";
+        middlewares = ["local-only"];
       };
       http.services."${name}-ui".loadbalancer.servers = [
-        {url = "127.0.0.1:${cfg2.port}";}
+        {url = "http://127.0.0.1:${cfg2.port}";}
       ];
     };
   };
