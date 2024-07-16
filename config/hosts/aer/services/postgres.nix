@@ -1,21 +1,22 @@
-{config, lib, ...}: let
+{config, lib, pkgs, ...}: let
   cfg = config.services.postgresql;
   cfg2 = config.services.pgadmin;
   name = "db";
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer";
 in {
-  systemd.services."postgresql".serviceConfig = {
-    User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-    Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-  };
+  #systemd.services."postgresql".serviceConfig = {
+  #  User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+  #  Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+  #};
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_16;
     dataDir = "/persist/services/postgres";
-    identMap = ''
-      # Let other names login as themselves
-      superuser_map      /^(.*)$   \1
-    '';
+    #identMap = ''
+    #  # Let other names login as themselves
+    #  superuser_map      /^(.*)$   \1
+    #'';
   };
 
   #systemd.services."pgadmin".serviceConfig = {
