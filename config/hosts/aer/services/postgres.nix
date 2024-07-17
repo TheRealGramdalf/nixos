@@ -17,6 +17,17 @@ in {
       # Let other names login as themselves
       superuser_map      /^(.*)$   \1
     '';
+    authentication = ''
+      local all pgadmin peer
+      local all all trust
+    '';
+    initialScript = ''
+      CREATE ROLE pgadmin WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
+      CREATE DATABASE pgadmin;
+      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO pgadmin;
+      GRANT ALL PRIVILEGES ON DATABASE postgres TO pgadmin;
+      GRANT ALL PRIVILEGES ON DATABASE pgadmin TO pgadmin;
+    '';
   };
 
   systemd.services."pgadmin".serviceConfig = {
@@ -31,6 +42,8 @@ in {
     initialEmail = "pgadmin@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
+      ALLOWED_HOSTS = ["127.0.0.1"];
+      CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
