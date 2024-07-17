@@ -5,14 +5,18 @@
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer";
 in {
-  #systemd.services."postgresql".serviceConfig = {
-  #  User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-  #  Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-  #};
+  systemd.services."postgresql".serviceConfig = {
+    User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+    Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+  };
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_16;
     dataDir = "/persist/services/postgres";
+    initdbArgs = [
+      "--username=postgres-aer@auth.aer.dedyn.io"
+      "--debug"
+    ];
     identMap = ''
       # Let other names login as themselves
       superuser_map      /^(.*)$   \1
@@ -21,12 +25,12 @@ in {
       local all pgadmin peer
       local all all trust
     '';
-    initialScript = ''
-      CREATE ROLE pgadmin WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
+    initialScript = pkgs.writeText "init-sql-script" ''
+      CREATE ROLE e3a51f72-3dfb-4742-b2b2-d7088e9be7be WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
       CREATE DATABASE pgadmin;
-      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO pgadmin;
-      GRANT ALL PRIVILEGES ON DATABASE postgres TO pgadmin;
-      GRANT ALL PRIVILEGES ON DATABASE pgadmin TO pgadmin;
+      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
+      GRANT ALL PRIVILEGES ON DATABASE postgres TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
+      GRANT ALL PRIVILEGES ON DATABASE pgadmin TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
     '';
   };
 
@@ -39,11 +43,11 @@ in {
   };
   services.pgadmin = {
     enable = true;
-    initialEmail = "pgadmin@auth.aer.dedyn.io";
+    initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
       ALLOWED_HOSTS = ["127.0.0.1"];
-      CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
+      CONFIG_DATABASE_URI = "postgresql://e3a51f72-3dfb-4742-b2b2-d7088e9be7be:pgadmin@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
