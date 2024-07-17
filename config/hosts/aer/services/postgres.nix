@@ -28,7 +28,7 @@ in {
   };
   services.pgadmin = {
     enable = true;
-    initialEmail = "root@localhost";
+    initialEmail = "pgadmin@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
       DATA_DIR = "/persist/services/pgadmin";
