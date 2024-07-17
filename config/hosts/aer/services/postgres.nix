@@ -1,6 +1,6 @@
 {config, lib, pkgs, ...}: let
   cfg = config.services.postgresql;
-  cfg2 = config.services.pgadmin;
+  cfg2 = config.services.pogadmin;
   name = "db";
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer";
@@ -41,7 +41,7 @@ in {
       "/persist/secrets/pgadmin/pgadmin.env"
     ];
   };
-  services.pgadmin = {
+  services.pogadmin = {
     enable = true;
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
