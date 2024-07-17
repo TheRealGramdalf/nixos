@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.services.pgadmin;
+  cfg = config.services.pogadmin;
 
   _base = with types; [ int bool str ];
   base = with types; oneOf ([ (listOf (oneOf _base)) (attrsOf (oneOf _base)) ] ++ _base);
@@ -26,7 +26,7 @@ let
   pyType = with types; attrsOf (oneOf [ (attrsOf base) (listOf base) base ]);
 in
 {
-  options.services.pgadmin = {
+  options.services.pogadmin = {
     enable = mkEnableOption "PostgreSQL Admin 4";
 
     port = mkOption {
@@ -121,7 +121,7 @@ in
   config = mkIf (cfg.enable) {
     networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [ cfg.port ];
 
-    services.pgadmin.settings = {
+    services.pogadmin.settings = {
       DEFAULT_SERVER_PORT = cfg.port;
       PASSWORD_LENGTH_MIN = cfg.minimumPasswordLength;
       SERVER_MODE = true;
