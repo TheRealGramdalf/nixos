@@ -34,15 +34,14 @@ in {
   };
 
   systemd.services."pgadmin".serviceConfig = {
-    DynamicUser = lib.mkForce false;
-    User = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
-    Group = lib.mkForce "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     EnvironmentFile = [
       "/persist/secrets/pgadmin/pgadmin.env"
     ];
   };
   services.pogadmin = {
     enable = true;
+    user = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
+    group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
