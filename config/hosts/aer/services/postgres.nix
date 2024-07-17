@@ -25,11 +25,11 @@ in {
       local all all trust
     '';
     initialScript = pkgs.writeText "init-sql-script" ''
-      CREATE ROLE e3a51f72-3dfb-4742-b2b2-d7088e9be7be WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
+      CREATE ROLE pgadmin WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
       CREATE DATABASE pgadmin;
-      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
-      GRANT ALL PRIVILEGES ON DATABASE postgres TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
-      GRANT ALL PRIVILEGES ON DATABASE pgadmin TO e3a51f72-3dfb-4742-b2b2-d7088e9be7be;
+      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO pgadmin;
+      GRANT ALL PRIVILEGES ON DATABASE postgres TO pgadmin;
+      GRANT ALL PRIVILEGES ON DATABASE pgadmin TO pgadmin;
     '';
   };
 
@@ -46,7 +46,7 @@ in {
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
       ALLOWED_HOSTS = ["127.0.0.1"];
-      CONFIG_DATABASE_URI = "postgresql://e3a51f72-3dfb-4742-b2b2-d7088e9be7be:pgadmin@localhost/pgadmin";
+      CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
