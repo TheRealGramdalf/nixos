@@ -179,8 +179,9 @@ in
       ];
 
       serviceConfig = {
-        User = "pgadmin";
-        DynamicUser = true;
+        User = cfg.user;
+        Group = cfg.group;
+        DynamicUser = mkIf (cfg.user == "pgadmin" && cfg.group == "pgadmin") true;
         LogsDirectory = "pgadmin";
         StateDirectory = "pgadmin";
         ExecStart = "${cfg.package}/bin/pgadmin4";
@@ -189,12 +190,15 @@ in
       };
     };
 
-    users.users.pgadmin = {
-      isSystemUser = true;
-      group = "pgadmin";
+    users.users = mkIf (cfg.user == "pgadmin") {
+      pgadmin = {
+        group = cfg.group;
+        isSystemUser = true;
+      };
     };
-
-    users.groups.pgadmin = { };
+    users.groups = mkIf (cfg.group == "pgadmin") {
+      pgadmin = {};
+    };
 
     environment.etc."pgadmin/config_system.py" = {
       text = optionalString cfg.emailServer.enable ''
@@ -204,8 +208,8 @@ in
         MAIL_PASSWORD = pw
       '' + formatPy cfg.settings;
       mode = "0600";
-      user = "pgadmin";
-      group = "pgadmin";
+      user = cfg.user;
+      group = cfg.group;
     };
   };
 }
