@@ -118,6 +118,34 @@ in
       type = pyType;
       default = { };
     };
+
+    user = mkOption {
+      default = "pgadmin";
+      type = str;
+      description = ''
+        Group under which pgadmin runs.
+
+        ::: {.note}
+        If left as the default value this user will automatically be created
+        on system activation, otherwise you are responsible for
+        ensuring the user exists before the pgadmin service starts.
+        :::
+      '';
+    };
+
+    group = mkOption {
+      default = "pgadmin";
+      type = str;
+      description = ''
+        Primary group under which pgadmin runs.
+
+        ::: {.note}
+        If left as the default value this group will automatically be created
+        on system activation, otherwise you are responsible for
+        ensuring the group exists before the pgadmin service starts.
+        :::
+      '';
+    };
   };
 
   config = mkIf (cfg.enable) {
