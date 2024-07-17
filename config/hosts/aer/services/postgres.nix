@@ -17,12 +17,11 @@ in {
       "--username=postgres-aer@auth.aer.dedyn.io"
       "--debug"
     ];
-    identMap = ''
-      # Let other names login as themselves
-      superuser_map      /^(.*)$   \1
-    '';
+    #identMap = ''
+    #  # Let other names login as themselves
+    #  superuser_map      /^(.*)$   \1
+    #'';
     authentication = ''
-      local all pgadmin peer
       local all all trust
     '';
     initialScript = pkgs.writeText "init-sql-script" ''
