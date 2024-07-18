@@ -27,7 +27,7 @@ let
     Type = "notify";
     BindReadOnlyPaths = [
       "/nix/store"
-      # Required for the healthcheck notification to go through
+      # For healthcheck notifications
       "/run/systemd/notify"
       "-/etc/resolv.conf"
       "-/etc/nsswitch.conf"
@@ -324,8 +324,8 @@ in
     systemd.services.kanidm-unixd = mkIf cfg.enablePam {
       description = "Kanidm Local Client Resolver";
       after = [
-        "chronyd.service"
-        "ntpd.service"
+        (mkIf config.services.chrony.enable "chronyd.service")
+        (mkIf config.services.ntp.enable "ntpd.service")
         "network-online.target"
       ];
       before = [
@@ -371,8 +371,8 @@ in
     systemd.services.kanidm-unixd-tasks = mkIf cfg.enablePamTasks {
       description = "Kanidm PAM home management daemon";
       after=[
-        "chronyd.service"
-        "ntpd.service"
+        (mkIf config.services.chrony.enable "chronyd.service")
+        (mkIf config.services.ntp.enable "ntpd.service")
         "network-online.target"
         "kanidm-unixd.service"
       ];
@@ -425,10 +425,11 @@ in
       })
     ];
 
-    system.nssModules = mkIf cfg.enablePam [ cfg.package ];
-
-    system.nssDatabases.group = mkIf cfg.enablePam ["kanidm"];
-    system.nssDatabases.passwd = mkIf cfg.enablePam ["kanidm"];
+    system = mkIf cfg.enablePam {
+      nssModules = [ cfg.package ];
+      nssDatabases.group = ["kanidm"];
+      nssDatabases.passwd = ["kanidm"];
+    };
 
     users.groups = mkMerge [
       (mkIf cfg.enableServer {
