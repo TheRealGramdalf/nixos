@@ -1,8 +1,8 @@
 { config, lib, options, pkgs, ... }:
 let
   cfg = config.services.kani;
-  inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce;
-  inherit (lib.types) str nullOr strMatching submodule path enum listOf ints;
+  inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce filterAttrs mapAttrs;
+  inherit (lib.types) str nullOr strMatching submodule path enum listOf ints bool;
   settingsFormat = pkgs.formats.toml { };
   # Remove null values, so we can document optional values that don't end up in the generated TOML file.
   filterConfig = lib.converge (lib.filterAttrsRecursive (_: v: v != null));
@@ -82,6 +82,20 @@ in
     '' // {default = cfg.enablePam;};
 
     package = lib.mkPackageOption pkgs "kanidm" {};
+
+    #makeSystemdWait = mkOption {
+    #  type = bool;
+    #  description = ''
+    #    Enabling this causes all systemd units that match the following criteria to gain
+    #    `After = ["kanidm-unixd"]` and `Requires = ["kanidm-unixd"]` in its service config:
+    #    - {option}`services.kani.enablePam` must be enabled
+    #    - At least one `User =` or `Group =` directive matches the following regex
+    #      - `[[:xdigit:]]{8}-(?:[[:xdigit:]]{4}-){3}[[:xdigit:]]{12}`
+    #      - _This regex matches the Kanidm `uuid` format. The `name` or `spn` field is unstable and should not be used_
+    #    - The `User` or `Group` does not exist in {option}`users`
+    #  '';
+    #  default = cfg.enablePam;
+    #};
 
     serverSettings = mkOption {
       type = submodule {
@@ -411,6 +425,19 @@ in
       };
       environment.RUST_LOG = "info";
     };
+    
+    #systemd = mkIf cfg.makeSystemdWait (mapAttrs (n: v:
+    #  {services.n.serviceConfig = {
+    #    After = ["kanidm-unixd.service"];
+    #    Requires = ["kanidm-unixd.service"];
+    #  };
+    #  } 
+    #) (filterAttrs (n: v: 
+    #  !isNull (builtins.match "[[:xdigit:]]{8}-(?:[[:xdigit:]]{4}-){3}[[:xdigit:]]{12}" v.serviceConfig.Group)
+    #  && !isNull (builtins.match "[[:xdigit:]]{8}-(?:[[:xdigit:]]{4}-){3}[[:xdigit:]]{12}" v.serviceConfig.User)
+    #  && config.users.users.${v.serviceConfig.User} != {}
+    #  && config.users.groups.${v.serviceConfig.Group} != {}
+    #) config.systemd.services));
 
     # These paths are hardcoded
     environment.etc = mkMerge [
