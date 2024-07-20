@@ -33,7 +33,7 @@ in {
       passwordFile = "/persist/secrets/netbird/coturn.pass";
     };
   };
-  services.nginx.virtualHosts.${cfg.domain}.listen = [{addr = "unix:/run/nginx.sock";}];
+  services.nginx.virtualHosts.${cfg.domain}.listen = [{port = 6942;}];
 
 
   # TODO: add ports accordingly
@@ -43,7 +43,7 @@ in {
         rule= "Host(`${cfg.domain}`)";
         service = "netbird-dash";
       };
-      http.services."netbird-dash".loadbalancer.servers= [{url = "unix:/run/nginx.sock";}];
+      http.services."netbird-dash".loadbalancer.servers= [{url = "http://127.0.0.1:6924";}];
     };
     "netbird-signal".settings = {
       http.routers."netbird-signal" = {
