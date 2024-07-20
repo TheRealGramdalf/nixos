@@ -62,7 +62,7 @@ in {
         rule= "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
       };
-      http.services."netbird-api".loadbalancer.servers= [{url = "h2c://127.0.0.1:443";}];
+      http.services."netbird-api".loadbalancer.servers= [{url = "h2c://127.0.0.1:${toString cfg.management.port}";}];
     };
   };
 }
