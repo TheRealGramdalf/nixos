@@ -12,6 +12,7 @@ in {
       oidcConfigEndpoint = "https://auth.aer.dedyn.io/oauth2/openid/${cid}/.well-known/openid-configuration";
       settings = {
         TURNConfig.Secret = {_secret = "/persist/secrets/netbird/turn-secret";};
+        # Generate this with `wg genkey`
         DataStoreEncryptionKey = {_secret = "/persist/secrets/netbird/datastore.key";};
       };
     };
