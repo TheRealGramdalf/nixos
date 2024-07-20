@@ -21,7 +21,7 @@ in {
       enableNginx = true;
       #domain = cfg.domain;
       settings = {
-        AUTH_AUTHORITY = cfg.management.oidcConfigEndpoint;
+        AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
         AUTH_CLIENT_ID = cid;
         AUTH_SUPPORTED_SCOPES = "openid profile email";
       };
