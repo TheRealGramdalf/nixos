@@ -24,7 +24,7 @@ in {
         AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
         AUTH_CLIENT_ID = cid;
         AUTH_SUPPORTED_SCOPES = "openid profile email";
-        AUTH_SECRET = "3e8Wza0FtsZ6MJ46LeMbDXwaPeGH0SR16C4f0XvGEyQLFvxk"
+        AUTH_SECRET = "3e8Wza0FtsZ6MJ46LeMbDXwaPeGH0SR16C4f0XvGEyQLFvxk";
       };
     };
     signal = {
