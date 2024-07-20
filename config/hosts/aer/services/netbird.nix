@@ -16,6 +16,7 @@ in {
       };
     };
     dashboard = {
+      enable = true;
       settings = {
         AUTH_AUTHORITY = "";
         AUTH_CLIENT_ID = cid;
