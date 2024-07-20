@@ -54,7 +54,7 @@ in {
         rule= "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
         service = "netbird-mgmt";
       };
-      http.services."netbird-mgmt".loadbalancer.servers= [{url = "https://127.0.0.1:${toString cfg.management.port}";}];
+      http.services."netbird-mgmt".loadbalancer.servers= [{url = "http://127.0.0.1:${toString cfg.management.port}";}];
       http.routers."netbird-api" = {
         rule= "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
