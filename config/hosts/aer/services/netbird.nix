@@ -18,6 +18,7 @@ in {
     };
     dashboard = {
       enable = true;
+      enableNginx = true;
       settings = {
         AUTH_AUTHORITY = "";
         AUTH_CLIENT_ID = cid;
@@ -32,6 +33,7 @@ in {
       passwordFile = "/persist/secrets/netbird/coturn.pass";
     };
   };
+  services.nginx.virtualHosts.${cfg.domain}.listen = [{addr = "unix:/run/nginx.sock";}];
 
 
   # TODO: add ports accordingly
@@ -41,7 +43,7 @@ in {
         rule= "Host(`${cfg.domain}`)";
         service = "netbird-dash";
       };
-      http.services."netbird-dash".loadbalancer.servers= [{url = "http://127.0.0.1";}];
+      http.services."netbird-dash".loadbalancer.servers= [{url = "unix:/run/nginx.sock";}];
     };
     "netbird-signal".settings = {
       http.routers."netbird-signal" = {
