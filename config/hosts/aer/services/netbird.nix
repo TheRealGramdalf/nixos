@@ -19,9 +19,9 @@ in {
     dashboard = {
       enable = true;
       enableNginx = true;
-      domain = cfg.domain;
+      #domain = cfg.domain;
       settings = {
-        AUTH_AUTHORITY = "";
+        AUTH_AUTHORITY = cfg.domain;
         AUTH_CLIENT_ID = cid;
         AUTH_SUPPORTED_SCOPES = "openid profile email";
       };
