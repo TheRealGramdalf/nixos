@@ -19,6 +19,7 @@ in {
     dashboard = {
       enable = true;
       enableNginx = true;
+      domain = cfg.domain;
       settings = {
         AUTH_AUTHORITY = "";
         AUTH_CLIENT_ID = cid;
