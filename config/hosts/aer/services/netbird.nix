@@ -43,7 +43,7 @@ in {
         rule= "Host(`${cfg.domain}`)";
         service = "netbird-dash";
       };
-      http.services."netbird-dash".loadbalancer.servers= [{url = "http://127.0.0.1:6924";}];
+      http.services."netbird-dash".loadbalancer.servers= [{url = "http://127.0.0.1:6924"; addr = "127.0.0.1";}];
     };
     "netbird-signal".settings = {
       http.routers."netbird-signal" = {
