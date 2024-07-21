@@ -1,26 +1,32 @@
-{ config, lib, options, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  options,
+  pkgs,
+  ...
+}: let
   cfg = config.services.kani;
   inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce filterAttrs mapAttrs;
   inherit (lib.types) str nullOr strMatching submodule path enum listOf ints bool;
-  settingsFormat = pkgs.formats.toml { };
+  settingsFormat = pkgs.formats.toml {};
   # Remove null values, so we can document optional values that don't end up in the generated TOML file.
   filterConfig = lib.converge (lib.filterAttrsRecursive (_: v: v != null));
   serverConfigFile = settingsFormat.generate "server.toml" (filterConfig cfg.serverSettings);
   clientConfigFile = settingsFormat.generate "kanidm-config.toml" (filterConfig cfg.clientSettings);
   unixConfigFile = settingsFormat.generate "kanidm-unixd.toml" (filterConfig cfg.unixSettings);
-  certPaths = builtins.map builtins.dirOf [ cfg.serverSettings.tls_chain cfg.serverSettings.tls_key ];
+  certPaths = builtins.map builtins.dirOf [cfg.serverSettings.tls_chain cfg.serverSettings.tls_key];
 
   # Merge bind mount paths and remove paths where a prefix is already mounted.
   # This makes sure that if e.g. the tls_chain is in the nix store and /nix/store is already in the mount
   # paths, no new bind mount is added. Adding subpaths caused problems on ofborg.
   hasPrefixInList = list: newPath: lib.any (path: lib.hasPrefix (builtins.toString path) (builtins.toString newPath)) list;
   mergePaths = lib.foldl' (merged: newPath: let
-      # If the new path is a prefix to some existing path, we need to filter it out
-      filteredPaths = lib.filter (p: !lib.hasPrefix (builtins.toString newPath) (builtins.toString p)) merged;
-      # If a prefix of the new path is already in the list, do not add it
-      filteredNew = lib.optional (!hasPrefixInList filteredPaths newPath) newPath;
-    in filteredPaths ++ filteredNew) [];
+    # If the new path is a prefix to some existing path, we need to filter it out
+    filteredPaths = lib.filter (p: !lib.hasPrefix (builtins.toString newPath) (builtins.toString p)) merged;
+    # If a prefix of the new path is already in the list, do not add it
+    filteredNew = lib.optional (!hasPrefixInList filteredPaths newPath) newPath;
+  in
+    filteredPaths ++ filteredNew) [];
 
   defaultServiceConfig = {
     # Setting the type to `notify` enables additional healthchecks
@@ -58,28 +64,28 @@ let
     ProtectKernelModules = true;
     ProtectKernelTunables = true;
     ProtectProc = "invisible";
-    RestrictAddressFamilies = [ ];
+    RestrictAddressFamilies = [];
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
     SystemCallArchitectures = "native";
-    SystemCallFilter = [ "@system-service" "~@privileged @resources @setuid @keyring" ];
+    SystemCallFilter = ["@system-service" "~@privileged @resources @setuid @keyring"];
     # Does not work well with the temporary root
     #UMask = "0066";
   };
-
-in
-{
+in {
   options.services.kani = {
     enableClient = mkEnableOption "the Kanidm client";
     enableServer = mkEnableOption "the Kanidm server";
     enablePam = mkEnableOption "the Kanidm PAM and NSS integration";
-    enablePamTasks = mkEnableOption ''the kanidm-unixd-tasks daemon, which handles home creation of users home directories.
-    ::: {.note}
-    The kanidm-unixd-tasks daemon is not required for PAM and nsswitch functionality.
-    If disabled, your system will function as usual. It is however strongly recommended due to the features it provides supporting Kanidm's capabilities.
-    :::
-    '' // {default = cfg.enablePam;};
+    enablePamTasks =
+      mkEnableOption ''        the kanidm-unixd-tasks daemon, which handles home creation of users home directories.
+            ::: {.note}
+            The kanidm-unixd-tasks daemon is not required for PAM and nsswitch functionality.
+            If disabled, your system will function as usual. It is however strongly recommended due to the features it provides supporting Kanidm's capabilities.
+            :::
+      ''
+      // {default = cfg.enablePam;};
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
@@ -151,12 +157,12 @@ in
           log_level = mkOption {
             description = "Log level of the server.";
             default = "info";
-            type = enum [ "info" "debug" "trace" ];
+            type = enum ["info" "debug" "trace"];
           };
           role = mkOption {
             description = "The role of this server. This affects the replication relationship and thereby available features.";
             default = "WriteReplica";
-            type = enum [ "WriteReplica" "WriteReplicaNoUI" "ReadOnlyReplica" ];
+            type = enum ["WriteReplica" "WriteReplicaNoUI" "ReadOnlyReplica"];
           };
           online_backup = {
             path = mkOption {
@@ -182,7 +188,7 @@ in
           };
         };
       };
-      default = { };
+      default = {};
       description = ''
         Settings for Kanidm, see
         [the documentation](https://kanidm.github.io/kanidm/stable/server_configuration.html)
@@ -236,208 +242,226 @@ in
   };
 
   config = mkIf (cfg.enableClient || cfg.enableServer || cfg.enablePam) {
-    assertions =
-      [
-        {
-          assertion = !cfg.enableServer || ((cfg.serverSettings.tls_chain or null) == null) || (!lib.isStorePath cfg.serverSettings.tls_chain);
-          message = ''
-            <option>services.kanidm.serverSettings.tls_chain</option> points to
-            a file in the Nix store. You should use a quoted absolute path to
-            prevent this.
-          '';
-        }
-        {
-          assertion = !cfg.enableServer || ((cfg.serverSettings.tls_key or null) == null) || (!lib.isStorePath cfg.serverSettings.tls_key);
-          message = ''
-            <option>services.kanidm.serverSettings.tls_key</option> points to
-            a file in the Nix store. You should use a quoted absolute path to
-            prevent this.
-          '';
-        }
-        {
-          assertion = !cfg.enableClient || options.services.kani.clientSettings.isDefined;
-          message = ''
-            <option>services.kanidm.clientSettings</option> needs to be configured
-            if the client is enabled.
-          '';
-        }
-        {
-          assertion = !cfg.enablePam || options.services.kani.clientSettings.isDefined;
-          message = ''
-            <option>services.kanidm.clientSettings</option> needs to be configured
-            for the PAM daemon to connect to the Kanidm server.
-          '';
-        }
-        {
-          assertion = !cfg.enableServer || (cfg.serverSettings.domain == null
+    assertions = [
+      {
+        assertion = !cfg.enableServer || ((cfg.serverSettings.tls_chain or null) == null) || (!lib.isStorePath cfg.serverSettings.tls_chain);
+        message = ''
+          <option>services.kanidm.serverSettings.tls_chain</option> points to
+          a file in the Nix store. You should use a quoted absolute path to
+          prevent this.
+        '';
+      }
+      {
+        assertion = !cfg.enableServer || ((cfg.serverSettings.tls_key or null) == null) || (!lib.isStorePath cfg.serverSettings.tls_key);
+        message = ''
+          <option>services.kanidm.serverSettings.tls_key</option> points to
+          a file in the Nix store. You should use a quoted absolute path to
+          prevent this.
+        '';
+      }
+      {
+        assertion = !cfg.enableClient || options.services.kani.clientSettings.isDefined;
+        message = ''
+          <option>services.kanidm.clientSettings</option> needs to be configured
+          if the client is enabled.
+        '';
+      }
+      {
+        assertion = !cfg.enablePam || options.services.kani.clientSettings.isDefined;
+        message = ''
+          <option>services.kanidm.clientSettings</option> needs to be configured
+          for the PAM daemon to connect to the Kanidm server.
+        '';
+      }
+      {
+        assertion =
+          !cfg.enableServer
+          || (cfg.serverSettings.domain
+            == null
             -> cfg.serverSettings.role == "WriteReplica" || cfg.serverSettings.role == "WriteReplicaNoUI");
-          message = ''
-            <option>services.kanidm.serverSettings.domain</option> can only be set if this instance
-            is not a ReadOnlyReplica. Otherwise the db would inherit it from
-            the instance it follows.
-          '';
-        }
-        (mkIf cfg.enablePam {
-          assertion = (config.services.nscd.enable -> config.services.nscd.enableNsncd);
-          message = ''
-            Kanidm-unixd implements it's own cache, which conflicts with the cache implemented by nscd.
-            Use {option}services.nscd.enableNsncd, the non caching reimplementation of nscd instead. 
-          '';
-        })
-      ];
+        message = ''
+          <option>services.kanidm.serverSettings.domain</option> can only be set if this instance
+          is not a ReadOnlyReplica. Otherwise the db would inherit it from
+          the instance it follows.
+        '';
+      }
+      (mkIf cfg.enablePam {
+        assertion = config.services.nscd.enable -> config.services.nscd.enableNsncd;
+        message = ''
+          Kanidm-unixd implements it's own cache, which conflicts with the cache implemented by nscd.
+          Use {option}services.nscd.enableNsncd, the non caching reimplementation of nscd instead.
+        '';
+      })
+    ];
 
-    environment.systemPackages = mkIf cfg.enableClient [ cfg.package ];
+    environment.systemPackages = mkIf cfg.enableClient [cfg.package];
 
-    systemd.tmpfiles.settings."10-kanidm" = {
-      ${cfg.serverSettings.online_backup.path}.d = {
-        mode = "0700";
-        user = "kanidm";
-        group = "kanidm";
-      };
-    };
+    systemd = mkMerge [
+      {
+        tmpfiles.settings."10-kanidm" = {
+          ${cfg.serverSettings.online_backup.path}.d = {
+            mode = "0700";
+            user = "kanidm";
+            group = "kanidm";
+          };
+        };
+      }
+      (mkIf cfg.enableServer {
+        services.kanidm = mkIf cfg.enableServer {
+          description = "kanidm identity management daemon";
+          after = ["time-sync.target" "network-online.target"];
+          wants = ["time-sync.target" "network-online.target"];
+          before = ["radiusd.service"];
+          wantedBy = ["multi-user.target"];
+          serviceConfig = mkMerge [
+            # Merge paths and ignore existing prefixes needs to sidestep mkMerge
+            (defaultServiceConfig
+              // {
+                BindReadOnlyPaths = mergePaths (defaultServiceConfig.BindReadOnlyPaths ++ certPaths);
+              })
+            {
+              StateDirectory = "kanidm";
+              StateDirectoryMode = "0700";
+              RuntimeDirectory = "kanidmd";
+              ExecStart = "${cfg.package}/bin/kanidmd server -c ${serverConfigFile}";
+              User = "kanidm";
+              Group = "kanidm";
 
-    systemd.services.kanidm = mkIf cfg.enableServer {
-      description = "kanidm identity management daemon";
-      after = ["time-sync.target" "network-online.target"];
-      wants = ["time-sync.target" "network-online.target"];
-      before = ["radiusd.service"];
-      wantedBy = ["multi-user.target"];
-      serviceConfig = mkMerge [
-        # Merge paths and ignore existing prefixes needs to sidestep mkMerge
-        (defaultServiceConfig // {
-          BindReadOnlyPaths = mergePaths (defaultServiceConfig.BindReadOnlyPaths ++ certPaths);
-        })
-        {
-          StateDirectory = "kanidm";
-          StateDirectoryMode = "0700";
-          RuntimeDirectory = "kanidmd";
-          ExecStart = "${cfg.package}/bin/kanidmd server -c ${serverConfigFile}";
-          User = "kanidm";
-          Group = "kanidm";
+              BindPaths = [
+                # To create the socket
+                "/run/kanidmd:/run/kanidmd"
+                # To store backups
+                cfg.serverSettings.online_backup.path
+              ];
 
-          BindPaths = [
-            # To create the socket
-            "/run/kanidmd:/run/kanidmd"
-            # To store backups
-            cfg.serverSettings.online_backup.path
+              AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
+              CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
+              # This would otherwise override the CAP_NET_BIND_SERVICE capability.
+              PrivateUsers = mkForce false;
+              # Port needs to be exposed to the host network
+              PrivateNetwork = mkForce false;
+              RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_UNIX"];
+              TemporaryFileSystem = "/:ro";
+            }
           ];
+          environment.RUST_LOG = "info";
+        };
+      })
 
-          AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-          CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
-          # This would otherwise override the CAP_NET_BIND_SERVICE capability.
-          PrivateUsers = mkForce false;
-          # Port needs to be exposed to the host network
-          PrivateNetwork = mkForce false;
-          RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
-          TemporaryFileSystem = "/:ro";
-        }
-      ];
-      environment.RUST_LOG = "info";
-    };
-
-    systemd.services.kanidm-unixd = mkIf cfg.enablePam {
-      description = "Kanidm Local Client Resolver";
-      after = [
-        (mkIf config.services.chrony.enable "chronyd.service")
-        (mkIf config.services.ntp.enable "ntpd.service")
-        "network-online.target"
-      ];
-      before = [
-        "systemd-user-sessions.service"
-        "sshd.service"
-        "nss-user-lookup.target"
-      ];
-      wants = ["nss-user-lookup.target" "network-online.target"];
-      wantedBy = ["multi-user.target"];
-
-      restartTriggers = [ unixConfigFile clientConfigFile ];
-      serviceConfig = mkMerge [
-        defaultServiceConfig
-        {
-          CacheDirectory = "kanidm-unixd";
-          CacheDirectoryMode = "0700";
-          RuntimeDirectory = "kanidm-unixd";
-          ExecStart = "${cfg.package}/bin/kanidm_unixd";
-          User = "kanidm-unixd";
-          Group = "kanidm-unixd";
-
-          BindReadOnlyPaths = [
-            "-/etc/kanidm"
-            "-/etc/static/kanidm"
-            "-/etc/ssl"
-            "-/etc/static/ssl"
-            "-/etc/passwd"
-            "-/etc/group"
+      (mkIf cfg.enablePam {
+        services.kanidm-unixd = mkIf cfg.enablePam {
+          description = "Kanidm Local Client Resolver";
+          after = [
+            (mkIf config.services.chrony.enable "chronyd.service")
+            (mkIf config.services.ntp.enable "ntpd.service")
+            "network-online.target"
           ];
-          BindPaths = [
-            # To create the socket
-            "/run/kanidm-unixd:/var/run/kanidm-unixd"
+          before = [
+            "systemd-user-sessions.service"
+            "sshd.service"
+            "nss-user-lookup.target"
           ];
-          # Needs to connect to kanidmd
-          PrivateNetwork = mkForce false;
-          RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
-          TemporaryFileSystem = "/:ro";
-        }
-      ];
-      environment.RUST_LOG = "info";
-    };
+          wants = ["nss-user-lookup.target" "network-online.target"];
+          wantedBy = ["multi-user.target"];
 
-    systemd.services.kanidm-unixd-tasks = mkIf cfg.enablePamTasks {
-      description = "Kanidm PAM home management daemon";
-      after=[
-        (mkIf config.services.chrony.enable "chronyd.service")
-        (mkIf config.services.ntp.enable "ntpd.service")
-        "network-online.target"
-        "kanidm-unixd.service"
-      ];
-      wants = ["network-online.target"];
-      requires=["kanidm-unixd.service"];
-      wantedBy = ["multi-user.target"];
-      restartTriggers = [ unixConfigFile clientConfigFile ];
-      serviceConfig = {
-        ExecStart = "${cfg.package}/bin/kanidm_unixd_tasks";
+          restartTriggers = [unixConfigFile clientConfigFile];
+          serviceConfig = mkMerge [
+            defaultServiceConfig
+            {
+              CacheDirectory = "kanidm-unixd";
+              CacheDirectoryMode = "0700";
+              RuntimeDirectory = "kanidm-unixd";
+              ExecStart = "${cfg.package}/bin/kanidm_unixd";
+              User = "kanidm-unixd";
+              Group = "kanidm-unixd";
 
-        BindReadOnlyPaths = [
-          "/nix/store"
-          "-/etc/resolv.conf"
-          "-/etc/nsswitch.conf"
-          "-/etc/hosts"
-          "-/etc/localtime"
-          "-/etc/kanidm"
-          "-/etc/static/kanidm"
-        ];
-        BindPaths = [
-          # To manage home directories
-          "/home"
-          # To connect to kanidm-unixd
-          "/run/kanidm-unixd:/var/run/kanidm-unixd"
-        ];
-        # CAP_DAC_OVERRIDE is needed to ignore ownership of unixd socket
-        CapabilityBoundingSet = [ "CAP_CHOWN" "CAP_FOWNER" "CAP_DAC_OVERRIDE" "CAP_DAC_READ_SEARCH" ];
-        IPAddressDeny = "any";
-        # Need access to users
-        PrivateUsers = false;
-        # Need access to home directories
-        ProtectHome = false;
-        RestrictAddressFamilies = [ "AF_UNIX" ];
-        TemporaryFileSystem = "/:ro";
-        Restart = "on-failure";
-      };
-      environment.RUST_LOG = "info";
-    };
-    
-    #systemd = mkIf cfg.makeSystemdWait (mapAttrs (n: v:
-    #  {services.n.serviceConfig = {
-    #    After = ["kanidm-unixd.service"];
-    #    Requires = ["kanidm-unixd.service"];
-    #  };
-    #  } 
-    #) (filterAttrs (n: v: 
-    #  !isNull (builtins.match "[[:xdigit:]]{8}-(?:[[:xdigit:]]{4}-){3}[[:xdigit:]]{12}" v.serviceConfig.Group)
-    #  && !isNull (builtins.match "[[:xdigit:]]{8}-(?:[[:xdigit:]]{4}-){3}[[:xdigit:]]{12}" v.serviceConfig.User)
-    #  && config.users.users.${v.serviceConfig.User} != {}
-    #  && config.users.groups.${v.serviceConfig.Group} != {}
-    #) config.systemd.services));
+              BindReadOnlyPaths = [
+                "-/etc/kanidm"
+                "-/etc/static/kanidm"
+                "-/etc/ssl"
+                "-/etc/static/ssl"
+                "-/etc/passwd"
+                "-/etc/group"
+              ];
+              BindPaths = [
+                # To create the socket
+                "/run/kanidm-unixd:/var/run/kanidm-unixd"
+              ];
+              # Needs to connect to kanidmd
+              PrivateNetwork = mkForce false;
+              RestrictAddressFamilies = ["AF_INET" "AF_INET6" "AF_UNIX"];
+              TemporaryFileSystem = "/:ro";
+            }
+          ];
+          environment.RUST_LOG = "info";
+        };
+      })
+
+      (mkIf cfg.enablePamTasks {
+        services.kanidm-unixd-tasks = mkIf cfg.enablePamTasks {
+          description = "Kanidm PAM home management daemon";
+          after = [
+            (mkIf config.services.chrony.enable "chronyd.service")
+            (mkIf config.services.ntp.enable "ntpd.service")
+            "network-online.target"
+            "kanidm-unixd.service"
+          ];
+          wants = ["network-online.target"];
+          requires = ["kanidm-unixd.service"];
+          wantedBy = ["multi-user.target"];
+          restartTriggers = [unixConfigFile clientConfigFile];
+          serviceConfig = {
+            ExecStart = "${cfg.package}/bin/kanidm_unixd_tasks";
+
+            BindReadOnlyPaths = [
+              "/nix/store"
+              "-/etc/resolv.conf"
+              "-/etc/nsswitch.conf"
+              "-/etc/hosts"
+              "-/etc/localtime"
+              "-/etc/kanidm"
+              "-/etc/static/kanidm"
+            ];
+            BindPaths = [
+              # To manage home directories
+              "/home"
+              # To connect to kanidm-unixd
+              "/run/kanidm-unixd:/var/run/kanidm-unixd"
+            ];
+            # CAP_DAC_OVERRIDE is needed to ignore ownership of unixd socket
+            CapabilityBoundingSet = ["CAP_CHOWN" "CAP_FOWNER" "CAP_DAC_OVERRIDE" "CAP_DAC_READ_SEARCH"];
+            IPAddressDeny = "any";
+            # Need access to users
+            PrivateUsers = false;
+            # Need access to home directories
+            ProtectHome = false;
+            RestrictAddressFamilies = ["AF_UNIX"];
+            TemporaryFileSystem = "/:ro";
+            Restart = "on-failure";
+          };
+          environment.RUST_LOG = "info";
+        };
+      })
+
+      (
+        mkIf cfg.makeSystemdWait
+        (mapAttrs (
+            n: v: {
+              services.n.serviceConfig = {
+                After = ["kanidm-unixd.service"];
+                Requires = ["kanidm-unixd.service"];
+              };
+            }
+          ) (filterAttrs (
+              n: v:
+                !isNull (builtins.match "([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})" v.serviceConfig.Group)
+                && !isNull (builtins.match "([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})" v.serviceConfig.User)
+                && config.users.users.${v.serviceConfig.User} != {}
+                && config.users.groups.${v.serviceConfig.Group} != {}
+            )
+            config.systemd.services))
+      )
+    ];
 
     # These paths are hardcoded
     environment.etc = mkMerge [
@@ -453,17 +477,17 @@ in
     ];
 
     system = mkIf cfg.enablePam {
-      nssModules = [ cfg.package ];
+      nssModules = [cfg.package];
       nssDatabases.group = ["kanidm"];
       nssDatabases.passwd = ["kanidm"];
     };
 
     users.groups = mkMerge [
       (mkIf cfg.enableServer {
-        kanidm = { };
+        kanidm = {};
       })
       (mkIf cfg.enablePam {
-        kanidm-unixd = { };
+        kanidm-unixd = {};
       })
     ];
     users.users = mkMerge [
@@ -472,7 +496,7 @@ in
           description = "Kanidm server";
           isSystemUser = true;
           group = "kanidm";
-          packages = [ cfg.package ];
+          packages = [cfg.package];
         };
       })
       (mkIf cfg.enablePam {
@@ -485,6 +509,6 @@ in
     ];
   };
 
-  meta.maintainers = with lib.maintainers; [ erictapen Flakebi ];
+  meta.maintainers = with lib.maintainers; [erictapen Flakebi];
   meta.buildDocsInSandbox = false;
 }
