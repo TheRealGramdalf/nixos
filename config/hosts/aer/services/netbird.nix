@@ -1,4 +1,4 @@
-{config, ...}: let 
+{config, ...}: let
   cfg = config.services.netbird.server;
   cid = "netbird-aer_rs";
 in {
@@ -34,36 +34,39 @@ in {
       passwordFile = "/persist/secrets/netbird/coturn.pass";
     };
   };
-  services.nginx.virtualHosts.${cfg.domain}.listen = [{port = 6942; addr = "127.0.0.1";}];
+  services.nginx.virtualHosts.${cfg.domain}.listen = [
+    {
+      port = 6942;
+      addr = "127.0.0.1";
+    }
+  ];
 
-
-  # TODO: add ports accordingly
   services.cone.extraFiles = {
     "netbird-dash".settings = {
       http.routers."netbird-dash" = {
-        rule= "Host(`${cfg.domain}`)";
+        rule = "Host(`${cfg.domain}`)";
         service = "netbird-dash";
       };
-      http.services."netbird-dash".loadbalancer.servers= [{url = "http://127.0.0.1:6942";}];
+      http.services."netbird-dash".loadbalancer.servers = [{url = "http://127.0.0.1:6942";}];
     };
     "netbird-signal".settings = {
       http.routers."netbird-signal" = {
-        rule= "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";
+        rule = "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";
         service = "netbird-signal";
       };
-      http.services."netbird-signal".loadbalancer.servers= [{url = "h2c://127.0.0.1:${toString cfg.signal.port}";}];
+      http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${toString cfg.signal.port}";}];
     };
     "netbird-mgmt".settings = {
       http.routers."netbird-mgmt" = {
-        rule= "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
+        rule = "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
         service = "netbird-mgmt";
       };
-      http.services."netbird-mgmt".loadbalancer.servers= [{url = "http://127.0.0.1:${toString cfg.management.port}";}];
+      http.services."netbird-mgmt".loadbalancer.servers = [{url = "http://127.0.0.1:${toString cfg.management.port}";}];
       http.routers."netbird-api" = {
-        rule= "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
+        rule = "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
       };
-      http.services."netbird-api".loadbalancer.servers= [{url = "h2c://127.0.0.1:${toString cfg.management.port}";}];
+      http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${toString cfg.management.port}";}];
     };
   };
 }

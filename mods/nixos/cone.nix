@@ -223,7 +223,7 @@ in {
 
         ::: {.note}
         With the `docker` provider, traefik manages connection to containers via the docker socket,
-        which requires membership of the `docker` group for write access 
+        which requires membership of the `docker` group for write access
         :::
       '';
     };
@@ -246,13 +246,13 @@ in {
         The traefik static configuration methods (env, CLI, and file) are mutually exclusive.
         Rather than setting secret values with the traefik environment variable syntax,
         it is recommended to set arbitray environment variables, then reference them with `$VARNAME` in e.g.
-        {option}`services.cone.static.settings`. 
+        {option}`services.cone.static.settings`.
         :::
       '';
     };
     useEnvSubst = mkOption {
       # Should this be enabled by default if using env files, as it adds (?) start time and closure size
-      default = (cfg.environmentFiles != []);
+      default = cfg.environmentFiles != [];
       type = bool;
       example = true;
       description = ''
@@ -266,7 +266,6 @@ in {
       (mkRenamedOptionModule ["services" "cone" "dynamicConfigFile"] ["services" "cone" "dynamic" "file"])
       (mkRenamedOptionModule ["services" "cone" "dynamicConfigOptions"] ["services" "cone" "dynamic" "settings"])
     ];
-
   };
 
   config = mkIf cfg.enable {
@@ -329,9 +328,10 @@ in {
         ReadWritePaths = [
           cfg.dataDir
         ];
-        ReadOnlyPaths = [
-        ]
-        ++ optional (cfg.dynamic.dir != null) cfg.dynamic.dir;
+        ReadOnlyPaths =
+          [
+          ]
+          ++ optional (cfg.dynamic.dir != null) cfg.dynamic.dir;
 
         RuntimeDirectory = "traefik";
       };

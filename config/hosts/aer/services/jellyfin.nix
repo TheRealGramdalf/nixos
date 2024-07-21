@@ -22,7 +22,7 @@ in {
   };
   networking.firewall = {
     # from https://jellyfin.org/docs/general/networking/index.html
-    allowedUDPPorts = [ 1900 7359 ]; # DLNA and client discovery respectively
+    allowedUDPPorts = [1900 7359]; # DLNA and client discovery respectively
   };
 
   services.cone.extraFiles."${name}".settings = {

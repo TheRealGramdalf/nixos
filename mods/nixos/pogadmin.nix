@@ -1,33 +1,44 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.services.pogadmin;
-  inherit (lib.types) int bool str oneOf listOf attrsOf port path nullOr ;
+  inherit (lib.types) int bool str oneOf listOf attrsOf port path nullOr;
   inherit (lib) mkEnableOption mkOption mkDefault mkForce mapAttrsToList concatStringsSep optional optionalAttrs optionalString;
 
-  _base = [ int bool str ];
-  base = oneOf ([ (listOf (oneOf _base)) (attrsOf (oneOf _base)) ] ++ _base);
+  _base = [int bool str];
+  base = oneOf ([(listOf (oneOf _base)) (attrsOf (oneOf _base))] ++ _base);
 
-  formatAttrset = attr:
-    "{${concatStringsSep "\n" (mapAttrsToList (key: value: "${builtins.toJSON key}: ${formatPyValue value},") attr)}}";
+  formatAttrset = attr: "{${concatStringsSep "\n" (mapAttrsToList (key: value: "${builtins.toJSON key}: ${formatPyValue value},") attr)}}";
 
   formatPyValue = value:
-    if builtins.isString value then builtins.toJSON value
-    else if value ? _expr then value._expr
-    else if builtins.isInt value then toString value
-    else if builtins.isBool value then (if value then "True" else "False")
-    else if builtins.isAttrs value then (formatAttrset value)
-    else if builtins.isList value then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
+    if builtins.isString value
+    then builtins.toJSON value
+    else if value ? _expr
+    then value._expr
+    else if builtins.isInt value
+    then toString value
+    else if builtins.isBool value
+    then
+      (
+        if value
+        then "True"
+        else "False"
+      )
+    else if builtins.isAttrs value
+    then (formatAttrset value)
+    else if builtins.isList value
+    then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
     else throw "Unrecognized type";
 
   formatPy = attrs:
     concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${formatPyValue value}") attrs);
 
-  pyType = with types; attrsOf (oneOf [ (attrsOf base) (listOf base) base ]);
-in
-{
+  pyType = with types; attrsOf (oneOf [(attrsOf base) (listOf base) base]);
+in {
   options.services.pogadmin = {
     enable = mkEnableOption "PostgreSQL Admin 4";
 
@@ -37,7 +48,7 @@ in
       default = 5050;
     };
 
-    package = mkPackageOption pkgs "pgadmin4" { };
+    package = mkPackageOption pkgs "pgadmin4" {};
 
     initialEmail = mkOption {
       description = "Initial email for the pgAdmin account";
@@ -116,7 +127,7 @@ in
         [Documentation](https://www.pgadmin.org/docs/pgadmin4/development/config_py.html)
       '';
       type = pyType;
-      default = { };
+      default = {};
     };
 
     user = mkOption {
@@ -149,33 +160,36 @@ in
   };
 
   config = mkIf (cfg.enable) {
-    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [ cfg.port ];
+    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [cfg.port];
 
-    services.pogadmin.settings = {
-      DEFAULT_SERVER_PORT = cfg.port;
-      PASSWORD_LENGTH_MIN = cfg.minimumPasswordLength;
-      SERVER_MODE = true;
-      UPGRADE_CHECK_ENABLED = false;
-    } // (optionalAttrs cfg.openFirewall {
-      DEFAULT_SERVER = mkDefault "::";
-    }) // (optionalAttrs cfg.emailServer.enable {
-      MAIL_SERVER = cfg.emailServer.address;
-      MAIL_PORT = cfg.emailServer.port;
-      MAIL_USE_SSL = cfg.emailServer.useSSL;
-      MAIL_USE_TLS = cfg.emailServer.useTLS;
-      MAIL_USERNAME = cfg.emailServer.username;
-      SECURITY_EMAIL_SENDER = cfg.emailServer.sender;
-    });
+    services.pogadmin.settings =
+      {
+        DEFAULT_SERVER_PORT = cfg.port;
+        PASSWORD_LENGTH_MIN = cfg.minimumPasswordLength;
+        SERVER_MODE = true;
+        UPGRADE_CHECK_ENABLED = false;
+      }
+      // (optionalAttrs cfg.openFirewall {
+        DEFAULT_SERVER = mkDefault "::";
+      })
+      // (optionalAttrs cfg.emailServer.enable {
+        MAIL_SERVER = cfg.emailServer.address;
+        MAIL_PORT = cfg.emailServer.port;
+        MAIL_USE_SSL = cfg.emailServer.useSSL;
+        MAIL_USE_TLS = cfg.emailServer.useTLS;
+        MAIL_USERNAME = cfg.emailServer.username;
+        SECURITY_EMAIL_SENDER = cfg.emailServer.sender;
+      });
 
     systemd.services.pgadmin = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      requires = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      requires = ["network.target"];
       # we're adding this optionally so just in case there's any race it'll be caught
       # in case postgres doesn't start, pgadmin will just start normally
-      wants = [ "postgresql.service" ];
+      wants = ["postgresql.service"];
 
-      path = [ config.services.postgresql.package pkgs.coreutils pkgs.bash ];
+      path = [config.services.postgresql.package pkgs.coreutils pkgs.bash];
 
       preStart = ''
         # NOTE: this is idempotent (aka running it twice has no effect)
@@ -213,7 +227,8 @@ in
         LogsDirectory = "pgadmin";
         StateDirectory = "pgadmin";
         ExecStart = "${cfg.package}/bin/pgadmin4";
-        LoadCredential = [ "initial_password:${cfg.initialPasswordFile}" ]
+        LoadCredential =
+          ["initial_password:${cfg.initialPasswordFile}"]
           ++ optional cfg.emailServer.enable "email_password:${cfg.emailServer.passwordFile}";
       };
     };
@@ -229,12 +244,14 @@ in
     };
 
     environment.etc."pgadmin/config_system.py" = {
-      text = optionalString cfg.emailServer.enable ''
-        import os
-        with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
-          pw = f.read()
-        MAIL_PASSWORD = pw
-      '' + formatPy cfg.settings;
+      text =
+        optionalString cfg.emailServer.enable ''
+          import os
+          with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
+            pw = f.read()
+          MAIL_PASSWORD = pw
+        ''
+        + formatPy cfg.settings;
       mode = "0600";
       user = cfg.user;
       group = cfg.group;

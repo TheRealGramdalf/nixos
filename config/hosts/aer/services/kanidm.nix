@@ -1,4 +1,8 @@
-{config, lib, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.services.kani;
   dataDir = "/persist/services/kanidm";
 in {
