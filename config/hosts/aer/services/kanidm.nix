@@ -6,7 +6,7 @@
   cfg = config.services.kani;
   dataDir = "/persist/services/kanidm";
 in {
-  imports = [./kanisys.nix];
+  #imports = [./kanisys.nix];
   # Temporary fix for nixpkgs#323674
   systemd.services."kanidm" = {
     environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
