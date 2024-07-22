@@ -89,20 +89,6 @@ in {
 
     package = lib.mkPackageOption pkgs "kanidm" {};
 
-    makeSystemdWait = mkOption {
-      type = bool;
-      description = ''
-        Enabling this causes all systemd units that match the following criteria to gain
-        `After = ["kanidm-unixd"]` and `Requires = ["kanidm-unixd"]` in its service config:
-        - {option}`services.kani.enablePam` must be enabled
-        - At least one `User =` or `Group =` directive matches the following regex
-          - `([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})`
-          - _This regex matches the Kanidm `uuid` format. The `name` or `spn` field is unstable and should not be used_
-        - The `User` or `Group` does not exist in {option}`users`
-      '';
-      default = cfg.enablePam;
-    };
-
     serverSettings = mkOption {
       type = submodule {
         freeformType = settingsFormat.type;
@@ -442,25 +428,6 @@ in {
           environment.RUST_LOG = "info";
         };
       })
-
-      (
-        mkIf cfg.makeSystemdWait
-        (mapAttrs (
-            n: v: {
-              services.n.serviceConfig = {
-                After = ["kanidm-unixd.service"];
-                Requires = ["kanidm-unixd.service"];
-              };
-            }
-          ) (filterAttrs (
-              n: v:
-                !isNull (builtins.match "([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})" v.serviceConfig.Group)
-                && !isNull (builtins.match "([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})" v.serviceConfig.User)
-                && config.users.users.${v.serviceConfig.User} != {}
-                && config.users.groups.${v.serviceConfig.Group} != {}
-            )
-            config.systemd.services))
-      )
     ];
 
     # These paths are hardcoded
