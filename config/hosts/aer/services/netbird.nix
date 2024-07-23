@@ -57,25 +57,25 @@ in {
       http.routers."netbird-signal" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";
         service = "netbird-signal";
-        entrypoints = ["${sigPort}"];
+        entrypoints = ["netbird-signal"];
       };
       http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${sigPort}";}];
-      entrypoints.${sigPort}.address = ":${sigPort}";
+      entrypoints."netbird-signal".address = ":${sigPort}";
     };
     "netbird-mgmt".settings = {
       http.routers."netbird-mgmt" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
         service = "netbird-mgmt";
-        entrypoints = ["${mgmtPort}"];
+        entrypoints = ["netbird-mgmt"];
       };
       http.services."netbird-mgmt".loadbalancer.servers = [{url = "http://127.0.0.1:${mgmtPort}";}];
       http.routers."netbird-api" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
-        entrypoints = ["${mgmtPort}"];
+        entrypoints = ["netbird-mgmt"];
       };
       http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
-      entrypoints.${mgmtPort}.address = ":${mgmtPort}";
+      entrypoints."netbird-mgmt".address = ":${mgmtPort}";
     };
   };
   networking.firewall = {
