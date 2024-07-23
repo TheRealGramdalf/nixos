@@ -81,12 +81,12 @@ in {
           http.tls.certResolver = "letsencrypt";
         };
         "netbird-mgmt" = {
-          address = ":${toString config.services.netbird.server.management.port}";
+          address = ":8011";
           http.tls.certResolver = "letsencrypt";
         };
         "netbird-signal" = {
           http.tls.certResolver = "letsencrypt";
-          address = ":${toString config.services.netbird.server.signal.port}";
+          address = ":8012";
         };
       };
     };

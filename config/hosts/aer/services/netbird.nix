@@ -8,6 +8,7 @@ in {
     enable = true;
     domain = "vpn.aer.dedyn.io";
     management = {
+      port = 6969;
       logLevel = "DEBUG";
       disableAnonymousMetrics = true;
       disableSingleAccountMode = true;
@@ -31,6 +32,7 @@ in {
       };
     };
     signal = {
+      port = 6968;
       logLevel = "DEBUG";
     };
     coturn = {
