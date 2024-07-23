@@ -1,6 +1,8 @@
 {config, ...}: let
   cfg = config.services.netbird.server;
-  cid = "netbird-aer_rs";
+  cid = "netbird";
+  sigPort = "${sigPort}";
+  mgmtPort = "${mgmtPort}";
 in {
   services.netbird.server = {
     enable = true;
@@ -23,8 +25,8 @@ in {
       #domain = cfg.domain;
       settings = {
         AUTH_AUDIENCE = cid;
-        AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
         AUTH_CLIENT_ID = cid;
+        AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
         AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
       };
     };
@@ -55,20 +57,29 @@ in {
       http.routers."netbird-signal" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";
         service = "netbird-signal";
+        entrypoints = ["${sigPort}"];
       };
-      http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${toString cfg.signal.port}";}];
+      http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${sigPort}";}];
+      entrypoints.${sigPort}.address = ":${sigPort}";
     };
     "netbird-mgmt".settings = {
       http.routers."netbird-mgmt" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
         service = "netbird-mgmt";
+        entrypoints = ["${mgmtPort}"];
       };
-      http.services."netbird-mgmt".loadbalancer.servers = [{url = "http://127.0.0.1:${toString cfg.management.port}";}];
+      http.services."netbird-mgmt".loadbalancer.servers = [{url = "http://127.0.0.1:${mgmtPort}";}];
       http.routers."netbird-api" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
+        entrypoints = ["${mgmtPort}"];
       };
-      http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${toString cfg.management.port}";}];
+      http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
+      entrypoints.${mgmtPort}.address = ":${mgmtPort}";
     };
+  };
+  networking.firewall = {
+    allowedTCPPorts = [cfg.management.port cfg.signal.port];
+    #allowedUDPPortRanges = [{from = 53000; to = 54000;}];
   };
 }
