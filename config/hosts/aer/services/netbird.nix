@@ -1,8 +1,8 @@
 {config, ...}: let
   cfg = config.services.netbird.server;
   cid = "netbird";
-  sigPort = "${sigPort}";
-  mgmtPort = "${mgmtPort}";
+  sigPort = "${toString cfg.signal.port}";
+  mgmtPort = "${toString cfg.management.port}";
 in {
   services.netbird.server = {
     enable = true;
