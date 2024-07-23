@@ -60,7 +60,6 @@ in {
         entrypoints = ["netbird-signal"];
       };
       http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${sigPort}";}];
-      entrypoints."netbird-signal".address = ":${sigPort}";
     };
     "netbird-mgmt".settings = {
       http.routers."netbird-mgmt" = {
@@ -75,7 +74,6 @@ in {
         entrypoints = ["netbird-mgmt"];
       };
       http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
-      entrypoints."netbird-mgmt".address = ":${mgmtPort}";
     };
   };
   networking.firewall = {

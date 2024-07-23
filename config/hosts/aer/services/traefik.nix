@@ -78,15 +78,15 @@ in {
         "websecure" = {
           address = ":443";
           asDefault = true;
-          http.tls = {
-            certResolver = "letsencrypt";
-            #domains = [
-            #  {
-            #    main = "aer.dedyn.io";
-            #    sans = ["*.aer.dedyn.io"];
-            #  }
-            #];
-          };
+          http.tls.certResolver = "letsencrypt";
+        };
+        entrypoints."netbird-mgmt" = {
+          address = ":${toString config.services.netbird.server.management.port}";
+          http.tls.certResolver = "letsencrypt";
+        };
+        entrypoints."netbird-signal" = {
+          http.tls.certResolver = "letsencrypt";
+          address = ":${toString config.services.netbird.server.signal.port}";
         };
       };
     };
