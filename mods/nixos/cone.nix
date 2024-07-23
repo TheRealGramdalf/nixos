@@ -26,6 +26,12 @@
     then staticFile
     else "/run/traefik/config.json";
 in {
+  imports = [
+    (mkRenamedOptionModule ["services" "cone" "staticConfigFile"] ["services" "cone" "static" "file"])
+    (mkRenamedOptionModule ["services" "cone" "staticConfigOptions"] ["services" "cone" "static" "settings"])
+    (mkRenamedOptionModule ["services" "cone" "dynamicConfigFile"] ["services" "cone" "dynamic" "file"])
+    (mkRenamedOptionModule ["services" "cone" "dynamicConfigOptions"] ["services" "cone" "dynamic" "settings"])
+  ];
   options.services.cone = {
     # TODO
     # - [] Rather than using `let`, set `cfg.dynamic.file` to writeText toJSON
@@ -259,13 +265,6 @@ in {
         Whether to use [`envSubst`]() in the ExecStartPre phase to augment the generated static config. See {option}`services.cone.environmentFiles`
       '';
     };
-
-    imports = [
-      (mkRenamedOptionModule ["services" "cone" "staticConfigFile"] ["services" "cone" "static" "file"])
-      (mkRenamedOptionModule ["services" "cone" "staticConfigOptions"] ["services" "cone" "static" "settings"])
-      (mkRenamedOptionModule ["services" "cone" "dynamicConfigFile"] ["services" "cone" "dynamic" "file"])
-      (mkRenamedOptionModule ["services" "cone" "dynamicConfigOptions"] ["services" "cone" "dynamic" "settings"])
-    ];
   };
 
   config = mkIf cfg.enable {
