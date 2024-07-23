@@ -80,11 +80,11 @@ in {
           asDefault = true;
           http.tls.certResolver = "letsencrypt";
         };
-        entrypoints."netbird-mgmt" = {
+        "netbird-mgmt" = {
           address = ":${toString config.services.netbird.server.management.port}";
           http.tls.certResolver = "letsencrypt";
         };
-        entrypoints."netbird-signal" = {
+        "netbird-signal" = {
           http.tls.certResolver = "letsencrypt";
           address = ":${toString config.services.netbird.server.signal.port}";
         };
