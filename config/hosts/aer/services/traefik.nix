@@ -80,14 +80,6 @@ in {
           asDefault = true;
           http.tls.certResolver = "letsencrypt";
         };
-        "netbird-mgmt" = {
-          address = ":8011";
-          http.tls.certResolver = "letsencrypt";
-        };
-        "netbird-signal" = {
-          http.tls.certResolver = "letsencrypt";
-          address = ":8012";
-        };
       };
     };
   };
