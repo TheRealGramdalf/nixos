@@ -9,6 +9,7 @@
     ./hardware.nix
     ./ssh.nix
     ../../common/nix3.nix
+    ./system.nix
 
     # Services
     ./services/services.nix
