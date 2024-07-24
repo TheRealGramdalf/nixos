@@ -67,19 +67,17 @@ in {
       http.routers."netbird-mgmt" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/api`)";
         service = "netbird-mgmt";
-        #entrypoints = ["netbird-mgmt"];
       };
       http.services."netbird-mgmt".loadbalancer.servers = [{url = "http://127.0.0.1:${mgmtPort}";}];
       http.routers."netbird-api" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/management.ManagementService/`)";
         service = "netbird-api";
-        #entrypoints = ["netbird-mgmt"];
       };
       http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
     };
   };
   networking.firewall = {
-    allowedTCPPorts = [cfg.management.port cfg.signal.port];
-    #allowedUDPPortRanges = [{from = 53000; to = 54000;}];
+    allowedUDPPorts = [3478]
+    #allowedUDPPortRanges = [{from = 49152; to = 65535;}];
   };
 }
