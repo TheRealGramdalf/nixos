@@ -77,7 +77,7 @@ in {
     };
   };
   networking.firewall = {
-    allowedUDPPorts = [3478]
+    allowedUDPPorts = [3478];
     #allowedUDPPortRanges = [{from = 49152; to = 65535;}];
   };
 }
