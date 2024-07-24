@@ -59,7 +59,6 @@ in {
       http.routers."netbird-signal" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";
         service = "netbird-signal";
-        entrypoints = ["netbird-signal"];
       };
       http.services."netbird-signal".loadbalancer.servers = [{url = "h2c://127.0.0.1:${sigPort}";}];
     };
@@ -77,7 +76,7 @@ in {
     };
   };
   networking.firewall = {
-    allowedUDPPorts = [3478];
+    allowedUDPPorts = [3478]; # turn: port
     #allowedUDPPortRanges = [{from = 49152; to = 65535;}];
   };
 }
