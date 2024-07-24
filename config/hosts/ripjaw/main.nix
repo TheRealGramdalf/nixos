@@ -7,6 +7,7 @@
     ../../common/fonts.nix
     ../../common/nh.nix
     ../../common/backdoor.nix
+    ./netbird.nix
 
     # Host-specific config
     ./hardware-config.nix
