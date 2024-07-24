@@ -1,13 +1,5 @@
 {pkgs, ...}: {
-  services.netbird = {
-    enable = true;
-    tunnels = {
-      "home".environment = {
-        NB_ADMIN_URL="https://vpn.aer.dedyn.io";
-        NB_MANAGEMENT_URL="https://vpn.aer.dedyn.io";
-      };
-    };
-  };
+  services.netbird.enable = true;
   environment.systemPackages = [
     pkgs.netbird-ui
   ];
