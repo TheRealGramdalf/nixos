@@ -4,6 +4,11 @@
   eno3 = "enp2s0f0";
   eno4 = "enp2s0f1";
 in {
+  services.netbird.enable = true;
+  environment.sessionVariables = {
+    NB_ADMIN_URL="https://vpn.aer.dedyn.io";
+    NB_MANAGEMENT_URL="https://vpn.aer.dedyn.io";
+  };
   networking = {
     useNetworkd = true;
     useDHCP = false;
