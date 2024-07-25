@@ -8,6 +8,7 @@
     ./hardware.nix
     ./smb.nix
     ./ssh.nix
+    ./netbird.nix
   ];
   # Enable rebuilding with flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
