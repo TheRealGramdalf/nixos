@@ -1,7 +1,5 @@
 {...}: {
-  system.etc.overlay = {
-    enable = true;
-    mutable = false;
-  };
+  boot.initrd.systemd.enable = true;
+  system.etc.overlay.enable = true;
   users.mutableUsers = false;
 }
