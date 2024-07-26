@@ -10,9 +10,17 @@
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer";
 in {
-  systemd.services."postgresql".serviceConfig = {
-    User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-    Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+  systemd.services."postgresql" = {
+    after = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    requires = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    serviceConfig = {
+      User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+      Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+    };
   };
   services.postgresql = {
     enable = true;
@@ -38,8 +46,14 @@ in {
     '';
   };
 
-  systemd.services."pgadmin".serviceConfig = {
-    EnvironmentFile = [
+  systemd.services."pgadmin" = {
+    after = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    requires = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    serviceConfig.EnvironmentFile = [
       "/persist/secrets/pgadmin/pgadmin.env"
     ];
   };
