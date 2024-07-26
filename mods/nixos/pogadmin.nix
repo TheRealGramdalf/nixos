@@ -244,17 +244,13 @@ in {
     };
 
     environment.etc."pgadmin/config_system.py" = {
-      text =
-        optionalString cfg.emailServer.enable ''
+      source = pkgs.writeText "pgadmin-config.py" (optionalString cfg.emailServer.enable ''
           import os
           with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
             pw = f.read()
           MAIL_PASSWORD = pw
         ''
-        + formatPy cfg.settings;
-      mode = "0600";
-      user = cfg.user;
-      group = cfg.group;
+        + formatPy cfg.settings);
     };
   };
 }
