@@ -19,6 +19,7 @@ in {
   };
   services.coturn = {
     listening-port = 3477;
+    alt-listening-port = 3476;
     listening-ips = [
       "127.0.0.1"
       # the TURN server has to listen on this address for the udp port range
@@ -26,7 +27,6 @@ in {
     ];
     no-tcp = true;
     no-tcp-relay = true;
-    no-udp-relay = true;
     no-tls = true;
     no-dtls = true;
   };
