@@ -4,7 +4,14 @@
 in {
   services.cockpit = {
     enable = true;
-    settings = {};
+    settings = {
+      WebService = {
+        #Origins = ""; 
+        ProtocolHeader = "X-Forwarded-Proto";
+        ForwardedForHeader = "X-Forwarded-For";
+        LoginTo = false;
+      };
+    };
   };
   services.cone.extraFiles."${name}".settings = {
     http.routers."${name}" = {
