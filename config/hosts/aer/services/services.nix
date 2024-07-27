@@ -6,7 +6,7 @@
     ./smb.nix
     ./jellyfin.nix
     ./postgres.nix
-    ./netbird.nix
+    ./netbird/main.nix
     #./dashy.nix
     #./paperless.nix
   ];

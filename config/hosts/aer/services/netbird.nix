@@ -5,6 +5,7 @@
   mgmtPort = "${toString cfg.management.port}";
 in {
   services.netbird.server = {
+    # This top level switch enables some defaults based on top level options
     enable = true;
     domain = "vpn.aer.dedyn.io";
     management = {
@@ -23,7 +24,6 @@ in {
     dashboard = {
       enable = true;
       enableNginx = true;
-      #domain = cfg.domain;
       settings = {
         AUTH_AUDIENCE = cid;
         AUTH_CLIENT_ID = cid;
@@ -74,6 +74,10 @@ in {
       };
       http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
     };
+  };
+  services.cone.static.settings.entryPoints."3478" = {
+    http.tls.certResolver = "letsencrypt";
+    address = ":3478/udp";
   };
   networking.firewall = {
     allowedUDPPorts = [3478]; # turn: port
