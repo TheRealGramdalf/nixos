@@ -4,6 +4,7 @@
 in {
   services.cockpit = {
     enable = true;
+    port = 6967;
     settings = {
       WebService = {
         #Origins = ""; 
