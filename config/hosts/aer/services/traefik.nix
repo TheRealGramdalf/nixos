@@ -76,6 +76,7 @@ in {
           };
         };
         "websecure" = {
+          http3 = true;
           address = ":443";
           asDefault = true;
           http.tls.certResolver = "letsencrypt";
