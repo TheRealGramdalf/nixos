@@ -7,6 +7,7 @@
     ./jellyfin.nix
     ./postgres.nix
     ./netbird/main.nix
+    ./cockpit.nix
     #./dashy.nix
     #./paperless.nix
   ];
