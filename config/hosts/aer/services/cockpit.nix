@@ -19,6 +19,6 @@ in {
       rule = "Host(`${name}.aer.dedyn.io`)";
       middlewares = "local-only";
     };
-    http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.port}";}];
+    http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
   };
 }
