@@ -8,6 +8,17 @@ in {
     management = {
       # These settings are advertised to clients, i.e. the outward facing ports
       turnPort = lib.mkForce 3478;
+      settings.TURNConfig.Turns = [
+        {
+          Proto = "udp";
+          URI = "turn:${cfg.domain}:${toString cfg.management.turnPort}";
+          Username = "netbird";
+          Password =
+            if (cfg.coturn.password != null)
+            then cfg.coturn.password
+            else {_secret = cfg.coturn.passwordFile;};
+        }
+      ];
     };
     coturn = {
       enable = true;
