@@ -2,6 +2,8 @@
   cfg = config.services.netbird.server;
   cid = "netbird";
 in {
+  # For reference, see https://github.com/netbirdio/netbird/blob/main/infrastructure_files/turnserver.conf.tmpl
+  # Of note, the tls-listening-port is enabled upstream
   services.netbird.server = {
     management = {
       # These settings are advertised to clients, i.e. the outward facing ports
@@ -24,6 +26,7 @@ in {
     ];
     no-tcp = true;
     no-tcp-relay = true;
+    no-udp-relay = true;
     no-tls = true;
     no-dtls = true;
   };
