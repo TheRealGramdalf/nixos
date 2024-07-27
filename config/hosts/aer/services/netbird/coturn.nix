@@ -1,11 +1,11 @@
-{config, ...}: let
+{config, lib, ...}: let
   cfg = config.services.netbird.server;
   cid = "netbird";
 in {
   services.netbird.server = {
     management = {
       # These settings are advertised to clients, i.e. the outward facing ports
-      turnPort = 3478
+      turnPort = lib.mkForce 3478;
     };
     coturn = {
       enable = true;
