@@ -20,5 +20,5 @@ in {
       middlewares = "local-only";
     };
     http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.port}";}];
-  }
+  };
 }
