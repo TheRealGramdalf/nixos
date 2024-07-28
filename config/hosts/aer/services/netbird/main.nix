@@ -1,5 +1,4 @@
 _: {
-
   services.netbird.server = {
     # This top level switch enables some defaults based on top level options
     enable = true;

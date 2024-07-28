@@ -7,7 +7,7 @@ in {
     port = 6967;
     settings = {
       WebService = {
-        Origins = "https://${name}.aer.dedyn.io"; 
+        Origins = "https://${name}.aer.dedyn.io";
         ProtocolHeader = "X-Forwarded-Proto";
         ForwardedForHeader = "X-Forwarded-For";
         LoginTo = false;

@@ -1,4 +1,8 @@
-{lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib) mapAttrs filterAttrs;
   #sysFiltered = filterAttrs (
   #    n: v:
@@ -8,14 +12,16 @@
   #      #&& config.users.groups.${v.serviceConfig.Group} != {}
   #  )
   #  config.systemd.services;
-  sysMapped = mapAttrs (
-    n: v: {
-      services.n = {
-        after = ["kanidm-unixd.service"];
-        requires = ["kanidm-unixd.service"];
-      };
-    }
-  ) config.systemd.services;
+  sysMapped =
+    mapAttrs (
+      n: v: {
+        services.n = {
+          after = ["kanidm-unixd.service"];
+          requires = ["kanidm-unixd.service"];
+        };
+      }
+    )
+    config.systemd.services;
 in {
-systemd.services = sysMapped;
+  systemd.services = sysMapped;
 }

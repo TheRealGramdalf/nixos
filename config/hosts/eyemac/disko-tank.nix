@@ -18,12 +18,16 @@ let
   };
 in {
   disko.devices = {
-    disk."${pool}-1" = {
-      device = "/dev/disk/by-id/${diskid-1}";
-    } // fullzfs;
-    disk."${pool}-2" = {
-      device = "/dev/disk/by-id/${diskid-2}";
-    } // fullzfs;
+    disk."${pool}-1" =
+      {
+        device = "/dev/disk/by-id/${diskid-1}";
+      }
+      // fullzfs;
+    disk."${pool}-2" =
+      {
+        device = "/dev/disk/by-id/${diskid-2}";
+      }
+      // fullzfs;
     zpool."${pool}" = {
       type = "zpool";
       options.ashift = "12";
