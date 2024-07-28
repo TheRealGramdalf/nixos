@@ -8,6 +8,7 @@
     packages = with pkgs; [
       heroic
       prismlauncher
+      scarab
     ];
   };
 }
