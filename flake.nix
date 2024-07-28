@@ -19,10 +19,6 @@
       url = "github:anyrun-org/anyrun/9e14b5946e413b87efc697946b3983d5244a1714";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    inputmodule-pr = {
-      url = "github:Nixos/nixpkgs/dcdb09bc9cb7f91962e284965d85f13088ccb1b9";
-    };
   };
 
   outputs = context @ {

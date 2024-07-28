@@ -8,7 +8,6 @@
     # Host-specific config
     ./hardware-config.nix
     ./configuration.nix
-    ./framework.nix
     ./netbird.nix
   ];
   system.stateVersion = "24.05";
