@@ -39,7 +39,7 @@ in {
       gtk = {
         enable = true;
         theme = {
-          name = "catppuccin-mocha-mauve-standard+default";
+          name = "catppuccin-mocha-mauve-standard";
           package = pkgs.catppuccin-gtk.override {
             accents = ["mauve"];
             #tweaks = [ "rimless" "black" ];
