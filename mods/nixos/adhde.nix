@@ -53,6 +53,11 @@ in {
         libsForQt5.qt5.qtwayland
         kdePackages.qtwayland # qt6
       ];
+      qt = {
+        enable = true;
+        platformTheme = "gnome";
+        style = "adwaita-dark";
+      };
     })
 
     (mkIf cfg.pipewire.enable {
