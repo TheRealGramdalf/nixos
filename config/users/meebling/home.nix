@@ -38,10 +38,10 @@
       evince # Document viewer
       gcolor3 # Color picker
       clapper # Video viewer
-      gnome.eog # Photo viewer
+      eog # Photo viewer
       dialect # Translate app
       drawing
-      gnome.nautilus
+      nautilus
     ];
   };
   programs = {

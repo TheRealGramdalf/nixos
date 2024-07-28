@@ -71,31 +71,31 @@
       dive
       filezilla
       motrix # Download manager
-      gnome.gnome-calculator
-      gnome.gnome-system-monitor
-      gnome.gnome-sound-recorder
+      gnome-calculator
+      gnome-system-monitor
+      gnome-sound-recorder
       gnome-obfuscate
       baobab # Disk usage analyzer
-      gnome.gnome-disk-utility
+      gnome-disk-utility
       whatip
       gnome-solanum # Pomodoro timer
       eartag # File tag editor
       evince # Document viewer
       clapper # Video viewer
-      gnome.eog # Photo viewer
-      gnome.gnome-power-manager # Battery stats
+      eog # Photo viewer
+      gnome-power-manager # Battery stats
       #textpieces # Manipulate text without random websites
       dialect # Translate app
       iotas # MD notes app
       drawing
       vlc
-      gnome.gnome-clocks
-      gnome.gnome-maps
-      gnome.nautilus
-      gnome.simple-scan
+      gnome-clocks
+      gnome-maps
+      nautilus
+      simple-scan
       #gnome-connections
       gnome-secrets
-      gnome.gnome-font-viewer
+      gnome-font-viewer
       obs-studio
       tauon
       podman-desktop
@@ -104,8 +104,8 @@
       gparted
       rpi-imager
       # Settings
-      gnome.dconf-editor
-      gnome.gnome-tweaks
+      dconf-editor
+      gnome-tweaks
       # Web browsers
       brave
       epiphany

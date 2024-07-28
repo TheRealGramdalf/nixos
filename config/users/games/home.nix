@@ -14,7 +14,7 @@
     };
     packages = with pkgs; [
       drawing
-      gnome.nautilus
+      nautilus
       # Word Processing
       libreoffice
       onlyoffice-bin # For improved compatibility over libreoffice
@@ -22,7 +22,7 @@
       obsidian
       evince # Document viewer
       clapper # Video viewer
-      gnome.eog # Photo viewer
+      eog # Photo viewer
       vlc
     ];
   };
