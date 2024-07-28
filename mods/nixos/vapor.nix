@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-# TODO Needs updating due to opengl cleanup
-with lib; let
+}: let
+  inherit (lib) types;
+  inherit (lib) mkIf mkDefault mkEnableOption mkOption literalExpression optionals optionalAttrs optional;
   cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
 
@@ -86,7 +86,6 @@ in {
       enable = true;
       enable32Bit = true;
     };
-    hardware.steam-hardware.enable = true;
 
     security.wrappers = mkIf (cfg.gamescopeSession.enable && gamescopeCfg.capSysNice) {
       # needed or steam fails
@@ -97,11 +96,14 @@ in {
         setuid = true;
       };
     };
-    # optionally enable 32bit pulseaudio support if pulseaudio is enabled
-    hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 
     programs.gamescope.enable = mkDefault cfg.gamescopeSession.enable;
     services.displayManager.sessionPackages = mkIf cfg.gamescopeSession.enable [gamescopeSessionFile];
+
+    # optionally enable 32bit pulseaudio support if pulseaudio is enabled
+    hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
+
+    hardware.steam-hardware.enable = true;
 
     networking.firewall = lib.mkMerge [
       (mkIf (cfg.remotePlay.openFirewall || cfg.localNetworkGameTransfers.openFirewall) {
