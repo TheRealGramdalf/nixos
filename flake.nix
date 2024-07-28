@@ -149,16 +149,6 @@
           ./mods/nixos/main.nix
         ];
       };
-      "aer-files" = nixosSystem {
-        modules = [
-          ./config/hosts/aer-files/main.nix
-        ];
-      };
-      "docker-ve" = nixosSystem {
-        modules = [
-          ./config/hosts/docker-ve/main.nix
-        ];
-      };
       "here-nor-there" = nixosSystem {
         modules = [
           ./config/hosts/here-nor-there/main.nix
