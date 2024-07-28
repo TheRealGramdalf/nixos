@@ -114,6 +114,7 @@
       # Hypervisors
       bottles
       # Games
+      modrinth-app
       prismlauncher
       mangohud # System usage stats
       #### CLI ####
