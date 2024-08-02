@@ -2,7 +2,7 @@
   services = {
     # Network shares
     samba = {
-      package = pkgs.samba4.override {enableMDNS = true};
+      package = pkgs.samba4.override {enableMDNS = true;};
       # ^^ Needed to enable mDNS support. Thank you iv.cha!
       enable = true;
       openFirewall = true;
