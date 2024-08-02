@@ -59,12 +59,12 @@ in {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
-      allowInterfaces = ["${eno1}"];
+      allowInterfaces = ["eno1"];
     };
     samba-wsdd = {
       enable = true;
       openFirewall = true;
-      interface = "${eno1}";
+      interface = "eno1";
     };
     chrony.enable = true;
   };
