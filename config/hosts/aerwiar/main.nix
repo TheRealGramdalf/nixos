@@ -9,6 +9,7 @@
     ./hardware-config.nix
     ./configuration.nix
     ./netbird.nix
+    ./fprint.nix
   ];
   system.stateVersion = "24.05";
   nixpkgs.config.allowUnfree = true;
