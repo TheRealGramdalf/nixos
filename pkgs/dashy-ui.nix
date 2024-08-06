@@ -28,6 +28,7 @@ stdenv.mkDerivation (finalAttrs: {
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
     echo ${builtins.toJSON settings} > user-data/conf.yml
+    yarn validate-config
   '';
   installPhase = ''
     mkdir $out
