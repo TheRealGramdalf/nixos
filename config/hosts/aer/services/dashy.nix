@@ -28,7 +28,7 @@ in {
         {
           addr = "127.0.0.1";
           inherit port;
-          proxyProtocol = true;
+          #proxyProtocol = true;
         }
       ];
       locations = {
