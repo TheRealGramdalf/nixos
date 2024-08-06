@@ -1,5 +1,5 @@
-{self, ...}: let
-settings = {};
+{context, ...}: let
+  settings = {};
 in {
   #virtualisation.oci-containers."dash" = {
   #  image = "lissy93/dashy:3.1.1";
@@ -22,9 +22,16 @@ in {
   services.nginx = {
     enable = true;
     virtualHosts."aer.dedyn.io" = {
+      listen = [
+        {
+          addr = "127.0.0.1";
+          port = 6941;
+          proxyProtocol = true;
+        }
+      ];
       locations = {
         "/" = {
-          root = self.packages.x86_64-linux.dashy-ui.override {inherit settings};
+          root = context.self.packages.x86_64-linux.dashy-ui.override {inherit settings;};
           tryFiles = "$uri /index.html "; #$uri.html =404
         };
 
