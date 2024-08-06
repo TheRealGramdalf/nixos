@@ -26,6 +26,7 @@ stdenv.mkDerivation (finalAttrs: {
   # Use postConfigure to prevent colliding with yarnConfigHook
   # If no settings are passed, use the default config provided by upstream
   postConfigure = lib.optional (settings != {}) ''
+    echo "Writing settings override..."
     echo ${builtins.toJSON settings} > user-data/conf.yml
   '';
   installPhase = ''
