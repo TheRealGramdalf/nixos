@@ -23,9 +23,9 @@ stdenv.mkDerivation (finalAttrs: {
     yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-KVAZIBM47yp1NWYc2esvTwfoAev4q7Wgi0c73PUZRNw=";
   };
-  #postConfigure = ''
-  #  echo ${toJSON settings} > $out/user-data/conf.yml
-  #'';
+  configurePhase = lib.optional (settings != {}) ''
+    echo ${toJSON settings} > user-data/conf.yml
+  '';
   installPhase = ''
     mkdir $out
     cp -R dist/* $out
