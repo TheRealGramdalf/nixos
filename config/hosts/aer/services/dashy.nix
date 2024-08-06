@@ -47,14 +47,12 @@ in {
       #'';
     };
   };
-  services.cone.extraFiles = {
-    "dashy".settings = {
-      http.routers."dashy" = {
-        rule = "Host(`${domain}`)";
-        service = "dashy";
-        middlewares = "local-only";
-      };
-      http.services."dashy".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
+  services.cone.extraFiles."dashy".settings = {
+    http.routers."dashy" = {
+      rule = "Host(`${domain}`)";
+      service = "dashy";
+      middlewares = "local-only";
     };
+    http.services."dashy".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
   };
 }
