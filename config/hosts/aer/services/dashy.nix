@@ -1,4 +1,6 @@
 {context, ...}: let
+  domain = "aer.dedyn.io";
+  port = 6941;
   settings = {};
 in {
   #virtualisation.oci-containers."dash" = {
@@ -21,11 +23,11 @@ in {
   #};
   services.nginx = {
     enable = true;
-    virtualHosts."aer.dedyn.io" = {
+    virtualHosts."${domain}" = {
       listen = [
         {
           addr = "127.0.0.1";
-          port = 6941;
+          inherit port;
           proxyProtocol = true;
         }
       ];
@@ -43,6 +45,16 @@ in {
       #extraConfig = ''
       #  error_page 404 /404.html;
       #'';
+    };
+  };
+  services.cone.extraFiles = {
+    "dashy".settings = {
+      http.routers."dashy" = {
+        rule = "Host(`${domain}`)";
+        service = "dashy";
+        middlewares = "local-only";
+      };
+      http.services."dashy".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
     };
   };
 }
