@@ -5,9 +5,9 @@
   fetchYarnDeps,
   yarnConfigHook,
   yarnBuildHook,
-  nodejs
-  #settings ? {}
-}: 
+  nodejs,
+  settings ? {},
+}:
 stdenv.mkDerivation (finalAttrs: {
   pname = "dashy-ui";
   # This is like 3.1.1 but the latest working yarn.lock.
