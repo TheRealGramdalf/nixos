@@ -1,5 +1,8 @@
 _: let
-  lock-true = {Value = true; Status = "locked";};
+  lock-true = {
+    Value = true;
+    Status = "locked";
+  };
 in {
   programs.firefox.policies = {
     # Ad-hoc user preferences, managed by policy

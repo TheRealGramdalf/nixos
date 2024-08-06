@@ -1,5 +1,8 @@
 _: let
-  lock-false = {Value = false;Status = "locked";};
+  lock-false = {
+    Value = false;
+    Status = "locked";
+  };
 in {
   programs.firefox.policies = {
     SearchSuggestEnabled = false;
