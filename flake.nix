@@ -133,6 +133,7 @@
         ];
       };
       "aer" = nixosSystem {
+        specialArgs = {inherit context;};
         modules = [
           ./config/hosts/aer/main.nix
           ./mods/nixos/main.nix
