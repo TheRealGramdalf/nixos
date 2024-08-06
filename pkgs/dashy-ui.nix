@@ -23,7 +23,9 @@ stdenv.mkDerivation (finalAttrs: {
     yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-KVAZIBM47yp1NWYc2esvTwfoAev4q7Wgi0c73PUZRNw=";
   };
-  configurePhase = lib.optional (settings != {}) ''
+  # Use postConfigure to prevent colliding with yarnConfigHook
+  # If no settings are passed, use the default config provided by upstream
+  postConfigure = lib.optional (settings != {}) ''
     echo ${builtins.toJSON settings} > user-data/conf.yml
   '';
   installPhase = ''
