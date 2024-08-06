@@ -8,7 +8,7 @@
     ./postgres.nix
     ./netbird/main.nix
     #./cockpit.nix
-    #./dashy.nix
+    ./dashy.nix
     #./paperless.nix
   ];
 }
