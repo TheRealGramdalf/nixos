@@ -24,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-KVAZIBM47yp1NWYc2esvTwfoAev4q7Wgi0c73PUZRNw=";
   };
   configurePhase = lib.optional (settings != {}) ''
-    echo ${toJSON settings} > user-data/conf.yml
+    echo ${builtins.toJSON settings} > user-data/conf.yml
   '';
   installPhase = ''
     mkdir $out
