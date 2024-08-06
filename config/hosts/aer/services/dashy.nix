@@ -1,7 +1,16 @@
 {context, ...}: let
   domain = "aer.dedyn.io";
   port = 6941;
-  settings = {};
+  settings = {
+    pageInfo = {
+      title = "Aerwiar";
+      description = "Launchpad for the Aerwiar home server";
+    };
+    appConfig = {
+      preventWriteToDisk = true;
+      disableUpdateChecks = true;
+    };
+  };
 in {
   #virtualisation.oci-containers."dash" = {
   #  image = "lissy93/dashy:3.1.1";
