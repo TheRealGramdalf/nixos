@@ -37,10 +37,10 @@ stdenv.mkDerivation (finalAttrs: {
     # Needed for executing package.json scripts
     nodejs
   ];
-  meta = with lib; {
+  meta = {
     description = "dashy";
     homepage = "https://dashy.to";
-    license = licenses.mit;
-    #maintainers = [ maintainers.gramdalf ];
+    license = lib.licenses.mit;
+    #maintainers = [ lib.maintainers.gramdalf ];
   };
 })
