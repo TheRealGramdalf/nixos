@@ -31,8 +31,9 @@ stdenv.mkDerivation (finalAttrs: {
   # If no settings are passed, use the default config provided by upstream
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
-    echo '${builtins.toJSON settings}'
+    cp '${builtins.toFile "conf.yml" ''${builtins.toJSON settings}''}' user-data/conf.yml
     echo "Settings done"
+    cat user-data/conf.yml
     #> user-data/conf.yml
     exit 1
     yarn validate-config --offline
