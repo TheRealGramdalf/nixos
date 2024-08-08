@@ -26,7 +26,7 @@ in {
       #};
     };
 
-    package = mkPackageOption context.self.packages.x86_64-linux "dashy-ui";
+    package = mkPackageOption pkgs "hello";
     finalDrv = mkOption {
       default =
         if cfg.settings != {}
