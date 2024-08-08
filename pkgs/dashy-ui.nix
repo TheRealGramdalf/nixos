@@ -28,7 +28,7 @@ stdenv.mkDerivation (finalAttrs: {
   # If no settings are passed, use the default config provided by upstream
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
-    yq --output=yml '${builtins.toFile "conf.json" ''${builtins.toJSON settings}''}' > user-data/conf.yml
+    yq --output-format yml '${builtins.toFile "conf.json" ''${builtins.toJSON settings}''}' > user-data/conf.yml
     yarn validate-config --offline
   '';
   installPhase = ''
