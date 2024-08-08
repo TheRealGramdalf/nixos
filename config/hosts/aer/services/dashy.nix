@@ -85,126 +85,6 @@ in {
           ];
         }
         {
-          name = "Management";
-          displayData.hideForGuests = true;
-          items = [
-            {
-              description = "OpenWRT WebUI";
-              icon = "si-openwrt";
-              title = "Edge Router";
-              url = "https://192.168.1.1";
-            }
-            {
-              description = "Server firewall for incoming connections";
-              icon = "si-opnsense";
-              title = "OPNsense";
-              url = "https://gateway.aer.dedyn.io";
-            }
-            {
-              description = "VM/LXC hypervisor";
-              icon = "si-proxmox";
-              title = "Proxmox";
-              url = "https://proxmox.aer.dedyn.io";
-            }
-            {
-              description = "Debugging dashboard";
-              icon = "si-traefikproxy";
-              title = "Traefik";
-              url = "https://traefik.aer.dedyn.io";
-            }
-            {
-              description = "Wireless AP for Aerwiar: Killridge Mountains";
-              icon = "fas fa-wifi";
-              title = "Aer: Killridge";
-              url = "https://192.168.1.2";
-            }
-            {
-              description = "Wireless AP for Aerwiar: Woes of Shreve";
-              icon = "fas fa-wifi";
-              title = "Aer: Woes of Shreve";
-              url = "";
-            }
-          ];
-        }
-        {
-          name = "Monitoring";
-          displayData.hideForGuests = true;
-          items = [
-            {
-              description = "Data visualised on dashboards";
-              icon = "si-grafana";
-              title = "Grafana";
-              url = "https://monitor.aer.dedyn.io";
-            }
-          ];
-        }
-        {
-          name = "System Maintence";
-          displayData.hideForGuests = true;
-          items = [
-            {
-              description = "Real-time system resource usage";
-              title = "NetData";
-            }
-            {
-              description = "Docker container management";
-              title = "Portainer";
-            }
-            {
-              description = "Container monitoring";
-              title = "cAdvisor";
-            }
-            {
-              description = "Simple resource usage";
-              title = "Glances";
-            }
-            {
-              description = "Docker container web log viewer";
-              title = "Dozzle";
-            }
-            {
-              description = "System Statistics Aggregation with PromQL";
-              title = "Prometheus";
-            }
-          ];
-        }
-        {
-          name = "External Services";
-          displayData.hideForGuests = true;
-          items = [
-            {
-              description = "DDNS/Domain provider";
-              title = "Desec";
-              url = "https://desec.io/login";
-            }
-            {
-              description = "Off-site system Borg backups";
-              title = "BorgBase";
-              url = "https://www.borgbase.com/repositories";
-            }
-            {
-              description = "Hosted VPN provider";
-              title = "Mullvad";
-              url = "https://mullvad.net/en/account/";
-            }
-            {
-              description = "Secure networks between devices";
-              title = "ZeroTier";
-              url = "https://my.zerotier.com/";
-            }
-            {
-              description = "Cron Job Monitoring";
-              title = "HealthChecks";
-              url = "https://healthchecks.io/checks/";
-            }
-            {
-              description = "Broadband internet provider";
-              title = "ISP - Vodafone";
-              url = "https://myaccount.vodafone.co.uk/";
-            }
-          ];
-        }
-        {
           name = "Media";
           displayData.hideForGuests = true;
           items = [
@@ -214,54 +94,16 @@ in {
               title = "Jellyfin";
               url = "https://media.aer.dedyn.io";
             }
-            {
-              description = "Music Library Manager";
-              title = "Lidarr";
-              url = "https://lidarr.aer.dedyn.io";
-            }
-            {
-              description = "Semi-automated Music organization/tagging";
-              title = "OneTag";
-              url = "https://onetag.aer.dedyn.io";
-            }
-          ];
-        }
-        {
-          name = "Home Control";
-          displayData.hideForGuests = true;
-          items = [
-            {
-              description = "Smart home control";
-              title = "Home Assistant";
-            }
-            {
-              description = "Flow-based automation";
-              title = "Node-RED";
-            }
-          ];
-        }
-        {
-          name = "External Utilities";
-          displayData = {
-            collapsed = true;
-            hideForGuests = true;
-          };
-          items = [
-            {
-              description = "Check public IP and associated data";
-              title = "Public IP";
-              url = "https://www.whatismyip.com/";
-            }
-            {
-              description = "Check ICAN info for a given IP address or domain";
-              title = "Who Is Lookup";
-              url = "https://whois.domaintools.com/";
-            }
-            {
-              description = "Upload + download speeds and latency";
-              title = "Speed Test";
-              url = "https://speed.cloudflare.com/";
-            }
+            #{
+            #  description = "Music Library Manager";
+            #  title = "Lidarr";
+            #  url = "https://lidarr.aer.dedyn.io";
+            #}
+            #{
+            #  description = "Semi-automated Music organization/tagging";
+            #  title = "OneTag";
+            #  url = "https://onetag.aer.dedyn.io";
+            #}
           ];
         }
         {
@@ -276,7 +118,147 @@ in {
               description = "Password Manager compattible with Bitwarden Clients";
               icon = "si-vaultwarden";
               title = "Vaultwarden";
-              url = "https://vault.aer.dedyn.io";
+              url = "${config.services.vaultwarden.config.DOMAIN}";
+            }
+          ];
+        }
+        {
+          name = "Connectivity";
+          items = [
+            {
+              title = "Netbird VPN";
+              icon = "fas fa-network-wired";
+              url = "https://${config.services.netbird.server.domain}";
+            }
+            {
+              title = "Network Shares";
+              subItems = [
+                {
+                  description = "Connecting from a Windows computer";
+                  icon = "fas fa-folder-tree";
+                  title = "Windows";
+                  url = ''\\${config.networking.hostname}'';
+                }
+                {
+                  description = "Connecting from a Linux device";
+                  icon = "fas fa-folder-tree";
+                  title = "Linux";
+                  url = "smb://${config.networking.hostname}";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          name = "Management";
+          displayData.hideForGuests = true;
+          items = [
+            {
+              description = "OpenWRT WebUI";
+              icon = "si-openwrt";
+              title = "Edge Router";
+              url = "https://192.168.1.1";
+            }
+            {
+              description = "Wireless AP for Aerwiar: Killridge Mountains";
+              icon = "fas fa-wifi";
+              title = "Aer: Killridge";
+              url = "https://192.168.1.2";
+            }
+            {
+              description = "Wireless AP for Aerwiar: Woes of Shreve";
+              icon = "fas fa-wifi";
+              title = "Aer: Woes of Shreve";
+              url = "https://192.168.1.187:4343";
+            }
+            {
+              description = "Debugging dashboard";
+              icon = "si-traefikproxy";
+              title = "Traefik";
+              url = "https://traefik.aer.dedyn.io";
+            }
+            {
+              description = "Dell iDrac 6 express WebUI";
+              icon = "fas fa-server";
+              title = "Dell iDrac";
+              url = "https://192.168.1.228/start.html";
+            }
+          ];
+        }
+        #{
+        #  name = "Monitoring";
+        #  displayData.hideForGuests = true;
+        #  items = [
+        #    {
+        #      description = "Data visualised on dashboards";
+        #      icon = "si-grafana";
+        #      title = "Grafana";
+        #      url = "https://monitor.aer.dedyn.io";
+        #    }
+        #  ];
+        #}
+        #{
+        #  name = "System Maintence";
+        #  displayData.hideForGuests = true;
+        #  items = [
+        #    {
+        #      description = "Real-time system resource usage";
+        #      title = "NetData";
+        #    }
+        #    {
+        #      description = "Docker container management";
+        #      title = "Portainer";
+        #    }
+        #    {
+        #      description = "Container monitoring";
+        #      title = "cAdvisor";
+        #    }
+        #    {
+        #      description = "Simple resource usage";
+        #      title = "Glances";
+        #    }
+        #    {
+        #      description = "Docker container web log viewer";
+        #      title = "Dozzle";
+        #    }
+        #    {
+        #      description = "System Statistics Aggregation with PromQL";
+        #      title = "Prometheus";
+        #    }
+        #  ];
+        #}
+        {
+          name = "External Services";
+          displayData.hideForGuests = true;
+          items = [
+            {
+              description = "DDNS/Domain provider";
+              title = "Desec";
+              url = "https://desec.io/login";
+            }
+          ];
+        }
+        {
+          name = "External Utilities";
+          displayData = {
+            collapsed = true;
+            hideForGuests = true;
+          };
+          items = [
+            {
+              description = "Check public IP and associated data";
+              title = "Public IP";
+              url = "https://ifconfig.me/";
+            }
+            {
+              description = "Check ICAN info for a given IP address or domain";
+              title = "Who Is Lookup";
+              url = "https://whois.domaintools.com/";
+            }
+            {
+              description = "Upload + download speeds and latency";
+              title = "Speed Test";
+              url = "https://speed.cloudflare.com/";
             }
           ];
         }
@@ -297,6 +279,12 @@ in {
                   icon = "si-simpleicons";
                   title = "Simple Icons";
                   url = "https://simpleicons.org";
+                }
+                {
+                  description = "Free generic SVG icons";
+                  icon = "si-fontawesome";
+                  title = "Font-Awesome Icons";
+                  url = "https://fontawesome.com/search?o=r&m=free";
                 }
               ];
               title = "Icons";
