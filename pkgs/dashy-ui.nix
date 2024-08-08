@@ -23,10 +23,6 @@ stdenv.mkDerivation (finalAttrs: {
     yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-KVAZIBM47yp1NWYc2esvTwfoAev4q7Wgi0c73PUZRNw=";
   };
-  #postUnpack = ''
-  #  sed -i 's/printFileReadError(e);/printFileReadError(e);\n  process.exit(1);/gm' source/services/config-validator.js
-  #  cat source/services/config-validator.js
-  #'';
   # Use postConfigure to prevent colliding with yarnConfigHook
   # If no settings are passed, use the default config provided by upstream
   postConfigure = lib.optional (settings != {}) ''
@@ -34,15 +30,6 @@ stdenv.mkDerivation (finalAttrs: {
     cp '${builtins.toFile "conf.yml" ''${builtins.toJSON settings}''}' user-data/conf.yml
     yarn validate-config --offline
   '';
-
-  #if [ -z "$VUE_APP_CONFIG_VALID" ]; then
-  #  echo "Configuration is invalid, refusing to build"
-  #  printenv
-  #  exit 1
-  #else
-  #  echo "Configuration is valid, continuing..."
-  #  exit 0
-  #fi
   installPhase = ''
     mkdir $out
     cp -R dist/* $out
