@@ -426,6 +426,69 @@
       }
     ];
   };
+  s2 = {
+    appConfig = {theme = "colorful";};
+    pageInfo = {
+      description = "Welcome to your new dashboard!";
+      navLinks = [
+        {
+          path = "https://github.com/Lissy93/dashy";
+          title = "GitHub";
+        }
+        {
+          path = "https://dashy.to/docs";
+          title = "Documentation";
+        }
+      ];
+      title = "Dashy";
+    };
+    sections = [
+      {
+        icon = "fas fa-rocket";
+        items = [
+          {
+            description = "Development a project management links for Dashy";
+            icon = "https://i.ibb.co/qWWpD0v/astro-dab-128.png";
+            target = "newtab";
+            title = "Dashy Live";
+            url = "https://live.dashy.to/";
+          }
+          {
+            description = "Source Code, Issues and Pull Requests";
+            icon = "favicon";
+            title = "GitHub";
+            url = "https://github.com/lissy93/dashy";
+          }
+          {
+            description = "Configuring & Usage Documentation";
+            icon = "far fa-book";
+            provider = "Dashy.to";
+            title = "Docs";
+            url = "https://dashy.to/docs";
+          }
+          {
+            description = "See how others are using Dashy";
+            icon = "far fa-grin-hearts";
+            title = "Showcase";
+            url = "https://github.com/Lissy93/dashy/blob/master/docs/showcase.md";
+          }
+          {
+            description = "See full list of configuration options";
+            icon = "fas fa-wrench";
+            title = "Config Guide";
+            url = "https://github.com/Lissy93/dashy/blob/master/docs/configuring.md";
+          }
+          {
+            description = "Get help with Dashy, raise a bug, or get in contact";
+            icon = "far fa-hands-helping";
+            title = "Support";
+            url = "https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md";
+          }
+        ];
+        name = "Getting Started";
+      }
+    ];
+  };
 in {
   services.nginx = {
     enable = true;
@@ -439,7 +502,7 @@ in {
       locations = {
         "/" = {
           root = context.self.packages.x86_64-linux.dashy-ui.override {
-            inherit settings;
+            settings = s2;
           };
           tryFiles = "$uri /index.html ";
         };
