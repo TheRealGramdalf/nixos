@@ -112,7 +112,7 @@ in {
             {
               description = "Single Sign-on (Server Account)";
               title = "Kanidm";
-              url = "https://auth.aer.dedyn.io";
+              url = "${config.services.kani.serverSettings.origin}";
             }
             {
               description = "Password Manager compattible with Bitwarden Clients";
