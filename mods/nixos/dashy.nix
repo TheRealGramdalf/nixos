@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  context,
   ...
 }: let
   inherit (lib.types) package str;
@@ -26,12 +27,18 @@ in {
       #};
     };
 
-    package = mkPackageOption pkgs "hello";
+    package = mkPackageOption context.self.packages.x86_64-linux "dashy-ui" {};
     finalDrv = mkOption {
+      readOnly = true;
       default =
         if cfg.settings != {}
         then cfg.package.override {inherit (cfg) settings;}
         else cfg.package;
+      defaultText = ''
+        if cfg.settings != {}
+        then cfg.package.override {inherit (cfg) settings;}
+        else cfg.package;
+      '';
       type = package;
       description = ''
         Final derivation containing the fully built static files
@@ -44,7 +51,7 @@ in {
         Settings serialized into `user-data/conf.yml` before build.
         If left empty, the default configuration shipped with the package will be used instead
       '';
-      inherit (pkgs.formats.json) type;
+      inherit (pkgs.formats.json {}) type;
     };
     #pages = mkOption {
     #  default = {};
