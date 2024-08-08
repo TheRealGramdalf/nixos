@@ -137,12 +137,14 @@ in {
                   description = "Connecting from a Windows computer";
                   icon = "fas fa-folder-tree";
                   title = "Windows";
+                  target = "clipboard";
                   url = ''\\${config.networking.hostName}'';
                 }
                 {
                   description = "Connecting from a Linux device";
                   icon = "fas fa-folder-tree";
                   title = "Linux";
+                  target = "modal";
                   url = "smb://${config.networking.hostName}";
                 }
               ];
