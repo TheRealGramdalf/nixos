@@ -5,5 +5,6 @@
     ./cone.nix
     ./kani.nix
     ./pogadmin.nix
+    ./dashy.nix
   ];
 }
