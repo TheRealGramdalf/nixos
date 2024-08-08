@@ -154,7 +154,7 @@
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./config/common/nix3.nix
+          ./config/common/tomeutils.nix
           ({
             pkgs,
             modulesPath,
@@ -162,10 +162,6 @@
           }: {
             imports = [
               "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-            ];
-            environment.systemPackages = with pkgs; [
-              neovim
-              git
             ];
             users.users."root".openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5ibKzd+V2eR1vmvBAfSWcZmPB8zUYFMAN3FS6xY9ma"
