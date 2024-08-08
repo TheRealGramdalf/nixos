@@ -6,6 +6,7 @@
   yarnConfigHook,
   yarnBuildHook,
   nodejs,
+  yq-go,
   settings ? {},
 }:
 stdenv.mkDerivation (finalAttrs: {
