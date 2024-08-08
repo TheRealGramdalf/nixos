@@ -24,8 +24,12 @@ stdenv.mkDerivation (finalAttrs: {
     yarnLock = finalAttrs.src + "/yarn.lock";
     hash = "sha256-KVAZIBM47yp1NWYc2esvTwfoAev4q7Wgi0c73PUZRNw=";
   };
-  # Use postConfigure to prevent colliding with yarnConfigHook
-  # If no settings are passed, use the default config provided by upstream
+  # - Use postConfigure to prevent colliding with yarnConfigHook
+  # - If no settings are passed, use the default config provided by upstream
+  # - Despite JSON being valid YAML (and the JSON passing the config validator),
+  # there seem to be some issues with JSON in the final build - potentially due to
+  # the way the client parses things
+  # - Instead, we use `yq-go` to convert it to yaml
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
     yq --output-format yml '${builtins.toFile "conf.json" ''${builtins.toJSON settings}''}' > user-data/conf.yml
