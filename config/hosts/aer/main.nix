@@ -8,7 +8,7 @@
     ./networking.nix
     ./hardware.nix
     ./ssh.nix
-    ../../common/nix3.nix
+    ../../common/tomeutils.nix
     ./system.nix
 
     # Services
