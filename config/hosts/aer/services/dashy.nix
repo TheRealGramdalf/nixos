@@ -502,7 +502,7 @@ in {
       locations = {
         "/" = {
           root = context.self.packages.x86_64-linux.dashy-ui.override {
-            settings = s2;
+            inherit settings;
           };
           tryFiles = "$uri /index.html ";
         };
