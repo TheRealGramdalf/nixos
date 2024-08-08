@@ -27,7 +27,7 @@ stdenv.mkDerivation (finalAttrs: {
   # If no settings are passed, use the default config provided by upstream
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
-    cp '${builtins.toFile "conf.yml" ''${builtins.toJSON settings}''}' user-data/conf.yml
+    yq --output=yml '${builtins.toFile "conf.json" ''${builtins.toJSON settings}''}' > user-data/conf.yml
     yarn validate-config --offline
   '';
   installPhase = ''
@@ -39,6 +39,8 @@ stdenv.mkDerivation (finalAttrs: {
     yarnConfigHook
     yarnBuildHook
     nodejs
+    # For yaml parsing
+    yq-go
   ];
   meta = {
     description = "dashy";
