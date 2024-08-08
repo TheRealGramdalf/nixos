@@ -9,15 +9,28 @@ in {
       domain = "aer.dedyn.io";
     };
     settings = {
+      pageInfo = {
+        title = "Aerwiar";
+        description = "Launchpad for the Aerwiar home server";
+      };
       appConfig = {
-        # Nix stuff, should probably go in default module if possible
+        ## Nix stuff, should probably go in default module if possible
         disableUpdateChecks = true;
         preventWriteToDisk = true;
 
+        ## Config related settings
+        enableErrorReporting = false;
         allowConfigEdit = true;
+        preventLocalSave = false;
+        disableConfigurationForNonAdmin = true;
+        disableConfiguration = false;
         #auth = {
-        #  enableGuestAccess = false;
-        #  enableKeycloak = false;
+        #  enableGuestAccess = true;
+        #  enableOidc = true;
+        #  oidc = {
+        #    clientId = "";
+        #    endpoint = "";
+        #  }
         #  users = [
         #    {
         #      hash = "416446aa03cd5d634673b505387e139e11751c3c2dfb7fa1632535ff5c2406ca";
@@ -26,137 +39,54 @@ in {
         #    }
         #  ];
         #};
-        defaultIcon = "generative";
-        defaultOpeningMethod = "newtab";
-        disableConfiguration = false;
-        disableConfigurationForNonAdmin = true;
-        disableContextMenu = false;
-        disableSmartSort = false;
-        enableErrorReporting = true;
-        enableFontAwesome = true;
-        enableMaterialDesignIcons = false;
-        enableMultiTasking = false;
-        enableServiceWorker = false;
-        faviconApi = "allesedv";
-        hideComponents = {
-          hideFooter = false;
-          hideHeading = false;
-          hideNav = false;
-          hideSearch = false;
-          hideSettings = false;
-        };
-        iconSize = "medium";
-        language = "en";
-        layout = "auto";
-        preventLocalSave = false;
+        ## Functionality
         routingMode = "history";
-        showSplashScreen = true;
-        startingView = "default";
         statusCheck = false;
         statusCheckInterval = 0;
-        theme = "argon";
         webSearch = {
           disableWebSearch = false;
           openingMethod = "newtab";
           searchBangs = {};
           searchEngine = "duckduckgo";
         };
-        widgetsAlwaysUseProxy = false;
-      };
-      pageInfo = {
-        title = "Aerwiar";
-        description = "Launchpad for the Aerwiar home server";
+        defaultOpeningMethod = "newtab";
+        # Not sure about my verdict on multitasking yet
+        enableMultiTasking = false;
+        # Offline dashboard is nice, ctrl + f5 will force reload if needed
+        enableServiceWorker = true;
+        faviconApi = "allesedv";
+        ## UI settings
+        theme = "argon";
+        showSplashScreen = false;
+        iconSize = "medium";
+        # Use a handy generative icon if none is specified
+        defaultIcon = "generative";
+        layout = "auto";
+        startingView = "default";
+        language = "en";
+        hideComponents = {
+          hideFooter = true;
+          hideHeading = false;
+          hideNav = false;
+          hideSearch = false;
+          hideSettings = false;
+        };
       };
       sections = [
         {
-          displayData = {
-            collapsed = false;
-            cols = 2;
-          };
+          name = "Productivity";
           items = [
-            {
-              description = "Web site archiving";
-              title = "Archive Box";
-            }
-            {
-              description = "Feature-rich dynamic tables (similar to Airtable)";
-              title = "Baserow";
-            }
-            {
-              description = "Self-hosted Wiki";
-              title = "Bookstack";
-            }
-            {
-              description = "Manage domains and other internet assets";
-              title = "Domain Mod";
-            }
-            {
-              description = "Financial manager, for keeping track of expenses, income, budgets, etc";
-              title = "Firefly";
-            }
-            {
-              description = "RSS feed reader and news aggregator";
-              title = "Fresh RSS";
-            }
-            {
-              description = "Personal GIF library";
-              title = "GifWit";
-            }
-            {
-              description = "Git service, hosting mirrors of my public repos";
-              title = "Git Tea";
-            }
-            {
-              description = "Issues involving 'TheRealGramdalf'";
-              icon = "si-github";
-              title = "Github Issues";
-              url = "https://github.com/search?q=is%3Aissue+involves%3Atherealgramdalf&type=issues&s=updated&o=desc";
-            }
-            {
-              description = "Cloud office suit and collaboration platform";
-              title = "NextCloud";
-            }
             {
               description = "Scan, index, and archive physical paper documents";
               icon = "si-paperless-ngx";
               title = "Paperless";
               url = "https://paperless.aer.dedyn.io";
             }
-            {
-              description = "Browsing, organizing, and sharing photos and albums";
-              title = "Photo Prism";
-            }
-            {
-              description = "Encrypted notes app, with extensions and desktop + mobile apps";
-              title = "Standard Notes";
-            }
-            {
-              description = "Peer-to-peer file synchronization";
-              title = "Syncthing";
-            }
-            {
-              description = "Cloud based VS Code development environment";
-              title = "VS Code Web";
-            }
-            {
-              description = "Saved URLs and bookmarks";
-              title = "Wallabag";
-            }
-            {
-              description = "Bookmarks, history and browser sync";
-              title = "XBrowserSync";
-            }
           ];
-          name = "Productivity";
         }
         {
-          displayData = {
-            collapsed = false;
-            cols = 1;
-            hideForGuests = true;
-            rows = 1;
-            sortBy = "default";
-          };
+          name = "Management";
+          displayData.hideForGuests = true;
           items = [
             {
               description = "OpenWRT WebUI";
@@ -195,37 +125,11 @@ in {
               url = "";
             }
           ];
-          name = "Management";
         }
         {
-          displayData = {
-            collapsed = false;
-            cols = 1;
-            hideForGuests = true;
-            rows = 1;
-            sortBy = "default";
-          };
+          name = "Monitoring";
+          displayData.hideForGuests = true;
           items = [
-            {
-              description = "DNS settings for ad & tracker blocking";
-              title = "Pi-Hole";
-            }
-            {
-              description = "Presence monitoring and ARP scanning";
-              title = "PiAlert";
-            }
-            {
-              description = "Network latency monitoring";
-              title = "SmokePing";
-            }
-            {
-              description = "Up-time monitoring for local service";
-              title = "StatPing";
-            }
-            {
-              description = "Local network speed and latency test";
-              title = "LibreSpeed";
-            }
             {
               description = "Data visualised on dashboards";
               icon = "si-grafana";
@@ -233,13 +137,10 @@ in {
               url = "https://monitor.aer.dedyn.io";
             }
           ];
-          name = "Monitoring";
         }
         {
-          displayData = {
-            hideForGuests = true;
-            sortBy = "default";
-          };
+          name = "System Maintence";
+          displayData.hideForGuests = true;
           items = [
             {
               description = "Real-time system resource usage";
@@ -266,13 +167,10 @@ in {
               title = "Prometheus";
             }
           ];
-          name = "System Maintence";
         }
         {
-          displayData = {
-            hideForGuests = true;
-            sortBy = "default";
-          };
+          name = "External Services";
+          displayData.hideForGuests = true;
           items = [
             {
               description = "DDNS/Domain provider";
@@ -305,13 +203,10 @@ in {
               url = "https://myaccount.vodafone.co.uk/";
             }
           ];
-          name = "External Services";
         }
         {
-          displayData = {
-            hideForGuests = true;
-            sortBy = "default";
-          };
+          name = "Media";
+          displayData.hideForGuests = true;
           items = [
             {
               description = "Stream Music, Movies, and TV Shows";
@@ -330,13 +225,10 @@ in {
               url = "https://onetag.aer.dedyn.io";
             }
           ];
-          name = "Media";
         }
         {
-          displayData = {
-            hideForGuests = true;
-            sortBy = "default";
-          };
+          name = "Home Control";
+          displayData.hideForGuests = true;
           items = [
             {
               description = "Smart home control";
@@ -347,13 +239,12 @@ in {
               title = "Node-RED";
             }
           ];
-          name = "Home Control";
         }
         {
+          name = "External Utilities";
           displayData = {
             collapsed = true;
             hideForGuests = true;
-            sortBy = "default";
           };
           items = [
             {
@@ -371,22 +262,10 @@ in {
               title = "Speed Test";
               url = "https://speed.cloudflare.com/";
             }
-            {
-              description = "Confirms a secure connection to Mullvad's WireGuard servers";
-              title = "Mullvad Check";
-              url = "https://mullvad.net/check";
-            }
           ];
-          name = "External Utilities";
         }
         {
-          displayData = {
-            collapsed = false;
-            cols = 1;
-            hideForGuests = true;
-            rows = 1;
-            sortBy = "default";
-          };
+          name = "Identity";
           items = [
             {
               description = "Single Sign-on (Server Account)";
@@ -400,16 +279,10 @@ in {
               url = "https://vault.aer.dedyn.io";
             }
           ];
-          name = "Identity";
         }
         {
-          displayData = {
-            collapsed = false;
-            cols = 1;
-            hideForGuests = true;
-            rows = 1;
-            sortBy = "default";
-          };
+          name = "Dashy";
+          displayData.hideForGuests = true;
           items = [
             {
               subItems = [
@@ -429,7 +302,6 @@ in {
               title = "Icons";
             }
           ];
-          name = "Dashy";
         }
       ];
     };
