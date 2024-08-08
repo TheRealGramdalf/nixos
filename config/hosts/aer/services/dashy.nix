@@ -144,7 +144,7 @@ in {
                   description = "Connecting from a Linux device";
                   icon = "fas fa-folder-tree";
                   title = "Linux";
-                  target = "modal";
+                  target = "clipboard";
                   url = "smb://${config.networking.hostName}";
                 }
               ];
