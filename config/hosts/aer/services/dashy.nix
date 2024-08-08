@@ -78,7 +78,7 @@ in {
           items = [
             {
               description = "Scan, index, and archive physical paper documents";
-              icon = "si-paperless-ngx";
+              icon = "si-paperlessngx";
               title = "Paperless";
               url = "https://paperless.aer.dedyn.io";
             }
