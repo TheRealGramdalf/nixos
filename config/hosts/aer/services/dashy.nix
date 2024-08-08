@@ -1,4 +1,4 @@
-_: let
+{config, context, ...}: let
   cfg = config.services.dashy;
   port = 6941;
 in {
@@ -8,6 +8,7 @@ in {
       enableNginx = true;
       domain = "aer.dedyn.io";
     };
+    package = context.self.packages.x86_64-linux.dashy-ui;
     settings = {
       appConfig = {
         # Nix stuff, should probably go in default module if possible
@@ -445,7 +446,7 @@ in {
   # Proxy nginx through traefik
   services.cone.extraFiles."dashy".settings = {
     http.routers."dashy" = {
-      rule = "Host(`${domain}`)";
+      rule = "Host(`${cfg.virtualHost.domain}`)";
       service = "dashy";
       middlewares = "local-only";
     };
