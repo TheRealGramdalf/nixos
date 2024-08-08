@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.services.pogadmin;
   inherit (lib.types) int bool str oneOf listOf attrsOf port path nullOr;
-  inherit (lib) mkEnableOption mkOption mkDefault mkForce mapAttrsToList concatStringsSep optional optionalAttrs optionalString;
+  inherit (lib) mkEnableOption mkOption mkDefault mapAttrsToList concatStringsSep optional optionalAttrs optionalString;
 
   _base = [int bool str];
   base = oneOf ([(listOf (oneOf _base)) (attrsOf (oneOf _base))] ++ _base);
@@ -17,22 +17,24 @@ with lib; let
   formatPyValue = value:
     if builtins.isString value
     then builtins.toJSON value
-    else if value ? _expr
-    then value._expr
-    else if builtins.isInt value
-    then toString value
-    else if builtins.isBool value
-    then
-      (
-        if value
-        then "True"
-        else "False"
-      )
-    else if builtins.isAttrs value
-    then (formatAttrset value)
-    else if builtins.isList value
-    then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
-    else throw "Unrecognized type";
+    else
+      value._expr
+      or (
+        if builtins.isInt value
+        then toString value
+        else if builtins.isBool value
+        then
+          (
+            if value
+            then "True"
+            else "False"
+          )
+        else if builtins.isAttrs value
+        then (formatAttrset value)
+        else if builtins.isList value
+        then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
+        else throw "Unrecognized type"
+      );
 
   formatPy = attrs:
     concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${formatPyValue value}") attrs);
@@ -159,8 +161,8 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
-    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [cfg.port];
+  config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [cfg.port];
 
     services.pogadmin.settings =
       {
@@ -235,7 +237,7 @@ in {
 
     users.users = mkIf (cfg.user == "pgadmin") {
       pgadmin = {
-        group = cfg.group;
+        inherit (cfg) group;
         isSystemUser = true;
       };
     };

@@ -1,4 +1,4 @@
-{...}: {
+_: {
   boot.initrd.systemd.enable = true;
   system.etc.overlay.enable = false;
   users.mutableUsers = false;

@@ -1,6 +1,5 @@
 {config, ...}: let
   cfg = config.services.netbird.server;
-  cid = "netbird";
   sigPort = "${toString cfg.signal.port}";
 in {
   services.netbird.server = {

@@ -11,18 +11,13 @@
   cfg = config.services.cone;
   jsonValue = (pkgs.formats.json {}).type;
 
-  dynamicFile =
-    if (cfg.dynamic.file == null && cfg.dynamic.dir == null)
-    then writeText "dynamic_config.json" (builtins.toJSON cfg.dynamic.settings)
-    else cfg.dynamic.file;
-
   staticFile =
     if cfg.static.file == null
     then writeText "static_config.json" (builtins.toJSON cfg.static.settings)
     else cfg.static.file;
 
   finalStaticFile =
-    if cfg.useEnvSubst == false
+    if !cfg.useEnvSubst
     then staticFile
     else "/run/traefik/config.json";
 in {
@@ -304,7 +299,7 @@ in {
       serviceConfig = {
         EnvironmentFile = cfg.environmentFiles;
         ExecStartPre =
-          optional (cfg.useEnvSubst)
+          optional cfg.useEnvSubst
           (pkgs.writeShellScript "pre-start" ''
             umask 077
             ${getExe pkgs.envsubst} -i "${staticFile}" > "${finalStaticFile}"
@@ -328,9 +323,7 @@ in {
           cfg.dataDir
         ];
         ReadOnlyPaths =
-          [
-          ]
-          ++ optional (cfg.dynamic.dir != null) cfg.dynamic.dir;
+          optional (cfg.dynamic.dir != null) cfg.dynamic.dir;
 
         RuntimeDirectory = "traefik";
       };
@@ -338,9 +331,7 @@ in {
 
     systemd.tmpfiles = {
       rules =
-        [
-        ]
-        ++ optional (cfg.user == "traefik") "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group} - -"
+        optional (cfg.user == "traefik") "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group} - -"
         ++ optional (cfg.dynamic.dir != null) "d ${cfg.dynamic.dir} 0700 ${cfg.user} ${cfg.group} - -"
         # Clean all old tmpfiles in the dynamic directory
         ++ optional (cfg.dynamic.dir != null) "r ${cfg.dynamic.dir}/_nixos-* - - - - -"
@@ -349,7 +340,7 @@ in {
     };
     users.users = optionalAttrs (cfg.user == "traefik") {
       traefik = {
-        group = cfg.group;
+        inherit (cfg) group;
         isSystemUser = true;
       };
     };

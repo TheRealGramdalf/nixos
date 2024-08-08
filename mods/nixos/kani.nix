@@ -6,8 +6,8 @@
   ...
 }: let
   cfg = config.services.kani;
-  inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce filterAttrs mapAttrs;
-  inherit (lib.types) str nullOr strMatching submodule path enum listOf ints bool;
+  inherit (lib) mkEnableOption mkOption mkIf mkMerge mkForce;
+  inherit (lib.types) str nullOr strMatching submodule path enum listOf ints;
   settingsFormat = pkgs.formats.toml {};
   # Remove null values, so we can document optional values that don't end up in the generated TOML file.
   filterConfig = lib.converge (lib.filterAttrsRecursive (_: v: v != null));

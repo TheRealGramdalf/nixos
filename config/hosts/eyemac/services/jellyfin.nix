@@ -1,4 +1,4 @@
-{config, ...}: let
+_: let
   name = "media";
   port = "8096";
 in {

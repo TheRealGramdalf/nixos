@@ -1,6 +1,4 @@
-{config, ...}: let
-  cfg = config.services.cone;
-in {
+{config, ...}: {
   services.cone = {
     enable = true;
     supplementaryGroups = ["docker"];

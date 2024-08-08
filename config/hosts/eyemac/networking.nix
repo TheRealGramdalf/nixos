@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   networking = {
     useNetworkd = true;
     useDHCP = false;

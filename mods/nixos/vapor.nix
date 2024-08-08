@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) types;
-  inherit (lib) mkIf mkDefault mkEnableOption mkOption literalExpression optionals optionalAttrs optional;
+  inherit (lib) mkIf mkDefault mkEnableOption mkOption;
   cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
 
