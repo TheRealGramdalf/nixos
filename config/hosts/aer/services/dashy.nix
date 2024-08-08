@@ -8,7 +8,6 @@ in {
       enableNginx = true;
       domain = "aer.dedyn.io";
     };
-    package = context.self.packages.x86_64-linux.dashy-ui;
     settings = {
       appConfig = {
         # Nix stuff, should probably go in default module if possible
