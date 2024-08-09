@@ -23,17 +23,17 @@ in {
             else {_secret = cfg.coturn.passwordFile;};
         }
       ];
-      settings.Stuns = [
-        {
-          Password =
-            if (cfg.coturn.password != null)
-            then cfg.coturn.password
-            else {_secret = cfg.coturn.passwordFile;};
-          Proto = "udp";
-          URI = "stun:${cfg.domain}:${toString cfg.management.turnPort}";
-          Username = "netbird";
-        }
-      ];
+      #settings.Stuns = [
+      #  {
+      #    Password =
+      #      if (cfg.coturn.password != null)
+      #      then cfg.coturn.password
+      #      else {_secret = cfg.coturn.passwordFile;};
+      #    Proto = "udp";
+      #    URI = "stun:${cfg.domain}:${toString cfg.management.turnPort}";
+      #    Username = "netbird";
+      #  }
+      #];
     };
     coturn = {
       enable = true;
@@ -59,7 +59,7 @@ in {
     no-tls = true;
     no-dtls = true;
     extraConfig = ''
-      verbose = true
+      Verbose = true
       #external-ip = 70.70.36.117/192.168.1.5
     '';
   };
