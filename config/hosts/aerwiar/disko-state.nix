@@ -3,18 +3,18 @@
   disko.devices = {
     disk."zdisk" = {
       ##### CHANGE THIS!! #####
-      device = "/dev/disk/by-id/";
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NG0R402090R";
       ##### ^^^^^^^^^^^^^ #####
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          "aerwiar-zroot" = {
-            label = "aerwiar-zroot";
+          "aerwiar-zpool" = {
+            label = "aerwiar-zpool";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "aerwiar-zroot";
+              pool = "aerwiar-zpool";
             };
           };
           "aerwiar-zboot" = {
@@ -30,7 +30,7 @@
         };
       };
     };
-    zpool."aerwiar-zroot" = {
+    zpool."aerwiar-zpool" = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
@@ -90,7 +90,7 @@
           };
         };
       };
-      postCreateHook = "zfs snapshot -r zroot@blank";
+      postCreateHook = "zfs snapshot -r zpool@blank";
     };
   };
 }
