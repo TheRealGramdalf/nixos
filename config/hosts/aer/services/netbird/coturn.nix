@@ -47,9 +47,10 @@ in {
     no-tcp-relay = true;
     no-tls = true;
     no-dtls = true;
-    #extraConfig = ''
-    #  external-ip = 70.70.36.117/192.168.1.5
-    #'';
+    extraConfig = ''
+      verbose = true
+      #external-ip = 70.70.36.117/192.168.1.5
+    '';
   };
 
   services.cone.extraFiles = {
