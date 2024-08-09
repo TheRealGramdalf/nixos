@@ -23,6 +23,17 @@ in {
             else {_secret = cfg.coturn.passwordFile;};
         }
       ];
+      settings.Stuns = [
+        {
+          Password =
+            if (cfg.coturn.password != null)
+            then cfg.coturn.password
+            else {_secret = cfg.coturn.passwordFile;};
+          Proto = "udp";
+          URI = "stun:${cfg.domain}:${toString cfg.management.turnPort}";
+          Username = "netbird";
+        }
+      ];
     };
     coturn = {
       enable = true;
