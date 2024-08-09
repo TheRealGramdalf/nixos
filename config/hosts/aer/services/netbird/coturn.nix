@@ -40,6 +40,9 @@ in {
       # the TURN server has to listen on this address for the udp port range
       "192.168.1.5"
     ];
+    relay-ips = [
+      "70.70.36.117"
+    ];
     no-tcp = true;
     no-tcp-relay = true;
     no-tls = true;
