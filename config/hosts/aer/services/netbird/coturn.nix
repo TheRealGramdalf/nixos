@@ -53,6 +53,7 @@ in {
     ];
     relay-ips = [
       "192.168.1.5"
+      "127.0.0.1"
     ];
     no-tcp = true;
     no-tcp-relay = true;
