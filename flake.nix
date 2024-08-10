@@ -139,6 +139,13 @@
           ./mods/nixos/main.nix
         ];
       };
+      "orthanc" = nixosSystem {
+        specialArgs = {inherit context;};
+        modules = [
+          ./config/hosts/orthanc/main.nix
+          ./mods/nixos/main.nix
+        ];
+      };
       "aer-test" = nixosSystem {
         modules = [
           ./config/hosts/aer/main.nix
