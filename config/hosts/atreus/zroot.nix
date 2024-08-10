@@ -1,24 +1,25 @@
 # UEFI only GPT
-{
+let
+  hostname = "atreus";
+  device = "disk/by-id/nvme-INTEL_SSDPEKNU512GZ_BTKA12021MF2512A";
+in {
   disko.devices = {
     disk."zdisk" = {
-      ##### CHANGE THIS!! #####
-      device = "/dev/disk/by-id/";
-      ##### ^^^^^^^^^^^^^ #####
+      device = "/dev/${device}";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          "atreus-zroot" = {
-            label = "atreus-zroot";
+          "${hostname}-zroot" = {
+            label = "${hostname}-zroot";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "atreus-zroot";
+              pool = "${hostname}-zroot";
             };
           };
-          "atreus-zboot" = {
-            label = "atreus-zboot";
+          "${hostname}-zboot" = {
+            label = "${hostname}-zboot";
             size = "100%";
             type = "EF00";
             content = {
@@ -30,7 +31,7 @@
         };
       };
     };
-    zpool."atreus-zroot" = {
+    zpool."${hostname}-zroot" = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
@@ -90,7 +91,7 @@
           };
         };
       };
-      postCreateHook = "zfs snapshot -r zroot@blank";
+      postCreateHook = "zfs snapshot -r ${hostname}-zroot@blank";
     };
   };
 }
