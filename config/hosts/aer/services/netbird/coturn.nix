@@ -23,17 +23,6 @@ in {
             else {_secret = cfg.coturn.passwordFile;};
         }
       ];
-      #settings.Stuns = [
-      #  {
-      #    Password =
-      #      if (cfg.coturn.password != null)
-      #      then cfg.coturn.password
-      #      else {_secret = cfg.coturn.passwordFile;};
-      #    Proto = "udp";
-      #    URI = "stun:${cfg.domain}:${toString cfg.management.turnPort}";
-      #    Username = "netbird";
-      #  }
-      #];
     };
     coturn = {
       enable = true;
@@ -44,6 +33,8 @@ in {
     };
   };
   services.coturn = {
+    # This apparently needs to be direct; i.e. it can't be proxied through something unless
+    # the port stays the same
     listening-port = 3478;
     alt-listening-port = 3476;
     listening-ips = [
@@ -61,7 +52,6 @@ in {
     no-dtls = true;
     extraConfig = ''
       verbose = true
-      #external-ip = 70.70.36.117/192.168.1.5
     '';
   };
 }
