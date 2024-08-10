@@ -44,7 +44,7 @@ in {
     };
   };
   services.coturn = {
-    listening-port = 3477;
+    listening-port = 3478;
     alt-listening-port = 3476;
     listening-ips = [
       "127.0.0.1"
@@ -61,22 +61,7 @@ in {
     no-dtls = true;
     extraConfig = ''
       verbose = true
-      allow-loopback-peers
       #external-ip = 70.70.36.117/192.168.1.5
     '';
-  };
-
-  services.cone.extraFiles = {
-    "netbird-turn".settings = {
-      udp.routers."netbird-turn" = {
-        entrypoints = ["netbird-turn"];
-        service = "netbird-turn";
-      };
-      udp.services."netbird-turn".loadbalancer.servers = [{address = "127.0.0.1:${toString config.services.coturn.listening-port}";}];
-    };
-  };
-  services.cone.static.settings.entryPoints."netbird-turn" = {
-    #http.tls.certResolver = "letsencrypt";
-    address = ":3478/udp";
   };
 }
