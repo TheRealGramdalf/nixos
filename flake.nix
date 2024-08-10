@@ -21,7 +21,7 @@
     };
   };
 
-  outputs = context @ {
+  outputs = inputs @ {
     nixpkgs,
     home-manager,
     nixos-hardware,
@@ -59,7 +59,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit context;};
+              extraSpecialArgs = {inherit inputs;};
               sharedModules = [
                 ./mods/home/main.nix
               ];
@@ -75,7 +75,7 @@
         ];
       };
       "aerwiar" = nixosSystem {
-        specialArgs = {inherit context;};
+        specialArgs = {inherit inputs;};
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
@@ -85,7 +85,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit context;};
+              extraSpecialArgs = {inherit inputs;};
               sharedModules = [
                 ./mods/home/main.nix
               ];
@@ -111,7 +111,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit context;};
+              extraSpecialArgs = {inherit inputs;};
               sharedModules = [
                 ./mods/home/main.nix
               ];
@@ -133,14 +133,14 @@
         ];
       };
       "aer" = nixosSystem {
-        specialArgs = {inherit context;};
+        specialArgs = {inherit inputs;};
         modules = [
           ./config/hosts/aer/main.nix
           ./mods/nixos/main.nix
         ];
       };
       "orthanc" = nixosSystem {
-        specialArgs = {inherit context;};
+        specialArgs = {inherit inputs;};
         modules = [
           ./config/hosts/orthanc/main.nix
           ./mods/nixos/main.nix
@@ -179,7 +179,7 @@
       "gramdalf" = homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         #useGlobalPkgs = true;
-        extraSpecialArgs = {inherit context;};
+        extraSpecialArgs = {inherit inputs;};
         modules = [
           ./config/users/gramdalf/main.nix
         ];

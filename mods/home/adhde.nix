@@ -3,14 +3,14 @@
   osConfig,
   lib,
   pkgs,
-  context,
+  inputs,
   ...
 }: let
   inherit (lib) mkEnableOption mkMerge mkIf;
   cfg = config.tomeutils.adhde;
 in {
   imports = [
-    context.anyrun.homeManagerModules.default
+    inputs.anyrun.homeManagerModules.default
   ];
   options.tomeutils.adhde = {
     enable = mkEnableOption "ADHDE, a set of usable Hyprland defaults for the scatterbrained" // {default = false;};
@@ -75,7 +75,7 @@ in {
       programs.anyrun = {
         enable = true;
         config = {
-          plugins = with context.anyrun.packages.${pkgs.system}; [
+          plugins = with inputs.anyrun.packages.${pkgs.system}; [
             applications
             rink
             symbols

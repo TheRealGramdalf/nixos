@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  context,
+  inputs,
   ...
 }: let
   inherit (lib.types) package str;
@@ -27,7 +27,7 @@ in {
       #};
     };
 
-    package = mkPackageOption context.self.packages.x86_64-linux "dashy-ui" {};
+    package = mkPackageOption inputs.self.packages.x86_64-linux "dashy-ui" {};
     finalDrv = mkOption {
       readOnly = true;
       default =
