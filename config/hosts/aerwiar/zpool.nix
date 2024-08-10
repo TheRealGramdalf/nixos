@@ -1,24 +1,25 @@
 # UEFI only GPT
-{
+let
+  hostname = "aerwiar";
+  device = "disk/by-id/nvme-INTEL_SSDPEKNU512GZ_BTKA12021MF2512A";
+in {
   disko.devices = {
     disk."zdisk" = {
-      ##### CHANGE THIS!! #####
-      device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5P2NG0R402090R";
-      ##### ^^^^^^^^^^^^^ #####
+      device = "/dev/${device}";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          "aerwiar-zpool" = {
-            label = "aerwiar-zpool";
+          "${hostname}-zpool" = {
+            label = "${hostname}-zpool";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "aerwiar-zpool";
+              pool = "${hostname}-zpool";
             };
           };
-          "aerwiar-zboot" = {
-            label = "aerwiar-zboot";
+          "${hostname}-zboot" = {
+            label = "${hostname}-zboot";
             size = "100%";
             type = "EF00";
             content = {
@@ -30,7 +31,7 @@
         };
       };
     };
-    zpool."aerwiar-zpool" = {
+    zpool."${hostname}-zpool" = {
       type = "zpool";
       options.ashift = "12";
       rootFsOptions = {
@@ -90,7 +91,7 @@
           };
         };
       };
-      postCreateHook = "zfs snapshot -r zpool@blank";
+      postCreateHook = "zfs snapshot -r ${hostname}-zpool@blank";
     };
   };
 }
