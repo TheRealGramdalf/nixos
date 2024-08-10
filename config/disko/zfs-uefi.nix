@@ -1,7 +1,7 @@
-# BIOS compatible gpt partition
+# UEFI only GPT
 let
-  hostname = "";
-  device = "";
+  hostname = ""; # Used to name drives & pools
+  device = ""; # Path of the device relative to `/dev/`. Usually `disk/by-id/...`
 in {
   disko.devices = {
     disk."zdisk" = {
@@ -10,23 +10,16 @@ in {
       content = {
         type = "gpt";
         partitions = {
-          # This allows a GPT partition table to be used with legacy BIOS systems. See https://www.gnu.org/software/grub/manual/grub/html_node/BIOS-installation.html
-          "mbr" = {
-            label = "mbr";
-            size = "1M";
-            type = "EF02"; # Disko will always place type EF02 at the beginning of the disk
-          };
           "${hostname}-zroot" = {
             label = "${hostname}-zroot";
             end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
-              pool = "zroot";
+              pool = "${hostname}-zroot";
             };
           };
-          # This has to be short due to BIOS limitations
-          "ZSYS" = {
-            label = "ZSYS";
+          "${hostname}-zboot" = {
+            label = "${hostname}-zboot";
             size = "100%";
             type = "EF00";
             content = {
