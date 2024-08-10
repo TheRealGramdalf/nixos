@@ -1,4 +1,4 @@
-# BIOS compatible gpt partition
+# BIOS compatible gpt disk
 let
   hostname = "";
   device = "";
