@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  # For later reference, this host isn't actually used anywhere
   environment = {
     systemPackages = with pkgs; [
       vim
