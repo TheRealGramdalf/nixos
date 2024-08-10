@@ -162,11 +162,7 @@
         system = "x86_64-linux";
         modules = [
           ./config/common/tomeutils.nix
-          ({
-            pkgs,
-            modulesPath,
-            ...
-          }: {
+          ({modulesPath, ...}: {
             imports = [
               "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
             ];
