@@ -76,7 +76,7 @@ in {
       # All parameters are required
 
       # Use oauth2 as a login method
-      AUTHENTICATION_SOURCES = [ "oauth2" "internal"];
+      AUTHENTICATION_SOURCES = ["oauth2" "internal"];
 
       OAUTH2_CONFIG = [
         {
