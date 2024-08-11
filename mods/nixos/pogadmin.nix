@@ -3,43 +3,82 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.services.pogadmin;
-  inherit (lib.types) int bool str oneOf listOf attrsOf port path nullOr;
-  inherit (lib) mkEnableOption mkOption mkDefault mapAttrsToList concatStringsSep optional optionalAttrs optionalString;
+  inherit
+    (lib.types)
+    int
+    bool
+    str
+    oneOf
+    listOf
+    attrsOf
+    port
+    path
+    nullOr
+    ;
+  inherit
+    (lib)
+    mkEnableOption
+    mkOption
+    mkPackageOption
+    mkDefault
+    mkForce
+    mkIf
+    mapAttrsToList
+    concatStringsSep
+    optional
+    optionalAttrs
+    optionalString
+    escapeShellArg
+    ;
 
-  _base = [int bool str];
-  base = oneOf ([(listOf (oneOf _base)) (attrsOf (oneOf _base))] ++ _base);
+  _base = [
+    int
+    bool
+    str
+  ];
+  base = oneOf (
+    [
+      (listOf (oneOf _base))
+      (attrsOf (oneOf _base))
+    ]
+    ++ _base
+  );
 
-  formatAttrset = attr: "{${concatStringsSep "\n" (mapAttrsToList (key: value: "${builtins.toJSON key}: ${formatPyValue value},") attr)}}";
+  formatAttrset = attr: "{${
+    concatStringsSep "\n" (
+      mapAttrsToList (key: value: "${builtins.toJSON key}: ${formatPyValue value},") attr
+    )
+  }}";
 
   formatPyValue = value:
     if builtins.isString value
     then builtins.toJSON value
-    else
-      value._expr
-      or (
-        if builtins.isInt value
-        then toString value
-        else if builtins.isBool value
-        then
-          (
-            if value
-            then "True"
-            else "False"
-          )
-        else if builtins.isAttrs value
-        then (formatAttrset value)
-        else if builtins.isList value
-        then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
-        else throw "Unrecognized type"
-      );
+    else if value ? _expr
+    then value._expr
+    else if builtins.isInt value
+    then toString value
+    else if builtins.isBool value
+    then
+      (
+        if value
+        then "True"
+        else "False"
+      )
+    else if builtins.isAttrs value
+    then (formatAttrset value)
+    else if builtins.isList value
+    then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
+    else throw "Unrecognized type";
 
-  formatPy = attrs:
-    concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${formatPyValue value}") attrs);
+  formatPy = attrs: concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${formatPyValue value}") attrs);
 
-  pyType = with types; attrsOf (oneOf [(attrsOf base) (listOf base) base]);
+  pyType = attrsOf (oneOf [
+    (attrsOf base)
+    (listOf base)
+    base
+  ]);
 in {
   options.services.pogadmin = {
     enable = mkEnableOption "PostgreSQL Admin 4";
@@ -131,7 +170,6 @@ in {
       type = pyType;
       default = {};
     };
-
     user = mkOption {
       default = "pgadmin";
       type = str;
@@ -161,8 +199,8 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [cfg.port];
+  config = mkIf (cfg.enable) {
+    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [cfg.port];
 
     services.pogadmin.settings =
       {
@@ -171,9 +209,7 @@ in {
         SERVER_MODE = true;
         UPGRADE_CHECK_ENABLED = false;
       }
-      // (optionalAttrs cfg.openFirewall {
-        DEFAULT_SERVER = mkDefault "::";
-      })
+      // (optionalAttrs cfg.openFirewall {DEFAULT_SERVER = mkDefault "::";})
       // (optionalAttrs cfg.emailServer.enable {
         MAIL_SERVER = cfg.emailServer.address;
         MAIL_PORT = cfg.emailServer.port;
@@ -191,7 +227,11 @@ in {
       # in case postgres doesn't start, pgadmin will just start normally
       wants = ["postgresql.service"];
 
-      path = [config.services.postgresql.package pkgs.coreutils pkgs.bash];
+      path = [
+        config.services.postgresql.package
+        pkgs.coreutils
+        pkgs.bash
+      ];
 
       preStart = ''
         # NOTE: this is idempotent (aka running it twice has no effect)
@@ -218,9 +258,7 @@ in {
         ) | ${cfg.package}/bin/pgadmin4-cli setup-db
       '';
 
-      restartTriggers = [
-        "/etc/pgadmin/config_system.py"
-      ];
+      restartTriggers = ["/etc/pgadmin/config_system.py"];
 
       serviceConfig = {
         User = cfg.user;
@@ -230,7 +268,9 @@ in {
         StateDirectory = "pgadmin";
         ExecStart = "${cfg.package}/bin/pgadmin4";
         LoadCredential =
-          ["initial_password:${cfg.initialPasswordFile}"]
+          [
+            "initial_password:${cfg.initialPasswordFile}"
+          ]
           ++ optional cfg.emailServer.enable "email_password:${cfg.emailServer.passwordFile}";
       };
     };
@@ -241,9 +281,7 @@ in {
         isSystemUser = true;
       };
     };
-    users.groups = mkIf (cfg.group == "pgadmin") {
-      pgadmin = {};
-    };
+    users.groups = mkIf (cfg.group == "pgadmin") {pgadmin = {};};
 
     environment.etc."pgadmin/config_system.py" = {
       source = pkgs.writeText "pgadmin-config.py" (optionalString cfg.emailServer.enable ''
