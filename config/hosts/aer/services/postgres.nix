@@ -64,6 +64,7 @@ in {
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
+      DEBUG = true;
       ALLOWED_HOSTS = ["127.0.0.1"];
       CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
@@ -73,6 +74,9 @@ in {
 
       # Multiple OAUTH2 providers can be added in the list like [{...},{...}]
       # All parameters are required
+
+      # Use oauth2 as a login method
+      AUTHENTICATION_SOURCES = [ "oauth2" "internal"];
 
       OAUTH2_CONFIG = [
         {
