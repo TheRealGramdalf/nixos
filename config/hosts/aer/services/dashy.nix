@@ -111,6 +111,7 @@ in {
           items = [
             {
               description = "Single Sign-on (Server Account)";
+              icon = "fas fa-lock";
               title = "Kanidm";
               url = "${config.services.kani.serverSettings.origin}";
             }
@@ -206,10 +207,6 @@ in {
         #    {
         #      description = "Real-time system resource usage";
         #      title = "NetData";
-        #    }
-        #    {
-        #      description = "Docker container management";
-        #      title = "Portainer";
         #    }
         #    {
         #      description = "Container monitoring";
