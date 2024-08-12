@@ -8,6 +8,7 @@
     ./networking.nix
     ./services/main.nix
     ./ssh.nix
+    ./configuration.nix
   ];
   networking = {
     hostName = "eyemac";
