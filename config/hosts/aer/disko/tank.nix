@@ -7,7 +7,6 @@
       rootFsOptions = {
         # These are inherited to all child datasets as the default value
         canmount = "on"; # ...Except for `canmount`
-        mountpoint = "/tank";
         atime = "off"; # atime generally sucks, only enable it when needed
         compression = "zstd"; # More CPU heavy, but better compressratio
         xattr = "sa"; # Store extra attributes with metadata, good for performance
