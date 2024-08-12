@@ -6,7 +6,11 @@ _: {
     uid = 911; # Lord of The Rings: The Twin Towers
     group = "arm";
   };
-  systemd.tmpfiles.rules = [];
+  systemd.tmpfiles.rules = [
+    "d /persist/arm 0700 arm arm - -"
+    "d /persist/arm/config 0700 arm arm - -"
+    "d /persist/arm/home 0700 arm arm - -"
+  ];
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."arm" = {
     autoStart = true;
@@ -26,9 +30,8 @@ _: {
       # This is needed in order to `mount /dev/sr0 /mnt/dev/sr0` for ripping, which may be avoidable by
       # handling mounts outside of the container, and having `/mnt/dev` bind mounted into the container.
       "--privileged"
+      # Pass the CD/Bluray/DVD drive to the container
       "--device=/dev/sr0:/dev/sr0"
-      "--device=/dev/sr1:/dev/sr1"
-      "--device=/dev/sr1:/dev/sr2"
     ];
   };
 }
