@@ -1,4 +1,4 @@
-# Tank: Beefy boi with lots of space
+# Tank: Mirror of two 1TB disks
 let
   pool = "tank";
   diskid-1 = "ata-WDC_WD10EZEX-00RKKA0_WD-WCC1S2272773";
