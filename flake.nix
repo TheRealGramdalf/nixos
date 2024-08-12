@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     anyrun = {
       url = "github:anyrun-org/anyrun/9e14b5946e413b87efc697946b3983d5244a1714";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +30,7 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
+    nixos-cosmic,
     ...
   }:
   # Create convenience shorthands
@@ -77,6 +83,7 @@
       "aerwiar" = nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
+          nixos-cosmic.nixosModules.default
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./config/hosts/aerwiar/main.nix
           ./mods/nixos/main.nix
@@ -99,6 +106,21 @@
               group = "gramdalf";
             };
             users.groups."gramdalf" = {};
+          }
+          # Cosmic user
+          {
+            # Don't enable the greeter, use SDDM instead
+            services.desktopManager.cosmic.enable = true;
+            # Disable networkManager, it conflicts with iwd/sysd-netd
+            networking.networkManager.enable = false;
+            users.users."starlight" = {
+              isNormalUser = true;
+              extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "plugdev" "wireshark"];
+              # Mirror gramdalf's password
+              hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
+              group = "starlight";
+            };
+            users.groups."starlight" = {};
           }
         ];
       };
