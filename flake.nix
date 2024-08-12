@@ -111,8 +111,8 @@
           {
             # Don't enable the greeter, use SDDM instead
             services.desktopManager.cosmic.enable = true;
-            # Disable networkManager, it conflicts with iwd/sysd-netd
-            networking.networkManager.enable = false;
+            # Disable networkmanager, it conflicts with iwd/sysd-netd
+            networking.networkmanager.enable = false;
             users.users."starlight" = {
               isNormalUser = true;
               extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "plugdev" "wireshark"];
