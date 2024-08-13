@@ -175,11 +175,6 @@
           ./mods/nixos/main.nix
         ];
       };
-      "here-nor-there" = nixosSystem {
-        modules = [
-          ./config/hosts/here-nor-there/main.nix
-        ];
-      };
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
