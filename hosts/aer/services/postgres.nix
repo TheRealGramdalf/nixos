@@ -153,7 +153,7 @@ in {
     #};
     "postgres-ui".settings = {
       http.routers."${name}-ui" = {
-        rule = "Host(`${name}.aer.dedyn.io`)";
+        rule = "Host(`${name}.aer.dedyn.io`) || Host(`aer.netbird.selfhosted`)";
         service = "${name}-ui";
         middlewares = ["local-only"];
       };
