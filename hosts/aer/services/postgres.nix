@@ -65,7 +65,6 @@ in {
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     settings = {
       DEBUG = true;
-      ALLOWED_HOSTS = ["127.0.0.1"];
       CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
