@@ -58,7 +58,7 @@
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
         modules = [
-          ./config/hosts/ripjaw/main.nix
+          ./hosts/ripjaw/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
@@ -69,7 +69,7 @@
               sharedModules = [
                 ./mods/home/main.nix
               ];
-              users."games" = import ./config/users/games/main.nix;
+              users."games" = import ./users/games/main.nix;
             };
             users.mutableUsers = false;
             users.users."games" = {
@@ -85,7 +85,7 @@
         modules = [
           nixos-cosmic.nixosModules.default
           nixos-hardware.nixosModules.framework-16-7040-amd
-          ./config/hosts/aerwiar/main.nix
+          ./hosts/aerwiar/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
@@ -96,7 +96,7 @@
               sharedModules = [
                 ./mods/home/main.nix
               ];
-              users."gramdalf" = import ./config/users/gramdalf/main.nix;
+              users."gramdalf" = import ./users/gramdalf/main.nix;
             };
             users.mutableUsers = false;
             users.users."gramdalf" = {
@@ -126,7 +126,7 @@
       };
       "atreus" = nixosSystem {
         modules = [
-          ./config/hosts/atreus/main.nix
+          ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
           {
@@ -137,8 +137,8 @@
               sharedModules = [
                 ./mods/home/main.nix
               ];
-              users."meebling" = import ./config/users/meebling/main.nix;
-              users."meeblingthedevilish" = import ./config/users/meebling/devilish.nix;
+              users."meebling" = import ./users/meebling/main.nix;
+              users."meeblingthedevilish" = import ./users/meebling/devilish.nix;
             };
             users.mutableUsers = false;
             users.users."meebling" = {
@@ -157,28 +157,28 @@
       "aer" = nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./config/hosts/aer/main.nix
+          ./hosts/aer/main.nix
           ./mods/nixos/main.nix
         ];
       };
       "orthanc" = nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./config/hosts/orthanc/main.nix
+          ./hosts/orthanc/main.nix
           ./mods/nixos/main.nix
         ];
       };
       "aer-test" = nixosSystem {
         modules = [
-          ./config/hosts/aer/main.nix
-          ./config/hosts/aer/vm.nix
+          ./hosts/aer/main.nix
+          ./hosts/aer/vm.nix
           ./mods/nixos/main.nix
         ];
       };
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./config/common/tomeutils.nix
+          ./common/tomeutils.nix
           ({modulesPath, ...}: {
             imports = [
               "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
@@ -198,7 +198,7 @@
         #useGlobalPkgs = true;
         extraSpecialArgs = {inherit inputs;};
         modules = [
-          ./config/users/gramdalf/main.nix
+          ./users/gramdalf/main.nix
         ];
       };
     };
