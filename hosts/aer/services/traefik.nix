@@ -21,7 +21,7 @@ in {
       "middlewares".settings = {
         http.middlewares.local-only.ipallowlist.sourcerange = [
           "192.168.1.0/24"
-          "100.64.0.0/16"
+          "100.89.0.0/16"
         ];
       };
     };
