@@ -3,9 +3,17 @@
   name = "paperless";
   port = "8000";
 in {
-  systemd.services."paperless".serviceConfig.EnvironmentFile = [
-    "/persist/secrets/paperless/paperless.env"
-  ];
+  # task-queue
+  # consumer
+  systemd.services = {
+    "paperless-scheduler".serviceConfig.EnvironmentFile = [
+      "/persist/secrets/paperless/paperless-database.env"
+      "/persist/secrets/paperless/paperless-admin.env"
+    ];
+    "paperless-web".serviceConfig.EnvironmentFile = [
+      "/persist/secrets/paperless/paperless-oauth2.env"
+    ];
+  };
   services.paperless = {
     enable = true;
     mediaDir = "/tank/paperless";
