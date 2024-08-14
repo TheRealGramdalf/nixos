@@ -111,11 +111,17 @@ in {
       default = 6;
     };
 
-    imports = mkOption {
+    extraConfig = mkOption {
       description = ''
-        List of python modules to import. This can be used to `import os` so you can `os.getenv("SECRETS")`.
+        Extra config added to the end of {option}`services.pogadmin.settings`
+        This can be used to pass secret values into the configuration in combination with 
+        {option}`systemd.services.pgadmin.serviceConfig.EnvironmentFiles`
       '';
-      type = nullOr (listOf str);
+      example = ''
+        import os
+        CONFIG_DATABASE_URI = "postgres://pgadmin:" + os.getenv('DATABASE_PASSWORD') + "@localhost/pgadmin"
+      '';
+      type = nullOr str;
       default = null;
     };
 
@@ -293,17 +299,14 @@ in {
 
     environment.etc."pgadmin/config_system.py" = {
       source = pkgs.writeText "pgadmin-config.py" 
-      (
-        optionalString (cfg.imports != null) ''
-          import ${(concatStringsSep " " cfg.imports)}
-        ''
-        + optionalString cfg.emailServer.enable ''
+      (optionalString cfg.emailServer.enable ''
           import os
           with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
             pw = f.read()
           MAIL_PASSWORD = pw
         ''
-        + formatPy cfg.settings);
+        + formatPy cfg.settings
+        + optionalString (cfg.extraConfig != null) "\n${cfg.extraConfig}");
     };
   };
 }
