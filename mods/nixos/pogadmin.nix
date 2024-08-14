@@ -111,6 +111,14 @@ in {
       default = 6;
     };
 
+    imports = mkOption {
+      description = ''
+        List of python modules to import. This can be used to `import os` so you can `os.getenv("SECRETS")`.
+      '';
+      type = nullOr (listOf str);
+      default = null;
+    };
+
     emailServer = {
       enable = mkOption {
         description = ''
@@ -284,7 +292,12 @@ in {
     users.groups = mkIf (cfg.group == "pgadmin") {pgadmin = {};};
 
     environment.etc."pgadmin/config_system.py" = {
-      source = pkgs.writeText "pgadmin-config.py" (optionalString cfg.emailServer.enable ''
+      source = pkgs.writeText "pgadmin-config.py" 
+      (
+        optionalString (cfg.imports != null) ''
+          import ${(concatStringsSep " " cfg.imports)}
+        ''
+        + optionalString cfg.emailServer.enable ''
           import os
           with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
             pw = f.read()
