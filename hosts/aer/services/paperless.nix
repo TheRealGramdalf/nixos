@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, lib, ...}: let
   cfg = config.services.paperless;
   name = "paperless";
   port = "8000";
@@ -58,6 +58,20 @@ in {
       # This is required if you will be exposing Paperless-ngx on a public domain
       # (if doing so please consider security measures such as reverse proxy)
       PAPERLESS_URL = "https://${name}.aer.dedyn.io";
+    };
+  };
+
+  # Override the module which incorrectly assumes user creation
+  systemd.tmpfiles.settings = let
+      defaultRule = {
+        inherit (cfg) user;
+        group = cfg.user;
+      };
+    in {
+    "10-paperless" = lib.mkForce {
+      "${cfg.dataDir}".d = defaultRule;
+      "${cfg.mediaDir}".d = defaultRule;
+      "${cfg.consumptionDir}".d = if cfg.consumptionDirIsPublic then { mode = "777"; } else defaultRule;
     };
   };
 
