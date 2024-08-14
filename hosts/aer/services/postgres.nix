@@ -38,13 +38,9 @@ in {
       # Trust the unix socket
       local all all trust
 
-      host  all all 127.0.0.1/32 scram-sha-256
-      host  all all ::1/128      scram-sha-256
-      host  all all 127.0.0.1/32 md5
-      host  all all ::1/128      md5
-      host  all all 127.0.0.1/32 password
-      host  all all ::1/128      password
-    '';
+      host  all all 127.0.0.1/32 all
+      host  all all ::1/128      all
+      '';
     initialScript = pkgs.writeText "init-sql-script" ''
       CREATE ROLE pgadmin WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
       CREATE DATABASE pgadmin;
