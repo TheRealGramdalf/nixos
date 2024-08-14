@@ -66,8 +66,6 @@ in {
     extraConfig = ''
       import os
       CONFIG_DATABASE_URI = f"postgresql://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
-      cs = os.getenv('OAUTH2_CLIENT_SECRET')
-      OAUTH2_CONFIG = [ {"OAUTH2_CLIENT_SECRET": cs} ]
     '';
     settings = {
       DEBUG = true;
@@ -91,7 +89,8 @@ in {
           # Oauth client id
           OAUTH2_CLIENT_ID = "${clientid}";
           # Oauth secret
-          #OAUTH2_CLIENT_SECRET = "os.getenv('OAUTH2_CLIENT_SECRET')";
+          # ?
+          OAUTH2_CLIENT_SECRET = "os.getenv('OAUTH2_CLIENT_SECRET')";
           # URL to generate a token;
           # Ex: https://github.com/login/oauth/access_token
           OAUTH2_TOKEN_URL = "${authurl}/oauth2/token";
