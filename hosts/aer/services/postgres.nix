@@ -66,7 +66,8 @@ in {
     imports = ["os"];
     settings = {
       DEBUG = true;
-      CONFIG_DATABASE_URI = "postgresql://pgadmin:pgadmin@localhost/pgadmin";
+      # The entire thing has to be in an environment variable cause python and string interpretation is stupid
+      CONFIG_DATABASE_URI = "os.getenv('DATABASE_URI')";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
