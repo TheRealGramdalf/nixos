@@ -8,6 +8,6 @@
     ./postgres.nix
     ./netbird/main.nix
     ./dashy.nix
-    #./paperless.nix
+    ./paperless.nix
   ];
 }
