@@ -10,6 +10,9 @@ in {
       "/persist/secrets/paperless/paperless-database.env"
       "/persist/secrets/paperless/paperless-admin.env"
     ];
+    "paperless-task-queue".serviceConfig.EnvironmentFile = [
+      "/persist/secrets/paperless/paperless-database.env"
+    ];
     "paperless-web".serviceConfig.EnvironmentFile = [
       "/persist/secrets/paperless/paperless-oauth2.env"
     ];
