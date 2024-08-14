@@ -6,10 +6,13 @@ in {
   # task-queue
   # consumer
   systemd.services = {
-    "paperless-scheduler".serviceConfig.EnvironmentFile = [
-      "/persist/secrets/paperless/paperless-database.env"
-      "/persist/secrets/paperless/paperless-admin.env"
-    ];
+    "paperless-scheduler".serviceConfig = {
+      PrivateNetwork = lib.mkForce false;
+      EnvironmentFile = [
+        "/persist/secrets/paperless/paperless-database.env"
+        "/persist/secrets/paperless/paperless-admin.env"
+      ];
+    };
     "paperless-task-queue".serviceConfig.EnvironmentFile = [
       "/persist/secrets/paperless/paperless-database.env"
     ];
