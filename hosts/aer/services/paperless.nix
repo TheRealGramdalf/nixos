@@ -65,7 +65,7 @@ in {
               settings.server_url = "https://auth.aer.dedyn.io/oauth2/openid/paperless-ngx-aer_rs";
             }
           ];
-          OAUTH_PKCE_ENABLED = true;
+          OAUTH_PKCE_ENABLED = "True";
         };
       };
       # Use this variable to set a timezone for the Paperless Docker containers. If not specified, defaults to UTC.
