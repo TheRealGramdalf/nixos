@@ -62,18 +62,17 @@ in {
   };
 
   # Override the module which incorrectly assumes user creation
-  systemd.tmpfiles.settings = let
+  systemd.tmpfiles.settings."10-paperless" = lib.mkForce (
+    let
       defaultRule = {
         inherit (cfg) user;
         group = cfg.user;
       };
     in {
-    "10-paperless" = lib.mkForce {
-      "${cfg.dataDir}".d = defaultRule;
-      "${cfg.mediaDir}".d = defaultRule;
-      "${cfg.consumptionDir}".d = if cfg.consumptionDirIsPublic then { mode = "777"; } else defaultRule;
-    };
-  };
+    "${cfg.dataDir}".d = defaultRule;
+    "${cfg.mediaDir}".d = defaultRule;
+    "${cfg.consumptionDir}".d = if cfg.consumptionDirIsPublic then { mode = "777"; } else defaultRule;
+  });
 
   services.cone.extraFiles."${name}".settings = {
     http.routers."${name}" = {
