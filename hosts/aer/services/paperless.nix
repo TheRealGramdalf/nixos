@@ -49,7 +49,7 @@ in {
       };
       # Use this variable to set a timezone for the Paperless Docker containers. If not specified, defaults to UTC.
       # Does this still happen when run with systemd?
-      PAPERLESS_TIME_ZONE = "${time.timeZone}";
+      PAPERLESS_TIME_ZONE = "${config.time.timeZone}";
 
       # The default language to use for OCR. Set this to the language most of your
       # documents are written in.
