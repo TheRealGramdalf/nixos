@@ -63,7 +63,10 @@ in {
     group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
-    imports = ["os"];
+    extraConfig = ''
+      import os
+      CONFIG_DATABASE_URI = "postgres://pgadmin:" + os.getenv('DATABASE_PASSWORD') + "@localhost/pgadmin"
+    '';
     settings = {
       DEBUG = true;
       # The entire thing has to be in an environment variable cause python and string interpretation is stupid
@@ -88,7 +91,7 @@ in {
           # Oauth client id
           OAUTH2_CLIENT_ID = "${clientid}";
           # Oauth secret
-          OAUTH2_CLIENT_SECRET = "os.getenv(\"OAUTH2_CLIENT_SECRET\")";
+          OAUTH2_CLIENT_SECRET = "os.getenv('OAUTH2_CLIENT_SECRET')";
           # URL to generate a token;
           # Ex: https://github.com/login/oauth/access_token
           OAUTH2_TOKEN_URL = "${authurl}/oauth2/token";
