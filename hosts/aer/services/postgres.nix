@@ -64,8 +64,7 @@ in {
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     extraConfig = ''
-      import os
-      CONFIG_DATABASE_URI = f"postgres://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
+      
     '';
     settings = {
       DEBUG = true;
