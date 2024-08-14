@@ -63,13 +63,12 @@ in {
     group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
-    #extraConfig = ''
-    #  import os
-    #  CONFIG_DATABASE_URI = f"postgres://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
-    #'';
+    extraConfig = ''
+      import os
+      CONFIG_DATABASE_URI = f"postgresql://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
+    '';
     settings = {
       DEBUG = true;
-      CONFIG_DATABASE_URI = "postgres://pgadmin:password@localhost/pgadmin";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
