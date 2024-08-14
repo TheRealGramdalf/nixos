@@ -65,7 +65,7 @@ in {
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     extraConfig = ''
       import os
-      CONFIG_DATABASE_URI = "postgres://pgadmin:" + os.getenv('DATABASE_PASSWORD') + "@localhost/pgadmin"
+      CONFIG_DATABASE_URI = f"postgres://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
     '';
     settings = {
       DEBUG = true;
