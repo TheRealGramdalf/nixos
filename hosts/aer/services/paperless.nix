@@ -1,7 +1,7 @@
-_: let
+{config, ...}: let
   cfg = config.services.paperless;
   name = "paperless";
-  port = "";
+  port = "8000";
 in {
   systemd.services."paperless".serviceConfig.EnvironmentFile = [
     "/persist/secrets/paperless/paperless.env"
@@ -66,6 +66,6 @@ in {
       service = "${name}";
       rule = "Host(`${name}.aer.dedyn.io`)";
     };
-    http.services."${name}".loadBalancer.servers = [{url = "http://${cfg.address}:${port}";}];
+    http.services."${name}".loadBalancer.servers = [{url = "http://${cfg.address}\:${port}";}];
   };
 }
