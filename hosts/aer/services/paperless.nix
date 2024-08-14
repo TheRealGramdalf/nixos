@@ -9,7 +9,6 @@ in {
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
         "/persist/secrets/paperless/paperless-database.env"
-        "/persist/secrets/paperless/paperless-admin.env"
       ];
     };
     "paperless-consumer".serviceConfig = {
@@ -17,7 +16,6 @@ in {
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
         "/persist/secrets/paperless/paperless-database.env"
-        "/persist/secrets/paperless/paperless-admin.env"
       ];
     };
     "paperless-task-queue".serviceConfig.EnvironmentFile = [
@@ -25,6 +23,8 @@ in {
     ];
     "paperless-web".serviceConfig.EnvironmentFile = [
       "/persist/secrets/paperless/paperless-oauth2.env"
+      "/persist/secrets/paperless/paperless-admin.env"
+      "/persist/secrets/paperless/paperless-database.env"
     ];
   };
   services.paperless = {
