@@ -64,12 +64,11 @@ in {
     initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     extraConfig = ''
-      
+      import os
+      CONFIG_DATABASE_URI = f"postgres://pgadmin:{os.getenv('DATABASE_PASSWORD')}@localhost/pgadmin"
     '';
     settings = {
       DEBUG = true;
-      # The entire thing has to be in an environment variable cause python and string interpretation is stupid
-      CONFIG_DATABASE_URI = "os.getenv('DATABASE_URI')";
       DATA_DIR = "/persist/services/pgadmin";
       ##########################################################################
       # OAuth2 Configuration
