@@ -1,7 +1,7 @@
 {config, lib, ...}: let
   cfg = config.services.paperless;
   name = "paperless";
-  port = "8000";
+  port = "28981";
 in {
   systemd.services = {
     "paperless-scheduler".serviceConfig = {
