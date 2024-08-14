@@ -38,8 +38,10 @@ in {
       # Trust the unix socket
       local all all trust
 
-      host  all all 127.0.0.1/32 all
-      host  all all ::1/128      all
+      # Paperless uses plain password authentication
+      host  paperless-ngx-aer paperless-ngx-aer 127.0.0.1/32 password 
+      host  all all 127.0.0.1/32 scram-sha-256
+      host  all all ::1/128      scram-sha-256
       '';
     initialScript = pkgs.writeText "init-sql-script" ''
       CREATE ROLE pgadmin WITH PASSWORD 'pgadmin' SUPERUSER CREATEROLE CREATEDB REPLICATION BYPASSRLS LOGIN;
