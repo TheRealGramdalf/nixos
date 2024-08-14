@@ -3,9 +3,17 @@
   name = "paperless";
   port = "8000";
 in {
-  # consumer
   systemd.services = {
     "paperless-scheduler".serviceConfig = {
+      # Conflicts with the database connection
+      PrivateNetwork = lib.mkForce false;
+      EnvironmentFile = [
+        "/persist/secrets/paperless/paperless-database.env"
+        "/persist/secrets/paperless/paperless-admin.env"
+      ];
+    };
+    "paperless-consumer".serviceConfig = {
+      # Conflicts with the database connection
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
         "/persist/secrets/paperless/paperless-database.env"
