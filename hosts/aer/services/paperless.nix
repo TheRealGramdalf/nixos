@@ -55,22 +55,22 @@ in {
       # OpenID Configuration:
       PAPERLESS_PROXY_SSL_HEADER = ["HTTP_X_FORWARDED_PROTO" "https"];
       PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
-      # This environment variable expects a string of JSON value
-      PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
-        openid_connect = {
-          APPS = [
-            {
-              client_id = "paperless-ngx-aer_rs";
-              name = "Authstralia";
-              provider_id = "kanidm-aer";
-              # This secret is substituted from the environment file
-              secret = "$OAUTH2_SECRET";
-              settings.server_url = "https://auth.aer.dedyn.io/oauth2/openid/paperless-ngx-aer_rs";
-            }
-          ];
-          OAUTH_PKCE_ENABLED = "True";
-        };
-      };
+      ## This environment variable expects a string of JSON value
+      #PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
+      #  openid_connect = {
+      #    APPS = [
+      #      {
+      #        client_id = "paperless-ngx-aer_rs";
+      #        name = "Authstralia";
+      #        provider_id = "kanidm-aer";
+      #        # This secret is substituted from the environment file
+      #        secret = "$OAUTH2_SECRET";
+      #        settings.server_url = "https://auth.aer.dedyn.io/oauth2/openid/paperless-ngx-aer_rs";
+      #      }
+      #    ];
+      #    OAUTH_PKCE_ENABLED = "True";
+      #  };
+      #};
       # Use this variable to set a timezone for the Paperless Docker containers. If not specified, defaults to UTC.
       # Does this still happen when run with systemd?
       PAPERLESS_TIME_ZONE = "${config.time.timeZone}";
