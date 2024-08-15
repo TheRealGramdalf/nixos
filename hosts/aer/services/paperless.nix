@@ -8,26 +8,21 @@ in {
       # Conflicts with the database connection
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
-        "/persist/secrets/paperless/paperless-database.env"
-        "/persist/secrets/paperless/paperless-admin.env"
+        "/persist/secrets/paperless/paperless.env"
       ];
     };
     "paperless-consumer".serviceConfig = {
       # Conflicts with the database connection
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
-        "/persist/secrets/paperless/paperless-database.env"
-        "/persist/secrets/paperless/paperless-admin.env"
+        "/persist/secrets/paperless/paperless.env"
       ];
     };
     "paperless-task-queue".serviceConfig.EnvironmentFile = [
-      "/persist/secrets/paperless/paperless-database.env"
-      "/persist/secrets/paperless/paperless-admin.env"
+      "/persist/secrets/paperless/paperless.env"
     ];
     "paperless-web".serviceConfig.EnvironmentFile = [
-      "/persist/secrets/paperless/paperless-oauth2.env"
-      "/persist/secrets/paperless/paperless-admin.env"
-      "/persist/secrets/paperless/paperless-database.env"
+      "/persist/secrets/paperless/paperless.env"
     ];
   };
   services.paperless = {
