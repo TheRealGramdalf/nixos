@@ -6,5 +6,7 @@ _: {
       installation_mode = "force_installed";
       default_area = "navbar";
     };
+    # https://www.reddit.com/r/firefox/comments/o0xl1q/reducing_cpu_usage_of_dark_reader_extension/
+    "nglayout.initialpaint.delay" = 250;
   };
 }
