@@ -10,7 +10,7 @@ _: {
             cert = "/persist/secrets/zrepl/aer.crt";
             key = "/persist/secrets/zrepl/aer.key";
             server_cn = "orthanc";
-            address = "orthanc.netbird.selfhosted:8888";
+            address = "orthanc:8888";
             type = "tls";
           };
           filesystems = {
