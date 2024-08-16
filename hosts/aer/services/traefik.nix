@@ -27,11 +27,10 @@ in {
     };
     static.settings = {
       log.level = "DEBUG";
-      #providers.docker = {
-      #  defaultRule = "Host(`{{ index .Labels \"com.docker.compose.service\"}}.aer.dedyn.io`)";
-      #  network = "proxynet";
-      #  watch = true;
-      #};
+      providers.docker = {
+        defaultRule = "Host(`{{ index .Labels \"com.docker.compose.service\"}}.aer.dedyn.io`)";
+        watch = true;
+      };
       global.checkNewVersion = false;
       serversTransport.insecureSkipVerify = true;
       api = {
