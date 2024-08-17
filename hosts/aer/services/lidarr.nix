@@ -18,8 +18,8 @@ in {
       "${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
     ];
     labels = {
-      "traefik.enable" = true;
-      "traefik.http.services.lidarr.loadbalancer.server.port" = 8686;
+      "traefik.enable" = "true";
+      "traefik.http.services.lidarr.loadbalancer.server.port" = "8686";
     };
     environment = {
       PUID = "30200";
