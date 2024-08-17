@@ -1,7 +1,7 @@
 {config, pkgs, ...}: let
   name = "lidarr";
   cfg = config.services.lidarr;
-  arr_scripts = pkgs.fetchFromGithub {
+  arr_scripts = pkgs.fetchFromGitHub {
     owner = "RandomNinjaAtk";
     repo = "arr-scripts";
     rev = "8d9271f31d8282a3c7bbfc1eea008d631b5ce70e";
