@@ -2,6 +2,14 @@
   cfg = config.services.paperless;
   name = "paperless";
   port = "28981";
+  wantsKani = {
+    After = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+    Requires = [
+      config.systemd.services."kanidm-unixd".name
+    ];
+  };
 in {
   systemd.services = {
     "paperless-scheduler".serviceConfig = {
@@ -10,20 +18,24 @@ in {
       EnvironmentFile = [
         "/persist/secrets/paperless/paperless.env"
       ];
-    };
+    } // wantsKani;
     "paperless-consumer".serviceConfig = {
       # Conflicts with the database connection
       PrivateNetwork = lib.mkForce false;
       EnvironmentFile = [
         "/persist/secrets/paperless/paperless.env"
       ];
-    };
-    "paperless-task-queue".serviceConfig.EnvironmentFile = [
-      "/persist/secrets/paperless/paperless.env"
-    ];
-    "paperless-web".serviceConfig.EnvironmentFile = [
-      "/persist/secrets/paperless/paperless.env"
-    ];
+    }// wantsKani;
+    "paperless-task-queue".serviceConfig = {
+      EnvironmentFile = [
+        "/persist/secrets/paperless/paperless.env"
+      ];
+    } // wantsKani;
+    "paperless-web".serviceConfig = {
+      EnvironmentFile = [
+        "/persist/secrets/paperless/paperless.env"
+      ];
+    } // wantsKani;
   };
   services.paperless = {
     enable = true;
