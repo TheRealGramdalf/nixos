@@ -24,6 +24,10 @@ in {
       "traefik.http.routers.lidarr.middlewares" = "local-only@file";
       "hl.host" = "${name}";
     };
+    extraOptions = [
+      "--dns 1.1.1.1"
+      "--dns-search ."
+    ];
     environment = {
       PUID = "30200";
       PGID = "60100";
