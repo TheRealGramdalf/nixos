@@ -9,5 +9,6 @@
     ./netbird/main.nix
     ./dashy.nix
     ./paperless.nix
+    ./lidarr.nix
   ];
 }
