@@ -28,7 +28,7 @@ in {
     static.settings = {
       log.level = "DEBUG";
       providers.docker = {
-        defaultRule = "Host(`{{ index .Labels \"com.docker.compose.service\"}}.aer.dedyn.io`)";
+        defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.aer.dedyn.io`)";
         watch = true;
       };
       global.checkNewVersion = false;

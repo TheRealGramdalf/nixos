@@ -22,6 +22,7 @@ in {
       "traefik.http.services.lidarr.loadbalancer.server.port" = "8686";
       "traefik.http.routers.lidarr.service" = "lidarr";
       "traefik.http.routers.lidarr.middlewares" = "local-only@file";
+      "hl.host" = "${name}"
     };
     environment = {
       PUID = "30200";
