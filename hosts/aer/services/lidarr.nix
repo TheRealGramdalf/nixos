@@ -25,6 +25,6 @@ in {
       PUID = "30200";
       PGID = "60100";
       TZ = config.time.timeZone;
-    }
+    };
   };
 }
