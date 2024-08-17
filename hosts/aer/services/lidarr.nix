@@ -9,7 +9,7 @@
     sha256 = "sha256-kUcmeeHoCHMQuRrtOrLPrpvpW0LmRf2smbzncQIIC9Y=";
   };
 in {
-  virtualisation.oci-containers."lidarr" = {
+  virtualisation.oci-containers.containers."lidarr" = {
     image = "lscr.io/linuxserver/lidarr:2.0.7";
     volumes = [
       "/persist/services/lidarr/config:/config"
