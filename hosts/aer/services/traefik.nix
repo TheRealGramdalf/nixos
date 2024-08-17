@@ -4,7 +4,7 @@ in {
   services.cone = {
     enable = true;
     # Traefik's user/group must be local, since it's required for `kanidm-unixd` to function properly
-    #supplementaryGroups = ["docker"];
+    supplementaryGroups = ["docker"];
     dataDir = "/persist/services/traefik";
     dynamic.dir = "/persist/services/traefik/dynamic-config";
     environmentFiles = [
