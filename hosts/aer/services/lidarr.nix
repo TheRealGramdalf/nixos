@@ -25,8 +25,8 @@ in {
       "hl.host" = "${name}";
     };
     extraOptions = [
-      "--dns 1.1.1.1"
-      "--dns-search ."
+      "--dns=1.1.1.1"
+      "--dns-search=."
     ];
     environment = {
       PUID = "30200";
