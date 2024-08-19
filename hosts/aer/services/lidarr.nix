@@ -4,7 +4,7 @@
   arr_scripts = pkgs.fetchFromGitHub {
     owner = "RandomNinjaAtk";
     repo = "arr-scripts";
-    rev = "8d9271f31d8282a3c7bbfc1eea008d631b5ce70e";
+    rev = "ae84972d035ee14966c176fb420fbe1d28402feb";
     fetchSubmodules = false;
     sha256 = "sha256-kUcmeeHoCHMQuRrtOrLPrpvpW0LmRf2smbzncQIIC9Y=";
   };
@@ -13,9 +13,9 @@ in {
     image = "lscr.io/linuxserver/lidarr:2.4.3";
     volumes = [
       "/persist/services/lidarr/config:/config"
-      "/persist/services/lidarr/custom-services:/custom-services.d"
+      #"/persist/services/lidarr/custom-services:/custom-services.d"
       "/tank/media:/data/media"
-      "${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
+      #"${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
     ];
     labels = {
       "traefik.enable" = "true";
