@@ -13,9 +13,10 @@ in {
     image = "lscr.io/linuxserver/lidarr:2.4.3";
     volumes = [
       "/persist/services/lidarr/config:/config"
-      #"/persist/services/lidarr/custom-services:/custom-services.d"
+      "/persist/services/lidarr/custom-services:/custom-services.d"
+      # This needs `g+rwx` to work with the current group setup
       "/tank/media:/data/media"
-      #"${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
+      "${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
     ];
     labels = {
       "traefik.enable" = "true";
