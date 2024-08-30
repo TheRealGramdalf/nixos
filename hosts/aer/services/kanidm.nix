@@ -1,5 +1,5 @@
 {config, ...}: let
-  cfg = config.services.kani;
+  cfg = config.services.kanidm;
   dataDir = "/persist/services/kanidm";
 in {
   #imports = [./kanisys.nix];
@@ -11,7 +11,7 @@ in {
       "${dataDir}/db" # This is either technically a different filesystem, or getting borked by the path merge function, so it isn't mounted correctly by default
     ];
   };
-  services.kani = {
+  services.kanidm = {
     enableServer = true;
     enablePam = true;
     serverSettings = {

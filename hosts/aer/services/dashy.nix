@@ -113,7 +113,7 @@ in {
               description = "Single Sign-on (Server Account)";
               icon = "fas fa-lock";
               title = "Kanidm";
-              url = "${config.services.kani.serverSettings.origin}";
+              url = "${config.services.kanidm.serverSettings.origin}";
             }
             {
               description = "Password Manager compattible with Bitwarden Clients";
