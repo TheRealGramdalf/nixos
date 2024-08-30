@@ -73,7 +73,7 @@
       motrix # Download manager
       gnome-calculator
       gnome-system-monitor
-      gnome.gnome-sound-recorder
+      gnome-sound-recorder
       gnome-obfuscate
       baobab # Disk usage analyzer
       gnome-disk-utility
@@ -83,14 +83,14 @@
       evince # Document viewer
       clapper # Video viewer
       eog # Photo viewer
-      gnome.gnome-power-manager # Battery stats
+      gnome-power-manager # Battery stats
       #textpieces # Manipulate text without random websites
       dialect # Translate app
       iotas # MD notes app
       drawing
       vlc
-      gnome.gnome-clocks
-      gnome.gnome-maps
+      gnome-clocks
+      gnome-maps
       nautilus
       simple-scan
       #gnome-connections
