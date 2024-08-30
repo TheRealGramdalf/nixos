@@ -1,4 +1,8 @@
-{config, lib, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.services.paperless;
   name = "paperless";
   port = "28981";
@@ -12,30 +16,38 @@
   };
 in {
   systemd.services = {
-    "paperless-scheduler".serviceConfig = {
-      # Conflicts with the database connection
-      PrivateNetwork = lib.mkForce false;
-      EnvironmentFile = [
-        "/persist/secrets/paperless/paperless.env"
-      ];
-    } // wantsKani;
-    "paperless-consumer".serviceConfig = {
-      # Conflicts with the database connection
-      PrivateNetwork = lib.mkForce false;
-      EnvironmentFile = [
-        "/persist/secrets/paperless/paperless.env"
-      ];
-    }// wantsKani;
-    "paperless-task-queue".serviceConfig = {
-      EnvironmentFile = [
-        "/persist/secrets/paperless/paperless.env"
-      ];
-    } // wantsKani;
-    "paperless-web".serviceConfig = {
-      EnvironmentFile = [
-        "/persist/secrets/paperless/paperless.env"
-      ];
-    } // wantsKani;
+    "paperless-scheduler".serviceConfig =
+      {
+        # Conflicts with the database connection
+        PrivateNetwork = lib.mkForce false;
+        EnvironmentFile = [
+          "/persist/secrets/paperless/paperless.env"
+        ];
+      }
+      // wantsKani;
+    "paperless-consumer".serviceConfig =
+      {
+        # Conflicts with the database connection
+        PrivateNetwork = lib.mkForce false;
+        EnvironmentFile = [
+          "/persist/secrets/paperless/paperless.env"
+        ];
+      }
+      // wantsKani;
+    "paperless-task-queue".serviceConfig =
+      {
+        EnvironmentFile = [
+          "/persist/secrets/paperless/paperless.env"
+        ];
+      }
+      // wantsKani;
+    "paperless-web".serviceConfig =
+      {
+        EnvironmentFile = [
+          "/persist/secrets/paperless/paperless.env"
+        ];
+      }
+      // wantsKani;
   };
   services.paperless = {
     enable = true;
@@ -100,10 +112,14 @@ in {
         group = cfg.user;
       };
     in {
-    "${cfg.dataDir}".d = defaultRule;
-    "${cfg.mediaDir}".d = defaultRule;
-    "${cfg.consumptionDir}".d = if cfg.consumptionDirIsPublic then { mode = "777"; } else defaultRule;
-  });
+      "${cfg.dataDir}".d = defaultRule;
+      "${cfg.mediaDir}".d = defaultRule;
+      "${cfg.consumptionDir}".d =
+        if cfg.consumptionDirIsPublic
+        then {mode = "777";}
+        else defaultRule;
+    }
+  );
 
   services.cone.extraFiles."${name}".settings = {
     http.routers."${name}" = {

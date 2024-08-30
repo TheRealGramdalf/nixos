@@ -1,4 +1,8 @@
-{config, pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   name = "lidarr";
   cfg = config.services.lidarr;
   arr_scripts = pkgs.fetchFromGitHub {

@@ -114,7 +114,7 @@ in {
     extraConfig = mkOption {
       description = ''
         Extra config added to the end of {option}`services.pogadmin.settings`
-        This can be used to pass secret values into the configuration in combination with 
+        This can be used to pass secret values into the configuration in combination with
         {option}`systemd.services.pgadmin.serviceConfig.EnvironmentFiles`
       '';
       example = ''
@@ -298,15 +298,16 @@ in {
     users.groups = mkIf (cfg.group == "pgadmin") {pgadmin = {};};
 
     environment.etc."pgadmin/config_system.py" = {
-      source = pkgs.writeText "pgadmin-config.py" 
-      (optionalString cfg.emailServer.enable ''
-          import os
-          with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
-            pw = f.read()
-          MAIL_PASSWORD = pw
-        ''
-        + formatPy cfg.settings
-        + optionalString (cfg.extraConfig != null) "\n${cfg.extraConfig}");
+      source =
+        pkgs.writeText "pgadmin-config.py"
+        (optionalString cfg.emailServer.enable ''
+            import os
+            with open(os.path.join(os.environ['CREDENTIALS_DIRECTORY'], 'email_password')) as f:
+              pw = f.read()
+            MAIL_PASSWORD = pw
+          ''
+          + formatPy cfg.settings
+          + optionalString (cfg.extraConfig != null) "\n${cfg.extraConfig}");
     };
   };
 }
