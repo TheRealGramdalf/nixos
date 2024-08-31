@@ -27,5 +27,7 @@
     git
     sysz
     neovim
+    tmux # Detached shell sessions
+    smartmontools # SMART monitoring for block devices
   ];
 }
