@@ -20,6 +20,6 @@
   programs.nh = {
     enable = true;
     flake = "/etc/nixos";
-    package = pkgs.nh
+    package = pkgs.nh;
   };
 }
