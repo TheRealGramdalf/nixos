@@ -1,7 +1,7 @@
 # UEFI only GPT
 let
   hostname = "orthanc";
-  device = ""; # Path of the device relative to `/dev/`. Usually `disk/by-id/...`
+  device = "disk/by-id/ata-KINGSTON_SUV400S37120G_50026B776A000290 ";
 in {
   disko.devices = {
     disk."zdisk" = {
