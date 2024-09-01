@@ -8,6 +8,11 @@ in {
     ];
   };
 
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "aacraid" "usbhid" "sd_mod"];
+    kernelModules = ["kvm-intel"];
+  };
+
   fileSystems."/" = {
     device = "${hostname}-zroot/system-state";
     fsType = "zfs";
