@@ -7,6 +7,6 @@
   # Since swapfile isn't available, enable zramswap
   zramSwap = {
     enable = true;
-    memoryPercent = 15;
+    memoryPercent = 60;
   };
 }
