@@ -5,5 +5,8 @@
   #devNodes = /dev/disk/by-partlabel; # Might have issues with legacy BIOS, since it can't read GPT labels?
   #};
   # Since swapfile isn't available, enable zramswap
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 15;
+  };
 }
