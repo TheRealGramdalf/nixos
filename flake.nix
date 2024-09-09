@@ -124,6 +124,12 @@
           #}
         ];
       };
+      "muffin-time" = nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/muffin-time/main.nix
+        ];
+      };
       "atreus" = nixosSystem {
         modules = [
           ./hosts/atreus/main.nix
