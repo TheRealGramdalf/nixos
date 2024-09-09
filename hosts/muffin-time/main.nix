@@ -2,6 +2,7 @@
   imports = [
     ../../common/tomeutils.nix
     ../../common/zfs-boot.nix
+    ../../common/backdoor.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix
