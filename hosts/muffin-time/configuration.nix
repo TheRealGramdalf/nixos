@@ -29,8 +29,8 @@
   users.groups."muffin" = {};
   users.users."muffin" = {
     group = "muffin";
+    extraGroups = ["wheel" "video"];
     isNormalUser = true;
-    hashedPasswordFile = "/persist/secrets/muffin.psw"
+    hashedPasswordFile = "/persist/secrets/muffin.psw";
   };
-
 }
