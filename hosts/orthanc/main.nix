@@ -13,6 +13,6 @@
   system.stateVersion = "24.05";
   networking = {
     hostName = "orthanc";
-    hostId = "8425e349";
+    hostId = "864ae26d";
   };
 }
