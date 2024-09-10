@@ -127,6 +127,7 @@
       "muffin-time" = nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-t490
           ./hosts/muffin-time/main.nix
         ];
       };
