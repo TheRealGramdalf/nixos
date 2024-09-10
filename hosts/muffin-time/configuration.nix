@@ -16,7 +16,16 @@
     };
     tmp.cleanOnBoot = true;
   };
-  environment.systemPackages = [pkgs.ntfs3g];
+  environment.systemPackages = with pkgs; [
+    # NTFS (windows filesystem) support
+    ntfs3g
+    # MS Teams
+    teams
+    # MS Office alternative
+    onlyoffice-bin
+    # Google spyware
+    google-chrome
+  ];
 
   nix.settings = {
     experimental-features = [
