@@ -20,7 +20,7 @@
     # NTFS (windows filesystem) support
     ntfs3g
     # MS Teams
-    teams
+    #teams
     # MS Office alternative
     onlyoffice-bin
     # Google spyware
