@@ -11,7 +11,12 @@
     wayland.enable = true;
   };
 
-  networking.wireless.enable = true;
+  networking = {
+    # Required for KDE to control wifi via GUI
+    networkmanager.enable = true;
+    # Enable wireless as a whole
+    wireless.enable = true;
+  };
   
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
