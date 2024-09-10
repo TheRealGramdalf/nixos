@@ -10,6 +10,8 @@
     # Enable Wayland in SDDM so the system doesn't need X11
     wayland.enable = true;
   };
+
+  networking.wireless.enable = true;
   
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
