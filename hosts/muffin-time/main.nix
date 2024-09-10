@@ -13,6 +13,6 @@
   system.stateVersion = "24.11";
   networking = {
     hostName = "muffin-time";
-    hostId = "";
+    hostId = "04ff6c6c";
   };
 }
