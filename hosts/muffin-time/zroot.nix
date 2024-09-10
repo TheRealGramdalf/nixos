@@ -1,7 +1,7 @@
 # UEFI only GPT
 let
   hostname = "muffin-time";
-  device = "disk/by-id/";
+  device = "disk/by-id/nvme-SAMSUNG_MZVLB512HBJQ-000L7_S4ENNF0N356917";
 in {
   disko.devices = {
     disk."zdisk" = {
