@@ -95,7 +95,10 @@ in {
           };
         };
       };
-      postCreateHook = "zfs snapshot -r ${hostname}-zroot@blank";
+      postCreateHook = ''
+        zfs snapshot -r ${hostname}-zroot@blank
+        zpool upgrade ${hostname}-zroot
+      '';
     };
   };
 }
