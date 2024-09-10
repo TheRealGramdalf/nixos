@@ -6,6 +6,9 @@ in {
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # Fixes iwlwifi not loading
+  hardware.enableAllFirmware = true;
+
   fileSystems."/" = {
     device = "${hostname}-zroot/system-state";
     fsType = "zfs";
