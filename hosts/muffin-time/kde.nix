@@ -4,8 +4,12 @@
     enable = true;
     enableQt5Integration = true;
   };
-  # Enable Wayland in SDDM so the system doesn't need X11
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    # SDDM isn't enabled by the plasma6 module
+    enable = true;
+    # Enable Wayland in SDDM so the system doesn't need X11
+    wayland.enable = true;
+  };
   
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
