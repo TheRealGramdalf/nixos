@@ -108,7 +108,7 @@ in {
 
     (mkIf cfg.reload.enable {
       wayland.windowManager.hyprland.settings.bind = [
-        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar hypridle"
+        "CTRL + ALT, delete, exec, hyprctl reload && systemctl restart --user waybar"
       ];
     })
 
