@@ -9,6 +9,7 @@
       heroic
       prismlauncher
       scarab
+      webcord
     ];
   };
 }
