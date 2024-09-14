@@ -15,7 +15,7 @@
     # Required for KDE to control wifi via GUI
     networkmanager.enable = true;
   };
-  
+
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
 

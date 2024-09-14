@@ -13,12 +13,12 @@ let
       };
     };
   };
-  vd1-1 = { device = "/dev/disk/by-id/wwn-0x5000c500626b52eb"; } // fullzfs;
-  vd1-2 = { device = "/dev/disk/by-id/wwn-0x5000c500638b7f17"; } // fullzfs;
-  vd1-3 = { device = "/dev/disk/by-id/wwn-0x5000c5008370435f"; } // fullzfs;
-  vd1-4 = { device = "/dev/disk/by-id/wwn-0x50014ee263d62711"; } // fullzfs;
-  vd1-5 = { device = "/dev/disk/by-id/wwn-0x50014ee263d636da"; } // fullzfs;
-  vd1-6 = { device = "/dev/disk/by-id/wwn-0x5000c50083702c0f"; } // fullzfs;
+  vd1-1 = {device = "/dev/disk/by-id/wwn-0x5000c500626b52eb";} // fullzfs;
+  vd1-2 = {device = "/dev/disk/by-id/wwn-0x5000c500638b7f17";} // fullzfs;
+  vd1-3 = {device = "/dev/disk/by-id/wwn-0x5000c5008370435f";} // fullzfs;
+  vd1-4 = {device = "/dev/disk/by-id/wwn-0x50014ee263d62711";} // fullzfs;
+  vd1-5 = {device = "/dev/disk/by-id/wwn-0x50014ee263d636da";} // fullzfs;
+  vd1-6 = {device = "/dev/disk/by-id/wwn-0x5000c50083702c0f";} // fullzfs;
 in {
   disko.devices = {
     disk = {
