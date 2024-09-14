@@ -23,6 +23,40 @@
     # Enable fingerprint reader
     fprintd.enable = true;
     # Control the malfunctioning fan
-    thinkfan.enable = true;
+    thinkfan = {
+      enable = true;
+      levels = [
+        [
+          0
+          0
+          50
+        ]
+        [
+          1
+          48
+          60
+        ]
+        [
+          2
+          50
+          61
+        ]
+        [
+          3
+          52
+          63
+        ]
+        [
+          6
+          56
+          65
+        ]
+        [
+          7
+          60
+          32767
+        ]
+      ];
+    };
   };
 }
