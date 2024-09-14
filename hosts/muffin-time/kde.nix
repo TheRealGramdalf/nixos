@@ -20,6 +20,11 @@
   programs.firefox.enable = true;
 
   services = {
+    # Enable pulse/alsa emulation to try and get KDE's GUI working
+    pipewire = {
+      pulse.enable = true;
+      alsa.enable = true;
+    };
     # Enable fingerprint reader
     fprintd.enable = true;
     # Control the malfunctioning fan
