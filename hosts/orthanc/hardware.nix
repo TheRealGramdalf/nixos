@@ -3,9 +3,9 @@
 in {
   boot.zfs = {
     devNodes = "/dev/disk/by-partlabel";
-    extraPools = [
-      "orthanc"
-    ];
+    #extraPools = [
+    #  "isengard"
+    #];
   };
 
   boot = {
