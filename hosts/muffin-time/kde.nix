@@ -25,6 +25,9 @@
     # Control the malfunctioning fan
     thinkfan = {
       enable = true;
+      # See https://www.desmos.com/calculator/ldzn6pj5pl
+      # for a visualization of the fan curve. The meaning
+      # can be found at https://www.mankier.com/5/thinkfan.conf.legacy
       levels = [
         [
           0
