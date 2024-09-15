@@ -33,6 +33,12 @@
     fprintd.enable = true;
     # Control the malfunctioning fan
     thinkfan.enable = true;
+    # Printing, mDNS etc
+    avahi = {
+      enable = true;
+      openFirewall = true;
+      nssmdns4 = true;
+    }
   };
   system.nixos.tags = ["default_curve"];
 }
