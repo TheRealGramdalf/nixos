@@ -38,7 +38,7 @@
       enable = true;
       openFirewall = true;
       nssmdns4 = true;
-    }
+    };
   };
   system.nixos.tags = ["default_curve"];
 }
