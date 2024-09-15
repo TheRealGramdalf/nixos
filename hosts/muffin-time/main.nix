@@ -5,6 +5,7 @@
     ../../common/backdoor.nix
     ./configuration.nix
     ./hardware.nix
+    ./specializations.nix
     ./kde.nix
   ];
   time.timeZone = "America/Vancouver";
