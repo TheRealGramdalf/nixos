@@ -1,5 +1,5 @@
 {
-  specialisation."fullblast".config = {
+  specialisation."fullblast".configuration = {
     services = {
       # Control the malfunctioning fan
       thinkfan = {
@@ -15,7 +15,7 @@
       };
     };
   };
-  specialisation."aggressive".config = {
+  specialisation."aggressive".configuration = {
     services = {
       # Control the malfunctioning fan
       thinkfan = {
