@@ -19,6 +19,10 @@
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
   services = {
     # Enable pulse/alsa emulation to try and get KDE's GUI working
     pipewire = {
