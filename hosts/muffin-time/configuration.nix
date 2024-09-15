@@ -29,6 +29,8 @@
     ardour
     # Another professional DAW
     davinci-resolve
+    # Video player
+    vlc
   ];
 
   nix.settings = {
