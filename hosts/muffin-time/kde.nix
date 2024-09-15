@@ -28,43 +28,7 @@
     # Enable fingerprint reader
     fprintd.enable = true;
     # Control the malfunctioning fan
-    thinkfan = {
-      enable = true;
-      # See https://www.desmos.com/calculator/ldzn6pj5pl
-      # for a visualization of the fan curve. The meaning
-      # can be found at https://www.mankier.com/5/thinkfan.conf.legacy
-      levels = [
-        [
-          0
-          0
-          50
-        ]
-        [
-          1
-          48
-          60
-        ]
-        [
-          2
-          50
-          61
-        ]
-        [
-          3
-          52
-          63
-        ]
-        [
-          6
-          56
-          65
-        ]
-        [
-          7
-          60
-          32767
-        ]
-      ];
-    };
+    thinkfan.enable = true;
   };
+  system.nixos.tags = ["default_curve"];
 }
