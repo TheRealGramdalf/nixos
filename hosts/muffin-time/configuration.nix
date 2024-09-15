@@ -25,6 +25,10 @@
     onlyoffice-bin
     # Google spyware
     google-chrome
+    # MIDI/digital audio workstation
+    ardour
+    # Another professional DAW
+    davinci-resolve
   ];
 
   nix.settings = {
