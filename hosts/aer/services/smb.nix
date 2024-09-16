@@ -6,23 +6,6 @@
       # ^^ Needed to enable mDNS support. Thank you iv.cha!
       enable = true;
       openFirewall = true;
-      shares = {
-        photos = {
-          path = "/tank/smb/photos";
-          writable = true;
-          comment = "Ye Olde Photos";
-        };
-        media = {
-          path = "/tank/media";
-          writable = true;
-          comment = "The Seven Seas";
-        };
-        Data = {
-          path = "/tank/smb/Data";
-          writable = true;
-          comment = "All your mushrooms go here";
-        };
-      };
       settings = {
         global = {
           ## Security Settings
@@ -45,6 +28,21 @@
   
           ## Performance Optimizations & platform compatibility
           "use sendfile" = "yes";
+        };
+        "photos" = {
+          path = "/tank/smb/photos";
+          writable = true;
+          comment = "Ye Olde Photos";
+        };
+        "media" = {
+          path = "/tank/media";
+          writable = true;
+          comment = "The Seven Seas";
+        };
+        "Data" = {
+          path = "/tank/smb/Data";
+          writable = true;
+          comment = "All your mushrooms go here";
         };
       };
     };
