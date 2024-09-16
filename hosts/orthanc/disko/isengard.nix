@@ -54,8 +54,10 @@ in {
         normalization = "formD"; # Validate and normalize file names, good for SMB
       };
 
-      datasets = {};
-      postCreateHook = "zfs snapshot -r isengard@blank";
+      datasets = {
+        "sink".type = "zfs_fs";
+      };
+      postCreateHook = "zpool upgrade isengard";
     };
   };
 }
