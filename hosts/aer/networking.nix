@@ -28,6 +28,7 @@ in {
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server
         name = "${eno4}";
+        gateway = ["10.0.0.1/24"];
         address = ["10.0.0.1/24"];
         networkConfig.DHCPServer = true;
       };
