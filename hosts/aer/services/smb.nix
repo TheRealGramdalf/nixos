@@ -23,29 +23,28 @@
           comment = "All your mushrooms go here";
         };
       };
-      extraConfig = ''
+      settings = {
         ## Security Settings
         # Permissions
-        inherit owner = unix only
-        inherit permissions = yes
+        "inherit owner" = "unix only";
+        "inherit permissions" = "yes";
         # ^^ Overrides `create` and `force create` `mask/mode`
-
+        
         # Authentication
-        passdb backend = tdbsam:/tank/smb/samba-passdb.tdb
-        security = user
-        guest account = nobody
-        map to guest = Bad User
-        # guest ok = true
-        #//TODO Look into: `invalid users`
+        "passdb backend" = "tdbsam:/tank/smb/samba-passdb.tdb";
+        global.security = "user";
+        "guest account" = "nobody";
+        "map to guest" = "Bad User";
+
 
         # Generic
-        server smb encrypt = required
+        "server smb encrypt" = "required";
         # ^^ Note: Breaks `smbclient -L <ip> -U%`
-        server min protocol = SMB3_00
+        "server min protocol" = "SMB3_00";
 
         ## Performance Optimizations & platform compatibility
-        use sendfile = yes
-      '';
+        "use sendfile" = "yes";
+      };
     };
     avahi = {
       publish.enable = true;
