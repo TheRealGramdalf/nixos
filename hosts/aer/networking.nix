@@ -31,6 +31,11 @@ in {
         gateway = ["10.0.0.1"];
         address = ["10.0.0.1/24"];
         networkConfig.DHCPServer = true;
+        dhcpServerConfig = {
+          PoolOffset = 100;
+          PoolSize = 20;
+        };
+        linkConfig.RequiredForOnline = "no";
       };
       # If all else fails, get a DHCP address
       "69-ether" = {
@@ -39,6 +44,7 @@ in {
           Type = "ether";
           Kind = "!*";
         };
+        linkConfig.RequiredForOnline = "no";
         networkConfig.DHCP = true;
       };
     };
