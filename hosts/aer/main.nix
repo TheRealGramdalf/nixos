@@ -14,6 +14,7 @@
     # Services
     ./services/services.nix
   ];
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
