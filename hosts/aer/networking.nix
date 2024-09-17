@@ -34,6 +34,8 @@ in {
         dhcpServerConfig = {
           PoolOffset = 100;
           PoolSize = 20;
+          EmitDNS = "yes";
+          DNS = "10.0.0.1";
         };
         linkConfig.RequiredForOnline = "no";
       };
