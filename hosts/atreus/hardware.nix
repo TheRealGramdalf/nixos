@@ -14,6 +14,7 @@
   boot.extraModulePackages = [];
 
   hardware = {
+    enableAllFirmware = true;
     brillo.enable = true;
     bluetooth = {
       enable = true;
