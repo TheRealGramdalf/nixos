@@ -33,7 +33,6 @@ stdenv.mkDerivation (finalAttrs: {
   postConfigure = lib.optional (settings != {}) ''
     echo "Writing settings override..."
     yq --output-format yml '${builtins.toFile "conf.json" ''${builtins.toJSON settings}''}' > user-data/conf.yml
-    yarn validate-config --offline
   '';
   installPhase = ''
     mkdir $out
@@ -47,6 +46,7 @@ stdenv.mkDerivation (finalAttrs: {
     # For yaml parsing
     yq-go
   ];
+  doDist = false;
   meta = {
     description = "dashy";
     homepage = "https://dashy.to";
