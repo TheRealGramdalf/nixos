@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # Enable KDE
   services.desktopManager.plasma6 = {
     enable = true;
@@ -38,6 +38,11 @@
       enable = true;
       openFirewall = true;
       nssmdns4 = true;
+    };
+    # The actual printing control daemon
+    printing = {
+      enable = true;
+      drivers = with pkgs; [gutenprint hplip splix];
     };
   };
   system.nixos.tags = ["default_curve"];
