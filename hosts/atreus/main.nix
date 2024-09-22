@@ -9,7 +9,7 @@
     ../../common/backdoor.nix
 
     # Host-specific config
-    ./hardware-config.nix
+    ./hardware.nix
     ./configuration.nix
     ./nvidia.nix
     ./basilisk.nix
