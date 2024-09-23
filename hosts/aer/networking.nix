@@ -38,8 +38,6 @@ in {
         };
         dhcpServerConfig = {
           ServerAddress = "10.0.0.1/24";
-          PoolOffset = 100;
-          PoolSize = 20;
           EmitDNS = "yes";
           DNS = "10.0.0.1";
         };
