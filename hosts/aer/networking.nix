@@ -30,7 +30,12 @@ in {
         name = "${eno4}";
         gateway = ["10.0.0.1"];
         address = ["10.0.0.1/24"];
-        networkConfig.DHCPServer = true;
+        networkConfig = {
+          DHCPServer = true;
+          # Disable ipv6
+          IPv6AcceptRA = false;
+          IPv6SendRA = false;
+        };
         dhcpServerConfig = {
           PoolOffset = 100;
           PoolSize = 20;
