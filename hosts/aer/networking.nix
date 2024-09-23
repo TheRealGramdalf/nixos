@@ -33,7 +33,6 @@ in {
         networkConfig = {
           DHCPServer = true;
           # Disable ipv6, see https://github.com/systemd/systemd/issues/5625#issuecomment-289372155
-          DHCP = "ipv4";
           LinkLocalAddressing = "no";
           IPv6AcceptRA = false;
         };
