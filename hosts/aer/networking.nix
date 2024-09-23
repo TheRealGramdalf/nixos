@@ -36,7 +36,6 @@ in {
           DHCP = "ipv4";
           LinkLocalAddressing = "no";
           IPv6AcceptRA = false;
-          IPv6SendRA = false;
         };
         dhcpServerConfig = {
           PoolOffset = 100;
