@@ -146,6 +146,7 @@
               ];
               users."meebling" = import ./users/meebling/main.nix;
               users."meeblingthedevilish" = import ./users/meebling/devilish.nix;
+              users."zoom" = import ./users/meebling/zoom.nix;
             };
             users.mutableUsers = false;
             users.users."meebling" = {
@@ -154,6 +155,11 @@
               extraGroups = ["video" "netdev"];
             };
             users.users."meeblingthedevilish" = {
+              isNormalUser = true;
+              hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+              extraGroups = ["video" "netdev"];
+            };
+            users.users."zoom" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
               extraGroups = ["video" "netdev"];
