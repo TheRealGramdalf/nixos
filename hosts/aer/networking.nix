@@ -64,6 +64,7 @@ in {
     resolved = {
       llmnr = "false";
       enable = true;
+      domains = ["local"];
       fallbackDns = [
         "1.1.1.1"
         "1.0.0.1"
