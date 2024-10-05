@@ -1,4 +1,4 @@
-{lib, ...}: {
+_: {
   services.zrepl = {
     enable = true;
     settings = {
@@ -47,13 +47,4 @@
       ];
     };
   };
-  system.nssDatabases.hosts = lib.mkForce [
-    "mymachines"
-    #"mdns4_minimal [NOTFOUND=return]"
-    #"resolve [!UNAVAIL=return]"
-    "files"
-    "myhostname"
-    "dns"
-    "mdns4"
-  ];
 }
