@@ -43,6 +43,7 @@ _: {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+      publish.enable = true;
     };
     chrony.enable = true;
   };
