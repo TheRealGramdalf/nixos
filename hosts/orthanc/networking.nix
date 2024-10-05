@@ -22,7 +22,11 @@ _: {
           Type = "ether";
           Kind = "!*";
         };
-        networkConfig.DHCP = true;
+        networkConfig = {
+          DHCP = true;
+          MulticastDNS = "resolve";
+          Domains = ["local"];
+        };
       };
     };
   };
@@ -30,18 +34,21 @@ _: {
     resolved = {
       llmnr = "false";
       enable = true;
+      domains = ["local"];
       fallbackDns = [
         "1.1.1.1"
         "1.0.0.1"
       ];
+      # Enable resolution only, leave responding to avahi
       extraConfig = ''
         [Resolve]
-        MulticastDNS = false
+        MulticastDNS = resolve
       '';
     };
     avahi = {
       enable = true;
-      nssmdns4 = true;
+      nssmdns4 = false;
+      nssmdns6 = false;
       openFirewall = true;
       publish = {
         enable = true;
