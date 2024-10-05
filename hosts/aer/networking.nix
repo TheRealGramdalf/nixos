@@ -24,7 +24,7 @@ in {
         name = "${eno1}";
         gateway = ["192.168.1.1"];
         address = ["192.168.1.5/24"];
-        linkConfig.MulticastDNS = "resolve";
+        networkConfig.MulticastDNS = "resolve";
       };
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server
@@ -36,16 +36,14 @@ in {
           # Disable ipv6, see https://github.com/systemd/systemd/issues/5625#issuecomment-289372155
           LinkLocalAddressing = "no";
           IPv6AcceptRA = false;
+          MulticastDNS = "resolve";
         };
         dhcpServerConfig = {
           ServerAddress = "10.0.0.1/24";
           EmitDNS = "yes";
           DNS = "10.0.0.1";
         };
-        linkConfig = {
-          RequiredForOnline = "no";
-          MulticastDNS = "resolve";
-        };
+        linkConfig.RequiredForOnline = "no";
       };
       # If all else fails, get a DHCP address
       "69-ether" = {
@@ -54,11 +52,11 @@ in {
           Type = "ether";
           Kind = "!*";
         };
-        linkConfig = {
-          RequiredForOnline = "no";
+        linkConfig.RequiredForOnline = "no";
+        networkConfig = {
+          DHCP = true;
           MulticastDNS = "resolve";
         };
-        networkConfig.DHCP = true;
       };
     };
   };
