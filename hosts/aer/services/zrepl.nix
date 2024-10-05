@@ -14,10 +14,11 @@ _: {
             type = "tls";
           };
           filesystems = {
-            "tank/smb<" = true;
-            "tank/media<" = true;
-            "medusa/services<" = true;
-            "aer-zroot/safe/persist<" = true;
+            "tank/test<" = true;
+            #"tank/smb<" = true;
+            #"tank/media<" = true;
+            #"medusa/services<" = true;
+            #"aer-zroot/safe/persist<" = true;
           };
           pruning = {
             keep_receiver = [
