@@ -15,6 +15,8 @@ _: {
             listen = ":8888";
             type = "tls";
           };
+          # zrepl/zrepl/issues/717
+          recv.placeholder.encryption = "inherit";
         }
       ];
     };
