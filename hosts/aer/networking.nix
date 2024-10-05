@@ -24,6 +24,7 @@ in {
         name = "${eno1}";
         gateway = ["192.168.1.1"];
         address = ["192.168.1.5/24"];
+        linkConfig.MulticastDNS = "resolve";
       };
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server
@@ -41,7 +42,10 @@ in {
           EmitDNS = "yes";
           DNS = "10.0.0.1";
         };
-        linkConfig.RequiredForOnline = "no";
+        linkConfig = {
+          RequiredForOnline = "no";
+          MulticastDNS = "resolve";
+        };
       };
       # If all else fails, get a DHCP address
       "69-ether" = {
@@ -50,7 +54,10 @@ in {
           Type = "ether";
           Kind = "!*";
         };
-        linkConfig.RequiredForOnline = "no";
+        linkConfig = {
+          RequiredForOnline = "no";
+          MulticastDNS = "resolve";
+        };
         networkConfig.DHCP = true;
       };
     };
