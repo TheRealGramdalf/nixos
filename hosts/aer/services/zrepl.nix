@@ -50,7 +50,7 @@
   system.nssDatabases.hosts = lib.mkForce [
     "mymachines"
     #"mdns4_minimal [NOTFOUND=return]"
-    "resolve [!UNAVAIL=return]"
+    #"resolve [!UNAVAIL=return]"
     "files"
     "myhostname"
     "dns"
