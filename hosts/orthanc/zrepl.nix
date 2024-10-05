@@ -11,7 +11,7 @@ _: {
             ca = "/persist/secrets/zrepl/aer.crt";
             cert = "/persist/secrets/zrepl/orthanc.crt";
             key = "/persist/secrets/zrepl/orthanc.key";
-            server_cn = "aer";
+            client_cns = "aer";
             listen = ":8888";
             type = "tls";
           };
