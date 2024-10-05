@@ -10,5 +10,6 @@
     ./dashy.nix
     ./paperless.nix
     ./lidarr.nix
+    ./zrepl.nix
   ];
 }
