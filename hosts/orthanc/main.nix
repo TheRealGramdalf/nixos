@@ -5,7 +5,7 @@
     ./hardware.nix
     ./ssh.nix
     ./system.nix
-    #./zrepl.nix
+    ./zrepl.nix
   ];
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
