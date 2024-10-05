@@ -41,6 +41,8 @@ in {
             ];
           }
         ];
+        # Temporarily fix cache assignment as per 91cd091669c469a4ba7f2934d52cdb646e37c0bd
+        cache = [];
       };
       options.ashift = "12";
       rootFsOptions = {
