@@ -24,7 +24,7 @@ in {
         name = "${eno1}";
         gateway = ["192.168.1.1"];
         address = ["192.168.1.5/24"];
-        networkConfig.MulticastDNS = "resolve";
+        networkConfig = {MulticastDNS = "resolve"; Domains = ["local"];};
       };
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server
@@ -37,6 +37,7 @@ in {
           LinkLocalAddressing = "no";
           IPv6AcceptRA = false;
           MulticastDNS = "resolve";
+          Domains = ["local"];
         };
         dhcpServerConfig = {
           ServerAddress = "10.0.0.1/24";
@@ -56,6 +57,7 @@ in {
         networkConfig = {
           DHCP = true;
           MulticastDNS = "resolve";
+          Domains = ["local"];
         };
       };
     };
