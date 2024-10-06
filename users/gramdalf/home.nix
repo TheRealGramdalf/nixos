@@ -31,6 +31,7 @@
       handbrake
       meld
       remmina
+      android-studio
       # Shell/terminal
       neovim
       nerdfonts
