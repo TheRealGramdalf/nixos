@@ -24,7 +24,10 @@ in {
         name = "${eno1}";
         gateway = ["192.168.1.1"];
         address = ["192.168.1.5/24"];
-        networkConfig = {MulticastDNS = "resolve"; Domains = ["local"];};
+        networkConfig = {
+          MulticastDNS = "resolve";
+          Domains = ["local"];
+        };
       };
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server
