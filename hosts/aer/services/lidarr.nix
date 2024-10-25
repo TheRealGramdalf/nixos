@@ -8,13 +8,13 @@
   arr_scripts = pkgs.fetchFromGitHub {
     owner = "RandomNinjaAtk";
     repo = "arr-scripts";
-    rev = "ae84972d035ee14966c176fb420fbe1d28402feb";
+    rev = "f7c59f85192b771e16cc9f52aaf06289136ee0d7";
     fetchSubmodules = false;
     sha256 = "sha256-kUcmeeHoCHMQuRrtOrLPrpvpW0LmRf2smbzncQIIC9Y=";
   };
 in {
   virtualisation.oci-containers.containers."lidarr" = {
-    image = "lscr.io/linuxserver/lidarr:2.4.3";
+    image = "lscr.io/linuxserver/lidarr:2.6.4";
     volumes = [
       "/persist/services/lidarr/config:/config"
       "/persist/services/lidarr/custom-services:/custom-services.d"
