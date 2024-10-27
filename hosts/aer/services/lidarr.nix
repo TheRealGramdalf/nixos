@@ -36,7 +36,7 @@ in {
       "--dns-search=."
     ];
     environment = {
-      PUID = "30250";
+      PUID = "30200";
       PGID = "2003408767";
       TZ = config.time.timeZone;
     };
