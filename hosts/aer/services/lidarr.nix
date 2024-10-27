@@ -19,9 +19,7 @@ in {
       "/persist/services/lidarr/config:/config"
       "/persist/services/lidarr/custom-services:/custom-services.d"
       # This needs `g+rwx` to work with the current group setup.
-      # For docker to do this correctly, the folder inside the container must already exist or be top level,
-      # otherwise leading folders will have incorrect permissions.
-      "/tank/media:/data"
+      "/tank/media:/tank/media"
       "${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
     ];
     labels = {
