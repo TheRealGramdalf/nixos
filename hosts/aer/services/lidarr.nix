@@ -14,12 +14,14 @@
   };
 in {
   virtualisation.oci-containers.containers."lidarr" = {
-    image = "lscr.io/linuxserver/lidarr:2.6.4";
+    image = "lscr.io/linuxserver/lidarr:2.7.1";
     volumes = [
       "/persist/services/lidarr/config:/config"
       "/persist/services/lidarr/custom-services:/custom-services.d"
-      # This needs `g+rwx` to work with the current group setup
-      "/tank/media:/data/media"
+      # This needs `g+rwx` to work with the current group setup.
+      # For docker to do this correctly, the folder inside the container must already exist or be top level,
+      # otherwise leading folders will have incorrect permissions.
+      "/tank/media:/data"
       "${arr_scripts}/lidarr/scripts_init.bash:/custom-cont-init.d/scripts_init.bash:ro"
     ];
     labels = {
