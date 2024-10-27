@@ -30,7 +30,7 @@ in {
         };
       };
       "14-recovery" = {
-        # Ad-hoc recovery interface running a DHCP server
+        # Ad-hoc recovery interface running a DHCP server (ostensibly)
         name = "${eno4}";
         gateway = ["10.0.0.1"];
         address = ["10.0.0.1/24"];
