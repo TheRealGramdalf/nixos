@@ -26,7 +26,9 @@ _: {
           DHCP = true;
           MulticastDNS = "resolve";
           Domains = ["local"];
+          #Gateway = 
         };
+        dhcpV4Config.UseGateway = true;
       };
     };
   };
