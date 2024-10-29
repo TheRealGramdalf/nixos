@@ -26,9 +26,18 @@ _: {
           DHCP = true;
           MulticastDNS = "resolve";
           Domains = ["local"];
-          #Gateway = 
         };
-        dhcpV4Config.UseGateway = true;
+        routes = [
+          {routeConfig = {
+            # ip route add
+            # default
+            Destination = "0.0.0.0/0";
+            Scope = "global";
+            # via *
+            Gateway = "_dhcp4";
+            # `dev *` is covered by the network match section 
+          };}
+        ];
       };
     };
   };
