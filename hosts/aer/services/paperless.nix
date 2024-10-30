@@ -7,45 +7,55 @@
   name = "paperless";
   port = "28981";
   wantsKani = {
-    After = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    Requires = [
-      config.systemd.services."kanidm-unixd".name
-    ];
+    unitConfig = {
+      After = [
+        config.systemd.services."kanidm-unixd".name
+      ];
+      Requires = [
+        config.systemd.services."kanidm-unixd".name
+      ];
+    };
   };
 in {
   systemd.services = {
-    "paperless-scheduler".serviceConfig =
+    "paperless-scheduler" =
       {
-        # Conflicts with the database connection
-        PrivateNetwork = lib.mkForce false;
-        EnvironmentFile = [
-          "/persist/secrets/paperless/paperless.env"
-        ];
+        serviceConfig = {
+          # Conflicts with the database connection
+          PrivateNetwork = lib.mkForce false;
+          EnvironmentFile = [
+            "/persist/secrets/paperless/paperless.env"
+          ];
+        };
       }
       // wantsKani;
-    "paperless-consumer".serviceConfig =
+    "paperless-consumer" =
       {
-        # Conflicts with the database connection
-        PrivateNetwork = lib.mkForce false;
-        EnvironmentFile = [
-          "/persist/secrets/paperless/paperless.env"
-        ];
+        serviceConfig = {
+          # Conflicts with the database connection
+          PrivateNetwork = lib.mkForce false;
+          EnvironmentFile = [
+            "/persist/secrets/paperless/paperless.env"
+          ];
+        };
       }
       // wantsKani;
-    "paperless-task-queue".serviceConfig =
+    "paperless-task-queue" =
       {
-        EnvironmentFile = [
-          "/persist/secrets/paperless/paperless.env"
-        ];
+        serviceConfig = {
+          EnvironmentFile = [
+            "/persist/secrets/paperless/paperless.env"
+          ];
+        };
       }
       // wantsKani;
-    "paperless-web".serviceConfig =
+    "paperless-web" =
       {
-        EnvironmentFile = [
-          "/persist/secrets/paperless/paperless.env"
-        ];
+        serviceConfig = {
+          EnvironmentFile = [
+            "/persist/secrets/paperless/paperless.env"
+          ];
+        };
       }
       // wantsKani;
   };
