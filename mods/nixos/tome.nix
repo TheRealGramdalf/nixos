@@ -9,6 +9,7 @@
   cfg = config.tome;
 in {
   options.tome = {
+    utils.enable = mkEnableOption "the addition of some generic troubleshooting/QoL packages to the system" // {default = false;};
     entworking = {
       enable = mkEnableOption "entworking, a modern network configuration backed by iwd and systemd" // {default = false;};
       domains = mkOption {
@@ -38,38 +39,35 @@ in {
           else "resolve";
       };
     };
-    udiskie = {
-      enable = mkEnableOption "a user systemd service for udiskie, the userspace removable media mounting GUI" // {default = true;};
-      args = mkOption {
-        type = nullOr (listOf str);
-        default = ["--tray" "--no-automount"];
-        description = "Verbatim args passed to `udiskie`";
-      };
-    };
-    qtwayland.enable = mkEnableOption "support for QT applications" // {default = cfg.enable;};
-    pipewire.enable = mkEnableOption "pipewire with compatibility settings" // {default = cfg.enable;};
-
-    polkit-agent = {
-      enable = mkEnableOption "a user systemd service for kde-polkit-agent, the priviledge escalation GUI" // {default = config.security.polkit.enable;};
-      args = mkOption {
-        type = nullOr (listOf str);
-        default = [];
-        description = "Verbatim args passed to `polkit-kde-agent`";
-      };
-    };
-    sddm.enable = mkEnableOption "SDDM, a wayland-friendly display manager" // {default = cfg.enable;};
-    # This needs tweaking to allow for other desktop environments
-    useWayland = mkOption {
-      type = bool;
-      default = cfg.enable;
-      description = "Whether to hint xwayland apps that they should use wayland natively";
-    };
+    ntfs.udev =
+      mkEnableOption ''
+        ntfs3 UDEV rules to use ntfs3 for filesystem type `ntfs`, fixing issues such as "unknown filesystem type 'ntfs'".
+        Note that "this method is not recommended and can confuse some 3rd party tools."
+      ''
+      // {default = false;};
   };
 
   ##### Implementation
   config = mkMerge [
-    (mkIf cfg.qtwayland.enable {
+    (mkIf cfg.thing.enable {
       stuff = true;
+    })
+
+    (mkIf cfg.utils {
+      environment.systemPackages = with pkgs; [
+        git
+        neovim
+        btop
+        tmux
+        sysz
+        smartmontools
+      ];
+    })
+
+    (mkIf cfg.ntfs.udev {
+      services.udev.extraRules = ''
+        SUBSYSTEM=="block", ENV{ID_FS_TYPE}=="ntfs", ENV{ID_FS_TYPE}="ntfs3"
+      '';
     })
 
     (mkIf cfg.entworking.enable {
