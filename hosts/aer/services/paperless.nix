@@ -75,8 +75,8 @@ in {
       # Password is also secret here
 
       PAPERLESS_DEBUG = false;
-      PAPERLESS_FILENAME_FORMAT = "{created_year}/{created_month_name_short}/{title}";
-      PAPERLESS_AUDIT_LOG_ENABLED = false; # Set up once things are running properly
+      PAPERLESS_FILENAME_FORMAT = "{owner_username}{created_year}/{created_month_name_short}/{title}/{doc_pk}";
+      PAPERLESS_AUDIT_LOG_ENABLED = true; # Set up once things are running properly
       PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS = true;
       PAPERLESS_EMPTY_TRASH_DIR = "${cfg.mediaDir}/media/.trash"; # Relative to `src/`, should be changed
       PAPERLESS_USE_X_FORWARD_HOST = true;
@@ -100,6 +100,7 @@ in {
       #    OAUTH_PKCE_ENABLED = "True";
       #  };
       #};
+      PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
       # Use this variable to set a timezone for the Paperless Docker containers. If not specified, defaults to UTC.
       # Does this still happen when run with systemd?
       PAPERLESS_TIME_ZONE = "${config.time.timeZone}";
