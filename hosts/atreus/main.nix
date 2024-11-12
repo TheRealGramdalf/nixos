@@ -12,8 +12,7 @@
     ./hardware.nix
     ./configuration.nix
     ./nvidia.nix
-    ./basilisk.nix
-    ./huion.nix
+    ./peripherals.nix
   ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "24.05";
