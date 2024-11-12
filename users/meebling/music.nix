@@ -14,8 +14,7 @@
       EDITOR = "nvim";
     };
     packages = [
-      pkgs.thunderbird
-      pkgs.zoom-us
+      pkgs.spotube
     ];
   };
 }
