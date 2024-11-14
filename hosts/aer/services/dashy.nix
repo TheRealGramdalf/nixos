@@ -1,7 +1,10 @@
-{config, ...}: let
+{config, inputs, ...}: let
   cfg = config.services.dashy;
   port = 6941;
 in {
+  imports = [
+    "${inputs.nixpkgs}/nixos/modules/services/web-apps/dashy.nix"
+  ];
   services.dashy = {
     enable = true;
     virtualHost = {
