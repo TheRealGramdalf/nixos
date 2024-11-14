@@ -8,7 +8,7 @@
   cfg2 = config.services.pogadmin;
   name = "db";
   authurl = "https://auth.aer.dedyn.io";
-  clientid = "pgadmin-aer";
+  clientid = "pgadmin-aer_rs";
 in {
   systemd.services."postgresql" = {
     after = [
