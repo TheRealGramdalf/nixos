@@ -21,7 +21,7 @@
     };
 
     anyrun = {
-      url = "github:anyrun-org/anyrun/9e14b5946e413b87efc697946b3983d5244a1714";
+      url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -220,11 +220,6 @@
           ./users/gramdalf/main.nix
         ];
       };
-    };
-    packages.x86_64-linux = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in {
-      dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
     };
   };
 }
