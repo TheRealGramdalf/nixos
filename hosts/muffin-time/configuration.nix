@@ -31,6 +31,7 @@
     davinci-resolve
     # Video player
     vlc
+    #audacity
   ];
 
   nix.settings = {
