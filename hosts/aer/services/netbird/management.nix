@@ -6,6 +6,9 @@ in {
   services.netbird.server = {
     management = {
       port = 6969;
+      extraOptions = [
+        "--metrics-port=9091"
+      ];
       logLevel = "DEBUG";
       disableAnonymousMetrics = true;
       disableSingleAccountMode = true;
