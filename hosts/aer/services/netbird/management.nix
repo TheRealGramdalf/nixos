@@ -21,11 +21,6 @@ in {
       };
     };
   };
-  # Fix Kanidm not supporting fragmented URIs
-  systemd.services."netbird-management".environment = {
-    AUTH_REDIRECT_URI = "/peers";
-    AUTH_SILENT_REDIRECT_URI = "/add-peers";
-  };
 
   services.cone.extraFiles = {
     "netbird-mgmt".settings = {
