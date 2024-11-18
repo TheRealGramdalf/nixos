@@ -31,7 +31,8 @@
     davinci-resolve
     # Video player
     vlc
-    #audacity
+    # Zoom
+    zoom-us
   ];
 
   nix.settings = {
