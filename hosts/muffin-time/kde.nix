@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   # Enable KDE
   services.desktopManager.plasma6 = {
     enable = true;
@@ -45,5 +45,7 @@
       drivers = with pkgs; [gutenprint hplip splix];
     };
   };
-  system.nixos.tags = ["default_curve"];
+  specialisation."no-thinkfan".configuration = {
+    services.thinkfan.enable = lib.mkForce false;
+  };
 }
