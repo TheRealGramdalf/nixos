@@ -50,8 +50,6 @@
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
     fwupd.enable = true;
   };
-  # This should be set in the terminal, since setting it here causes issues with `/etc/shells`
-  users.users."gramdalf".shell = pkgs.nushell;
 
   virtualisation.libvirtd = {
     enable = true;
