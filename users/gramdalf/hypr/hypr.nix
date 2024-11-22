@@ -26,7 +26,7 @@
       xwayland.force_zero_scaling = true;
       input = {
         kb_layout = "us";
-        follow_mouse = 1;
+        follow_mouse = 0;
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
         accel_profile = "flat";
         touchpad = {
@@ -90,11 +90,11 @@
           size = 2;
           passes = 1;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "$surface1";
-        "col.shadow_inactive" = "$surface1";
+        #drop_shadow = true;
+        #shadow_range = 4;
+        #shadow_render_power = 3;
+        #"col.shadow" = "$surface1";
+        #"col.shadow_inactive" = "$surface1";
       };
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
@@ -106,8 +106,8 @@
         gaps_in = 5;
         gaps_out = "10, 15, 10, 15";
         border_size = 2;
-        "col.active_border" = "$mauve";
-        "col.inactive_border" = "$surface0";
+        #"col.active_border" = "$mauve";
+        #"col.inactive_border" = "$surface0";
         layout = "dwindle";
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
         allow_tearing = false;
