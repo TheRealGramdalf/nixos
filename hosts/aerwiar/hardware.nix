@@ -1,19 +1,18 @@
 {
   config,
   lib,
-  modulesPath,
+  pkgs,
   ...
 }: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
   services.hardware.bolt.enable = true;
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
+
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
+  boot.zfs.package = lib.mkForce pkgs.zfs_unstable;
 
   hardware = {
     brillo.enable = true;

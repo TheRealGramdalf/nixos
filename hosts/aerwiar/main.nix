@@ -6,7 +6,7 @@
     ../../common/nh.nix
 
     # Host-specific config
-    ./hardware-config.nix
+    ./hardware.nix
     ./configuration.nix
     ./netbird.nix
     #./fprint.nix

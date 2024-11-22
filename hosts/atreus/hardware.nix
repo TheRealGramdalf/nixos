@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid" "uas" "sd_mod"];
@@ -11,8 +12,13 @@
 
   hardware.enableAllFirmware = true;
 
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
+  boot.zfs = {
+    package = lib.mkForce pkgs.zfs_unstable;
+    devNodes = "/dev/disk/by-partlabel";
+  };
+
   boot = {
-    zfs.devNodes = "/dev/disk/by-partlabel";
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;
