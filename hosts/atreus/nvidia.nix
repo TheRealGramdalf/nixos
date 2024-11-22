@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   hardware = {
     nvidia = {
       modesetting.enable = true;
