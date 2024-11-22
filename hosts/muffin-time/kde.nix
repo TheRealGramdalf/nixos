@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Enable KDE
   services.desktopManager.plasma6 = {
     enable = true;

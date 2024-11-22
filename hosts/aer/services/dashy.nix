@@ -1,4 +1,8 @@
-{config, inputs, ...}: let
+{
+  config,
+  inputs,
+  ...
+}: let
   cfg = config.services.dashy;
   port = 6941;
 in {
