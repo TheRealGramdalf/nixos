@@ -14,10 +14,10 @@
   services.desktopManager.plasma6 = {
     enable = true;
     enableQt5Integration = true;
-    excludePackages = with pkgs.kdePackages; [
-      konsole
-    ];
   };
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    konsole
+  ];
   services.displayManager.sddm = {
     # SDDM isn't enabled by the plasma6 module
     enable = true;
