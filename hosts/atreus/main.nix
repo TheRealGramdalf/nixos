@@ -1,10 +1,8 @@
 {config, ...}: {
   imports = [
     # Commonly used config
-    #../../common/posix-client.nix
     ../../common/zfs-boot.nix
     ../../common/tomeutils.nix
-    ../../common/fonts.nix
     ../../common/nh.nix
     ../../common/backdoor.nix
 

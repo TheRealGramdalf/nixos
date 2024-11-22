@@ -1,13 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ./hypr/hypr.nix
     ./firefox.nix
   ];
-
-  tomeutils.adhde = {
-    enable = true;
-    idle.sleep = true;
-  };
 
   home = {
     sessionVariables = {

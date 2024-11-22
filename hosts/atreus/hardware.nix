@@ -4,23 +4,12 @@
   modulesPath,
   ...
 }: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid" "uas" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  hardware = {
-    enableAllFirmware = true;
-    brillo.enable = true;
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-  };
+  hardware.enableAllFirmware = true;
 
   boot = {
     zfs.devNodes = "/dev/disk/by-partlabel";

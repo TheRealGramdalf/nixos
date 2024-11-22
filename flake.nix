@@ -153,22 +153,22 @@
             users.users."meebling" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
-              extraGroups = ["video" "netdev"];
+              extraGroups = ["video" "networkmanager"];
             };
             users.users."meeblingthedevilish" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "netdev"];
+              extraGroups = ["video" "networkmanager"];
             };
             users.users."zoom" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "netdev"];
+              extraGroups = ["video" "networkmanager"];
             };
             users.users."music" = {
               isNormalUser = true;
               hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "netdev"];
+              extraGroups = ["video" "networkmanager"];
             };
           }
         ];
