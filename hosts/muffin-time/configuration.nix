@@ -33,6 +33,8 @@
     vlc
     # Zoom
     zoom-us
+    # Musescore
+    musescore
   ];
 
   nix.settings = {
