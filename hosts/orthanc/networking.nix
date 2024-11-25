@@ -29,15 +29,13 @@ _: {
         };
         routes = [
           {
-            routeConfig = {
-              # ip route add
-              # default
-              Destination = "0.0.0.0/0";
-              Scope = "global";
-              # via *
-              Gateway = "_dhcp4";
-              # `dev *` is covered by the network match section
-            };
+            # ip route add
+            # default
+            Destination = "0.0.0.0/0";
+            Scope = "global";
+            # via *
+            Gateway = "_dhcp4";
+            # `dev *` is covered by the network match section
           }
         ];
       };
