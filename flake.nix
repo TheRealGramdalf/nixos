@@ -30,7 +30,6 @@
   # Create convenience shorthands
   let
     inherit (nixpkgs.lib) nixosSystem;
-    inherit (home-manager.lib) homeManagerConfiguration;
   in {
     ## Dev stuff
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
