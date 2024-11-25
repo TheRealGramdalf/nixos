@@ -165,13 +165,6 @@
           ./mods/nixos/main.nix
         ];
       };
-      "aer-test" = nixosSystem {
-        modules = [
-          ./hosts/aer/main.nix
-          ./hosts/aer/vm.nix
-          ./mods/nixos/main.nix
-        ];
-      };
       "iso" = nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -186,16 +179,6 @@
             ];
             services.openssh.openFirewall = true;
           })
-        ];
-      };
-    };
-    homeConfigurations = {
-      "gramdalf" = homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        #useGlobalPkgs = true;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./users/gramdalf/main.nix
         ];
       };
     };
