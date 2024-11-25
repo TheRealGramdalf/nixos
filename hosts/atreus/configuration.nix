@@ -40,6 +40,8 @@
       RoutePriorityOffset = 300;
     };
   };
+  # Disable NM's wait-online service. This delays boot significantly
+  systemd.services."NetworkManager-wait-online".enable = false;
   services = {
     resolved = {
       llmnr = "false";

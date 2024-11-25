@@ -8,7 +8,7 @@
       modesetting.enable = true;
       open = true;
       nvidiaSettings = true;
-      # Currently (Nov. 21st, 2024) refers to nvidia 560
+      # Currently (Nov. 21st, 2024) refers to nvidia 550
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };

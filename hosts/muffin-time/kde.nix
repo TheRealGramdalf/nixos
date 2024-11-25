@@ -19,6 +19,8 @@
     # Required for KDE to control wifi via GUI
     networkmanager.enable = true;
   };
+  # Disable NM's wait-online service. This delays boot significantly
+  systemd.services."NetworkManager-wait-online".enable = false;
 
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
