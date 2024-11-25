@@ -4,7 +4,6 @@
   ...
 }: let
   cfg = config.services.netbird.server;
-  cid = "netbird";
 in {
   # For reference, see https://github.com/netbirdio/netbird/blob/main/infrastructure_files/turnserver.conf.tmpl
   # Of note, the tls-listening-port is enabled upstream

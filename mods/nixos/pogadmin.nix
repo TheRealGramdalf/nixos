@@ -23,7 +23,6 @@
     mkOption
     mkPackageOption
     mkDefault
-    mkForce
     mkIf
     mapAttrsToList
     concatStringsSep
@@ -55,22 +54,24 @@
   formatPyValue = value:
     if builtins.isString value
     then builtins.toJSON value
-    else if value ? _expr
-    then value._expr
-    else if builtins.isInt value
-    then toString value
-    else if builtins.isBool value
-    then
-      (
-        if value
-        then "True"
-        else "False"
-      )
-    else if builtins.isAttrs value
-    then (formatAttrset value)
-    else if builtins.isList value
-    then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
-    else throw "Unrecognized type";
+    else
+      value._expr
+      or (
+        if builtins.isInt value
+        then toString value
+        else if builtins.isBool value
+        then
+          (
+            if value
+            then "True"
+            else "False"
+          )
+        else if builtins.isAttrs value
+        then (formatAttrset value)
+        else if builtins.isList value
+        then "[${concatStringsSep "\n" (map (v: "${formatPyValue v},") value)}]"
+        else throw "Unrecognized type"
+      );
 
   formatPy = attrs: concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${formatPyValue value}") attrs);
 
@@ -213,8 +214,8 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
-    networking.firewall.allowedTCPPorts = mkIf (cfg.openFirewall) [cfg.port];
+  config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [cfg.port];
 
     services.pogadmin.settings =
       {

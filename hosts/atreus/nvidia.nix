@@ -15,7 +15,7 @@
 
   assertions = [
     {
-      assertion = config.services.desktopManager.plasma6.enable == true;
+      assertion = config.services.desktopManager.plasma6.enable;
       message = "KDE plasma is not enabled, remove the plasmoid package!";
     }
   ];
