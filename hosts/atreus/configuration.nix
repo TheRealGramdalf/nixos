@@ -8,6 +8,8 @@
     NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
   };
 
+  users.users."root".openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUC4zNha0aecrBoeptHPDsmfcwj6RopBNEpv6+NnzIM"];
+
   powerManagement.enable = true;
 
   # Enable KDE
