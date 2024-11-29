@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./firefox.nix
+    ./kde-common.nix
   ];
 
   home = {
