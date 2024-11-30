@@ -11,11 +11,6 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableAllFirmware = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
-
   boot.loader.grub = {
     enable = true;
     # This device needs to be an entire disk, not a partition!
