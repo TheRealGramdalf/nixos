@@ -114,6 +114,8 @@
       };
       env = [
         "QT_QPA_PLATFORMTHEME,qt5ct" # change to qt6ct if you have that
+        "HYPRCURSOR_THEME,catppuccin-mocha-lavender-cursors"
+        "HYPRCURSOR_SIZE,24"
       ];
     };
   };
