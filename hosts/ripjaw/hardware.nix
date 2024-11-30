@@ -8,6 +8,9 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableAllFirmware = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
@@ -17,6 +20,7 @@
     enable = true;
     # This device needs to be an entire disk, not a partition!
     device = "/dev/disk/by-id/wwn-0x50025385500dc182";
+    # Could probably use https://github.com/Lxtharia/minegrub-world-sel-theme
   };
 
   fileSystems."/" = {
@@ -47,6 +51,4 @@
     neededForBoot = false;
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

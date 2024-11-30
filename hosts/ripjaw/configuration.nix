@@ -1,16 +1,84 @@
-{
-  hardware.enableRedistributableFirmware = true;
-  services.kanidm.unixSettings.pam_allowed_login_groups = ["50bc3d3a-87cd-4e90-ac6d-fb97f9b1a051"];
-
-  # Enable 24.05 /etc overlay
-  #systemd.sysusers.enable = true;
-  system.etc.overlay.enable = true;
-  boot.initrd.systemd.enable = true;
-
-  #users.users."cbe7b78d-c5ac-48cc-9615-b8117b4d4b77".extraGroups = ["video" "netdev"];
+{pkgs, ...}: {
 
   tomeutils = {
     vapor.enable = true;
-    adhde.enable = true;
+  };
+
+  powerManagement.enable = true;
+
+  # Enable KDE
+  services.desktopManager.plasma6 = {
+    enable = true;
+    enableQt5Integration = true;
+  };
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    konsole
+  ];
+  services.displayManager.sddm = {
+    # SDDM isn't enabled by the plasma6 module
+    enable = true;
+    # Enable Wayland in SDDM so the system doesn't need X11
+    wayland.enable = true;
+  };
+
+  networking = {
+    # Required for KDE to control wifi via GUI
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+      dns = "systemd-resolved";
+    };
+    dhcpcd.enable = false;
+    wireless.iwd.settings.Network = {
+      # Integrate with systemd for e.g. mDNS
+      NameResolvingService = "systemd";
+      # Set the priority high to prefer ethernet when available
+      RoutePriorityOffset = 300;
+    };
+  };
+  # Disable NM's wait-online service. This delays boot significantly
+  systemd.services."NetworkManager-wait-online".enable = false;
+  services = {
+    resolved = {
+      llmnr = "false";
+      enable = true;
+      domains = ["local"];
+      fallbackDns = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
+      # Enable resolution only, leave responding to avahi
+      extraConfig = ''
+        [Resolve]
+        MulticastDNS = resolve
+      '';
+    };
+    # Printing, mDNS etc
+    avahi = {
+      enable = true;
+      openFirewall = true;
+      nssmdns4 = false;
+      nssmdns6 = false;
+    };
+  };
+  hardware.bluetooth = {
+    # For now, change when moving to the other case
+    enable = false;
+    powerOnBoot = false;
+  };
+  services = {
+    colord.enable = true;
+    # Disable orca since it's unneeded at the moment
+    orca.enable = false;
+    # Enable pulse emulation to get a GUI
+    pipewire = {
+      pulse.enable = true;
+      alsa.enable = true;
+    };
+    # The actual printing control daemon
+    printing = {
+      enable = true;
+      drivers = with pkgs; [gutenprint hplip splix];
+    };
   };
 }
