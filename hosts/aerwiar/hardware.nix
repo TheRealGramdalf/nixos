@@ -11,9 +11,6 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
-  boot.zfs.package = lib.mkForce pkgs.zfs_unstable;
-
   hardware = {
     brillo.enable = true;
     bluetooth = {
