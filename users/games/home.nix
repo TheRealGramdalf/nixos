@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./hypr/hypr.nix
     ./firefox.nix
   ];
 
