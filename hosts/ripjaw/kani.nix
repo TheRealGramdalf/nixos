@@ -5,6 +5,7 @@ in {
     clientSettings.uri = "https://auth.aer.dedyn.io";
     enablePam = true;
     unixSettings = {
+      version = 2;
       pam_allowed_login_groups = ["${mainGroup}"];
       kanidm = {
         map_group = [
