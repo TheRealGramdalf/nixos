@@ -6,19 +6,20 @@ in {
     enablePam = true;
     unixSettings = {
       version = "2";
-      pam_allowed_login_groups = ["${mainGroup}"];
-      #kanidm = {
-      #  map_group = [
-      #    {
-      #      local = "video";
-      #      "with" = "${mainGroup}";
-      #    }
-      #    {
-      #      local = "networkmanager";
-      #      "with" = "${mainGroup}";
-      #    }
-      #  ];
-      #};
+      kanidm = {
+        # In version 2, this is under `kanidm`
+        pam_allowed_login_groups = ["${mainGroup}"];
+        map_group = [
+          {
+            local = "video";
+            "with" = "${mainGroup}";
+          }
+          {
+            local = "networkmanager";
+            "with" = "${mainGroup}";
+          }
+        ];
+      };
     };
   };
 }
