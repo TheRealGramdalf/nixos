@@ -61,6 +61,7 @@ in {
         tmux
         sysz
         smartmontools
+        fastfetch
       ];
     })
 
@@ -70,6 +71,17 @@ in {
       '';
     })
 
+    (mkIf cfg.entworking.vpn {
+      # This enables the client, not the management server.
+      # Registering is currently handled imperatively via setup keys
+      services.netbird.enable = true;
+      # Add some env vars so that netbird points to the right server
+      environment.sessionVariables = {
+        NB_ADMIN_URL = "https://vpn.aer.dedyn.io";
+        NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
+      };
+    })
+    
     (mkIf cfg.entworking.enable {
       assertions = [
         {
