@@ -181,5 +181,10 @@
         ];
       };
     };
+    packages.x86_64-linux = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in {
+      dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
+    };
   };
 }
