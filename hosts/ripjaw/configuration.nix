@@ -19,6 +19,10 @@
     enable = true;
     # Enable Wayland in SDDM so the system doesn't need X11
     wayland.enable = true;
+    # Scale the display 2x
+    settings.General = {
+      GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=192";
+    };
   };
 
   networking = {
