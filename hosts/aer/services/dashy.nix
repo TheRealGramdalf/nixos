@@ -12,6 +12,7 @@ in {
       enableNginx = true;
       domain = "aer.dedyn.io";
     };
+    package = inputs.self.packages.x86_64-linux.dashy-ui;
     settings = {
       pageInfo = {
         title = "Aerwiar";
