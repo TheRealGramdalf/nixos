@@ -5,6 +5,8 @@ in {
     clientSettings.uri = "https://auth.aer.dedyn.io";
     enablePam = true;
     unixSettings = {
+      # Make this empty to fix nix evaluation
+      pam_allowed_login_groups = [];
       version = "2";
       kanidm = {
         # In version 2, this is under `kanidm`
