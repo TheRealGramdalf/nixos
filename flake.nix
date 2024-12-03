@@ -19,6 +19,10 @@
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    minegrub-theme = {
+      url = "github:Lxtharia/minegrub-world-sel-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -50,6 +54,7 @@
     };
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/ripjaw/main.nix
           ./mods/nixos/main.nix

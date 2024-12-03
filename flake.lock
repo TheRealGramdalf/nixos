@@ -64,6 +64,26 @@
         "type": "github"
       }
     },
+    "minegrub-theme": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729099413,
+        "narHash": "sha256-rsnmjQH+/luj+erDK4HjzRwpVnorV9Eh7tdA7FeIbpw=",
+        "owner": "Lxtharia",
+        "repo": "minegrub-world-sel-theme",
+        "rev": "484b1c69c39af69c73b5b627d9c9a5962b4aeebe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lxtharia",
+        "repo": "minegrub-world-sel-theme",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1732410305,
@@ -136,6 +156,7 @@
       "inputs": {
         "anyrun": "anyrun",
         "home-manager": "home-manager",
+        "minegrub-theme": "minegrub-theme",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"
