@@ -34,7 +34,7 @@
       android-studio
       # Shell/terminal
       neovim
-      nerdfonts
+      nerd-fonts.fantasque-sans-mono
       wl-clipboard
       # Communication
       webcord
