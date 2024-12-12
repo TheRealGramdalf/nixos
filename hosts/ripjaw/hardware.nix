@@ -44,7 +44,8 @@ in {
       customIcons = [{
         name = "nixos";
         lineTop = "${nixos.distroName} '${nixos.codeName}' ${dateFormatted}";
-        lineBottom = "Survival Mode, No Cheats, Version: ${nixos.version}";
+        # Adventure mode because it's immutable - you can't change it once it's built
+        lineBottom = "Adventure Mode, No Cheats, Version: ${nixos.version}";
         # Icon: you can use an icon from the remote repo, or load from a local file
         imgName = "nixos";
         # customImg = builtins.path {
