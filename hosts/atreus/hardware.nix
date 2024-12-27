@@ -11,7 +11,6 @@
 
   hardware.enableAllFirmware = true;
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
   boot.zfs = {
     package = lib.mkForce pkgs.zfs_unstable;
     devNodes = "/dev/disk/by-partlabel";
