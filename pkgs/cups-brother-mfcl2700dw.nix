@@ -46,7 +46,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://download.brother.com/welcome/dlf101792/mfcl2700dwcupswrapper-${version}.i386.deb";
-    hash = "sha256-3uDwzLQTF8r1tsGZ7ChGhk4ryQmVsZYdUaj9eFaC0jc=";
+    hash = "sha256-BXiC7AZDbtVgXLgY0zIVH0HoQpQjTLPzoxlJHguGqec=";
   };
 
   installPhase =
