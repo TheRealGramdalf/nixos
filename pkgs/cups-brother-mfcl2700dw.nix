@@ -99,7 +99,6 @@ stdenv.mkDerivation rec {
     homepage = "http://www.brother.com/";
     description = "Brother MFC-L2700DW printer driver";
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    license = licenses.unfree;
     platforms = builtins.map (arch: "${arch}-linux") arches;
     maintainers = [ maintainers.lovesegfault ];
   };
