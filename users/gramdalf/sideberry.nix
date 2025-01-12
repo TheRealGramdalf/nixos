@@ -25,28 +25,28 @@ _: {
         overflow: unset;
         transition: height 0.3s 0.3s !important;
         }
-        
+
         /* Default state: Set initial height to enable animation */
         #main-window #TabsToolbar .toolbar-items {
         height: 3em !important;
         }
-        
+
         #main-window[uidensity="touch"] #TabsToolbar .toolbar-items {
         height: 3.35em !important;
         }
         #main-window[uidensity="compact"] #TabsToolbar .toolbar-items {
         height: 2.7em !important;
         }
-        
+
         #main-window[uidensity="normal"] #TabsToolbar .toolbar-items {
         height: 3.11em !important;
         }
-        
+
         /* Hidden state: Hide native tabs strip */
         #main-window[titlepreface="​"] #TabsToolbar .toolbar-items {
         height: 0px !important;
         }
-        
+
         /* Hidden state: Fix z-index of active pinned tabs */
         #main-window[titlepreface="​"] #tabbrowser-tabs {
         z-index: 0 !important;

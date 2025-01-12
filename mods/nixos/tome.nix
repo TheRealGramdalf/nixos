@@ -81,7 +81,7 @@ in {
         NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
       };
     })
-    
+
     (mkIf cfg.entworking.enable {
       assertions = [
         {
