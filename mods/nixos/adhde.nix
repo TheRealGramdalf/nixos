@@ -52,6 +52,8 @@ in {
       environment.systemPackages = with pkgs; [
         libsForQt5.qt5.qtwayland
         kdePackages.qtwayland # qt6
+        kdePackages.qt6ct
+        #hyprland-qtutils
       ];
       qt = {
         enable = true;
