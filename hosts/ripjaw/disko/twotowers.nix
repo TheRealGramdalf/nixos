@@ -54,7 +54,7 @@ in {
       };
 
       datasets = {
-        "arm/paperless".type = "zfs_fs";
+        "arm/rips".type = "zfs_fs";
       };
     };
   };
