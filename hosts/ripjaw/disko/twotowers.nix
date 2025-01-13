@@ -2,13 +2,13 @@
 let
   pool = "twotowers";
   disk = {
-    "intel-1" = "disk/by-id/wwn-0x5000c50002890a90";
-    "intel-2" = "disk/by-id/wwn-0x5000c50002890ba4";
+    "hdd-1" = "disk/by-id/wwn-0x5000c50002890a90";
+    "hdd-2" = "disk/by-id/wwn-0x5000c50002890ba4";
   };
 in {
   disko.devices = {
     disk = {
-      "intel-1" = {
+      "hdd-1" = {
         type = "disk";
         device = "/dev/${disk.hdd-1}";
         content = {
@@ -22,7 +22,7 @@ in {
           };
         };
       };
-      "intel-2" = {
+      "hdd-2" = {
         type = "disk";
         device = "/dev/${disk.hdd-2}";
         content = {
