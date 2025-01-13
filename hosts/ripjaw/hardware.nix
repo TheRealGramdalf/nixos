@@ -63,6 +63,10 @@ in {
     };
   };
 
+  boot.zfs.extraPools = [
+    "twotowers"
+  ];
+
   fileSystems."/" = {
     device = "zroot/system-state";
     fsType = "zfs";
