@@ -12,7 +12,7 @@
   hardware.enableAllFirmware = true;
 
   boot.zfs = {
-    package = lib.mkForce pkgs.zfs_unstable;
+    #package = lib.mkForce pkgs.zfs_unstable;
     devNodes = "/dev/disk/by-partlabel";
   };
 
