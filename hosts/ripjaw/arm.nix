@@ -14,6 +14,7 @@ _: {
     volumes = [
       "/persist/docker-ripjaw/home:/home/arm"
       "/persist/docker-ripjaw/config:/etc/arm/config"
+      "/twotowers/arm/rips:/rips"
     ];
     environment = {
       ARM_UID = "911";
