@@ -9,7 +9,7 @@ _: {
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
-    image = "automaticrippingmachine/automatic-ripping-machine:2.10.0";
+    image = "automaticrippingmachine/automatic-ripping-machine:2.10.3";
     ports = ["8080:8080"];
     volumes = [
       "/persist/docker-ripjaw/home:/home/arm"
