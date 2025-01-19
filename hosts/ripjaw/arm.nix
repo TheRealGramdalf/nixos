@@ -11,7 +11,10 @@ _: {
     ];
   };
   hardware.nvidia-container-toolkit.enable = true;
+  # Enable the datacenter driver for CDI
   hardware.nvidia.datacenter.enable = true;
+  # Enable CDI in the docker daemon
+  virtualisation.docker.daemon.settings.features.cdi = true;
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
@@ -32,10 +35,12 @@ _: {
       # This is needed in order to `mount /dev/sr0 /mnt/dev/sr0` for ripping, which may be avoidable by
       # handling mounts outside of the container, and having `/mnt/dev` bind mounted into the container.
       "--privileged"
-      "--device=/dev/sr0:/dev/sr0"
-      "--device=/dev/sr1:/dev/sr1"
-      "--device=/dev/sr1:/dev/sr2"
-      "--gpus all"
+      # Pass the nvidia card via CDI
+      "---device=nvidia.com/gpu=all"
+      # Pass the CD/DVD/Bluray drives. `sr0` is the top (bluray), the rest are in descending order
+      "--device=/dev/sr0"
+      "--device=/dev/sr1"
+      "--device=/dev/sr1"
     ];
   };
 }
