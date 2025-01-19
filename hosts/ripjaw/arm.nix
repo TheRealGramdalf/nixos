@@ -15,6 +15,8 @@ _: {
   hardware.nvidia.datacenter.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
+  # Add nvidia to videoDrivers to load it, or the CDI spec won't be generated
+  services.xserver.videoDrivers = ["nvidia"];
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
