@@ -5,7 +5,12 @@ _: {
     home = "/persist/docker-ripjaw";
     uid = 911; # Lord of The Rings: The Twin Towers
     group = "docker-ripjaw";
+    extraGroups = [
+      "video"
+      "render"
+    ];
   };
+  hardware.nvidia-container-toolkit.enable = true;
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
@@ -29,6 +34,7 @@ _: {
       "--device=/dev/sr0:/dev/sr0"
       "--device=/dev/sr1:/dev/sr1"
       "--device=/dev/sr1:/dev/sr2"
+      "--gpus all"
     ];
   };
 }
