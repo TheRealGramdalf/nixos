@@ -11,6 +11,7 @@ _: {
     ];
   };
   hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia.datacenter.enable = true;
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
