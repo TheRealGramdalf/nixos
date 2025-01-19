@@ -11,8 +11,6 @@ _: {
     ];
   };
   hardware.nvidia-container-toolkit.enable = true;
-  # Enable the datacenter driver for CDI
-  hardware.nvidia.datacenter.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
   # Add nvidia to videoDrivers to load it, or the CDI spec won't be generated
