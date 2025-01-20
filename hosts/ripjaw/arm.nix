@@ -1,7 +1,7 @@
 {config, pkgs, ... }: let
-  handbrake-nvpatched = pkgs.handbrake.override {
-    nv-codec-headers = pkgs.nv-codec-headers-11;
-  };
+  handbrake-nvpatched = (pkgs.handbrake.override {nv-codec-headers = pkgs.nv-codec-headers-11;}).overrideAttrs (oldAttrs: rec {
+  configureFlags = oldAttrs.configureFlags ++ [ "--enable-nvenc" ];
+  });
 in {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
@@ -38,7 +38,8 @@ in {
       "/persist/docker-ripjaw/home:/home/arm"
       "/persist/docker-ripjaw/config:/etc/arm/config"
       "/twotowers/arm/rips:/rips"
-      "${handbrake-nvpatched}:/handbrake-nvpatched"
+      "${handbrake-nvpatched}:/handbrake-nvpatched:ro"
+      "/nix/store:/nix/store:ro"
     ];
     environment = {
       ARM_UID = "911";
