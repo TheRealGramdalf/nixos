@@ -1,5 +1,5 @@
 {config, pkgs, ... }: let
-  handbrake-nvpatched = (pkgs.handbrake.override {nv-codec-headers = pkgs.nv-codec-headers-11;}).overrideAttrs (oldAttrs: rec {
+  handbrake-nvpatched = pkgs.handbrake.overrideAttrs (oldAttrs: rec {
   configureFlags = oldAttrs.configureFlags ++ [ "--enable-nvenc" ];
   });
 in {
