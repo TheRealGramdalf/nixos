@@ -46,7 +46,7 @@
       # handling mounts outside of the container, and having `/mnt/dev` bind mounted into the container.
       "--privileged"
       # Pass the nvidia card via CDI
-      "---device=nvidia.com/gpu=all"
+      "--device='nvidia.com/gpu=all'"
       # Pass the CD/DVD/Bluray drives. `sr0` is the top (bluray), the rest are in descending order
       "--device=/dev/sr0"
       "--device=/dev/sr1"
