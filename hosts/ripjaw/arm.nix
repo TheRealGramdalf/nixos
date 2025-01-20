@@ -1,4 +1,8 @@
-{config, ... }: {
+{config, pkgs, ... }: let
+  handbrake-nvpatched = pkgs.handbrake.override {
+    nv-codec-headers = pkgs.nv-codec-headers-11;
+  };
+in {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
@@ -34,6 +38,7 @@
       "/persist/docker-ripjaw/home:/home/arm"
       "/persist/docker-ripjaw/config:/etc/arm/config"
       "/twotowers/arm/rips:/rips"
+      "${handbrake-nvpatched}:/handbrake-nvpatched"
     ];
     environment = {
       ARM_UID = "911";
