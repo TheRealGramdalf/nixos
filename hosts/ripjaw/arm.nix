@@ -1,4 +1,4 @@
-_: {
+{config, ... }: {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
@@ -15,6 +15,16 @@ _: {
   virtualisation.docker.daemon.settings.features.cdi = true;
   # Add nvidia to videoDrivers to load it, or the CDI spec won't be generated
   services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    # Open driver doesn't support kepler
+    open = false;
+    powerManagement = {
+      enable = false;
+      finegrained = false;
+    };
+    # Legacy 470 drivers are required for k2000
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
     autoStart = true;
