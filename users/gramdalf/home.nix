@@ -26,6 +26,7 @@
     };
     packages = with pkgs; [
       wlr-randr
+      ripgrep
       #### GUI ####
       exfatprogs
       handbrake
