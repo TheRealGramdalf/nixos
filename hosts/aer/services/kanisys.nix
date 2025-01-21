@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (lib) mapAttrs filterAttrs;
+  inherit (lib) mapAttrs;
   #sysFiltered = filterAttrs (
   #    n: v:
   #      !isNull (builtins.match "([[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12})" v.serviceConfig.Group)
@@ -14,7 +14,7 @@
   #  config.systemd.services;
   sysMapped =
     mapAttrs (
-      n: v: {
+      n: _v: {
         services.n = {
           after = ["kanidm-unixd.service"];
           requires = ["kanidm-unixd.service"];

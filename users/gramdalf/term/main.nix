@@ -11,13 +11,12 @@
       enable = true;
       compression = true;
       extraConfig = ''
-        IdentityFile = ~/.ssh/gramdalf-key
-	User = root
+               IdentityFile = ~/.ssh/gramdalf-key
+        User = root
       '';
     };
     bash = {
       ls = "lsd";
-
     };
   };
 }

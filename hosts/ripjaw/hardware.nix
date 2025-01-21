@@ -7,7 +7,7 @@
   inherit (config.system) nixos;
   inherit (builtins) substring;
   inherit (inputs.nixpkgs) lastModifiedDate;
-  dateFormatted = (
+  dateFormatted =
     "("
     +
     # Year
@@ -28,8 +28,7 @@
     +
     # Minute
     "${substring 10 2 lastModifiedDate}"
-    + ")"
-  );
+    + ")";
 in {
   boot.initrd.availableKernelModules = ["uhci_hcd" "ehci_pci" "ata_piix" "ahci" "xhci_pci" "pata_jmicron" "firewire_ohci" "sd_mod" "sr_mod"];
   boot.initrd.kernelModules = [];

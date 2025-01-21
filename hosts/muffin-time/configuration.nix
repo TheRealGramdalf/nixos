@@ -35,9 +35,8 @@
     zoom-us
     # Musescore
     musescore
-# Adobe reader
+    # Adobe reader
     adobe-reader
-    
   ];
 
   nix.settings = {

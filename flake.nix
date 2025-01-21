@@ -186,7 +186,7 @@
         ];
       };
     };
-    packages.x86_64-linux = let 
+    packages.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
