@@ -1,5 +1,6 @@
 {
   services.kanidm = {
+    package = pkgs.kanidm_1_4;
     enablePam = true;
     clientSettings.uri = "https://auth.aer.dedyn.io";
     unixSettings = {
