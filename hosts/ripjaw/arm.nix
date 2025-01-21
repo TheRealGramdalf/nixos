@@ -6,6 +6,9 @@
   handbrake-nvpatched = pkgs.handbrake.overrideAttrs (oldAttrs: rec {
     configureFlags = oldAttrs.configureFlags ++ ["--enable-nvenc"];
   });
+  ffmpeg-nvpatched = pkgs.ffmpeg_7-full.override {
+    nv-codec-headers = pkgs.nv-codec-headers-9;
+  };
 in {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
@@ -20,10 +23,12 @@ in {
   };
   environment.systemPackages = [
     handbrake-nvpatched
+    ffmpeg-nvpatched
   ];
-  hardware.graphics.extraPackages = [
-    pkgs.cudaPackages.cudatoolkit
-  ];
+  # libnvidia-encode.so.1 comes from the regular drivers (nvidia-x11-470)
+  #hardware.graphics.extraPackages = [
+  #  pkgs.cudaPackages.cudatoolkit
+  #];
   hardware.nvidia-container-toolkit.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
