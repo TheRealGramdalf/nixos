@@ -16,7 +16,9 @@
       '';
     };
     bash = {
-      ls = "lsd";
+      shellAliases = {
+        ls = "lsd";
+      };
     };
   };
 }
