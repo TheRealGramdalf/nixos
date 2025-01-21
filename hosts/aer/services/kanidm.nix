@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, pkgs, ...}: let
   cfg = config.services.kanidm;
   dataDir = "/persist/services/kanidm";
 in {
@@ -12,6 +12,7 @@ in {
     ];
   };
   services.kanidm = {
+    package = pkgs.kanidm_1_4;
     enableServer = true;
     enablePam = true;
     serverSettings = {
