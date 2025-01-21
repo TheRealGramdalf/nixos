@@ -2,6 +2,9 @@
   handbrake-nvpatched = pkgs.handbrake.overrideAttrs (oldAttrs: rec {
   configureFlags = oldAttrs.configureFlags ++ [ "--enable-nvenc" ];
   });
+  ffmpeg-nvpatched = pkgs.ffmpeg_7-full.override {
+    nv-codec-headers = pkgs.nv-codec-headers-11;
+  };
 in {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
@@ -16,6 +19,7 @@ in {
   };
   environment.systemPackages = [
     handbrake-nvpatched
+    ffmpeg-nvpatched
   ];
   hardware.nvidia-container-toolkit.enable = true;
   # Enable CDI in the docker daemon
