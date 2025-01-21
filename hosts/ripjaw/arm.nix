@@ -7,6 +7,7 @@
     configureFlags = oldAttrs.configureFlags ++ ["--enable-nvenc"];
   });
   ffmpeg-nvpatched = pkgs.ffmpeg_7-full.override {
+    nv-codec-headers = pkgs.nv-codec-headers-11;
     nv-codec-headers-12 = pkgs.nv-codec-headers-11;
   };
 in {
