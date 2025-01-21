@@ -21,6 +21,9 @@ in {
     handbrake-nvpatched
     ffmpeg-nvpatched
   ];
+  hardware.graphics.extraPackages = [
+    pkgs.cudaPackages.cudatoolkit
+  ];
   hardware.nvidia-container-toolkit.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
