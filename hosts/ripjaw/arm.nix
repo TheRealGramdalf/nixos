@@ -14,6 +14,9 @@ in {
       "render"
     ];
   };
+  environment.systemPackages = [
+    handbrake-nvpatched
+  ];
   hardware.nvidia-container-toolkit.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
