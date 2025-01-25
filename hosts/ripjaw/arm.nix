@@ -2,15 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  handbrake-nvpatched = pkgs.handbrake.overrideAttrs (oldAttrs: rec {
-    configureFlags = oldAttrs.configureFlags ++ ["--enable-nvenc"];
-  });
-  ffmpeg-nvpatched = pkgs.ffmpeg_7-full.override {
-    nv-codec-headers = pkgs.nv-codec-headers-11;
-    nv-codec-headers-12 = pkgs.nv-codec-headers-11;
-  };
-in {
+}: {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
@@ -22,14 +14,7 @@ in {
       "render"
     ];
   };
-  environment.systemPackages = [
-    handbrake-nvpatched
-    ffmpeg-nvpatched
-  ];
   # libnvidia-encode.so.1 comes from the regular drivers (nvidia-x11-470)
-  #hardware.graphics.extraPackages = [
-  #  pkgs.cudaPackages.cudatoolkit
-  #];
   hardware.nvidia-container-toolkit.enable = true;
   # Enable CDI in the docker daemon
   virtualisation.docker.daemon.settings.features.cdi = true;
@@ -54,8 +39,6 @@ in {
       "/persist/docker-ripjaw/home:/home/arm"
       "/persist/docker-ripjaw/config:/etc/arm/config"
       "/twotowers/arm/rips:/rips"
-      "${handbrake-nvpatched}:/handbrake-nvpatched:ro"
-      "/nix/store:/nix/store:ro"
     ];
     environment = {
       ARM_UID = "911";
