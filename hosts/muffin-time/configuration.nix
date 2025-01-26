@@ -37,6 +37,8 @@
     musescore
     # Adobe reader
     adobe-reader
+    # koreader
+    koreader
   ];
 
   nix.settings = {
