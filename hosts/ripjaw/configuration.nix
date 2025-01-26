@@ -65,8 +65,7 @@
     };
   };
   hardware.bluetooth = {
-    # For now, change when moving to the other case
-    enable = false;
+    enable = true;
     powerOnBoot = false;
   };
   services = {
