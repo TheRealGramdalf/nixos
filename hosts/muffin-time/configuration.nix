@@ -40,6 +40,9 @@
     # koreader
     koreader
   ];
+  nixpkgs.config.permittedInsecurePackages = [
+    adobe-reader
+  ];
 
   nix.settings = {
     experimental-features = [
