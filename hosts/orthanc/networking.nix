@@ -34,7 +34,9 @@ _: {
             Destination = "0.0.0.0/0";
             Scope = "global";
             # via *
-            Gateway = "_dhcp4";
+            # The router here also advertises a classless static route, so the gateway given by
+            # _dhcpv4 is ignored. Hard code it instead.
+            Gateway = "10.40.25.1";
             # `dev *` is covered by the network match section
           }
         ];
