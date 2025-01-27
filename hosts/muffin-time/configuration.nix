@@ -41,7 +41,7 @@
     koreader
   ];
   nixpkgs.config.permittedInsecurePackages = [
-    pkgs.adobe-reader
+    "adobe-reader"
   ];
 
   nix.settings = {
