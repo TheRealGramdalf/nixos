@@ -39,6 +39,8 @@
     adobe-reader
     # koreader
     koreader
+    # Master PDF
+    masterpdfeditor
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
