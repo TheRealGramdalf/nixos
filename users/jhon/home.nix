@@ -13,6 +13,7 @@
       finamp # Music only from jellyfin
       jellyfin-media-player # Official client, for movies/tv shows
       spotify
+      firefox
     ];
   };
 }
