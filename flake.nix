@@ -37,20 +37,39 @@
   in {
     ## Dev stuff
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-    devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
-      name = "hecker";
-      meta.description = "The default development shell for my NixOS configurations";
-      # Enable flakes/nix3 for convenience
-      NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-      # packages available in the dev shell
-      packages = with nixpkgs.legacyPackages.x86_64-linux; [
-        alejandra # nix formatter
-        git # flakes require git, and so do I
-        statix # lints and suggestions
-        deadnix # clean up unused nix code
-        disko # Declarative disk partitioning, easier than `nix run`
-        just
-      ];
+    devShells.x86_64-linux = {
+      default = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+        name = "hecker";
+        meta.description = "The default development shell for my NixOS configurations";
+        # Enable flakes/nix3 for convenience
+        NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+        # packages available in the dev shell
+        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+          alejandra # nix formatter
+          git # flakes require git, and so do I
+          statix # lints and suggestions
+          deadnix # clean up unused nix code
+          disko # Declarative disk partitioning, easier than `nix run`
+          just
+        ];
+      };
+      klipperwrt = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+        name = "klipperwrt-firmware";
+        meta.description = "Devshell with the necessary packages to build klipper firmware";
+        # packages available in the dev shell
+        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+          python3
+          pkgsCross.avr.stdenv.cc
+          gcc-arm-embedded
+          bintools-unwrapped
+          libffi
+          libusb1
+          avrdude
+          stm32flash
+          #wxGTK32 # For bossac, whatever that is
+        ];
+        # When finished, run `make flash FLASH_DEVICE=/dev/serial/by-id/<serial-id>` to flash the firmware directly
+      };
     };
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
