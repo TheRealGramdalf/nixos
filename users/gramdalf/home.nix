@@ -118,6 +118,7 @@
       # Games
       prismlauncher
       mangohud # System usage stats
+      orca-slicer
       #### CLI ####
       kanidm # Kanidm client
       exiftool
