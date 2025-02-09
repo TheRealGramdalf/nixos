@@ -307,7 +307,7 @@ in {
     http.routers."dashy" = {
       rule = "Host(`${cfg.virtualHost.domain}`)";
       service = "dashy";
-      middlewares = "local-only";
+      #middlewares = "local-only";
     };
     http.services."dashy".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
   };
