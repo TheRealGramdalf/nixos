@@ -1,5 +1,5 @@
 {
-  description = "TheRealGramdalf's experimental config";
+  description = "TheRealGramdalf's no-longer-experimental config";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
