@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   tomeutils.adhde = {
     enable = true;
     idle.sleep = true;
@@ -23,6 +23,12 @@
     sessionVariables = {
       EDITOR = "nvim";
       FLAKE = "nix";
+      #QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+      #QT_FONT_DPI = 143;
+      # Scale qt applications on hidpi display
+      QT_SCALE_FACTOR = 1.5;
+      # Set a screenshot directory for grimblast
+      XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
     };
     packages = with pkgs; [
       wlr-randr
@@ -53,7 +59,7 @@
       # Services
       bitwarden
       denaro
-      celeste
+      #celeste
       jellyfin-web
       pika-backup
       protonvpn-gui
@@ -66,6 +72,7 @@
       #calibre # https://github.com/NixOS/nixpkgs/issues/305577
       drawio
       # Utilities
+      freecad
       btop
       inkscape
       picard # MusicBrainz Tagger
@@ -81,7 +88,7 @@
       gnome-disk-utility
       whatip
       gnome-solanum # Pomodoro timer
-      eartag # File tag editor
+      #eartag # File tag editor - broken, python sucks
       evince # Document viewer
       clapper # Video viewer
       eog # Photo viewer
