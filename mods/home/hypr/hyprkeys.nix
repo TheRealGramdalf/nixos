@@ -59,7 +59,7 @@ in {
         // {default = true;};
       args = mkOption {
         type = types.str;
-        default = "copysave area --freeze";
+        default = "--freeze copysave area";
         description = "Verbatim args passed to `grimblast`";
       };
     };
