@@ -9,26 +9,6 @@
     home = "/persist/docker-ripjaw";
     uid = 911; # Lord of The Rings: The Twin Towers
     group = "docker-ripjaw";
-    extraGroups = [
-      "video"
-      "render"
-    ];
-  };
-  # libnvidia-encode.so.1 comes from the regular drivers (nvidia-x11-470)
-  hardware.nvidia-container-toolkit.enable = true;
-  # Enable CDI in the docker daemon
-  virtualisation.docker.daemon.settings.features.cdi = true;
-  # Add nvidia to videoDrivers to load it, or the CDI spec won't be generated
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    # Open driver doesn't support kepler
-    open = false;
-    powerManagement = {
-      enable = false;
-      finegrained = false;
-    };
-    # Legacy 470 drivers are required for k2000
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
   };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers."ripjaw" = {
@@ -50,8 +30,6 @@
       # This is needed in order to `mount /dev/sr0 /mnt/dev/sr0` for ripping, which may be avoidable by
       # handling mounts outside of the container, and having `/mnt/dev` bind mounted into the container.
       "--privileged"
-      # Pass the nvidia card via CDI
-      "--device=nvidia.com/gpu=all"
       # Pass the CD/DVD/Bluray drives. `sr0` is the top (bluray), the rest are in descending order
       "--device=/dev/sr0"
       "--device=/dev/sr1"
