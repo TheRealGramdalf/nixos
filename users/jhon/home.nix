@@ -1,4 +1,17 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.x86_64-linux;
+in {
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+  programs.spicetify = {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      adblock
+      randomBadToTheBoneRiff
+    ];
+    theme = spicePkgs.themes.comfy;
+  };
   home = {
     username = "jhon";
     homeDirectory = "/home/jhon";
