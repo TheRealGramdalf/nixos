@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    openwrt-imagebuilder = {
+      url = "github:astro/nix-openwrt-imagebuilder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -220,6 +225,7 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
+      peetscastle = import ./hosts/peetscastle/main.nix;
     };
   };
 }
