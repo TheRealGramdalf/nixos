@@ -225,7 +225,7 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
-      peetscastle = import ./hosts/peetscastle/main.nix;
+      peetscastle = pkgs.callPackage ./hosts/peetscastle/main.nix {inherit inputs; inherit pkgs;};
     };
   };
 }
