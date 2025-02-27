@@ -8,7 +8,7 @@ in {
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
       adblock
-      randomBadToTheBoneRiff
+      hidePodcasts
     ];
     theme = spicePkgs.themes.comfy;
   };
