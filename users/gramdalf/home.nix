@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   tomeutils.adhde = {
     enable = true;
     idle.sleep = true;
@@ -24,9 +28,9 @@
       EDITOR = "nvim";
       FLAKE = "nix";
       #QT_AUTO_SCREEN_SCALE_FACTOR = 1;
-      #QT_FONT_DPI = 143;
-      # Scale qt applications on hidpi display
-      QT_SCALE_FACTOR = 1.5;
+      QT_FONT_DPI = 143;
+      # Scale qt applications on hidpi display. Disabled for now as hyprland scales it for me
+      #QT_SCALE_FACTOR = 1.5;
       # Set a screenshot directory for grimblast
       XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
     };
