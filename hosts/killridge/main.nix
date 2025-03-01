@@ -39,6 +39,7 @@
         [
           "iperf3"
           "luci-app-advanced-reboot"
+          "luci-app-wifischedule"
         ]
         ++ argon.deps;
       files = pkgs.runCommand "image-files" {} ''
