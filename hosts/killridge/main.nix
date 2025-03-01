@@ -37,6 +37,7 @@
       extraImageName = "killridge-ap";
       packages =
         [
+          "luci" # https://github.com/astro/nix-openwrt-imagebuilder/issues/53
           "iperf3"
           "luci-app-advanced-reboot"
           "luci-app-wifischedule"
@@ -57,6 +58,7 @@
         mkdir -p $out/etc/uci-defaults
         cat > $out/etc/uci-defaults/99-custom <<EOF
           exec >/root/uci-defaults.log 2>&1
+          opkg install /root/extraPackages/*.ipk
           uci batch << EOI
 
             # Remove wan dhcp config
