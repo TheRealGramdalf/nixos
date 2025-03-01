@@ -229,6 +229,10 @@
         inherit inputs;
         inherit pkgs;
       };
+      killridge = pkgs.callPackage ./hosts/killridge/main.nix {
+        inherit inputs;
+        inherit pkgs;
+      };
     };
   };
 }
