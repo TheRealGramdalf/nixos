@@ -33,6 +33,8 @@
   config =
     profiles.identifyProfile "linksys_wrt1900ac-v1"
     // {
+      release = "24.10.0";
+      extraImageName = "killridge-ap";
       packages =
         [
           "iperf3"
