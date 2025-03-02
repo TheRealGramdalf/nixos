@@ -54,6 +54,10 @@
         mkdir -p $out/www/luci-static/argon/background
         cp ${argon.backgrounds} $out/www/luci-static/argon/background/
 
+        # Add ssh key
+        mkdir -p $out/etc/dropbear
+        echo "${ssh-pub-key} >> $out/etc/dropbear/authorized_keys
+
         # Set UCI settings
         mkdir -p $out/etc/uci-defaults
         cat > $out/etc/uci-defaults/99-custom <<EOF
@@ -66,7 +70,11 @@
             # Remove wan dhcp config
             del dhcp.wan
             # Set dhcp settings for LAN
+            # Disable IPv6 DHCP services
+            del dhcp.lan.ra
+            del dhcp.lan.dhcpv6
             del dhcp.lan.ra_slaac
+            # Disable IPv4 DHCP services
             set dhcp.lan.ignore='1'
             del dhcp.@dnsmasq[0].authoritative
             del dhcp.@dnsmasq[0].nonwildcard
@@ -136,6 +144,18 @@
             # Enable WiFi
             del wireless.radio1.disabled='0'
             del wireless.radio0.disabled='0'
+
+            # Set wifi schedule
+            set wifi_schedule.@global[0].enabled='1'
+            set wifi_schedule.@global[0].unload_modules='0'
+            set wifi_schedule.Businesshours.enabled='1'
+            set wifi_schedule.Businesshours.starttime='07:00'
+            set wifi_schedule.Businesshours.stoptime='21:00'
+            set wifi_schedule.Businesshours.forcewifidown='1'
+            set wifi_schedule.Weekend.enabled='1'
+            set wifi_schedule.Weekend.starttime='08:00'
+            set wifi_schedule.Weekend.stoptime='21:00'
+            set wifi_schedule.Weekend.forcewifidown='1'
             
             # Disable password authentication (disabled for testing)
             # set dropbear.main.PasswordAuth='off'
@@ -151,11 +171,6 @@
 
             commit
           EOI
-
-          echo "uci is done"
-          
-          # Add an ssh key
-          echo "${ssh-pub-key}" >> /etc/dropbear/authorized_keys
 
           # Make a backup of /etc/shadow to /etc/shadow- as per the busybox passwd convention
           ## cp /etc/shadow /etc/shadow-
