@@ -61,7 +61,7 @@
         # Set UCI settings
         mkdir -p $out/etc/uci-defaults
         cat > $out/etc/uci-defaults/99-custom <<EOF
-          #!/usr/bin/env sh
+          #!/usr/bin/env ash
           exec >/root/uci-defaults.log 2>&1
           opkg install /root/extraPackages/*.ipk
           uci export >> /root/uci.defaults
@@ -157,9 +157,9 @@
             set wifi_schedule.Weekend.stoptime='21:00'
             set wifi_schedule.Weekend.forcewifidown='1'
             
-            # Disable password authentication (disabled for testing)
-            # set dropbear.main.PasswordAuth='off'
-            # set dropbear.main.RootPasswordAuth='off'
+            # Disable password authentication on SSH
+            set dropbear.main.PasswordAuth='off'
+            set dropbear.main.RootPasswordAuth='off'
 
 
             # Redirect HTTP requests to HTTPS (LUCI)
@@ -173,10 +173,9 @@
           EOI
 
           # Make a backup of /etc/shadow to /etc/shadow- as per the busybox passwd convention
-          ## cp /etc/shadow /etc/shadow-
-          # Change root password. Note the escaped \$ character in the regex.
-          # The $pass variable must be defined as literal, as it contains special characters. Either escape said characters or use single quotes.
-          ## sed -i -e "s;^root:[\$A-z0-9]*:;root:${x-hashed-root-password}:;" /etc/shadow
+          cp /etc/shadow /etc/shadow-
+          # Change root password. This is escaped because nix is cool like that.
+          sed -i -e 's;^root:[\$A-z0-9]*:;root:${x-hashed-root-password}:;' /etc/shadow
 
         EOF
       '';
