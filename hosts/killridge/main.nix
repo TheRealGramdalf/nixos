@@ -56,7 +56,7 @@
 
         # Add ssh key
         mkdir -p $out/etc/dropbear
-        echo "${ssh-pub-key} >> $out/etc/dropbear/authorized_keys
+        echo "${ssh-pub-key}" >> $out/etc/dropbear/authorized_keys
 
         # Set UCI settings
         mkdir -p $out/etc/uci-defaults
