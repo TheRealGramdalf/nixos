@@ -134,8 +134,6 @@
             set wireless.default_radio1.ocv='0'
 
             # Enable WiFi
-            del wireless.default_radio1.disabled='0'
-            del wireless.default_radio0.disabled='0'
             del wireless.radio1.disabled='0'
             del wireless.radio0.disabled='0'
             
@@ -154,6 +152,8 @@
             commit
           EOI
 
+          echo "uci is done"
+          
           # Add an ssh key
           echo "${ssh-pub-key}" >> /etc/dropbear/authorized_keys
 
