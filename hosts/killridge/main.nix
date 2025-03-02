@@ -57,8 +57,10 @@
         # Set UCI settings
         mkdir -p $out/etc/uci-defaults
         cat > $out/etc/uci-defaults/99-custom <<EOF
+          #!/usr/bin/env sh
           exec >/root/uci-defaults.log 2>&1
           opkg install /root/extraPackages/*.ipk
+          uci export >> /root/uci.defaults
           uci batch << EOI
 
             # Remove wan dhcp config
@@ -138,8 +140,8 @@
             del wireless.radio0.disabled='0'
             
             # Disable password authentication (disabled for testing)
-            #set dropbear.main.PasswordAuth='off'
-            #set dropbear.main.RootPasswordAuth='off'
+            # set dropbear.main.PasswordAuth='off'
+            # set dropbear.main.RootPasswordAuth='off'
 
 
             # Redirect HTTP requests to HTTPS (LUCI)
@@ -156,10 +158,10 @@
           echo "${ssh-pub-key}" >> /etc/dropbear/authorized_keys
 
           # Make a backup of /etc/shadow to /etc/shadow- as per the busybox passwd convention
-          ##cp /etc/shadow /etc/shadow-
+          ## cp /etc/shadow /etc/shadow-
           # Change root password. Note the escaped \$ character in the regex.
           # The $pass variable must be defined as literal, as it contains special characters. Either escape said characters or use single quotes.
-          ##sed -i -e "s;^root:[\$A-z0-9]*:;root:${x-hashed-root-password}:;" /etc/shadow
+          ## sed -i -e "s;^root:[\$A-z0-9]*:;root:${x-hashed-root-password}:;" /etc/shadow
 
         EOF
       '';
