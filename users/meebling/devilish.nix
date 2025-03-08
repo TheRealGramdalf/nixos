@@ -10,7 +10,7 @@
       prismlauncher
       scarab
       webcord
-      itch
+      #itch
     ];
   };
 }
