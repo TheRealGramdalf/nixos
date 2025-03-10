@@ -35,6 +35,7 @@
       XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
     };
     packages = with pkgs; [
+      jetbrains.idea-community
       wlr-randr
       ripgrep
       #### GUI ####
