@@ -9,7 +9,7 @@ in {
     inputs.spicetify-nix.homeManagerModules.default
   ];
   programs.spicetify = {
-    enable = true;
+    enable = false;
     enabledExtensions = with spicePkgs.extensions; [
       adblock
       hidePodcasts
