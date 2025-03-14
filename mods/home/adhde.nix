@@ -66,8 +66,14 @@ in {
         size = 24;
         gtk.enable = true;
         x11.enable = true;
-        package = pkgs.catppuccin-cursors.mochaLavender;
-        name = "catppuccin-mocha-lavender-cursors";
+        # Change to breezeX when merged?
+        # Alternatively package spacek?
+        package = pkgs.phinger-cursors;
+        name = "phinger-cursors-dark";
+        hyprcursor = {
+          enable = true;
+          size = 24;
+        };
       };
     })
 
