@@ -51,7 +51,6 @@
       # Communication
       webcord
       electron-mail
-      zoom-us
       chatterino2
       # Word Processing
       libreoffice
