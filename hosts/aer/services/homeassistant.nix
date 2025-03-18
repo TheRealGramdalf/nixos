@@ -25,6 +25,7 @@ in {
         temperature_unit = "C";
       };
       http = {
+        base_url = "https://${name}.aer.dedyn.io";
         use_x_forwarded_for = true;
         trusted_proxies = [
           "127.0.0.1"
