@@ -1,2 +1,5 @@
 .env
 result
+
+# Ignore files containing UCI exports (OpenWRT)
+*.uci
