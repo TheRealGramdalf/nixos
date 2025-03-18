@@ -5,6 +5,7 @@ in {
   services.home-assistant = {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
+    config = null;
     #config = {
     #  default_config = {};
     #  homeassistant = {
