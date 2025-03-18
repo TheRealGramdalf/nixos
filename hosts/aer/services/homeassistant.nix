@@ -1,5 +1,6 @@
 {config, ...}: let
   cfg = config.services.home-assistant;
+  port = 8123;
   name = "home";
 in {
   services.home-assistant = {
@@ -30,6 +31,6 @@ in {
       service = "${name}";
       middlewares = "local-only";
     };
-    http.services."${name}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString cfg.config.http.server_port}";}];
+    http.services."${name}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
   };
 }
