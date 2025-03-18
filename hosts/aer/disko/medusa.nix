@@ -82,6 +82,7 @@ in {
         "services/dashy".type = "zfs_fs";
         "services/jellyfin".type = "zfs_fs";
         "services/paperless".type = "zfs_fs";
+        "services/home-assistant".type = "zfs_fs";
       };
       postCreateHook = "zfs snapshot -r ${pool}@blank";
     };
