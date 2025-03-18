@@ -10,6 +10,8 @@ in {
     extraComponents = [
       # Storage acceleration
       "isal"
+      # User defined
+      "rachio"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
