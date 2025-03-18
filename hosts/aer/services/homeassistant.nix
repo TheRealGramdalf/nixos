@@ -6,6 +6,7 @@ in {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
     config = {
+      default_config = {};
       homeassistant = {
         name = "Home";
         unit_system = "metric";
