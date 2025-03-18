@@ -11,7 +11,10 @@ in {
       # Storage acceleration
       "isal"
       # User defined
+      # Sprinkler
       "rachio"
+      # Washing machine
+      "lg_thinq"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
