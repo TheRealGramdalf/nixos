@@ -7,6 +7,14 @@ in {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
     config = null;
+    extraComponents = [
+      # Storage acceleration
+      "isal"
+      # From the nixosmodule by default:
+      "default_config"
+      "esphome"
+      "met"
+    ];
     #config = {
     #  default_config = {};
     #  homeassistant = {
