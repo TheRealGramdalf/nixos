@@ -38,6 +38,7 @@
       packages =
         [
           "luci" # https://github.com/astro/nix-openwrt-imagebuilder/issues/53
+          "luci-ssl" # For HTTPS support
           "iperf3"
           "luci-app-advanced-reboot"
           "luci-app-wifischedule"
@@ -83,8 +84,14 @@
             del dhcp.@dnsmasq[0].filter_aaaa
             del dhcp.@dnsmasq[0].filter_a
             del dhcp.@dnsmasq[0].nonegcache
-            set dhcp.@dnsmasq[0].local='/local/'
-            set dhcp.@dnsmasq[0].domain='local'
+            # This is *not* referring to mDNS - it instead
+            # refers to a feature in dnsmasq similar to
+            # mDNS that resolves the hostnames of DHCP clients
+            # as `[hostname].lan`, via regular DNS lookups.
+            # Do not set this to `.local`, as that is reserved for
+            # mDNS exclusively. 
+            set dhcp.@dnsmasq[0].local='/lan/'
+            set dhcp.@dnsmasq[0].domain='lan'
 
             # Remove the WAN firewall zone
             del firewall.@zone[1]
@@ -98,8 +105,13 @@
             # Set the gateway and DNS server to the edge router
             set network.lan.gateway='192.168.1.1'
             add_list network.lan.dns='192.168.1.1'
-            # Set the mDNS search domain
+            # Set a DNS search domain. This (appears to?) merely indicates (via DHCP)
+            # that clients should use these two domains when attempting to qualify
+            # a hostname that is not already qualified.
+            # `local` here refers to mDNS, whereas `lan` refers to the DNS
+            # records fabricated by dnsmasq using hostnames of DHCP clients.
             add_list network.lan.dns_search='local'
+            add_list network.lan.dns_search='lan'
 
             # Add the WAN port to the lan bridge
             del network.@device[0].ports
