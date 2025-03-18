@@ -11,5 +11,6 @@
     ./paperless.nix
     ./lidarr.nix
     ./zrepl.nix
+    ./homeassistant.nix
   ];
 }
