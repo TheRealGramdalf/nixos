@@ -5,21 +5,21 @@ in {
   services.home-assistant = {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
-    config = {
-      default_config = {};
-      homeassistant = {
-        name = "Home";
-        unit_system = "metric";
-        temperature_unit = "C";
-      };
-      http = {
-        use_x_forwarded_for = true;
-        trusted_proxies = [
-          "127.0.0.1"
-        ];
-        server_host = ["127.0.0.1"];
-      };
-    };
+    #config = {
+    #  default_config = {};
+    #  homeassistant = {
+    #    name = "Home";
+    #    unit_system = "metric";
+    #    temperature_unit = "C";
+    #  };
+    #  http = {
+    #    use_x_forwarded_for = true;
+    #    trusted_proxies = [
+    #      "127.0.0.1"
+    #    ];
+    #    server_host = ["127.0.0.1"];
+    #  };
+    #};
   };
  
   # Proxy home-assistant through traefik
