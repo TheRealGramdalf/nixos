@@ -2,7 +2,7 @@
   mainGroup = "50bc3d3a-87cd-4e90-ac6d-fb97f9b1a051"; # ripjaw-login
 in {
   services.kanidm = {
-    package = pkgs.kanidm_1_4;
+    package = pkgs.kanidm_1_5;
     clientSettings.uri = "https://auth.aer.dedyn.io";
     enablePam = true;
     unixSettings = {
