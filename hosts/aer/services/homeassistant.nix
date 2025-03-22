@@ -15,6 +15,9 @@ in {
       "rachio"
       # Washing machine
       "lg_thinq"
+      # Tasmota smart devices
+      "tasmota"
+      "mqtt"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
