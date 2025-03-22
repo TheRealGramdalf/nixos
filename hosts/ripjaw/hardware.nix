@@ -32,7 +32,8 @@
 in {
   boot.initrd.availableKernelModules = ["uhci_hcd" "ehci_pci" "ata_piix" "ahci" "xhci_pci" "pata_jmicron" "firewire_ohci" "sd_mod" "sr_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
+  # sg is required for makemkv: https://discourse.nixos.org/t/makemkv-cant-find-my-usb-blu-ray-drive/23714/4
+  boot.kernelModules = ["kvm-intel" "sg"];
   boot.extraModulePackages = [];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
