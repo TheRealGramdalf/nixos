@@ -1,7 +1,9 @@
 {config, ...}: let
   cfg = config.services.home-assistant;
-  port = 8123;
-  name = "home";
+  ha = "home";
+  ha-port = 8123;
+  mq = "mqtt";
+  mq-port = 1883;
 in {
   services.home-assistant = {
     enable = true;
@@ -31,7 +33,7 @@ in {
         temperature_unit = "C";
       };
       http = {
-        base_url = "https://${name}.aer.dedyn.io";
+        base_url = "https://${ha}.aer.dedyn.io";
         use_x_forwarded_for = true;
         trusted_proxies = [
           "127.0.0.1"
@@ -71,13 +73,25 @@ in {
     ];
   };
 
-  # Proxy home-assistant through traefik
-  services.cone.extraFiles."${name}".settings = {
-    http.routers."${name}" = {
-      rule = "Host(`${name}.aer.dedyn.io`)";
-      service = "${name}";
-      middlewares = "local-only";
+  # Proxy home-assistant and MQTT through traefik
+  services.cone = {
+    extraFiles = {
+    "${ha}".settings = {
+      http.routers."${ha}" = {
+        rule = "Host(`${ha}.aer.dedyn.io`)";
+        service = "${ha}";
+        middlewares = "local-only";
+      };
+      http.services."${ha}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString ha-port}";}];
     };
-    http.services."${name}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString port}";}];
+    "${mq}".settings = {
+      http.routers."${mq}" = {
+        rule = "Host(`${mq}.aer.dedyn.io`)";
+        service = "${mq}";
+        middlewares = "local-only";
+      };
+      http.services."${mq}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString mq-port}";}];
+    };
+    };
   };
 }
