@@ -47,29 +47,21 @@ in {
     enable = true;
     dataDir = "/persist/services/mosquitto";
     listeners = [
-      # Local only host, for home-assistant
+      # Proxied through traefik
       {
-        port = 1883;
+        port = mq-port;
         address = "127.0.0.1";
         users = {
           "root" = {
             acl = ["readwrite #"];
             passwordFile = "/persist/secrets/mosquitto/root.passwdfile";
           };
-        };
-      }
-      /*
-        {
-        port = 1883;
-        address = "127.0.0.1";
-        users = {
           "IoT" = {
-            acl = [ "pattern readwrite #" ];
+            acl = [ "readwrite homeassistant/#" ];
             passwordFile = "/persist/secrets/mosquitto/IoT.passwdfile";
           };
         };
       }
-      */
     ];
   };
 
