@@ -56,9 +56,9 @@ in {
             acl = ["readwrite #"];
             passwordFile = "/persist/secrets/mosquitto/root.passwdfile";
           };
-          "IoT" = {
+          "iot-devices" = {
             acl = [ "readwrite homeassistant/#" ];
-            passwordFile = "/persist/secrets/mosquitto/IoT.passwdfile";
+            passwordFile = "/persist/secrets/mosquitto/iot-devices.passwdfile";
           };
         };
       }
