@@ -11,6 +11,7 @@
     ./netbird.nix
     #./fprint.nix
   ];
+  time.timeZone = "America/Vancouver";
   system.stateVersion = "24.05";
   nixpkgs.config.allowUnfree = true;
   networking = {
