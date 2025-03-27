@@ -6,6 +6,8 @@
     sysz # Systemctl TUI
     tealdeer # TL;DR for linux commands
     comma # , Run any command from nixpkgs
+    tmux # Run detached shell sessions
+    btop # System stats
   ];
   nix = {
     package = pkgs.nixVersions.nix_2_24;
