@@ -89,7 +89,7 @@
             # mDNS that resolves the hostnames of DHCP clients
             # as `[hostname].lan`, via regular DNS lookups.
             # Do not set this to `.local`, as that is reserved for
-            # mDNS exclusively. 
+            # mDNS exclusively.
             set dhcp.@dnsmasq[0].local='/lan/'
             set dhcp.@dnsmasq[0].domain='lan'
 
@@ -168,7 +168,7 @@
             set wifi_schedule.Weekend.starttime='08:00'
             set wifi_schedule.Weekend.stoptime='21:00'
             set wifi_schedule.Weekend.forcewifidown='1'
-            
+
             # Disable password authentication on SSH
             set dropbear.main.PasswordAuth='off'
             set dropbear.main.RootPasswordAuth='off'
