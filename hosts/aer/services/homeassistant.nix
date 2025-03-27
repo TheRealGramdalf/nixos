@@ -40,7 +40,37 @@ in {
       };
     };
   };
- 
+
+  services.mosquitto = {
+    enable = true;
+    dataDir = "/persist/services/mosquitto";
+    listeners = [
+      # Local only host, for home-assistant
+      {
+        port = 1883;
+        address = "127.0.0.1";
+        users = {
+          "root" = {
+            acl = ["pattern readwrite #"];
+            passwordFile = "/persist/secrets/mosquitto/root.passwdfile";
+          };
+        };
+      }
+      /*
+        {
+        port = 1883;
+        address = "127.0.0.1";
+        users = {
+          "IoT" = {
+            acl = [ "pattern readwrite #" ];
+            passwordFile = "/persist/secrets/mosquitto/IoT.passwdfile";
+          };
+        };
+      }
+      */
+    ];
+  };
+
   # Proxy home-assistant through traefik
   services.cone.extraFiles."${name}".settings = {
     http.routers."${name}" = {
