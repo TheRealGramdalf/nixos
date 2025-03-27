@@ -51,7 +51,7 @@ in {
         address = "127.0.0.1";
         users = {
           "root" = {
-            acl = ["pattern readwrite #"];
+            acl = ["readwrite #"];
             passwordFile = "/persist/secrets/mosquitto/root.passwdfile";
           };
         };
