@@ -65,6 +65,14 @@
       klipperwrt = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
         name = "klipperwrt-firmware";
         meta.description = "Devshell with the necessary packages to build klipper firmware";
+        # Instructions:
+        # - Mount the SDCard from the wifi box
+        # - Use `sudo -i` to become root
+        # - As root, enter the shell
+        # - CD to the klipper repo (upper/root/klipper)
+        # - Run `make clean` to clean caches
+        # - Run `make` to build the firmware
+        # - Run `make flash FLASH_DEVICE=/dev/serial/by-id/<serial-id>` to flash the firmware directly
         # packages available in the dev shell
         packages = with nixpkgs.legacyPackages.x86_64-linux; [
           python3
@@ -77,7 +85,6 @@
           stm32flash
           #wxGTK32 # For bossac, whatever that is
         ];
-        # When finished, run `make flash FLASH_DEVICE=/dev/serial/by-id/<serial-id>` to flash the firmware directly
       };
     };
     nixosConfigurations = {
