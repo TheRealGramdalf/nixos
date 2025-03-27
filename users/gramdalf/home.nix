@@ -179,7 +179,7 @@
     vscode = {
       enable = true;
       package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions; [
+      profiles."default".extensions = with pkgs.vscode-extensions; [
         # VSCodium Extensions
         arrterian.nix-env-selector
         #mkhl.direnv
