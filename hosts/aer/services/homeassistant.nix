@@ -79,7 +79,7 @@ in {
     "${mq}".settings = {
       tcp.routers."${mq}" = {
         rule = "HostSNI(`${mq}.aer.dedyn.io`)";
-        tls = false;
+        tls = true;
         service = "${mq}";
         middlewares = "local-only";
       };
