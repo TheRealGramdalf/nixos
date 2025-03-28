@@ -47,7 +47,7 @@
     ## Dev stuff
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     devShells.x86_64-linux = {
-      default = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+      "default" = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
         name = "hecker";
         meta.description = "The default development shell for my NixOS configurations";
         # Enable flakes/nix3 for convenience
@@ -62,7 +62,7 @@
           just
         ];
       };
-      klipperwrt = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+      "klipperwrt" = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
         name = "klipperwrt-firmware";
         meta.description = "Devshell with the necessary packages to build klipper firmware";
         # Instructions:
@@ -84,6 +84,20 @@
           avrdude
           stm32flash
           #wxGTK32 # For bossac, whatever that is
+        ];
+      };
+      "tasmota" = nixpkgs.legacyPackages.x86_64-linux.mkShell {
+        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+          esptool
+          #espflash
+          #uclibc
+          #zopfli
+          platformio
+          platformio-core
+          python312
+          python312Packages.pip
+          python312Packages.zopfli
+          python312Packages.wheel
         ];
       };
     };
@@ -232,6 +246,7 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
+      tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
       peetscastle = pkgs.callPackage ./hosts/peetscastle/main.nix {
         inherit inputs;
         inherit pkgs;
