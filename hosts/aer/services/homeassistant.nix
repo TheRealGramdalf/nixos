@@ -77,12 +77,13 @@ in {
       http.services."${ha}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString ha-port}";}];
     };
     "${mq}".settings = {
-      http.routers."${mq}" = {
-        rule = "Host(`${mq}.aer.dedyn.io`)";
+      tcp.routers."${mq}" = {
+        rule = "HostSNI(`${mq}.aer.dedyn.io`)";
+        tls = true;
         service = "${mq}";
         middlewares = "local-only";
       };
-      http.services."${mq}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString mq-port}";}];
+      tcp.services."${mq}".loadbalancer.servers = [{address = "127.0.0.1:${toString mq-port}";}];
     };
     };
   };
