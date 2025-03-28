@@ -2,6 +2,11 @@
   lib,
   stdenv,
   fetchFromGitHub,
+  esptool,
+  platformio,
+  platformio-core,
+  python312,
+  python312Packages,
   userConfig ? null,
   variant ? "tasmota"
 }:
@@ -18,6 +23,8 @@ stdenv.mkDerivation (finalAttrs: {
     echo ${userConfig} > tasmota/user_config_override.h
   '';
   buildPhase = ''
+    pwd
+    ls -la
     platformio run -e ${variant}
   '';
   installPhase = ''
