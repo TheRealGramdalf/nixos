@@ -17,7 +17,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "arendst";
     repo = "Tasmota";
     rev = "d436a4034b381b7587950f1c85d365212d5a24f2";
-    hash = "sha256-lRJ3lI9UUIaw9GWPEy81Dbf4cu6rClA4VjdWejVQN+g=";
+    hash = "sha256-edJ+Zh0Sx/DF3v3zqXizE8x7uuWwINYg/Twch/E3GRQ=";
   };
   preBuild = lib.optional (userConfig != null) ''
     echo ${userConfig} > tasmota/user_config_override.h
