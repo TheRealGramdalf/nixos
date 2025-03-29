@@ -246,7 +246,11 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
+      # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
+      tasmota-ssl = pkgs.callPackage ./pkgs/tasmota.nix {
+        userConfig = builtins.readFile ./hosts/smarthome/brightbulb.h;
+      };
       peetscastle = pkgs.callPackage ./hosts/peetscastle/main.nix {
         inherit inputs;
         inherit pkgs;
