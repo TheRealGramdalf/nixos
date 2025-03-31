@@ -70,6 +70,10 @@ in {
         };
       };
       entryPoints = {
+        "mqtt" = {
+          address = ":8883";
+          http.tls.certResolver = "letsencrypt";
+        };
         "traefik" = {
           address = ":8080";
         };
@@ -91,7 +95,7 @@ in {
     };
   };
   networking.firewall = {
-    allowedUDPPorts = [80 443];
-    allowedTCPPorts = [80 443];
+    allowedUDPPorts = [80 443 8883];
+    allowedTCPPorts = [80 443 8883];
   };
 }
