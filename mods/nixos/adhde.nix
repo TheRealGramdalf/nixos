@@ -197,6 +197,8 @@ in {
             IPv6PrivacyExtensions = true;
             # Enable mDNS responding and resolving on this match
             MulticastDNS = true;
+            # Use domains advertised by the DHCP server. This should be enabled by default imo
+            UseDomains = true;
           };
           # Enable mDNS on this match
           linkConfig.Multicast = true;
