@@ -67,6 +67,9 @@ in {
 
   # Proxy home-assistant and MQTT through traefik
   services.cone = {
+    static.settings.entryPoints."mqtt" = {
+      address = ":8883";
+    };
     extraFiles = {
       "${ha}".settings = {
         http.routers."${ha}" = {
@@ -82,6 +85,7 @@ in {
           tls = true;
           service = "${mq}";
           middlewares = "local-only";
+          entryPoints = [ "mqtt" ]
         };
         tcp.services."${mq}".loadbalancer.servers = [{address = "127.0.0.1:${toString mq-port}";}];
       };
