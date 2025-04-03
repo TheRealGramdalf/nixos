@@ -48,42 +48,6 @@ Examples :
 #undef  STA_PASS1
 #define STA_PASS1         "YourWifiPassword"     // [Password1] Wifi password
 
-// -- Setup your own MQTT settings  ---------------
-#undef  MQTT_HOST
-#define MQTT_HOST         "your-mqtt-server.com" // [MqttHost]
-
-#undef  MQTT_PORT
-#define MQTT_PORT         1883                   // [MqttPort] MQTT port (10123 on CloudMQTT)
-
-#undef  MQTT_USER
-#define MQTT_USER         "YourMqttUser"         // [MqttUser] Optional user
-
-#undef  MQTT_PASS
-#define MQTT_PASS         "YourMqttPass"         // [MqttPassword] Optional password
-
-// You might even pass some parameters from the command line ----------------------------
-// Ie:  export PLATFORMIO_BUILD_FLAGS='-DUSE_CONFIG_OVERRIDE -DMY_IP="192.168.1.99" -DMY_GW="192.168.1.1" -DMY_DNS="192.168.1.1"'
-
-#ifdef MY_IP
-#undef  WIFI_IP_ADDRESS
-#define WIFI_IP_ADDRESS     MY_IP                // Set to 0.0.0.0 for using DHCP or enter a static IP address
-#endif
-
-#ifdef MY_GW
-#undef  WIFI_GATEWAY
-#define WIFI_GATEWAY        MY_GW                // if not using DHCP set Gateway IP address
-#endif
-
-#ifdef MY_DNS
-#undef  WIFI_DNS
-#define WIFI_DNS            MY_DNS               // If not using DHCP set DNS IP address (might be equal to WIFI_GATEWAY)
-#endif
-
-#ifdef MY_DNS2
-#undef  WIFI_DNS2
-#define WIFI_DNS2           MY_DNS2              // If not using DHCP set DNS IP address (might be equal to WIFI_GATEWAY)
-#endif
-
 // !!! Remember that your changes GOES AT THE BOTTOM OF THIS FILE right before the last #endif !!!
 */
 
