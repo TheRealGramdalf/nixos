@@ -20,6 +20,9 @@ in {
       # Tasmota smart devices
       "tasmota"
       "mqtt"
+      # Printing
+      "ipp"
+      "brother"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
