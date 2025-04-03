@@ -90,6 +90,11 @@ Examples :
 // force the compiler to show a warning to confirm that this file is included
 #warning **** Message from the void: Using Settings from Nix ****
 
+#ifdef ESP8266
+#define MODULE                 USER_MODULE      // [Module] Select default module, use the template defined below
+#define USER_TEMPLATE "{\"NAME\":\"Bright Smart Bulb\",\"GPIO\":[0,0,0,0,0,416,0,0,0,160,0,0,0,0],\"FLAG\":0,\"BASE\":66}"  // [Template] Set JSON template
+#endif  // ESP8266
+
 #ifndef USE_MQTT_TLS
 #define USE_MQTT_TLS                          // Use TLS for MQTT connection (+34.5k code, +7.0k mem and +4.8k additional during connection handshake)
 #define USE_MQTT_TLS_CA_CERT              // Force full CA validation instead of fingerprints, slower, but simpler to use.  (+2.2k code, +1.9k mem during connection handshake)
