@@ -23,6 +23,8 @@ in {
       # Printing
       "ipp"
       "brother"
+      # Vacuum
+      "roomba"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
