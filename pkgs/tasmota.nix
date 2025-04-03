@@ -20,9 +20,9 @@ stdenv.mkDerivation (finalAttrs: {
     rev = version;
     hash = "sha256-edJ+Zh0Sx/DF3v3zqXizE8x7uuWwINYg/Twch/E3GRQ=";
   };
-  preBuild = ''
+  configurePhase = ''
     echo "Writing settings override..."
-    echo ${userConfig} > tasmota/user_config_override.h
+    echo '${userConfig}' > tasmota/user_config_override.h
   '';
   buildPhase = ''
     platformio run -e ${variant} --disable-auto-clean
