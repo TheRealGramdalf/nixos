@@ -59,7 +59,7 @@
         cp ${argon.backgrounds} $out/www/luci-static/argon/background/
 
         # Add ssh key
-        echo '${ssh-pub-key}' >> /etc/dropbear/authorized_keys
+        echo '${ssh-pub-key}' >> $out/etc/dropbear/authorized_keys
 
 
         # Set UCI settings
