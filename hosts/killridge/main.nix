@@ -105,11 +105,10 @@
             # Set the gateway and DNS server to the edge router
             set network.lan.gateway='192.168.1.1'
             add_list network.lan.dns='192.168.1.1'
-            # Set a DNS search domain. This (appears to?) merely indicates (via DHCP)
-            # that clients should use these two domains when attempting to qualify
-            # a hostname that is not already qualified.
+            # Set a DNS search domain. When the OpenWrt device itself
+            # resolves a (non-FQDN) hostname, it is supposed to try `dns_search`
             # `local` here refers to mDNS, whereas `lan` refers to the DNS
-            # records fabricated by dnsmasq using hostnames of DHCP clients.
+            # records fabricated by unbound using hostnames of DHCP clients.
             add_list network.lan.dns_search='local'
             add_list network.lan.dns_search='lan'
 
