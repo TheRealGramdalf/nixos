@@ -59,6 +59,7 @@
         cp ${argon.backgrounds} $out/www/luci-static/argon/background/
 
         # Add ssh key
+        mkdir -p $out/etc/dropbear
         echo '${ssh-pub-key}' >> $out/etc/dropbear/authorized_keys
 
 
