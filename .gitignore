@@ -1,5 +1,10 @@
 .env
+
+# `nix build` results
 result
 
 # Ignore files containing UCI exports (OpenWRT)
 *.uci
+
+# tasmota OTA files
+ota/*
