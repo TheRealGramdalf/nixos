@@ -20,37 +20,6 @@
 #ifndef _USER_CONFIG_OVERRIDE_H_
 #define _USER_CONFIG_OVERRIDE_H_
 
-/*****************************************************************************************************\
- * USAGE:
- *   To modify the stock configuration without changing the my_user_config.h file:
- *   (1) copy this file to "user_config_override.h" (It will be ignored by Git)
- *   (2) define your own settings below
- *
- ******************************************************************************************************
- * ATTENTION:
- *   - Changes to SECTION1 PARAMETER defines will only override flash settings if you change define CFG_HOLDER.
- *   - Expect compiler warnings when no ifdef/undef/endif sequence is used.
- *   - You still need to update my_user_config.h for major define USE_MQTT_TLS.
- *   - All parameters can be persistent changed online using commands via MQTT, WebConsole or Serial.
-\*****************************************************************************************************/
-
-/*
-Examples :
-
-// -- Master parameter control --------------------
-#undef  CFG_HOLDER
-#define CFG_HOLDER        4617                   // [Reset 1] Change this value to load SECTION1 configuration parameters to flash
-
-// -- Setup your own Wifi settings  ---------------
-#undef  STA_SSID1
-#define STA_SSID1         "YourSSID"             // [Ssid1] Wifi SSID
-
-#undef  STA_PASS1
-#define STA_PASS1         "YourWifiPassword"     // [Password1] Wifi password
-
-// !!! Remember that your changes GOES AT THE BOTTOM OF THIS FILE right before the last #endif !!!
-*/
-
 // force the compiler to show a warning to confirm that this file is included
 #warning **** Message from the void: Using Settings from Nix ****
 
@@ -79,7 +48,7 @@ Examples :
 
 #define MQTT_TLS_ENABLED       true           // [SetOption103] Enable TLS mode (requires TLS version)
 
-#endif
+#endif // USE_MQTT_TLS
 
 #ifndef USE_4K_RSA  // Support 4k RSA keys
 #define USE_4K_RSA
