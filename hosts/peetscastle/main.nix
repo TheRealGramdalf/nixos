@@ -33,8 +33,8 @@
   config =
     profiles.identifyProfile "linksys_ea8500"
     // {
-      # add package to include in the image, ie. packages that you don't
-      # want to install manually later
+      release = "24.10.0";
+      extraImageName = "peetscastle-ap";
       packages =
         [
           "luci" # https://github.com/astro/nix-openwrt-imagebuilder/issues/53
