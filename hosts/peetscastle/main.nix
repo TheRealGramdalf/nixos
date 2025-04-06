@@ -142,8 +142,10 @@
 
             # WiFi
             # sae-mixed is WPA2/WPA3 mixed mode
+            set wireless.radio1.htmode='VHT80'
             set wireless.radio0.country='CA'
             set wireless.radio0.cell_density='0'
+            set wireless.radio0.channel='auto'
             set wireless.default_radio0.ssid='Aerwiar - Peet'"'"'s Castle'
             set wireless.default_radio0.encryption='sae-mixed'
             set wireless.default_radio0.key='${x-wifi-password}'
@@ -153,9 +155,10 @@
             set wireless.default_radio0.ft_over_ds='0'
             set wireless.default_radio0.ocv='0'
 
-            set wireless.radio1.htmode='HT20'
+            set wireless.radio1.htmode='HT40'
             set wireless.radio1.country='CA'
             set wireless.radio1.cell_density='0'
+            set wireless.radio1.channel='auto'
             set wireless.default_radio1.ssid='Aerwiar - Peet'"'"'s Castle'
             set wireless.default_radio1.encryption='sae-mixed'
             set wireless.default_radio1.key='${x-wifi-password}'
