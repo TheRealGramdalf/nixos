@@ -116,13 +116,15 @@
             add_list network.lan.dns_search='local'
             add_list network.lan.dns_search='lan'
 
-            # Add the WAN port to the lan bridge
-            del network.@device[0].ports
-            add_list network.@device[0].ports='lan1'
-            add_list network.@device[0].ports='lan2'
-            add_list network.@device[0].ports='lan3'
-            add_list network.@device[0].ports='lan4'
-            add_list network.@device[0].ports='wan'
+            # Not working - traffic on all other ports is blocked
+            # if WAN is added to br-lan
+            # Add the WAN port to the lan bridge 
+            ## del network.@device[0].ports
+            ## add_list network.@device[0].ports='lan1'
+            ## add_list network.@device[0].ports='lan2'
+            ## add_list network.@device[0].ports='lan3'
+            ## add_list network.@device[0].ports='lan4'
+            ## add_list network.@device[0].ports='wan'
             set network.globals.packet_steering='1'
 
 
@@ -140,21 +142,26 @@
 
             # WiFi
             # sae-mixed is WPA2/WPA3 mixed mode
-            set wireless.radio0.htmode='HT20'
             set wireless.radio0.country='CA'
             set wireless.radio0.cell_density='0'
-            set wireless.radio0.channel='auto'
             set wireless.default_radio0.ssid='Aerwiar - Peet'"'"'s Castle'
             set wireless.default_radio0.encryption='sae-mixed'
             set wireless.default_radio0.key='${x-wifi-password}'
+            set wireless.default_radio0.ieee80211r='1'
+            # 'gm' in hexadecimal
+            set wireless.default_radio0.mobility_domain='676d'
+            set wireless.default_radio0.ft_over_ds='0'
             set wireless.default_radio0.ocv='0'
 
+            set wireless.radio1.htmode='HT20'
             set wireless.radio1.country='CA'
             set wireless.radio1.cell_density='0'
-            set wireless.radio1.channel='auto'
             set wireless.default_radio1.ssid='Aerwiar - Peet'"'"'s Castle'
             set wireless.default_radio1.encryption='sae-mixed'
             set wireless.default_radio1.key='${x-wifi-password}'
+            set wireless.default_radio1.ieee80211r='1'
+            set wireless.default_radio1.mobility_domain='676d'
+            set wireless.default_radio1.ft_over_ds='0'
             set wireless.default_radio1.ocv='0'
 
             # Enable WiFi
