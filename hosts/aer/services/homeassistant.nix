@@ -31,6 +31,9 @@ in {
       "met"
     ];
     config = {
+      # Include automations, these are part of a
+      # writable yaml file
+      automation = "!include automations.yaml";
       default_config = {};
       homeassistant = {
         name = "Home";
