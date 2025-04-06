@@ -105,7 +105,7 @@
             del network.wan6
 
             # Set the static address so it won't conflict
-            set network.lan.ipaddr='192.168.1.3'
+            set network.lan.ipaddr='192.168.1.6'
             # Set the gateway and DNS server to the edge router
             set network.lan.gateway='192.168.1.1'
             add_list network.lan.dns='192.168.1.1'
