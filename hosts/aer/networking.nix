@@ -22,12 +22,12 @@ in {
     networks = {
       "10-ingress" = {
         name = "${eno1}";
-        gateway = ["192.168.1.1"];
-        address = ["192.168.1.5/24"];
         networkConfig = {
+          DHCP = true;
           MulticastDNS = "resolve";
-          Domains = ["local"];
+          UseDomains = true;
         };
+        dhcpV4Config.RequestAddress = "192.168.1.5";
       };
       "14-recovery" = {
         # Ad-hoc recovery interface running a DHCP server (ostensibly)
@@ -60,7 +60,7 @@ in {
         networkConfig = {
           DHCP = true;
           MulticastDNS = "resolve";
-          Domains = ["local"];
+          UseDomains = true;
         };
       };
     };
