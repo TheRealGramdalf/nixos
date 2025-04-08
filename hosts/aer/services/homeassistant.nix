@@ -36,6 +36,7 @@ in {
       auth_oidc = {
         client_id = "home-assistant-aer_rs";
         discovery_url = "https://auth.aer.dedyn.io/oauth2/openid/home-assistant-aer_rs/.well-known/openid-configuration";
+        id_token_signing_alg = "ES256";
       };
       # Include automations, scenes, and scripts,
       # these are part of a writable yaml file
