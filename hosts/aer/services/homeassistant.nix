@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, pkgs, ...}: let
   cfg = config.services.home-assistant;
   ha = "home";
   ha-port = 8123;
