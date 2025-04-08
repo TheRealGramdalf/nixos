@@ -27,6 +27,8 @@ in {
       "brother"
       # Vacuum
       "roomba"
+      # Time, for wake up alarm
+      "time_date"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
