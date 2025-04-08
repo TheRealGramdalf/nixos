@@ -8,7 +8,9 @@ in {
   services.home-assistant = {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
-    #config = null;
+    customComponents = [
+      pkgs.home-assistant-custom-components.auth_oidc
+    ];
     extraComponents = [
       # Storage acceleration
       "isal"
@@ -31,9 +33,15 @@ in {
       "met"
     ];
     config = {
-      # Include automations, these are part of a
-      # writable yaml file
-      automation = "!include automations.yaml";
+      auth_oidc = {
+        client_id = "home-assistant-aer_rs";
+        discovery_url = "https://auth.aer.dedyn.io/oauth2/openid/home-assistant-aer_rs/.well-known/openid-configuration";
+      };
+      # Include automations, scenes, and scripts,
+      # these are part of a writable yaml file
+      "automation ui" = "!include automations.yaml";
+      "scene ui" = "!include scenes.yaml";
+      "script ui" = "!include scripts.yaml";
       default_config = {};
       homeassistant = {
         name = "Home";
