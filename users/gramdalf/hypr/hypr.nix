@@ -50,7 +50,6 @@
       bind = [
         "$mainMod, SPACE, exec, $menu"
         "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen,"
