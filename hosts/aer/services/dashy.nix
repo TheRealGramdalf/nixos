@@ -108,6 +108,18 @@ in {
           ];
         }
         {
+          name = "Automation";
+          displayData.hideForGuests = true;
+          items = [
+            {
+              description = "Home automation platform with thousands of integrations";
+              icon = "si-homeassistant";
+              title = "Home Assistant";
+              url = "https://home.aer.dedyn.io/auth/oidc/redirect";
+            }
+          ];
+        }
+        {
           name = "Identity";
           items = [
             {
@@ -158,8 +170,8 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
-              description = "OpenWRT WebUI";
-              icon = "si-openwrt";
+              description = "OPNSense WebUI";
+              icon = "si-opnsense";
               title = "Edge Router";
               url = "https://192.168.1.1";
             }
@@ -173,7 +185,13 @@ in {
               description = "Wireless AP for Aerwiar: Woes of Shreve";
               icon = "fas fa-wifi";
               title = "Aer: Woes of Shreve";
-              url = "https://192.168.1.187:4343";
+              url = "https://woes";
+            }
+            {
+              description = "Wireless AP for Aerwiar: Woes of Shreve";
+              icon = "fas fa-wifi";
+              title = "Aer: Peet's Castle";
+              url = "https://192.168.1.6";
             }
             {
               description = "Debugging dashboard";
