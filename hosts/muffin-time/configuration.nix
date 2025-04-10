@@ -41,6 +41,8 @@
     koreader
     # Master PDF
     masterpdfeditor
+    # Audacity
+    audacity
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
