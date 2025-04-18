@@ -9,12 +9,12 @@ in {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
     customComponents = [
-      pkgs.home-assistant-custom-components.auth_oidc.override {
+      (pkgs.home-assistant-custom-components.auth_oidc.override {
         postPatch = ''
           substituteInPlace src/custom_components/auth_oidc/oidc_client.py \
           --replace "access_token = token_response.get(\"access_token\")" "access_token = token_response.get(\"access_token\")\n_LOGGER.debug(\"Obtained ID token: %s\", id_token)"
         '';
-      }
+      })
       
     ];
     extraComponents = [
