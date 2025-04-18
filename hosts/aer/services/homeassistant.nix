@@ -46,7 +46,7 @@ in {
         discovery_url = "https://auth.aer.dedyn.io/oauth2/openid/home-assistant-aer_rs/.well-known/openid-configuration";
         id_token_signing_alg = "ES256";
         features.include_groups_scope = true;
-        roles.admin = "admins";
+        roles.admin = "15cdd9ec-08d0-4ca0-930f-5b9631c5ccb0";
         claims.groups = "groups";
       };
       # Include automations, scenes, and scripts,
