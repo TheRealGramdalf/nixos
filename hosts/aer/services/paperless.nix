@@ -82,6 +82,8 @@ in {
       PAPERLESS_USE_X_FORWARD_HOST = true;
       PAPERLESS_USE_X_FORWARD_PORT = true;
       # OpenID Configuration:
+      # See https://docs.paperless-ngx.com/configuration/#PAPERLESS_ACCOUNT_DEFAULT_GROUPS
+      # for automatic group membership
       PAPERLESS_PROXY_SSL_HEADER = ["HTTP_X_FORWARDED_PROTO" "https"];
       PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
       ## This environment variable expects a string of JSON value
