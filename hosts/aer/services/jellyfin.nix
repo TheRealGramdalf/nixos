@@ -2,7 +2,6 @@
   name = "media";
   port = "8096";
 in {
-  #    image = "lscr.io/linuxserver/jellyfin:10.8.13";
   systemd.services."jellyfin" = {
     after = [
       config.systemd.services."kanidm-unixd".name
