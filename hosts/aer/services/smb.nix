@@ -27,6 +27,10 @@
 
           ## Performance Optimizations & platform compatibility
           "use sendfile" = "yes";
+          # Let avahi choose the hostname to broadcast as
+          # This should fix an issue where windows refuses to mount a share
+          # due to the hostname being capitalized by default, which isn't advertised
+          "mdns name" = "mdns";
         };
         "photos" = {
           path = "/tank/smb/photos";
