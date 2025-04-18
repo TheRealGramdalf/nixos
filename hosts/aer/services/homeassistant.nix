@@ -9,13 +9,7 @@ in {
     enable = true;
     configDir = "/persist/services/home-assistant/config";
     customComponents = [
-      (pkgs.home-assistant-custom-components.auth_oidc.overrideAttrs {
-        postPatch = ''
-          substituteInPlace custom_components/auth_oidc/oidc_client.py \
-          --replace-fail "access_token = token_response.get(\"access_token\")" "access_token = token_response.get(\"access_token\"); _LOGGER.debug(\"Obtained ID token: %s\", id_token)"
-        '';
-      })
-      
+      pkgs.home-assistant-custom-components.auth_oidc
     ];
     extraComponents = [
       # Storage acceleration
@@ -35,6 +29,9 @@ in {
       "roomba"
       # Time, for sunrise alarm
       "time_date"
+      # So the logs stop spamming errors
+      "google_translate"
+      "homekit_controller"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
@@ -61,7 +58,6 @@ in {
         temperature_unit = "C";
       };
       http = {
-        base_url = "https://${ha}.aer.dedyn.io";
         use_x_forwarded_for = true;
         trusted_proxies = [
           "127.0.0.1"
