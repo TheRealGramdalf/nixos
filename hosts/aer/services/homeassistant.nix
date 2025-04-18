@@ -47,6 +47,11 @@ in {
         features.include_groups_scope = true;
         roles.admin = "15cdd9ec-08d0-4ca0-930f-5b9631c5ccb0";
         claims.groups = "groups";
+        # TODO
+        # For modifying the frontend, see
+        # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/servers/home-assistant/frontend.nix
+        # https://github.com/home-assistant/frontend/pull/23204
+        # https://github.com/christiaangoossens/hass-oidc-auth/blob/main/CONTRIBUTING.md#better-user-experience
       };
       # Include automations, scenes, and scripts,
       # these are part of a writable yaml file
