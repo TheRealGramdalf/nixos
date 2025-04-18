@@ -12,7 +12,7 @@ in {
       (pkgs.home-assistant-custom-components.auth_oidc.overrideAttrs {
         postPatch = ''
           substituteInPlace custom_components/auth_oidc/oidc_client.py \
-          --replace-fail "access_token = token_response.get(\"access_token\")" "access_token = token_response.get(\"access_token\")\n_LOGGER.debug(\"Obtained ID token: %s\", id_token)"
+          --replace-fail "access_token = token_response.get(\"access_token\")" "access_token = token_response.get(\"access_token\"); _LOGGER.debug(\"Obtained ID token: %s\", id_token)"
         '';
       })
       
