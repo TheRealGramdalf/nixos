@@ -140,6 +140,8 @@
             set system.@system[0].cronloglevel='7'
 
 
+            # radio0/radio1 name is unstable, leading to different flashes
+            # setting the radio incorrectly
             # WiFi
             # sae-mixed is WPA2/WPA3 mixed mode
             set wireless.radio0.htmode='HT40'
