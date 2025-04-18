@@ -16,7 +16,10 @@ in {
       "isal"
       # User defined
       # Sprinkler
+      # The controller advertises itself as
+      # a homekit device
       "rachio"
+      "homekit_controller"
       # Washing machine
       "lg_thinq"
       # Tasmota smart devices
@@ -31,7 +34,6 @@ in {
       "time_date"
       # So the logs stop spamming errors
       "google_translate"
-      "homekit_controller"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
