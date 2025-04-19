@@ -44,6 +44,7 @@
       enable = true;
       openFirewall = true;
       nssmdns4 = true;
+      publish.enable = true;
     };
     # The actual printing control daemon
     printing = {

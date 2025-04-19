@@ -1,4 +1,4 @@
-{pkgs, ... }: {
+{pkgs, inputs, ... }: {
   services.grafana = {
     enable = true;
     dataDir = "/persist/services/grafana";
@@ -6,18 +6,7 @@
   };
 
 
-  systemd.services."grafana" = {
-    after = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    requires = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    serviceConfig = {
-      User = "";
-      Group = "";
-    };
-  };
+  systemd.services = imputs.tome.lib.mkUnixdSarvice (x: "grafana");
   # Disable the user created by the module
   # The group is still created
   users.users."grafana".enable = false;
