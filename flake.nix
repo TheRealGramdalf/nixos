@@ -43,6 +43,7 @@
   # Create convenience shorthands
   let
     inherit (nixpkgs.lib) nixosSystem;
+    inputs.tome = import ./lib/main.nix;
   in {
     ## Dev stuff
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
