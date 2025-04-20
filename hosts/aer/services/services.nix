@@ -12,5 +12,6 @@
     ./lidarr.nix
     ./zrepl.nix
     ./homeassistant.nix
+    ./grafana.nix
   ];
 }
