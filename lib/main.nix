@@ -1,21 +1,24 @@
-{inputs}: let
-  inherit (inputs.nixpkgs) pkgsLib;
-in {
-  lib = {
-    #mkTraefik = servicename: lbserver:
-    mkUnixdService = service: user: group: {
-      "${service}" = {
-        serviceConfig = pkgsLib.mkIf (user || group != null) {
-          User = user;
-          Group = group;
-        };
-        after = [
-          config.systemd.services."kanidm-unixd".name
-        ];
-        requires = [
-          config.systemd.services."kanidm-unixd".name
-        ];
+{
+  #mkTraefik = servicename: lbserver:
+  mkUnixdService = {
+    lib,
+    nixosConfig,
+    serviceName,
+    serviceUser ? null,
+    serviceGroup ? null,
+  }: {
+    "${serviceName}" = {
+      serviceConfig = lib.mkIf (serviceUser != null || serviceGroup != null) {
+        User = lib.mkIf (serviceUser != null) (lib.mkForce serviceUser);
+        Group = lib.mkIf (serviceGroup != null) (lib.mkForce serviceGroup);
       };
+      # Using the `.name` attribute will throw an error if `kanidm-unixd` is not defined
+      after = [
+        nixosConfig.systemd.services."kanidm-unixd".name
+      ];
+      requires = [
+        nixosConfig.systemd.services."kanidm-unixd".name
+      ];
     };
   };
 }
