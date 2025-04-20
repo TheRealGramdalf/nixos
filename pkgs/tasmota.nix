@@ -9,7 +9,7 @@
   python312Packages,
   userConfig ? null,
   variant ? "tasmota",
-  version ? "v14.5.0"
+  version ? "v14.5.0",
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "tasmota";

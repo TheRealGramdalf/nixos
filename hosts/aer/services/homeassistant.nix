@@ -1,4 +1,8 @@
-{config, pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   cfg = config.services.home-assistant;
   ha = "home";
   ha-port = 8123;
@@ -113,7 +117,7 @@ in {
           tls = true;
           service = "${mq}";
           middlewares = "local-only";
-          entryPoints = [ "mqtt" ];
+          entryPoints = ["mqtt"];
         };
         tcp.services."${mq}".loadbalancer.servers = [{address = "127.0.0.1:${toString mq-port}";}];
       };

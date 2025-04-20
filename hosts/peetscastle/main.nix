@@ -118,7 +118,7 @@
 
             # Not working - traffic on all other ports is blocked
             # if WAN is added to br-lan
-            # Add the WAN port to the lan bridge 
+            # Add the WAN port to the lan bridge
             ## del network.@device[0].ports
             ## add_list network.@device[0].ports='lan1'
             ## add_list network.@device[0].ports='lan2'
