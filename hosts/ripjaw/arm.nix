@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   users.groups."docker-ripjaw".gid = 911;
   users.users."docker-ripjaw" = {
     description = "A.R.M. service account";
