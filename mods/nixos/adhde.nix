@@ -182,6 +182,14 @@ in {
       # This allows you to plug in random ethernet cables and obtain an address via DHCP
       systemd.network = {
         enable = true;
+        # Enable some features globally
+        config = {
+          networkConfig = {
+            IPv6PrivacyExtensions = true;
+            # Use domains advertised by the DHCP server. This should be enabled by default imo
+            UseDomains = true;
+          };
+        };
         networks."69-ether" = {
           # Match all non-virtual (veth) ethernet connections
           matchConfig = {
@@ -194,11 +202,8 @@ in {
           dhcpV6Config.RouteMetric = 200;
           networkConfig = {
             DHCP = true;
-            IPv6PrivacyExtensions = true;
-            # Enable mDNS responding and resolving on this match
+            ## Enable mDNS responding and resolving on this match
             MulticastDNS = true;
-            # Use domains advertised by the DHCP server. This should be enabled by default imo
-            UseDomains = true;
           };
           # Enable mDNS on this match
           linkConfig.Multicast = true;
