@@ -1,5 +1,5 @@
 {
-  inputs,
+  tome,
   config,
   lib,
   ...
@@ -10,7 +10,7 @@
     #configuration = {};
   };
 
-  systemd.services = inputs.tome.mkUnixdService {
+  systemd.services = tome.mkUnixdService {
     nixosConfig = config;
     inherit lib;
     serviceName = "grafana";
