@@ -31,7 +31,7 @@ in {
         name = "SSO";
         client_id = "grafana-aer_rs";
         client_secret = "$__file{/persist/secrets/client_secret}";
-        api_url = "https://${hl.authurl}/oauth2/openid/${srcfg."auth.generic_oauth".client_id}/userinfo";
+        api_url = "https://${hl.authurl}/oauth2/openid/${cfg."auth.generic_oauth".client_id}/userinfo";
         token_url = "https://${hl.authurl}/oauth2/token";
         auth_url = "https://${hl.authurl}/ui/oauth2";
         scopes = "openid profile email groups";
