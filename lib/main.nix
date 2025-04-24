@@ -1,11 +1,11 @@
-{
+lib: {
   #mkTraefik = servicename: lbserver:
   mkUnixdService = {
-    lib,
     nixosConfig,
     serviceName,
     serviceUser ? null,
     serviceGroup ? null,
+    lib,
   }: {
     "${serviceName}" = {
       serviceConfig = lib.mkIf (serviceUser != null || serviceGroup != null) {
