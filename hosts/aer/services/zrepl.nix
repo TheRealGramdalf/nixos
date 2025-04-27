@@ -2,6 +2,13 @@ _: {
   services.zrepl = {
     enable = true;
     settings = {
+      global.monitoring = [
+        {
+          type = "prometheus";
+          listen = "127.0.0.1:9811";
+          listen_freebind = true; # optional, default false
+        }
+      ];
       jobs = [
         {
           name = "offsite-backup";
