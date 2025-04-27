@@ -7,6 +7,7 @@
   hl.authurl = "auth.aer.dedyn.io";
   srcfg = config.services.grafana.settings.server;
   cfg = config.services.grafana.settings;
+  client_id = "grafana-aer_rs";
 in {
   services.grafana = {
     enable = true;
@@ -29,12 +30,12 @@ in {
         enabled = true;
         # Pretty name
         name = "SSO";
-        client_id = "grafana-aer_rs";
+        inherit client_id;
         client_secret = "$__file{/persist/secrets/client_secret}";
-        api_url = "https://${hl.authurl}/oauth2/openid/${cfg."auth.generic_oauth".client_id}/userinfo";
+        api_url = "https://${hl.authurl}/oauth2/openid/${client_id}/userinfo";
         token_url = "https://${hl.authurl}/oauth2/token";
         auth_url = "https://${hl.authurl}/ui/oauth2";
-        scopes = "openid profile email groups";
+        scopes = ["openid" "profile" "email" "groups"];
         login_attribute_path = "sub";
         name_attribute_path = "preferred_username";
         # If the user has the grafana admin group UUID in Kanidm, assign `GrafanaAdmin`
