@@ -18,6 +18,9 @@ in {
         enable_gzip = true;
         enforce_domain = true;
         protocol = "http";
+        # Do not include the port (irrelevant for reverse proxy)
+        # and set the protocol to https (similar reason). Uses grafana variable expansion.
+        root_url = "https://%(domain)s/";
       };
       security = {
         disable_initial_admin_creation = true;
