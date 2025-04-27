@@ -21,7 +21,7 @@ in {
       };
       security = {
         disable_initial_admin_creation = true;
-        secret_key = "$__file{/persist/secrets/secret_key}";
+        secret_key = "$__file{/persist/secrets/grafana/secret_key}";
       };
       database = {
         wal = true;
@@ -31,7 +31,7 @@ in {
         # Pretty name
         name = "SSO";
         inherit client_id;
-        client_secret = "$__file{/persist/secrets/client_secret}";
+        client_secret = "$__file{/persist/secrets/grafana/client_secret}";
         api_url = "https://${hl.authurl}/oauth2/openid/${client_id}/userinfo";
         token_url = "https://${hl.authurl}/oauth2/token";
         auth_url = "https://${hl.authurl}/ui/oauth2";
