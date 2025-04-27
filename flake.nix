@@ -212,7 +212,10 @@
         ];
       };
       "aer" = nixosSystem {
-        specialArgs = {inherit inputs; inherit tome;};
+        specialArgs = {
+          inherit inputs;
+          inherit tome;
+        };
         modules = [
           ./hosts/aer/main.nix
           ./mods/nixos/main.nix
