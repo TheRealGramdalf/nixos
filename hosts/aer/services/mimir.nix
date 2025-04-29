@@ -8,7 +8,7 @@ in {
   services.mimir = {
     enable = true;
     configuration = {
-      commom = {
+      common = {
         server = {
           # Enable settings for being behind a proxy
           proxy_protocol_enabled = true;
