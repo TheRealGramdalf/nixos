@@ -1,4 +1,4 @@
-{...}: let
+{tome, ...}: let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
 in {
@@ -10,7 +10,7 @@ in {
 ];
   };
 
-  environment.etc."alloy/config.alloy" = ''
+  environment.etc."alloy/config.alloy".text = ''
   '';
 
   # Proxy the alloy debug UI through traefik
