@@ -3,11 +3,11 @@
   listenAddr = "127.0.0.1:12346";
 in {
   services.alloy = {
-    enable = true;
+    enable = false;
     extraFlags = [
   "--server.http.listen-addr=${listenAddr}"
   "--disable-reporting"
-]
+];
   };
 
   environment.etc."alloy/config.alloy" = ''
@@ -22,7 +22,7 @@ in {
           service = "${alloy}";
           middlewares = "local-only";
         };
-        http.services."${alloy}".loadbalancer.servers = [{url = "http://127.0.0.1:12346";}];
+        http.services."${alloy}".loadbalancer.servers = [{url = "http://${listenAddr}";}];
       };
     };
   };
