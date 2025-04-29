@@ -72,7 +72,7 @@ in {
           service = "${mimir.name}";
           middlewares = "local-only";
         };
-        http.services."${mimir.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}\:${cfg.server.http_listen_port}";}];
+        http.services."${mimir.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}\:${toString cfg.server.http_listen_port}";}];
       };
     };
   };
