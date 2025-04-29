@@ -18,7 +18,7 @@ in {
           grpc_listen_port = 9094;
           http_listen_address = "127.0.0.1";
           http_listen_port = 9009;
-          log_level = "error";
+          log_level = "debug";
         };
         multitenancy_enabled = false;
 
