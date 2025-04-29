@@ -1,37 +1,43 @@
-{...}: let
+{config, ...}: let
   mimir = {
     name = "mimir";
-    datadir = "/persist/services/mimir";
+    dataDir = "/persist/services/mimir";
   };
-  listenAddr = "127.0.0.1:12346";
+  cfg = config.services.mimir.configuration.common;
 in {
   services.mimir = {
     enable = true;
     configuration = {
       commom = {
         server = {
+          # Enable settings for being behind a proxy
+          proxy_protocol_enabled = true;
+          log_source_ips_enabled = true;
           grpc_listen_address = "127.0.0.1";
+          # 9095 is default, 9094 for behind proxy (potentially)
+          grpc_listen_port = 9094;
           http_listen_address = "127.0.0.1";
-          #http_listen_port = 9009;
+          http_listen_port = 9009;
           log_level = "error";
         };
         multitenancy_enabled = false;
 
         blocks_storage = {
           backend = "filesystem";
-          bucket_store.sync_dir = "/tmp/mimir/tsdb-sync";
-          filesystem.dir = "/tmp/mimir/data/tsdb";
-          tsdb.dir = "/tmp/mimir/tsdb";
+          bucket_store.sync_dir = "${mimir.dataDir}/tsdb-sync";
+          filesystem.dir = "${mimir.dataDir}/data/tsdb";
+          tsdb.dir = "${mimir.dataDir}/tsdb";
+        };
+
+        compactor = {
+          # Not required to persist, done anyway for simplicity
+          data_dir = "${mimir.dataDir}/compactor";
+          sharding_ring.kvstore.store = "memberlist";
         };
 
         ruler_storage = {
           backend = "filesystem";
-          filesystem.dir = "/tmp/mimir/rules";
-        };
-
-        compactor = {
-          data_dir = "/tmp/mimir/compactor";
-          sharding_ring.kvstore.store = "memberlist";
+          filesystem.dir = "${mimir.dataDir}/rules";
         };
 
         distributor.ring = {
@@ -50,16 +56,23 @@ in {
     };
   };
 
-  # Proxy the alloy debug UI through traefik
+  systemd.services = tome.mkUnixdService {
+    nixosConfig = config;
+    serviceName = "mimir";
+    serviceUser = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
+    serviceGroup = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
+  };
+
+  # Proxy mimir through traefik for TLS
   services.cone = {
     extraFiles = {
-      "${alloy}".settings = {
-        http.routers."${alloy}" = {
-          rule = "Host(`${alloy}.aer.dedyn.io`)";
-          service = "${alloy}";
+      "${mimir.name}".settings = {
+        http.routers."${mimir.name}" = {
+          rule = "Host(`${mimir.name}.aer.dedyn.io`)";
+          service = "${mimir.name}";
           middlewares = "local-only";
         };
-        http.services."${alloy}".loadbalancer.servers = [{url = "http://127.0.0.1:12346";}];
+        http.services."${mimir.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}\:${cfg.server.http_listen_port}";}];
       };
     };
   };
