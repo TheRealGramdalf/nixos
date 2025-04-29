@@ -13,5 +13,8 @@
     ./zrepl.nix
     ./homeassistant.nix
     ./grafana.nix
+    ./alloy.nix
+    ./mimir.nix
+    ./loki.nix
   ];
 }
