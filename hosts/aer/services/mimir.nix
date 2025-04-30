@@ -56,12 +56,12 @@ in {
     };
   };
 
-  systemd.services = tome.mkUnixdService {
-    nixosConfig = config;
-    serviceName = "mimir";
-    serviceUser = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
-    serviceGroup = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
-  };
+  #systemd.services = tome.mkUnixdService {
+  #  nixosConfig = config;
+  #  serviceName = "mimir";
+  #  serviceUser = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
+  #  serviceGroup = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
+  #};
 
   # Proxy mimir through traefik for TLS
   services.cone = {
