@@ -1,4 +1,8 @@
-{config, tome, ...}: let
+{
+  config,
+  tome,
+  ...
+}: let
   mimir = {
     name = "mimir";
     dataDir = "/persist/services/mimir";

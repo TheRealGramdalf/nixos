@@ -5,9 +5,9 @@ in {
   services.alloy = {
     enable = false;
     extraFlags = [
-  "--server.http.listen-addr=${listenAddr}"
-  "--disable-reporting"
-];
+      "--server.http.listen-addr=${listenAddr}"
+      "--disable-reporting"
+    ];
   };
 
   environment.etc."alloy/config.alloy".text = ''
