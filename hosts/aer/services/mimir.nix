@@ -8,7 +8,7 @@
     name = "mimir";
     dataDir = "/persist/services/mimir";
   };
-  cfg = config.services.mimir.configuration.common;
+  cfg = config.services.mimir.configuration;
 in {
   services.mimir = {
     enable = true;
