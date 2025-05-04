@@ -13,51 +13,49 @@ in {
   services.mimir = {
     enable = true;
     configuration = {
-      common = {
-        server = {
-          # Enable settings for being behind a proxy
-          proxy_protocol_enabled = true;
-          log_source_ips_enabled = true;
-          grpc_listen_address = "127.0.0.1";
-          # 9095 is default, 9094 for behind proxy (potentially)
-          grpc_listen_port = 9094;
-          http_listen_address = "127.0.0.1";
-          http_listen_port = 9009;
-          log_level = "debug";
-        };
-        multitenancy_enabled = false;
-
-        blocks_storage = {
-          backend = "filesystem";
-          bucket_store.sync_dir = "${mimir.dataDir}/tsdb-sync";
-          filesystem.dir = "${mimir.dataDir}/data/tsdb";
-          tsdb.dir = "${mimir.dataDir}/tsdb";
-        };
-
-        compactor = {
-          # Not required to persist, done anyway for simplicity
-          data_dir = "${mimir.dataDir}/compactor";
-          sharding_ring.kvstore.store = "memberlist";
-        };
-
-        ruler_storage = {
-          backend = "filesystem";
-          filesystem.dir = "${mimir.dataDir}/rules";
-        };
-
-        distributor.ring = {
-          instance_addr = "127.0.0.1";
-          kvstore.store = "memberlist";
-        };
-
-        ingester.ring = {
-          instance_addr = "127.0.0.1";
-          kvstore.store = "memberlist";
-          replication_factor = 1;
-        };
-
-        store_gateway.sharding_ring.replication_factor = 1;
+      server = {
+        # Enable settings for being behind a proxy
+        proxy_protocol_enabled = true;
+        log_source_ips_enabled = true;
+        grpc_listen_address = "127.0.0.1";
+        # 9095 is default, 9094 for behind proxy (potentially)
+        grpc_listen_port = 9094;
+        http_listen_address = "127.0.0.1";
+        http_listen_port = 9009;
+        log_level = "debug";
       };
+      multitenancy_enabled = false;
+
+      blocks_storage = {
+        backend = "filesystem";
+        bucket_store.sync_dir = "${mimir.dataDir}/tsdb-sync";
+        filesystem.dir = "${mimir.dataDir}/data/tsdb";
+        tsdb.dir = "${mimir.dataDir}/tsdb";
+      };
+
+      compactor = {
+        # Not required to persist, done anyway for simplicity
+        data_dir = "${mimir.dataDir}/compactor";
+        sharding_ring.kvstore.store = "memberlist";
+      };
+
+      ruler_storage = {
+        backend = "filesystem";
+        filesystem.dir = "${mimir.dataDir}/rules";
+      };
+
+      distributor.ring = {
+        instance_addr = "127.0.0.1";
+        kvstore.store = "memberlist";
+      };
+
+      ingester.ring = {
+        instance_addr = "127.0.0.1";
+        kvstore.store = "memberlist";
+        replication_factor = 1;
+      };
+
+      store_gateway.sharding_ring.replication_factor = 1;
     };
   };
 
