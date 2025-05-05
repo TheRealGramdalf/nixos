@@ -3,17 +3,39 @@
   listenAddr = "127.0.0.1:12346";
 in {
   services.alloy = {
-    enable = false;
+    enable = true;
     extraFlags = [
       "--server.http.listen-addr=${listenAddr}"
       "--disable-reporting"
     ];
   };
 
-  environment.etc."alloy/config.alloy".text = ''
-  '';
+  environment.etc = {
+    "alloy/config.alloy".text = ''
+      prometheus.exporter.self "metamonitor" {
+      }
 
-  # Proxy the alloy debug UI through traefik
+      prometheus.scrape "metamonitoring" {
+        targets    = prometheus.exporter.self.metamonitor.targets
+        forward_to = [prometheus.remote_write.mimir.receiver]
+      }
+      prometheus.remote_write "mimir" {
+        endpoint {
+          url = "https://mimir.aer.dedyn.io/api/v1/push"
+        }
+      }
+    '';
+    "alloy/zrepl.alloy".text = ''
+      prometheus.scrape "zrepl" {
+        targets = [{
+          __address__ = "127.0.0.1:9811",
+        }]
+        forward_to = [prometheus.remote_write.mimir.receiver]
+      }
+    '';
+  };
+
+  # Proxy the alloy debug UI (?) through traefik
   services.cone = {
     extraFiles = {
       "${alloy}".settings = {
