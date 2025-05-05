@@ -96,7 +96,7 @@ in {
         };
       };
       metrics.prometheus = {
-        entryPoint = "metrics"
+        entryPoint = "metrics";
       };
     };
   };
