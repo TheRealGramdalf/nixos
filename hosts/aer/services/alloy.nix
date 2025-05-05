@@ -10,30 +10,19 @@ in {
     ];
   };
 
-  environment.etc = {
-    "alloy/config.alloy".text = ''
-      prometheus.exporter.self "metamonitor" {
+  environment.etc."alloy/config.alloy".text = ''
+    prometheus.exporter.self "metamonitor" {
+    }
+    prometheus.scrape "metamonitoring" {
+      targets    = prometheus.exporter.self.metamonitor.targets
+      forward_to = [prometheus.remote_write.mimir.receiver]
+    }
+    prometheus.remote_write "mimir" {
+      endpoint {
+        url = "https://mimir.aer.dedyn.io/api/v1/push"
       }
-
-      prometheus.scrape "metamonitoring" {
-        targets    = prometheus.exporter.self.metamonitor.targets
-        forward_to = [prometheus.remote_write.mimir.receiver]
-      }
-      prometheus.remote_write "mimir" {
-        endpoint {
-          url = "https://mimir.aer.dedyn.io/api/v1/push"
-        }
-      }
-    '';
-    "alloy/zrepl.alloy".text = ''
-      prometheus.scrape "zrepl" {
-        targets = [{
-          __address__ = "127.0.0.1:9811",
-        }]
-        forward_to = [prometheus.remote_write.mimir.receiver]
-      }
-    '';
-  };
+    }
+  '';
 
   # Proxy the alloy debug UI (?) through traefik
   services.cone = {

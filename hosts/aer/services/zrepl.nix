@@ -53,4 +53,13 @@ _: {
       ];
     };
   };
+
+  environment.etc."alloy/zrepl.alloy".text = ''
+    prometheus.scrape "zrepl" {
+      targets = [{
+        __address__ = "127.0.0.1:9811",
+      }]
+      forward_to = [prometheus.remote_write.mimir.receiver]
+    }
+  '';
 }
