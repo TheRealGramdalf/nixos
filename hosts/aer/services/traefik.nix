@@ -77,6 +77,9 @@ in {
         "traefik" = {
           address = ":8080";
         };
+        "metrics" = {
+          address = "127.0.0.1:8082";
+        };
         "web" = {
           address = ":80";
           http.redirections.entryPoint = {
@@ -92,10 +95,21 @@ in {
           http.tls.certResolver = "letsencrypt";
         };
       };
+      metrics.prometheus = {
+        entryPoint = "metrics"
+      };
     };
   };
   networking.firewall = {
     allowedUDPPorts = [80 443 8883];
     allowedTCPPorts = [80 443 8883];
   };
+  environment.etc."alloy/traefik.alloy".text = ''
+    prometheus.scrape "traefik" {
+      targets = [{
+        __address__ = "${cfg.static.settings.entryPoints."metrics".address}",
+      }]
+      forward_to = [prometheus.remote_write.mimir.receiver]
+    }
+  '';
 }
