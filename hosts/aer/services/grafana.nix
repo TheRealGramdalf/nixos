@@ -1,6 +1,7 @@
 {
   tome,
   config,
+  lib,
   ...
 }: let
   graf = "sys";
@@ -55,8 +56,10 @@ in {
   systemd.services = tome.mkUnixdService {
     nixosConfig = config;
     serviceName = "grafana";
-    serviceUser = "1137c4d1-6ea0-45dc-8612-bf46174d04d8";
-    serviceGroup = "1137c4d1-6ea0-45dc-8612-bf46174d04d8";
+    extraServiceConfig = {
+      User = lib.mkForce "1137c4d1-6ea0-45dc-8612-bf46174d04d8";
+      Group = lib.mkForce "1137c4d1-6ea0-45dc-8612-bf46174d04d8";
+    };
   };
   # Disable the user created by the module
   # The group is still created

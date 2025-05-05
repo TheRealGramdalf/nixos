@@ -62,9 +62,9 @@ in {
   systemd.services = tome.mkUnixdService {
     nixosConfig = config;
     serviceName = "mimir";
-    serviceUser = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
-    serviceGroup = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
     extraServiceConfig = {
+      User = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
+      Group = "15365d9a-2039-4c76-ac15-c4c4a3289a74";
       DynamicUser = lib.mkForce false;
       WorkingDirectory = lib.mkForce mimir.dataDir;
     };
