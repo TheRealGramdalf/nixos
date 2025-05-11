@@ -10,7 +10,7 @@ in {
     dataDir = "/persist/services/loki";
     # See https://grafana.com/docs/loki/latest/configure/
     configuration = {
-      ui.enabled = true;
+      #ui.enabled = true;
       server = {
         http_listen_address = "127.0.0.1";
         http_listen_port = 3100;
