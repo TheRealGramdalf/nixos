@@ -3,6 +3,7 @@
   loki = {
     uuid = "b1bf4973-4355-4f39-a675-905fb3641a34";
     name = "loki";
+    dataDir = config.services.loki.dataDir;
   };
 in {
   services.loki = {
@@ -21,8 +22,8 @@ in {
       common = {
         path_prefix = config.services.loki.dataDir;
         storage.filesystem = {
-          chunks_directory = "${config.services.loki.dataDir}/chunks";
-          rules_directory = "${config.services.loki.dataDir}/rules";
+          chunks_directory = "${loki.dataDir}/chunks";
+          rules_directory = "${loki.dataDir}/rules";
         };
         replication_factor = 1;
         ring.kvstore.store = "inmemory";
@@ -69,9 +70,9 @@ in {
       ruler = {
         storage = {
           type = "local";
-          local.directory = "${config.services.loki.dataDir}/ruler";
+          local.directory = "${loki.dataDir}/ruler";
         };
-        rule_path = "${config.services.loki.dataDir}/rules";
+        rule_path = "${loki.dataDir}/rules";
         #alertmanager_url = "http://alertmanager.r";
       };
 
