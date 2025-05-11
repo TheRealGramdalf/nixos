@@ -13,7 +13,7 @@ in {
       #ui.enabled = true;
       server = {
         http_listen_address = "127.0.0.1";
-        http_listen_port = 3100;
+        http_listen_port = "3100";
         proxy_protocol_enabled = true;
       };
       common.storage.filesystem = {
@@ -41,7 +41,7 @@ in {
           service = "${loki.name}";
           middlewares = "local-only";
         };
-        http.services."${loki.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}\:${toString cfg.server.http_listen_port}";}];
+        http.services."${loki.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}\:${cfg.server.http_listen_port}";}];
       };
     };
   };
