@@ -1,4 +1,4 @@
-{config, tome, ...}: let
+{config, tome, lib, ...}: let
   cfg = config.services.loki.configuration;
   loki = {
     uuid = "b1bf4973-4355-4f39-a675-905fb3641a34";
@@ -27,8 +27,8 @@ in {
     nixosConfig = config;
     serviceName = "loki";
     extraServiceConfig = {
-      User = loki.uuid;
-      Group = loki.uuid;
+      User = lib.mkForce loki.uuid;
+      Group = lib.mkForce loki.uuid;
     };
   };
 
