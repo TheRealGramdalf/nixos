@@ -55,16 +55,16 @@ in {
       #  delete_request_store = "filesystem";
       #};
 
-      #schema_config.configs = [
-      #  {
-      #    from = "2020-11-08";
-      #    store = "tsdb";
-      #    object_store = "filesystem";
-      #    schema = "v13";
-      #    index.prefix = "index_";
-      #    index.period = "24h";
-      #  }
-      #];
+      schema_config.configs = [
+        {
+          from = "2025-01-01";
+          store = "tsdb";
+          object_store = "filesystem";
+          schema = "v13";
+          index.prefix = "index_";
+          index.period = "24h";
+        }
+      ];
 
       ruler = {
         storage = {
