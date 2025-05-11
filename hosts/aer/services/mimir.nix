@@ -12,6 +12,7 @@
 in {
   services.mimir = {
     enable = true;
+    # See https://grafana.com/docs/mimir/latest/configure/configuration-parameters/
     configuration = {
       server = {
         # Enable settings for being behind a proxy

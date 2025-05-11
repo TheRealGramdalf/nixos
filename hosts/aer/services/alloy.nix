@@ -10,6 +10,7 @@ in {
     ];
   };
 
+  # For reference, see https://grafana.com/docs/alloy/latest/collect/
   environment.etc."alloy/config.alloy".text = ''
     prometheus.exporter.self "metamonitor" {
     }
