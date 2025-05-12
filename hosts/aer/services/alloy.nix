@@ -1,7 +1,6 @@
 {tome, config, ...}: let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
-  unix-name = "${config.networking.hostName}-unix";
 in {
   services.alloy = {
     enable = true;
@@ -27,10 +26,11 @@ in {
   '';
 
   environment.etc."alloy/unix.alloy".text = ''
-    prometheus.exporter.unix "${unix-name}" {
+    prometheus.exporter.unix "localhost}" {
+      include_exporter_metrics = true
     }
-    prometheus.scrape "${unix-name}" {
-      targets    = prometheus.exporter.unix.${unix-name}.targets
+    prometheus.scrape "node" {
+      targets    = prometheus.exporter.unix.localhost.targets
       forward_to = [prometheus.remote_write.mimir.receiver]
     }
   '';
