@@ -1,4 +1,4 @@
-{tome, ...}: let
+{tome, config, ...}: let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
   unix-name = "${config.networking.hostName}-unix";
