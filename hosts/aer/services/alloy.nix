@@ -26,7 +26,7 @@ in {
   '';
 
   environment.etc."alloy/unix.alloy".text = ''
-    prometheus.exporter.unix "localhost}" {
+    prometheus.exporter.unix "localhost" {
       include_exporter_metrics = true
     }
     prometheus.scrape "node" {
