@@ -1,6 +1,7 @@
 {tome, ...}: let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
+  unix-name = "${config.networking.hostName}-unix";
 in {
   services.alloy = {
     enable = true;
@@ -22,6 +23,15 @@ in {
       endpoint {
         url = "https://mimir.aer.dedyn.io/api/v1/push"
       }
+    }
+  '';
+
+  environment.etc."alloy/unix.alloy".text = ''
+    prometheus.exporter.unix "${unix-name}" {
+    }
+    prometheus.scrape "${unix-name}" {
+      targets    = prometheus.exporter.unix.${unix-name}.targets
+      forward_to = [prometheus.remote_write.mimir.receiver]
     }
   '';
 
