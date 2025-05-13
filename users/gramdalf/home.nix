@@ -26,7 +26,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      FLAKE = "nix";
+      NH_FLAKE = "nix";
       #QT_AUTO_SCREEN_SCALE_FACTOR = 1;
       QT_FONT_DPI = 143;
       # Scale qt applications on hidpi display. Disabled for now as hyprland scales it for me
