@@ -33,7 +33,7 @@ in {
     prometheus.exporter.unix "localhost" {
       include_exporter_metrics = true
       enable_collectors = [
-        "systemd"
+        "systemd",
         "processes"
       ]
     }
