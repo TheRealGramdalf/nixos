@@ -37,12 +37,14 @@
 
   outputs = inputs @ {
     nixpkgs,
+    nixpkgs-stable,
     home-manager,
     nixos-hardware,
     ...
   }:
   # Create convenience shorthands
   let
+    stableNixosSystem = nixpkgs-stable.lib.nixosSystem;
     inherit (nixpkgs.lib) nixosSystem;
     tome = import ./lib/main.nix inputs.nixpkgs.lib;
   in {
@@ -163,14 +165,14 @@
           }
         ];
       };
-      "muffin-time" = nixosSystem {
+      "muffin-time" = stableNixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
           ./hosts/muffin-time/main.nix
         ];
       };
-      "atreus" = nixosSystem {
+      "atreus" = stableNixosSystem {
         modules = [
           ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
