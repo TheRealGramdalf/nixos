@@ -25,9 +25,17 @@ in {
     }
   '';
 
+  # Many thanks to 
+  # https://www.claudiokuenzler.com/blog/1462/how-to-scrape-node-exporter-metrics-grafana-alloy
+  # and 
+  # https://www.claudiokuenzler.com/blog/1474/how-to-retrieve-metrics-all-processes-grafana-alloy
   environment.etc."alloy/unix.alloy".text = ''
     prometheus.exporter.unix "localhost" {
       include_exporter_metrics = true
+      enable_collectors = [
+        "systemd"
+        "processes"
+      ]
     }
     prometheus.scrape "node" {
       targets    = prometheus.exporter.unix.localhost.targets
