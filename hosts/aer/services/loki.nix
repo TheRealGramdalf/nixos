@@ -90,6 +90,7 @@ in {
     };
   };
 
+  users.users."loki".enable = false;
   # Proxy loki through traefik for TLS
   services.cone = {
     extraFiles = {
