@@ -45,6 +45,12 @@ in {
     }
   '';
 
+  systemd.services."alloy".serviceConfig = {
+    ReadWritePaths = [
+      "/run/dbus/system_bus_socket"
+    ];
+  };
+
   # Proxy the alloy debug UI (?) through traefik
   services.cone = {
     extraFiles = {
