@@ -20,7 +20,8 @@ in {
     enableServer = true;
     enablePam = true;
     serverSettings = {
-      log_level = "debug";
+      version = "2";
+      #log_level = "debug";
       origin = "https://auth.aer.dedyn.io";
       domain = "auth.aer.dedyn.io";
       # Needs https://github.com/NixOS/nixpkgs/pull/323676 to work properly
