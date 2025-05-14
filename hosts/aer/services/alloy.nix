@@ -55,7 +55,7 @@ in {
     }
     loki.write "logging" {
       endpoint {
-        url = "https://loki.aer.dedyn.io/api/v1/push"
+        url = "https://loki.aer.dedyn.io/loki/api/v1/push"
       }
     }
   '';
