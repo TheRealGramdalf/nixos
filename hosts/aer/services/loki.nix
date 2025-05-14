@@ -1,4 +1,9 @@
-{config, tome, lib, ...}: let
+{
+  config,
+  tome,
+  lib,
+  ...
+}: let
   cfg = config.services.loki.configuration;
   loki = {
     uuid = "b1bf4973-4355-4f39-a675-905fb3641a34";
@@ -29,8 +34,6 @@ in {
         ring.kvstore.store = "inmemory";
         ring.instance_addr = "127.0.0.1";
       };
-
-      
 
       #ingester.chunk_encoding = "snappy";
 
