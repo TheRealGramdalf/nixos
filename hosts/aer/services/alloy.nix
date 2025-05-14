@@ -36,7 +36,7 @@ in {
       include_exporter_metrics = true
       enable_collectors = [
         "systemd",
-        "processes"
+        "processes",
       ]
     }
     prometheus.scrape "node" {
