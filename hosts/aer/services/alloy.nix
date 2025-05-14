@@ -1,4 +1,8 @@
-{tome, config, ...}: let
+{
+  tome,
+  config,
+  ...
+}: let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
 in {
@@ -25,9 +29,9 @@ in {
     }
   '';
 
-  # Many thanks to 
+  # Many thanks to
   # https://www.claudiokuenzler.com/blog/1462/how-to-scrape-node-exporter-metrics-grafana-alloy
-  # and 
+  # and
   # https://www.claudiokuenzler.com/blog/1474/how-to-retrieve-metrics-all-processes-grafana-alloy
   # See https://grafana.com/docs/alloy/latest/reference/components/prometheus/prometheus.exporter.unix
   # for node_exporter reference
@@ -45,9 +49,24 @@ in {
     }
   '';
 
+  environment.etc."alloy/journal.alloy".text = ''
+    loki.source.journal "syslog" {
+      forward_to    = [loki.write.logging.receiver]
+    }
+    loki.write "logging" {
+      endpoint {
+        url = "https://loki.aer.dedyn.io/api/v1/push"
+      }
+    }
+  '';
+
   systemd.services."alloy".serviceConfig = {
     ReadWritePaths = [
       "/run/dbus/system_bus_socket"
+    ];
+    SupplementaryGroups = [
+      "adm"
+      "systemd-journal"
     ];
   };
 
