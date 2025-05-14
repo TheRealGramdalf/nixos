@@ -17,7 +17,7 @@ in {
     # See https://grafana.com/docs/loki/latest/configure/
     configuration = {
       analytics.reporting_enabled = false;
-      ui.enabled = true;
+      #ui.enabled = true;
       auth_enabled = false;
       server = {
         http_listen_address = "127.0.0.1";
