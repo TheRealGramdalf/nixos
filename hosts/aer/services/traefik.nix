@@ -30,7 +30,7 @@ in {
       };
     };
     static.settings = {
-      log.level = "DEBUG";
+      #log.level = "DEBUG";
       providers.docker = {
         defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.aer.dedyn.io`)";
         watch = true;
