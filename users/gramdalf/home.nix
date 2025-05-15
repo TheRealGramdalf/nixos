@@ -146,14 +146,14 @@
       plocate
       neofetch
       tealdeer
-      (ventoy.override {
-        withGtk3 = true;
-        defaultGuiType = "gtk3";
-        withNtfs = true;
-        withExt4 = true;
-        withCryptsetup = true;
-        withXfs = true;
-      })
+      #(ventoy.override {
+      #  withGtk3 = true;
+      #  defaultGuiType = "gtk3";
+      #  withNtfs = true;
+      #  withExt4 = true;
+      #  withCryptsetup = true;
+      #  withXfs = true;
+      #})
       firehol
       iperf3
       dmidecode
