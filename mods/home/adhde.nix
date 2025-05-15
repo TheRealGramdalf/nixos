@@ -9,9 +9,9 @@
   inherit (lib) mkEnableOption mkMerge mkIf;
   cfg = config.tomeutils.adhde;
 in {
-  imports = [
-    inputs.anyrun.homeManagerModules.default
-  ];
+  #imports = [
+  #  inputs.anyrun.homeManagerModules.default
+  #];
   options.tomeutils.adhde = {
     enable = mkEnableOption "ADHDE, a set of usable Hyprland defaults for the scatterbrained" // {default = false;};
 
