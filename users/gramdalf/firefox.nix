@@ -16,7 +16,7 @@
     enable = true;
     profiles."gramdalf" = {
       isDefault = true;
-      search.default = "DuckDuckGo";
+      search.default = "ddg";
       search.force = true;
       settings = {
         # These privacy settings can't be set via policy, so they need to be set here instead
