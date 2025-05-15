@@ -48,7 +48,7 @@
   services = {
     kanidm.enableClient = true;
     kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
-    kanidm.package = pkgs.kanidm_1_5;
+    kanidm.package = pkgs.kanidm_1_6;
     fwupd.enable = true;
   };
 
