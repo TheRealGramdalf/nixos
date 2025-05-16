@@ -10,7 +10,7 @@ in {
   # Temporary fix for nixpkgs#323674
   systemd.services."kanidm" = {
     environment."KANIDM_DB_PATH" = "${dataDir}/db/kanidm.db";
-    serviceConfig.BindPaths = [
+    serviceConfig.ReadWritePaths = [
       "${dataDir}"
       "${dataDir}/db" # This is either technically a different filesystem, or getting borked by the path merge function, so it isn't mounted correctly by default
     ];
