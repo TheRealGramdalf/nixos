@@ -26,6 +26,8 @@ in {
       "homekit_controller"
       # Washing machine
       "lg_thinq"
+      # Heat pump/furnace
+      "econet"
       # Tasmota smart devices
       "tasmota"
       "mqtt"
