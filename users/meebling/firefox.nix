@@ -16,7 +16,7 @@
     enable = true;
     profiles."meebling" = {
       isDefault = true;
-      search.default = "DuckDuckGo";
+      search.default = "ddg";
       search.force = true;
     };
   };
