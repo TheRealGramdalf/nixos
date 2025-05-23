@@ -1,6 +1,11 @@
 {pkgs, ...}: {
   tomeutils = {
-    vapor.enable = true;
+    vapor = {
+      enable = true;
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
+      ];
+    };
   };
   services.netbird.enable = true;
   environment.sessionVariables = {
