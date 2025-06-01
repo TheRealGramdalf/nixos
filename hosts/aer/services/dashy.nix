@@ -123,9 +123,9 @@ in {
           name = "Identity";
           items = [
             {
+              title = "Kanidm";
               description = "Single Sign-on (Server Account)";
               icon = "fas fa-lock";
-              title = "Kanidm";
               url = "${config.services.kanidm.serverSettings.origin}";
             }
             {
@@ -133,17 +133,18 @@ in {
               icon = "si-vaultwarden";
               title = "Vaultwarden";
               url = "${config.services.vaultwarden.config.DOMAIN}";
+            }
+            {
+              title = "Bitwarden Clients";
               subItems = [
                 {
-                  title = "Bitwarden Clients";
-                  description = "How to connect to the official Bitwarden clients";
+                  title = "How to connect to the official Bitwarden clients";
                   icon = "fas fa-question";
                   target = "newtab";
                   url = "https://bitwarden.com/pdf/help-change-client-environment.pdf";
                 }
                 {
-                  title = "Server URL";
-                  description = "Click to copy the Server URL needed for the Bitwarden clients";
+                  title = "Click to copy the Server URL needed for the Bitwarden clients";
                   icon = "fas fa-copy";
                   target = "clipboard";
                   url = "${config.services.vaultwarden.config.DOMAIN}";
