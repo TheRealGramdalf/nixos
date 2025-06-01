@@ -31,8 +31,11 @@
         accel_profile = "flat";
         touchpad = {
           natural_scroll = true;
+          # use multiple fingers for alt clicks rather than area
           clickfinger_behavior = true;
           tap-to-click = false; # What's palm rejection?
+          # Can toggle this off if needed
+          disable_while_typing = true;
         };
       };
       gestures = {
