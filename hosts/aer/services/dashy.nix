@@ -141,6 +141,7 @@ in {
                   title = "How to connect to the official Bitwarden clients";
                   icon = "fas fa-question";
                   target = "newtab";
+                  # Sourced from https://bitwarden.com/help/change-client-environment/
                   url = "https://bitwarden.com/pdf/help-change-client-environment.pdf";
                 }
                 {
