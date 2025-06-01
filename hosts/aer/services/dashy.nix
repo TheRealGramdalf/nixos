@@ -133,6 +133,22 @@ in {
               icon = "si-vaultwarden";
               title = "Vaultwarden";
               url = "${config.services.vaultwarden.config.DOMAIN}";
+              subItems = [
+                {
+                  title = "Bitwarden Clients";
+                  description = "How to connect to the official Bitwarden clients";
+                  icon = "fas fa-question";
+                  target = "newtab";
+                  url = "https://bitwarden.com/pdf/help-change-client-environment.pdf";
+                }
+                {
+                  title = "Server URL";
+                  description = "Click to copy the Server URL needed for the Bitwarden clients";
+                  icon = "fas fa-copy";
+                  target = "clipboard";
+                  url = "${config.services.vaultwarden.config.DOMAIN}";
+                }
+              ];
             }
           ];
         }
