@@ -78,9 +78,9 @@ in {
           name = "Productivity";
           items = [
             {
+              title = "Paperless";
               description = "Scan, index, and archive physical paper documents";
               icon = "si-paperlessngx";
-              title = "Paperless";
               url = "https://paperless.aer.dedyn.io";
             }
           ];
@@ -90,19 +90,19 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
+              title = "Jellyfin";
               description = "Stream Music, Movies, and TV Shows";
               icon = "si-jellyfin";
-              title = "Jellyfin";
               url = "https://media.aer.dedyn.io";
             }
             #{
-            #  description = "Music Library Manager";
             #  title = "Lidarr";
+            #  description = "Music Library Manager";
             #  url = "https://lidarr.aer.dedyn.io";
             #}
             #{
-            #  description = "Semi-automated Music organization/tagging";
             #  title = "OneTag";
+            #  description = "Semi-automated Music organization/tagging";
             #  url = "https://onetag.aer.dedyn.io";
             #}
           ];
@@ -112,9 +112,9 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
+              title = "Home Assistant";
               description = "Home automation platform with thousands of integrations";
               icon = "si-homeassistant";
-              title = "Home Assistant";
               url = "https://home.aer.dedyn.io/auth/oidc/redirect";
             }
           ];
@@ -129,9 +129,9 @@ in {
               url = "${config.services.kanidm.serverSettings.origin}";
             }
             {
+              title = "Vaultwarden";
               description = "Password Manager compattible with Bitwarden Clients";
               icon = "si-vaultwarden";
-              title = "Vaultwarden";
               url = "${config.services.vaultwarden.config.DOMAIN}";
             }
             {
@@ -165,16 +165,16 @@ in {
               title = "Network Shares";
               subItems = [
                 {
-                  description = "Connecting from a Windows computer";
-                  icon = "fas fa-folder-tree";
                   title = "Windows";
+                  #description = "Connecting from a Windows computer";
+                  icon = "fas fa-folder-tree";
                   target = "clipboard";
                   url = ''\\${config.networking.hostName}'';
                 }
                 {
-                  description = "Connecting from a Linux device";
-                  icon = "fas fa-folder-tree";
                   title = "Linux";
+                  #description = "Connecting from a Linux device";
+                  icon = "fas fa-folder-tree";
                   target = "clipboard";
                   url = "smb://${config.networking.hostName}";
                 }
@@ -187,39 +187,39 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
+              title = "Edge Router";
               description = "OPNSense WebUI";
               icon = "si-opnsense";
-              title = "Edge Router";
               url = "https://192.168.1.1";
             }
             {
+              title = "Aer: Killridge";
               description = "Wireless AP for Aerwiar: Killridge Mountains";
               icon = "fas fa-wifi";
-              title = "Aer: Killridge";
               url = "https://192.168.1.2";
             }
             {
+              title = "Aer: Woes of Shreve";
               description = "Wireless AP for Aerwiar: Woes of Shreve";
               icon = "fas fa-wifi";
-              title = "Aer: Woes of Shreve";
               url = "https://woes";
             }
             {
+              title = "Aer: Peet's Castle";
               description = "Wireless AP for Aerwiar: Woes of Shreve";
               icon = "fas fa-wifi";
-              title = "Aer: Peet's Castle";
               url = "https://192.168.1.6";
             }
             {
+              title = "Traefik";
               description = "Debugging dashboard";
               icon = "si-traefikproxy";
-              title = "Traefik";
               url = "https://traefik.aer.dedyn.io";
             }
             {
+              title = "Dell iDrac";
               description = "Dell iDrac 6 express WebUI";
               icon = "fas fa-server";
-              title = "Dell iDrac";
               url = "https://192.168.1.228/start.html";
             }
           ];
@@ -229,9 +229,9 @@ in {
         #  displayData.hideForGuests = true;
         #  items = [
         #    {
+        #      title = "Grafana";
         #      description = "Data visualised on dashboards";
         #      icon = "si-grafana";
-        #      title = "Grafana";
         #      url = "https://monitor.aer.dedyn.io";
         #    }
         #  ];
@@ -241,24 +241,24 @@ in {
         #  displayData.hideForGuests = true;
         #  items = [
         #    {
-        #      description = "Real-time system resource usage";
         #      title = "NetData";
+        #      description = "Real-time system resource usage";
         #    }
         #    {
-        #      description = "Container monitoring";
         #      title = "cAdvisor";
+        #      description = "Container monitoring";
         #    }
         #    {
-        #      description = "Simple resource usage";
         #      title = "Glances";
+        #      description = "Simple resource usage";
         #    }
         #    {
-        #      description = "Docker container web log viewer";
         #      title = "Dozzle";
+        #      description = "Docker container web log viewer";
         #    }
         #    {
-        #      description = "System Statistics Aggregation with PromQL";
         #      title = "Prometheus";
+        #      description = "System Statistics Aggregation with PromQL";
         #    }
         #  ];
         #}
@@ -267,8 +267,8 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
-              description = "DDNS/Domain provider";
               title = "Desec";
+              description = "DDNS/Domain provider";
               url = "https://desec.io/login";
             }
           ];
@@ -281,18 +281,18 @@ in {
           };
           items = [
             {
-              description = "Check public IP and associated data";
               title = "Public IP";
+              description = "Check public IP and associated data";
               url = "https://ifconfig.me/";
             }
             {
-              description = "Check ICAN info for a given IP address or domain";
               title = "Who Is Lookup";
+              description = "Check ICAN info for a given IP address or domain";
               url = "https://whois.domaintools.com/";
             }
             {
-              description = "Upload + download speeds and latency";
               title = "Speed Test";
+              description = "Upload + download speeds and latency";
               url = "https://speed.cloudflare.com/";
             }
           ];
@@ -302,27 +302,27 @@ in {
           displayData.hideForGuests = true;
           items = [
             {
+              title = "Icons";
               subItems = [
                 {
-                  description = "Documentation for Dashy Icons";
-                  icon = "si-github";
                   title = "Docs";
+                  #description = "Documentation for Dashy Icons";
+                  icon = "si-github";
                   url = "https://github.com/Lissy93/dashy/blob/master/docs/icons.md";
                 }
                 {
-                  description = "2900+ brand SVGs";
-                  icon = "si-simpleicons";
                   title = "Simple Icons";
+                  #description = "2900+ brand SVGs";
+                  icon = "si-simpleicons";
                   url = "https://simpleicons.org";
                 }
                 {
+                  title = "Font-Awesome Icons";
                   description = "Free generic SVG icons";
                   icon = "si-fontawesome";
-                  title = "Font-Awesome Icons";
                   url = "https://fontawesome.com/search?ic=free";
                 }
               ];
-              title = "Icons";
             }
           ];
         }
