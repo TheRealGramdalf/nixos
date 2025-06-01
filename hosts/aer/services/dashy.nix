@@ -318,7 +318,7 @@ in {
                   description = "Free generic SVG icons";
                   icon = "si-fontawesome";
                   title = "Font-Awesome Icons";
-                  url = "https://fontawesome.com/search?o=r&m=free";
+                  url = "https://fontawesome.com/search?ic=free";
                 }
               ];
               title = "Icons";
