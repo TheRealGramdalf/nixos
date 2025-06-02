@@ -16,5 +16,6 @@
     ./alloy.nix
     ./mimir.nix
     ./loki.nix
+    ./minecraft.nix
   ];
 }
