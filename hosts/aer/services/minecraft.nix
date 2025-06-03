@@ -20,7 +20,7 @@ in {
     openFirewall = true;
     dataDir = "/persist/services/minecraft";
     servers."nixcraft" = {
-      enable = false;
+      enable = true;
       package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
       jvmOpts = "-Xms6144M -Xmx8192M";
       serverProperties = {
