@@ -16,6 +16,13 @@
     };
     tmp.cleanOnBoot = true;
   };
+  # Enable uBlock Origin manually. Thanks, google
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+    ];
+  };
   environment.systemPackages = with pkgs; [
     # NTFS (windows filesystem) support
     ntfs3g
