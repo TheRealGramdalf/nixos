@@ -9,6 +9,7 @@
     ./hardware.nix
     ./configuration.nix
     ./netbird.nix
+    ./localsend.nix
     #./fprint.nix
   ];
   time.timeZone = "America/Vancouver";
