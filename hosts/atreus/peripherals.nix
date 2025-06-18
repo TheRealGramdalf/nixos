@@ -8,7 +8,7 @@
         "meebling"
         "meeblingthedevilish"
       ];
-    }
+    };
   };
   environment.systemPackages = [
     pkgs.polychromatic
