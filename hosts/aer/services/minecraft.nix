@@ -6,7 +6,7 @@
   ...
 }: let
   # Target minecraft version
-  mcVersion = "1.21.5";
+  mcVersion = "1.21.6";
   fabricVersion = "0.16.14";
   # Format minecraft version, replacing . with _
   serverVersion = lib.replaceStrings ["."] ["_"] "fabric-${mcVersion}";
@@ -23,10 +23,11 @@ in {
       enable = true;
       package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
       jvmOpts = "-Xms6144M -Xmx8192M";
+      # See https://minecraft.wiki/w/Server.properties
       serverProperties = {
         white-list = true;
         server-port = 25565;
-        motd = "Minecraft server with lots of dedicated wam";
+        motd = "With lots of dedicated wam | now with happy ghasts!";
         gamemode = "survival";
         spawn-protection = 0;
         simulation-distance = 8;
@@ -43,4 +44,7 @@ in {
       #};
     };
   };
+  networking.firewall.allowedUDPPorts = [
+    24454 # Simple VC
+  ];
 }
