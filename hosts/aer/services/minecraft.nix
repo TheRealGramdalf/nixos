@@ -33,8 +33,6 @@ in {
         simulation-distance = 8;
         view-distance = 10;
         level-seed = "4399847819543582427";
-        # Until client mods update to 1.21.6
-        allow-nether = false;
       };
       #symlinks = {
       #  # List all mods to be installed
