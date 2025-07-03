@@ -8,6 +8,7 @@
     # Host-specific config
     ./hardware.nix
     ./configuration.nix
+    ./kde.nix
     ./netbird.nix
     ./localsend.nix
     #./fprint.nix

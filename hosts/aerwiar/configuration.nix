@@ -1,12 +1,4 @@
 {pkgs, ...}: {
-  # Enable GVFS for SMB etc. mounts in userspace
-  services.gvfs.enable = true;
-
-  # Enable 24.05 /etc overlay
-  #systemd.sysusers.enable = true;
-  system.etc.overlay.enable = false;
-  boot.initrd.systemd.enable = true;
-
   boot = {
     loader = {
       systemd-boot = {
@@ -25,7 +17,6 @@
     };
     tmp.cleanOnBoot = true;
   };
-  environment.systemPackages = [pkgs.ntfs3g];
   powerManagement = {
     enable = true;
     scsiLinkPolicy = "med_power_with_dipm";
@@ -39,11 +30,6 @@
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
-
-  hardware.graphics.extraPackages = with pkgs; [
-    libva
-    libvdpau
-  ];
 
   services = {
     kanidm.enableClient = true;
@@ -72,6 +58,6 @@
   };
   tomeutils = {
     vapor.enable = true;
-    adhde.enable = true;
+    #adhde.enable = true;
   };
 }
