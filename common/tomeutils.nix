@@ -8,6 +8,7 @@
     comma # , Run any command from nixpkgs
     tmux # Run detached shell sessions
     btop # System stats
+    nix-tree # See where nix closure size goes
   ];
   nix = {
     package = pkgs.nixVersions.nix_2_24;
