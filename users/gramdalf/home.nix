@@ -3,11 +3,6 @@
   config,
   ...
 }: {
-  tomeutils.adhde = {
-    enable = true;
-    idle.sleep = true;
-  };
-
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
@@ -27,12 +22,6 @@
     sessionVariables = {
       EDITOR = "nvim";
       NH_FLAKE = "nix";
-      #QT_AUTO_SCREEN_SCALE_FACTOR = 1;
-      QT_FONT_DPI = 143;
-      # Scale qt applications on hidpi display. Disabled for now as hyprland scales it for me
-      #QT_SCALE_FACTOR = 1.5;
-      # Set a screenshot directory for grimblast
-      XDG_SCREENSHOTS_DIR = "${config.home.homeDirectory}/Screenshots";
     };
     packages = with pkgs; [
       jetbrains.idea-community
@@ -47,7 +36,6 @@
       # Shell/terminal
       neovim
       nerd-fonts.fantasque-sans-mono
-      wl-clipboard
       # Communication
       webcord
       electron-mail
@@ -167,9 +155,6 @@
       tree
       dig
       cadaver
-      #### Libraries/Drivers ####
-      # Misc
-      libva-utils
     ];
   };
   programs = {
@@ -194,17 +179,17 @@
     };
   };
 
-  dconf.settings = {
-    "org/gtk/gtk4/settings/file-chooser" = {
-      sort-directories-first = true;
-      show-create-link = true;
-      show-delete-permanently = true;
-      clock-format = "12h";
-    };
-    "org/gnome/nautilus/preferences" = {
-      show-create-link = true;
-      sort-directories-first = true;
-      show-delete-permanently = true;
-    };
-  };
+  #dconf.settings = {
+  #  "org/gtk/gtk4/settings/file-chooser" = {
+  #    sort-directories-first = true;
+  #    show-create-link = true;
+  #    show-delete-permanently = true;
+  #    clock-format = "12h";
+  #  };
+  #  "org/gnome/nautilus/preferences" = {
+  #    show-create-link = true;
+  #    sort-directories-first = true;
+  #    show-delete-permanently = true;
+  #  };
+  #};
 }
