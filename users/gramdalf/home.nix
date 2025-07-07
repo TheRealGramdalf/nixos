@@ -64,7 +64,7 @@
       #calibre # https://github.com/NixOS/nixpkgs/issues/305577
       drawio
       # Utilities
-      freecad-wayland
+      freecad
       btop
       inkscape
       picard # MusicBrainz Tagger
