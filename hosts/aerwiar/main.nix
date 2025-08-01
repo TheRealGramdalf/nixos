@@ -15,7 +15,12 @@
   ];
   time.timeZone = "America/Vancouver";
   system.stateVersion = "24.05";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "libsoup-2.74.3"
+    ];
+  };
   networking = {
     hostName = "aerwiar";
     hostId = "16a85224";
