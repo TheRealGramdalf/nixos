@@ -8,6 +8,7 @@
     enable = true;
     enableQt5Integration = true;
   };
+  qt.style = "breeze";
   services.displayManager.sddm = {
     # SDDM isn't enabled by the plasma6 module
     enable = true;
@@ -32,6 +33,8 @@
       pulse.enable = true;
       alsa.enable = true;
     };
+    # For piper
+    ratbagd.enable = true;
     # Enable fingerprint reader
     fprintd.enable = true;
     # Printing, mDNS etc
