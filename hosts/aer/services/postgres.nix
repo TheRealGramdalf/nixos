@@ -96,6 +96,8 @@ in {
           # Oauth secret
           # ?
           OAUTH2_CLIENT_SECRET = "os.getenv('OAUTH2_CLIENT_SECRET')";
+          OAUTH2_CHALLENGE_METHOD = "S256";
+          OAUTH2_RESPONSE_TYPE = "code";
           # URL to generate a token;
           # Ex: https://github.com/login/oauth/access_token
           OAUTH2_TOKEN_URL = "${authurl}/oauth2/token";
