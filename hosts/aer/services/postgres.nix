@@ -103,7 +103,7 @@ in {
           # Ex: https://github.com/login/oauth/authorize
           OAUTH2_AUTHORIZATION_URL = "${authurl}/oauth2/authorise";
           # server metadata url might be optional for your provider
-          OAUTH2_SERVER_METADATA_URL = "${authurl}/oauth2/openid/${clientid}/";
+          OAUTH2_SERVER_METADATA_URL = "${authurl}/oauth2/openid/${clientid}/.well-known/openid-configuration";
           # Oauth base url, ex: https://api.github.com/
           OAUTH2_API_BASE_URL = "None";
           # Name of the Endpoint, ex: user
