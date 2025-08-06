@@ -1,8 +1,3 @@
 {pkgs, ...}: {
-  tomeutils.vapor = {
-    enable = true;
-    #extraCompatPackages = [
-    #  pkgs.proton-ge-bin
-    #];
-  };
+  tomeutils.vapor.enable = true;
 }

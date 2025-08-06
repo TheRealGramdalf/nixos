@@ -1,5 +1,3 @@
 {pkgs, ...}: {
-  tomeutils.vapor = {
-    enable = true;
-  };
+  tomeutils.vapor.enable = true;
 }

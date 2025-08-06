@@ -57,7 +57,12 @@
     adb.enable = true;
   };
   tomeutils = {
-    vapor.enable = true;
+    vapor = {
+    enable = true;
+    extraCompatPackages = [
+      pkgs.proton-ge-bin
+    ];
+  };
     #adhde.enable = true;
   };
 }
