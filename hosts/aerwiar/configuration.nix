@@ -58,11 +58,11 @@
   };
   tomeutils = {
     vapor = {
-    enable = true;
-    extraCompatPackages = [
-      pkgs.proton-ge-bin
-    ];
-  };
+      enable = true;
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
+      ];
+    };
     #adhde.enable = true;
   };
 }
