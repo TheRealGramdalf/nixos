@@ -2,7 +2,16 @@
   description = "TheRealGramdalf's no-longer-experimental config";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -17,11 +26,6 @@
 
     openwrt-imagebuilder = {
       url = "github:astro/nix-openwrt-imagebuilder";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -43,6 +47,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    home-manager-stable,
     nixos-hardware,
     ...
   }:
@@ -180,7 +185,7 @@
         modules = [
           ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
-          home-manager.nixosModules.home-manager
+          home-manager-stable.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -258,7 +263,7 @@
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
-      tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
+      #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
       tasmota-ssl = pkgs.callPackage ./pkgs/tasmota.nix {
         userConfig = builtins.readFile ./hosts/smarthome/brightbulb.h;
       };
