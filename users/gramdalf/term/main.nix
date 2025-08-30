@@ -10,10 +10,10 @@
     ssh = {
       enable = true;
       compression = true;
-      extraConfig = ''
-               IdentityFile = ~/.ssh/gramdalf-key
-        User = root
-      '';
+      matchBlocks."*" = {
+        identityFile = "~/.ssh/gramdalf-key";
+        user = "root";
+      };
     };
     bash = {
       shellAliases = {
