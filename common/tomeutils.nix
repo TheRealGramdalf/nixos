@@ -11,7 +11,7 @@
     nix-tree # See where nix closure size goes
   ];
   nix = {
-    package = pkgs.nixVersions.nix_2_24;
+    package = pkgs.nixVersions.nix_2_28;
     settings = {
       experimental-features = [
         "nix-command"
