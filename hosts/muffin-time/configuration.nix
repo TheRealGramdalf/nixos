@@ -50,6 +50,8 @@
     masterpdfeditor
     # Audacity
     audacity
+    # zotero
+    zotero
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
