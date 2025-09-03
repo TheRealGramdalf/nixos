@@ -56,17 +56,18 @@
     stableNixosSystem = nixpkgs-stable.lib.nixosSystem;
     inherit (nixpkgs.lib) nixosSystem;
     tome = import ./lib/main.nix inputs.nixpkgs.lib;
+    x86pkgs = nixpkgs.legacyPackages.x86_64-linux;
   in {
     ## Dev stuff
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter.x86_64-linux = x86pkgs.alejandra;
     devShells.x86_64-linux = {
-      "default" = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+      "default" = x86pkgs.mkShellNoCC {
         name = "hecker";
         meta.description = "The default development shell for my NixOS configurations";
         # Enable flakes/nix3 for convenience
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";
         # packages available in the dev shell
-        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+        packages = with x86pkgs; [
           alejandra # nix formatter
           git # flakes require git, and so do I
           statix # lints and suggestions
@@ -75,7 +76,7 @@
           just
         ];
       };
-      "klipperwrt" = nixpkgs.legacyPackages.x86_64-linux.mkShellNoCC {
+      "klipperwrt" = x86pkgs.mkShellNoCC {
         name = "klipperwrt-firmware";
         meta.description = "Devshell with the necessary packages to build klipper firmware";
         # Instructions:
@@ -87,7 +88,7 @@
         # - Run `make` to build the firmware
         # - Run `make flash FLASH_DEVICE=/dev/serial/by-id/<serial-id>` to flash the firmware directly
         # packages available in the dev shell
-        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+        packages = with x86pkgs; [
           python3
           pkgsCross.avr.stdenv.cc
           gcc-arm-embedded
@@ -99,8 +100,8 @@
           #wxGTK32 # For bossac, whatever that is
         ];
       };
-      "tasmota" = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+      "tasmota" = x86pkgs.mkShell {
+        packages = with x86pkgs; [
           esptool
           #espflash
           #uclibc
@@ -258,7 +259,7 @@
       };
     };
     packages.x86_64-linux = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = x86pkgs;
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
