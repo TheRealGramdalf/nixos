@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  tome,
   ...
 }: let
   cfg = config.services.postgresql;
@@ -10,18 +11,36 @@
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer_rs";
 in {
-  systemd.services."postgresql" = {
-    after = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    requires = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    serviceConfig = {
-      User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-      Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
-    };
-  };
+  systemd.services = lib.mkMerge [
+    (tome.mkUnixdService {
+      nixosConfig = config;
+      serviceName = "postgresql";
+      extraServiceConfig = {
+        User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+        Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+      };
+    })
+    (tome.mkUnixdService {
+      nixosConfig = config;
+      serviceName = "pgadmin";
+      extraServiceConfig.EnvironmentFile = [
+        "/persist/secrets/pgadmin/pgadmin.env"
+      ];
+    })
+    (tome.mkUnixdService {
+      nixosConfig = config;
+      serviceName = "postgresql-setup";
+      extraServiceConfig = {
+        # This is needed since the setup script authenticates via UNIX username
+        # If left to the default (postgres), this will cause the script to speedloop indefinitely
+        # on a 0.1s delay.
+        # This also causes home-assistant to pause startup indefinitely, since it
+        # waits for postgresql.target and mysql.service regardless of the database type used
+        User = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+        Group = lib.mkForce "95795a5c-d0e0-4621-9956-22d2bc4955c3";
+      };
+    })
+  ];
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_16;
@@ -51,17 +70,6 @@ in {
     '';
   };
 
-  systemd.services."pgadmin" = {
-    after = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    requires = [
-      config.systemd.services."kanidm-unixd".name
-    ];
-    serviceConfig.EnvironmentFile = [
-      "/persist/secrets/pgadmin/pgadmin.env"
-    ];
-  };
   services.pogadmin = {
     enable = true;
     user = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
