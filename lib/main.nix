@@ -5,8 +5,6 @@ in {
   mkUnixdService = {
     nixosConfig,
     serviceName,
-    #serviceUser ? null,
-    #serviceGroup ? null,
     extraServiceConfig ? null,
     ...
   }: {
