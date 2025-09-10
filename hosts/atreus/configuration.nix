@@ -88,7 +88,7 @@
     # The actual printing control daemon
     printing = {
       enable = true;
-      drivers = with pkgs; [gutenprint hplip splix];
+      drivers = with pkgs; [gutenprint hplip splix brlaser];
     };
   };
 }
