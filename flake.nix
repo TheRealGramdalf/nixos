@@ -58,6 +58,7 @@
     tome = import ./lib/main.nix inputs.nixpkgs.lib;
     x86pkgs = nixpkgs.legacyPackages.x86_64-linux;
   in {
+    # To run checks on a host (i.e. `nix why-depends <host> nixpkgs#hello`), use .#nixosConfigurations.HOSTNAME.config.system.build.toplevel
     ## Dev stuff
     formatter.x86_64-linux = x86pkgs.alejandra;
     devShells.x86_64-linux = {
