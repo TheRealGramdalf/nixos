@@ -11,6 +11,7 @@
     ./kde.nix
     ./netbird.nix
     ./localsend.nix
+    ./fwmm.nix
     #./fprint.nix
   ];
   time.timeZone = "America/Vancouver";
