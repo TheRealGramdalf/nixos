@@ -3,16 +3,17 @@
   buildPythonPackage,
   fetchPypi,
   setuptools,
-}:
-
-buildPythonPackage rec {
+}: let
   pname = "filedialpy";
   version = "1.3.3";
+in
+buildPythonPackage {
+  inherit pname version;
   pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-CP3V73yWSArRHBLUct4hrNMjWZlvaaUlkpm1QP66RWA=";
+    hash = "sha256-u31ms+cVJo17S6L4OKxeSynR8lyf87zmPnietuhWnNc=";
   };
 
   build-system = [ setuptools ];
