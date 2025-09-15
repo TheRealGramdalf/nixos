@@ -3,6 +3,7 @@
   buildPythonPackage,
   fetchPypi,
   setuptools,
+  tkinter,
 }: let
   pname = "filedialpy";
   version = "1.3.3";
@@ -18,14 +19,16 @@ buildPythonPackage {
 
   build-system = [ setuptools ];
 
-  ## has no tests
-  #doCheck = false;
+  # Does not appear to have tests
+  doCheck = false;
 
-  #pythonImportsCheck = [
-  #  "toolz.itertoolz"
-  #  "toolz.functoolz"
-  #  "toolz.dicttoolz"
-  #];
+  pythonImportsCheck = [
+    "filedialpy"
+  ];
+
+  dependencies = [
+    tkinter
+  ];
 
   meta = {
     # Github only has 1.3.0, pypi has 1.3.3
