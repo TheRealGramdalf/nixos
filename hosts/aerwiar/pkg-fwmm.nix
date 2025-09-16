@@ -43,6 +43,7 @@ in stdenv.mkDerivation {
     mkdir $out
     cp -R $src/* $out
 
+    # Upstream attempts to open as rw, replace with ro
     substituteInPlace $out/main.py \
       --replace-fail 'r+' 'r'
 
