@@ -1,15 +1,10 @@
-{pkgs, lib, config, ...}: let
-  fwmm = pkgs.python312Packages.callPackage {} ./pkg-fwmm.nix;
+{pkgs, lib, config, inputs, ...}: let
+  fwmm = pkgs.python313Packages.callPackage ./pkg-fwmm.nix {
+    filedialpy = inputs.self.packages.x86_64-linux.filedialpy;
+    python = pkgs.python313;
+  };
 in {
-  environment.systemPackages = [fwmm]
+  environment.systemPackages = [fwmm];
   #systemd.services."fwmm" = {
-  #  path = lib.makeBinPath [
-  #    pkgs.python312
-  #    pkgs.python312Packages.pyserial
-  #    pkgs.python312Packages.numpy
-  #    pkgs.python312Packages.aiohttp
-  #    pkgs.python312Packages.python-crontab
-  #    # Missing filedialpy
-  #  ];
   #};
 }
