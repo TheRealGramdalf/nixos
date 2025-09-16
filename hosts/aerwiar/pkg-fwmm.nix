@@ -24,39 +24,40 @@
       python-crontab
       psutil
     ];
+  };
+in
+  stdenv.mkDerivation {
+    inherit pname version;
+
+    src = fetchFromGitHub {
+      owner = "DedFishy";
+      repo = "FWMM";
+      rev = version;
+      sha256 = "sha256-XgJ4MpUNS7lC2vFP57+mDq+FLZbm9vuw+2dbopAoHwM=";
     };
-in stdenv.mkDerivation {
-  inherit pname version;
 
-  src = fetchFromGitHub {
-    owner = "DedFishy";
-    repo = "FWMM";
-    rev = version;
-    sha256 = "sha256-XgJ4MpUNS7lC2vFP57+mDq+FLZbm9vuw+2dbopAoHwM=";
-  };
+    nativeBuildInputs = [
+      makeWrapper
+    ];
 
-  nativeBuildInputs = [
-    makeWrapper
-  ];
+    installPhase = ''
+      mkdir $out
+      cp -R $src/* $out
 
-  installPhase = ''
-    mkdir $out
-    cp -R $src/* $out
+      # Upstream attempts to open as rw, replace with ro
+      substituteInPlace $out/main.py \
+        --replace-fail 'r+' 'r'
 
-    # Upstream attempts to open as rw, replace with ro
-    substituteInPlace $out/main.py \
-      --replace-fail 'r+' 'r'
+      mkdir $out/bin
+      makeWrapper ${lib.getExe pyWithLibs} $out/bin/fwmm \
+        --add-flag $out/main.py \
+        --chdir $out
+    '';
 
-    mkdir $out/bin
-    makeWrapper ${lib.getExe pyWithLibs} $out/bin/fwmm \
-      --add-flag $out/main.py \
-      --chdir $out
-  '';
-
-  meta = {
-    changelog = "https://github.com/DedFishy/FWMM/releases/tag/${version}";
-    homepage = "https://github.com/DedFishy/FWMM";
-    description = "A utility to customize what is displayed on your Framework 16 LED matrix module using a widget-based system.";
-    license = lib.licenses.mit;
-  };
-}
+    meta = {
+      changelog = "https://github.com/DedFishy/FWMM/releases/tag/${version}";
+      homepage = "https://github.com/DedFishy/FWMM";
+      description = "A utility to customize what is displayed on your Framework 16 LED matrix module using a widget-based system.";
+      license = lib.licenses.mit;
+    };
+  }
