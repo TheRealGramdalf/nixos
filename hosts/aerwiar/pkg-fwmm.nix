@@ -5,6 +5,7 @@
   makeWrapper,
   python,
   # deps
+  psutil,
   pyserial,
   numpy,
   aiohttp,
@@ -21,6 +22,7 @@
       numpy
       aiohttp
       python-crontab
+      psutil
     ];
     };
 in stdenv.mkDerivation {
