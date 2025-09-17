@@ -36,7 +36,7 @@
       alsa.enable = true;
     };
     # Enable fingerprint reader
-    fprintd.enable = true;
+    fprintd.enable = false;
     # Control the malfunctioning fan
     thinkfan.enable = true;
     # Printing, mDNS etc
