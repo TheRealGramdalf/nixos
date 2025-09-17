@@ -34,8 +34,6 @@
     google-chrome
     # MIDI/digital audio workstation
     ardour
-    # Another professional DAW
-    davinci-resolve
     # Video player
     vlc
     # Zoom
