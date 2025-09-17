@@ -13,7 +13,7 @@
   filedialpy ? null,
 }: let
   pname = "fwmm";
-  version = "v1.0.2";
+  version = "7d1a08294a62c99a8ed23d090c3f92c5f186f580";
 
   pyWithLibs = python.buildEnv.override {
     extraLibs = [
@@ -44,10 +44,6 @@ in
       mkdir $out
       cp -R $src/* $out
 
-      # Upstream attempts to open as rw, replace with ro
-      substituteInPlace $out/main.py \
-        --replace-fail 'r+' 'r'
-
       mkdir $out/bin
       makeWrapper ${lib.getExe pyWithLibs} $out/bin/fwmm \
         --add-flag $out/main.py \
@@ -55,7 +51,7 @@ in
     '';
 
     meta = {
-      changelog = "https://github.com/DedFishy/FWMM/releases/tag/${version}";
+      changelog = "https://github.com/DedFishy/FWMM/releases/tag/v1.0.2";
       homepage = "https://github.com/DedFishy/FWMM";
       description = "A utility to customize what is displayed on your Framework 16 LED matrix module using a widget-based system.";
       license = lib.licenses.mit;
