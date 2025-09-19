@@ -11,6 +11,7 @@
     nix-tree # See where nix closure size goes
     unzip # Good to have in general
   ];
+  environment.enableAllTerminfo = true;
   nix = {
     package = pkgs.nixVersions.nix_2_28;
     settings = {
