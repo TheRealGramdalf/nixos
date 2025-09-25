@@ -67,6 +67,8 @@ in {
       default_config = {};
       homeassistant = {
         name = "Home";
+        internal_url = "https://${ha}.aer.dedyn.io";
+        external_url = "https://${ha}.aer.dedyn.io";
         unit_system = "metric";
         temperature_unit = "C";
       };
