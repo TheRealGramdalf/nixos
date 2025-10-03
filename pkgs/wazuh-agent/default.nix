@@ -65,7 +65,6 @@ in
       sha256 = "sha256-yWth09J1SSEi6xGCA8oAkVcBBEnXyOAWOnTNuXWEnNk=";
     };
 
-    #enableParallelBuilding = true;
     dontConfigure = true;
     dontFixup = true;
 
