@@ -134,6 +134,7 @@
       plocate
       neofetch
       tealdeer
+      pdfmixtool
       #(ventoy.override {
       #  withGtk3 = true;
       #  defaultGuiType = "gtk3";
