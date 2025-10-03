@@ -29,7 +29,7 @@
 }: let
   version = "4.12.0";
   dependencyVersion = "40";
-  external_dependencies = (
+  external-dependencies = (
     import ./dependencies {
       inherit fetchurl lib dependencyVersion;
     }
@@ -54,7 +54,7 @@
     };
   };
 in
-  stdenv.mkDerivation rec {
+  stdenv.mkDerivation {
     pname = "wazuh-agent";
     inherit version;
 
@@ -117,7 +117,7 @@ in
       ${lib.strings.concatMapStringsSep "\n" (
           dep: "tar -xzf ${dep} -C src/external"
         )
-        external_dependencies}
+        external-dependencies}
 
       mkdir -p src/external/libbpf-bootstrap/src
       cp --no-preserve=all -rf ${libbpf_bootstrap_deps.bootstrap}/* src/external/libbpf-bootstrap

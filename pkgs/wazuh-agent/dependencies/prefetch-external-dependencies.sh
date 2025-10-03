@@ -36,7 +36,7 @@ EXTERNAL_DEPS=(
 DEPENDENCY_VERSION=40
 BASE_URL="https://packages.wazuh.com/deps/$DEPENDENCY_VERSION/libraries/sources"
 
-echo "{" >external_dependencies.nix
+echo "{" >external-dependencies.nix
 
 for dep in "${EXTERNAL_DEPS[@]}"; do
     nix-prefetch-url "$BASE_URL/$dep.tar.gz" --type sha256 --print-path
@@ -44,7 +44,7 @@ for dep in "${EXTERNAL_DEPS[@]}"; do
         nix-prefetch-url "$BASE_URL/$dep.tar.gz" --type sha256 |
             xargs nix hash convert --from nix32 --to sri --hash-algo sha256
     )
-    cat <<EOF >>external_dependencies.nix
+    cat <<EOF >>external-dependencies.nix
 
 "$dep" = {
     name = "$dep";
@@ -53,6 +53,6 @@ for dep in "${EXTERNAL_DEPS[@]}"; do
 EOF
 done
 
-echo "}" >>external_dependencies.nix
+echo "}" >>external-dependencies.nix
 
-nixfmt external_dependencies.nix
+nixfmt external-dependencies.nix

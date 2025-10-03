@@ -20,4 +20,4 @@ in
       name = dep.name;
       sha256 = dep.sha256;
     })
-  ) (import ./external_dependencies.nix)
+  ) (import ./external-dependencies.nix)
