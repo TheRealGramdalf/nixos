@@ -31,6 +31,8 @@ in {
       # Tasmota smart devices
       "tasmota"
       "mqtt"
+      # tp-link Kasa smart home
+      "tplink"
       # Printing
       "ipp"
       "brother"
