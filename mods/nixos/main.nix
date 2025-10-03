@@ -4,5 +4,6 @@
     ./adhde.nix
     ./cone.nix
     ./pogadmin.nix
+    ./wazuh
   ];
 }
