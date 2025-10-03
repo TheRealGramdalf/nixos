@@ -3,21 +3,27 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkPackageOption
+    mkIf
+    types;
+
   wazuhUser = "wazuh";
   wazuhGroup = wazuhUser;
   stateDir = "/var/ossec";
-  cfg = config.services.wazuh-agent;
-  pkg = config.services.wazuh-agent.package;
-  agentAuthPassword = config.services.wazuh-agent.agentAuthPassword;
+  cfg = config.services.wazuh.agent;
+  pkg = config.services.wazuh.agent.package;
+  agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
 
   generatedConfig =
     if !(builtins.isNull cfg.config)
     then cfg.config
     else
       import ./generate-agent-config.nix {
-        cfg = config.services.wazuh-agent;
+        cfg = config.services.wazuh.agent;
         inherit pkgs;
       };
 
@@ -91,26 +97,26 @@ with lib; let
   };
 in {
   options = {
-    services.wazuh-agent = {
-      enable = lib.mkEnableOption "Wazuh agent";
+    services.wazuh.agent = {
+      enable = mkEnableOption "Wazuh agent";
 
-      manager = lib.mkOption {
-        type = lib.types.submodule {
-          freeformType = with lib.types;
+      manager = mkOption {
+        type = types.submodule {
+          freeformType = with types;
             attrsOf (oneOf [
               nonEmptyStr
               port
             ]);
           options = {
-            host = lib.mkOption {
-              type = lib.types.nonEmptyStr;
+            host = mkOption {
+              type = types.nonEmptyStr;
               description = ''
                 The IP address or hostname of the manager.
               '';
               example = "192.168.1.2";
             };
-            port = lib.mkOption {
-              type = lib.types.port;
+            port = mkOption {
+              type = types.port;
               description = ''
                 The port the manager is listening on to receive agent traffic.
               '';
@@ -121,25 +127,25 @@ in {
         };
       };
 
-      registration = lib.mkOption {
-        type = lib.types.submodule {
-          freeformType = with lib.types;
+      registration = mkOption {
+        type = types.submodule {
+          freeformType = with types;
             attrsOf (oneOf [
               nullOr
               nonEmptyStr
               port
             ]);
           options = {
-            host = lib.mkOption {
-              type = lib.types.nullOr lib.types.nonEmptyStr;
+            host = mkOption {
+              type = types.nullOr types.nonEmptyStr;
               description = ''
                 The IP address or hostname of the registration server.
               '';
               example = "192.168.1.2";
               default = null;
             };
-            port = lib.mkOption {
-              type = lib.types.port;
+            port = mkOption {
+              type = types.port;
               description = ''
                 The port the registration server is listening on to receive agent traffic.
               '';
@@ -150,10 +156,10 @@ in {
         };
       };
 
-      package = lib.mkPackageOption pkgs "wazuh-agent" {};
+      package = mkPackageOption pkgs "wazuh-agent" {};
 
-      path = lib.mkOption {
-        type = lib.types.listOf lib.types.path;
+      path = mkOption {
+        type = types.listOf types.path;
         default = with pkgs; [
           util-linux
           coreutils-full
@@ -164,24 +170,24 @@ in {
         description = "List of derivations to put in wazuh-agent's path.";
       };
 
-      config = lib.mkOption {
-        type = lib.types.nullOr lib.types.nonEmptyStr;
+      config = mkOption {
+        type = types.nullOr types.nonEmptyStr;
         default = null;
         description = ''
           Complete configuration for ossec.conf
         '';
       };
 
-      agentAuthPassword = lib.mkOption {
-        type = lib.types.nullOr lib.types.nonEmptyStr;
+      agentAuthPassword = mkOption {
+        type = types.nullOr types.nonEmptyStr;
         default = null;
         description = ''
           Password for the auth service
         '';
       };
 
-      extraConfig = lib.mkOption {
-        type = lib.types.lines;
+      extraConfig = mkOption {
+        type = types.lines;
         description = ''
           Extra configuration values to be appended to the bottom of ossec.conf.
         '';
