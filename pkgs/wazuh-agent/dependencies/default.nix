@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  fetcher = (
+  fetchWazuh = (
     {
       name,
       sha256,
@@ -16,7 +16,7 @@
   );
 in
   lib.mapAttrsToList (
-    name: dep: (fetcher {
+    name: dep: (fetchWazuh {
       name = dep.name;
       sha256 = dep.sha256;
     })
