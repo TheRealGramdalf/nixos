@@ -9,6 +9,10 @@
     mkEnableOption
     mkPackageOption
     mkIf
+    forEach
+    nameValuePair
+    listToAttrs
+    concatMapStringsSep
     types;
 
   stateDir = "/var/ossec";
