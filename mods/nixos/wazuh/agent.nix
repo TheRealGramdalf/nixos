@@ -228,7 +228,7 @@ in {
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = with cfg; (config == null) -> (extraConfig != null);
+        assertion = (cfg.config == null) -> (cfg.extraConfig != null);
         message = "extraConfig cannot be set when config is set";
       }
     ];
