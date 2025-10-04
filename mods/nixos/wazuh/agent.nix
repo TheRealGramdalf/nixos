@@ -136,7 +136,6 @@ in {
               description = ''
                 The port the manager is listening on to receive agent traffic.
               '';
-              example = 1514;
               default = 1514;
             };
           };
