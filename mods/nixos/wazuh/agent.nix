@@ -173,16 +173,24 @@ in {
 
       package = mkPackageOption pkgs "wazuh-agent" {};
 
-      path = mkOption {
-        type = types.listOf types.path;
+      extraPackages = mkOption {
+        type = types.listOf types.package;
         default = with pkgs; [
           util-linux
           coreutils-full
           nettools
           ps
         ];
+        defaultText = ''
+          with pkgs; [
+            util-linux
+            coreutils-full
+            nettools
+            ps
+          ];
+        '';
         example = lib.literalExpression "[ pkgs.util-linux pkgs.coreutils_full pkgs.nettools ]";
-        description = "List of derivations to put in wazuh-agent's path.";
+        description = "List of packages to put in wazuh-agent's path.";
       };
 
       config = mkOption {
