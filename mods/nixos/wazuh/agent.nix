@@ -29,38 +29,6 @@
         inherit pkgs;
       };
 
-  preStart = ''
-    ${
-      concatMapStringsSep "\n"
-      (
-        dir: "[ -d ${stateDir}/${dir} ] || cp -Rv --no-preserve=ownership ${pkg}/${dir} ${stateDir}/${dir}"
-      )
-      [
-        "active-response"
-        "agentless"
-        "bin"
-        "etc"
-        "lib"
-        "logs"
-        "queue"
-        "tmp"
-        "var"
-        "wodles"
-      ]
-    }
-
-    chown -R ${cfg.user}:${cfg.group} ${stateDir}
-
-    find ${stateDir} -type d -exec chmod 770 {} \;
-    find ${stateDir} -type f -exec chmod 750 {} \;
-
-    # Generate and copy ossec.config
-    cp ${pkgs.writeText "ossec.conf" generatedConfig} ${stateDir}/etc/ossec.conf
-
-    ${lib.optionalString (!(isNull agentAuthPassword)) "echo ${agentAuthPassword} >> ${stateDir}/etc/authd.pass"}
-
-  '';
-
   daemons = [
     "wazuh-modulesd"
     "wazuh-logcollector"
@@ -302,12 +270,40 @@ in {
             Type = "oneshot";
             User = cfg.user;
             Group = cfg.group;
-            ExecStart = let
-              script = pkgs.writeShellApplication {
+            ExecStart = lib.getExe pkgs.writeShellApplication {
                 name = "wazuh-prestart";
-                text = preStart;
-              };
-            in "${script}/bin/wazuh-prestart";
+                text = ''
+                ${
+                  concatMapStringsSep "\n"
+                  (
+                    dir: "[ -d ${stateDir}/${dir} ] || cp -Rv --no-preserve=ownership ${pkg}/${dir} ${stateDir}/${dir}"
+                  )
+                  [
+                    "active-response"
+                    "agentless"
+                    "bin"
+                    "etc"
+                    "lib"
+                    "logs"
+                    "queue"
+                    "tmp"
+                    "var"
+                    "wodles"
+                  ]
+                }
+
+                chown -R ${cfg.user}:${cfg.group} ${stateDir}
+
+                find ${stateDir} -type d -exec chmod 770 {} \;
+                find ${stateDir} -type f -exec chmod 750 {} \;
+
+                # Generate and copy ossec.config
+                cp ${pkgs.writeText "ossec.conf" generatedConfig} ${stateDir}/etc/ossec.conf
+
+                ${lib.optionalString (!(isNull agentAuthPassword)) "echo ${agentAuthPassword} >> ${stateDir}/etc/authd.pass"}
+
+              '';
+            };
           };
         };
       };
