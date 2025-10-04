@@ -11,8 +11,6 @@
     mkIf
     types;
 
-  wazuhUser = "wazuh";
-  wazuhGroup = wazuhUser;
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
   pkg = config.services.wazuh.agent.package;
@@ -47,7 +45,7 @@
       ]
     }
 
-    chown -R ${wazuhUser}:${wazuhGroup} ${stateDir}
+    chown -R ${cfg.user}:${cfg.group} ${stateDir}
 
     find ${stateDir} -type d -exec chmod 770 {} \;
     find ${stateDir} -type f -exec chmod 750 {} \;
@@ -84,8 +82,8 @@
 
     serviceConfig = {
       Type = "exec";
-      User = wazuhUser;
-      Group = wazuhGroup;
+      User = cfg.user;
+      Group = cfg.group;
       WorkingDirectory = "${stateDir}/";
       CapabilityBoundingSet = ["CAP_SETGID"];
 
@@ -99,6 +97,20 @@ in {
   options = {
     services.wazuh.agent = {
       enable = mkEnableOption "Wazuh agent";
+      user = mkOption {
+        type = types.str;
+        description = ''
+          User to run the wazuh daemons as. Note that this option is read-only due to limitations in the module
+        '';
+        default = "wazuh";
+      };
+      group = mkOption {
+        type = types.str;
+        description = ''
+          Group to run the wazuh daemons under. Note that this option is read-only due to limitations in the module
+        '';
+        default = "wazuh";
+      };
 
       manager = mkOption {
         type = types.submodule {
@@ -209,9 +221,9 @@ in {
         message = "extraConfig cannot be set when config is set";
       }
     ];
-    users.users.${wazuhUser} = {
+    users.users.${cfg.user} = {
       isSystemUser = true;
-      group = wazuhGroup;
+      group = cfg.group;
       description = "Wazuh agent user";
       home = stateDir;
       extraGroups = [
@@ -220,10 +232,10 @@ in {
       ]; # To read journal entries
     };
 
-    users.groups.${wazuhGroup} = {};
+    users.groups.${cfg.group} = {};
 
     systemd.tmpfiles.rules = [
-      "d ${stateDir}/tmp 0750 ${wazuhUser} ${wazuhGroup} 1d"
+      "d ${stateDir}/tmp 0750 ${cfg.user} ${cfg.group} 1d"
     ];
 
     systemd.targets.multi-user.wants = ["wazuh.target"];
@@ -263,8 +275,8 @@ in {
               else cfg.manager.port;
           in {
             Type = "oneshot";
-            User = wazuhUser;
-            Group = wazuhGroup;
+            User = cfg.user;
+            Group = cfg.group;
             ExecStart = ''
               ${pkg}/bin/agent-auth -m ${ip} -p ${toString port} && touch ${stateDir}/.agent-registered
             '';
@@ -277,8 +289,8 @@ in {
           before = ["wazuh-agent-auth.service"];
           serviceConfig = {
             Type = "oneshot";
-            User = wazuhUser;
-            Group = wazuhGroup;
+            User = cfg.user;
+            Group = cfg.group;
             ExecStart = let
               script = pkgs.writeShellApplication {
                 name = "wazuh-prestart";
@@ -295,8 +307,8 @@ in {
           nameValuePair d {
             setgid = true;
             setuid = true;
-            owner = wazuhUser;
-            group = wazuhGroup;
+            owner = cfg.user;
+            group = cfg.group;
             source = "${pkg}/bin/${d}";
           }
       )
