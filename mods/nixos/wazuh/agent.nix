@@ -4,7 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (lib)
+  inherit
+    (lib)
     mkOption
     mkEnableOption
     mkPackageOption
@@ -13,7 +14,10 @@
     nameValuePair
     listToAttrs
     concatMapStringsSep
-    types;
+    types
+    ;
+
+  xmlValue = (pkgs.formats.xml {}).type;
 
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
@@ -69,6 +73,8 @@ in {
   options = {
     services.wazuh.agent = {
       enable = mkEnableOption "Wazuh agent";
+      package = mkPackageOption pkgs "wazuh-agent" {};
+
       user = mkOption {
         type = types.str;
         description = ''
@@ -84,62 +90,56 @@ in {
         default = "wazuh";
       };
 
-      manager = mkOption {
+      settings = mkOption {
+        default = {};
         type = types.submodule {
-          freeformType = with types;
-            attrsOf (oneOf [
-              nonEmptyStr
-              port
-            ]);
+          freeformType = types.attrsOf xmlValue;
+
           options = {
-            host = mkOption {
-              type = types.nonEmptyStr;
-              description = ''
-                The IP address or hostname of the manager.
-              '';
-              example = "192.168.1.2";
-            };
-            port = mkOption {
-              type = types.port;
-              description = ''
-                The port the manager is listening on to receive agent traffic.
-              '';
-              default = 1514;
+            client = {
+              server = {
+                address = mkOption {
+                  type = types.nullOr types.nonEmptyStr;
+                  description = ''
+                    Specifies the IP address or the hostname of the Wazuh manager.
+                  '';
+                  example = "192.168.1.2";
+                  default = null;
+                };
+                port = mkOption {
+                  type = types.port;
+                  description = ''
+                    Specifies the port to send events to the manager. This must match the associated listening port configured on the Wazuh manager.
+                  '';
+                  default = 1514;
+                };
+              };
+              enrollment = {
+                manager_address = mkOption {
+                  type = types.nullOr types.nonEmptyStr;
+                  description = ''
+                    Hostname or IP address of the manager where the agent will be enrolled. If no value is set, the agent will try enrolling to the same manager that was specified for connection.
+                  '';
+                  example = "192.168.1.2";
+                  default = null;
+                };
+                port = mkOption {
+                  type = types.port;
+                  description = ''
+                    Specifies the port on the manager to send enrollment request. This must match the associated listening port configured on the Wazuh manager.
+                  '';
+                  default = 1515;
+                };
+              };
             };
           };
         };
-      };
+        description = ''
+          Wazuh-agent configuration written in Nix. This will be serialized to XML and passed as `ossec.conf`
 
-      registration = mkOption {
-        type = types.submodule {
-          freeformType = with types;
-            attrsOf (oneOf [
-              nullOr
-              nonEmptyStr
-              port
-            ]);
-          options = {
-            host = mkOption {
-              type = types.nullOr types.nonEmptyStr;
-              description = ''
-                The IP address or hostname of the registration server.
-              '';
-              example = "192.168.1.2";
-              default = null;
-            };
-            port = mkOption {
-              type = types.port;
-              description = ''
-                The port the registration server is listening on to receive agent traffic.
-              '';
-              example = 1515;
-              default = 1515;
-            };
-          };
-        };
+          Note that the root `ossec_config` tag is added automatically here
+        '';
       };
-
-      package = mkPackageOption pkgs "wazuh-agent" {};
 
       extraPackages = mkOption {
         type = types.listOf types.package;
@@ -159,14 +159,6 @@ in {
         '';
         example = lib.literalExpression "[ pkgs.util-linux pkgs.coreutils_full pkgs.nettools ]";
         description = "List of packages to put in wazuh-agent's path.";
-      };
-
-      config = mkOption {
-        type = types.nullOr types.nonEmptyStr;
-        default = null;
-        description = ''
-          Complete configuration for ossec.conf
-        '';
       };
 
       agentAuthPassword = mkOption {
@@ -194,12 +186,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = (cfg.config == null) -> (cfg.extraConfig != null);
-        message = "extraConfig cannot be set when config is set";
-      }
-    ];
     users.users.${cfg.user} = {
       isSystemUser = true;
       group = cfg.group;
@@ -271,8 +257,8 @@ in {
             User = cfg.user;
             Group = cfg.group;
             ExecStart = lib.getExe pkgs.writeShellApplication {
-                name = "wazuh-prestart";
-                text = ''
+              name = "wazuh-prestart";
+              text = ''
                 ${
                   concatMapStringsSep "\n"
                   (
