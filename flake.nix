@@ -264,7 +264,7 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
-      wazuh-agent = pkgs.callPackage ./pkgs/wazuh-agent {};
+      wazuh-agent = pkgs.callPackage ./pkgs/wazuh/agent {};
       filedialpy = pkgs.python3Packages.callPackage ./pkgs/filedialpy.nix {};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
