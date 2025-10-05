@@ -17,5 +17,6 @@
     ./mimir.nix
     ./loki.nix
     ./minecraft.nix
+    ./wazuh.nix
   ];
 }
