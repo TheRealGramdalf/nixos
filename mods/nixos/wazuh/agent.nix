@@ -24,7 +24,7 @@
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
 
   generatedConfig =
-    pkgs.formats.xml{}.generate "ossec.conf" cfg.settings;
+    pkgs.formats.xml{}.generate "ossec.conf" ({ossec_config = cfg.settings});
 
   daemons = [
     "wazuh-modulesd"
