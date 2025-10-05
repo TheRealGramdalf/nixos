@@ -24,9 +24,6 @@
   cfg = config.services.wazuh.agent;
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
 
-  generatedConfig =
-    pkgs.formats.xml{}.generate "ossec.conf" ({ossec_config = cfg.settings});
-
   daemons = [
     "wazuh-modulesd"
     "wazuh-logcollector"
@@ -82,6 +79,13 @@ in {
           Group to run the wazuh daemons under. Note that this option is read-only due to limitations in the module
         '';
         default = "wazuh";
+      };
+      config = mkOption {
+        type = types.path;
+        description = ''
+          Final configuration file used by wazuh
+        '';
+        default = (pkgs.formats.xml {}).generate "ossec.conf" {ossec_config = cfg.settings;};
       };
 
       #TODO determine which options are necessary for a default installation, which should have typing/be accessible always (e.g. port options)
@@ -271,7 +275,7 @@ in {
                 find ${stateDir} -type f -exec chmod 750 {} \;
 
                 # Generate and link ossec.config
-                ln -sf ${generatedConfig} ${stateDir}/etc/ossec.conf
+                ln -sf ${cfg.config} ${stateDir}/etc/ossec.conf
 
                 ${lib.optionalString (!(isNull agentAuthPassword)) "echo ${agentAuthPassword} >> ${stateDir}/etc/authd.pass"}
 
