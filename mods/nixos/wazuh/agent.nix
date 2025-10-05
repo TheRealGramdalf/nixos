@@ -19,6 +19,7 @@
 
   xmlValue = (pkgs.formats.xml {}).type;
 
+  #TODO Make this an option either at the top level or under `settings`
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
@@ -83,6 +84,10 @@ in {
         default = "wazuh";
       };
 
+      #TODO determine which options are necessary for a default installation, which should have typing/be accessible always (e.g. port options)
+      #TODO Determine if settings included as options here are only a selection or if they can be generated systematically from the Wazuh documentation
+
+      # Documentation for these options can be found here: https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/index.html
       settings = mkOption {
         default = {};
         type = types.submodule {
@@ -168,8 +173,10 @@ in {
     users.users.${cfg.user} = {
       isSystemUser = true;
       group = cfg.group;
+      #TODO Determine if the agent should use a separate user than the other microservices
       description = "Wazuh agent user";
       home = stateDir;
+      #TODO This should be set as `SupplementaryGroups` in the systemd service config if only specific daemons need the capabilities
       extraGroups = [
         "systemd-journal"
         "systemd-network"
@@ -235,6 +242,7 @@ in {
             Type = "oneshot";
             User = cfg.user;
             Group = cfg.group;
+            #TODO is lib.getExe necessary?
             ExecStart = lib.getExe pkgs.writeShellApplication {
               name = "wazuh-prestart";
               text = ''
