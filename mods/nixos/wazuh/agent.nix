@@ -262,7 +262,7 @@ in {
                 find ${stateDir} -type d -exec chmod 770 {} \;
                 find ${stateDir} -type f -exec chmod 750 {} \;
 
-                # Generate and copy ossec.config
+                # Generate and link ossec.config
                 ln -sf ${generatedConfig} ${stateDir}/etc/ossec.conf
 
                 ${lib.optionalString (!(isNull agentAuthPassword)) "echo ${agentAuthPassword} >> ${stateDir}/etc/authd.pass"}
