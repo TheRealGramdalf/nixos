@@ -21,7 +21,6 @@
 
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
-  pkg = config.services.wazuh.agent.package;
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
 
   generatedConfig =
@@ -223,7 +222,7 @@ in {
             User = cfg.user;
             Group = cfg.group;
             ExecStart = ''
-              ${pkg}/bin/agent-auth -m ${ip} -p ${toString port} && touch ${stateDir}/.agent-registered
+              ${cfg.package}/bin/agent-auth -m ${ip} -p ${toString port} && touch ${stateDir}/.agent-registered
             '';
           };
         };
@@ -242,7 +241,7 @@ in {
                 ${
                   concatMapStringsSep "\n"
                   (
-                    dir: "[ -d ${stateDir}/${dir} ] || cp -Rv --no-preserve=ownership ${pkg}/${dir} ${stateDir}/${dir}"
+                    dir: "[ -d ${stateDir}/${dir} ] || cp -Rv --no-preserve=ownership ${cfg.package}/${dir} ${stateDir}/${dir}"
                   )
                   [
                     "active-response"
@@ -282,7 +281,7 @@ in {
             setuid = true;
             owner = cfg.user;
             group = cfg.group;
-            source = "${pkg}/bin/${d}";
+            source = "${cfg.package}/bin/${d}";
           }
       )
     );
