@@ -25,13 +25,7 @@
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
 
   generatedConfig =
-    if !(builtins.isNull cfg.config)
-    then cfg.config
-    else
-      import ./generate-agent-config.nix {
-        cfg = config.services.wazuh.agent;
-        inherit pkgs;
-      };
+    pkgs.formats.xml{}.generate "ossec.conf" cfg.settings;
 
   daemons = [
     "wazuh-modulesd"
@@ -168,20 +162,6 @@ in {
           Password for the auth service
         '';
       };
-
-      extraConfig = mkOption {
-        type = types.lines;
-        description = ''
-          Extra configuration values to be appended to the bottom of ossec.conf.
-        '';
-        default = "";
-        example = ''
-          <!-- The added ossec_config root tag is required -->
-          <ossec_config>
-            <!-- Extra configuration options as needed -->
-          </ossec_config>
-        '';
-      };
     };
   };
 
@@ -284,7 +264,7 @@ in {
                 find ${stateDir} -type f -exec chmod 750 {} \;
 
                 # Generate and copy ossec.config
-                cp ${pkgs.writeText "ossec.conf" generatedConfig} ${stateDir}/etc/ossec.conf
+                ln -sf ${generatedConfig} ${stateDir}/etc/ossec.conf
 
                 ${lib.optionalString (!(isNull agentAuthPassword)) "echo ${agentAuthPassword} >> ${stateDir}/etc/authd.pass"}
 
