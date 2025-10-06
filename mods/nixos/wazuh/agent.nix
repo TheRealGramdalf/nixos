@@ -23,6 +23,7 @@
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
+  wazuhVersion = cfg.package.version;
 
   daemons = [
     "wazuh-modulesd"
@@ -37,8 +38,10 @@
     wants = ["wazuh-agent-auth.service"];
 
     partOf = ["wazuh.target"];
+    #TODO Why is `/run/current-system` added - is it required for security scanning?
     path =
-      cfg.path
+      cfg.defaultPackages
+      ++ cfg.extraPackages
       ++ [
         "/run/current-system/sw/bin"
         "/run/wrappers/bin"
@@ -82,18 +85,25 @@ in {
       };
       config = mkOption {
         type = types.path;
+        #TODO Should this be RO?
         description = ''
-          Final configuration file used by wazuh
+          Final `ossec.conf` configuration file used by wazuh
         '';
         default = (pkgs.formats.xml {}).generate "ossec.conf" {ossec_config = cfg.settings;};
+        defaultText = (pkgs.formats.xml {}).generate "ossec.conf" {ossec_config = config.services.wazuh.agent.settings;};
       };
 
       #TODO determine which options are necessary for a default installation, which should have typing/be accessible always (e.g. port options)
       #TODO Determine if settings included as options here are only a selection or if they can be generated systematically from the Wazuh documentation
-
-      # Documentation for these options can be found here: https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/index.html
       settings = mkOption {
         default = {};
+        description = ''
+          Wazuh-agent configuration written in Nix. This will be serialized to XML and passed as `ossec.conf`
+
+          Note that the root `ossec_config` tag is added automatically
+
+          Not all possible configuration options are listed here - see the [config reference](https://documentation.wazuh.com/${cfg.package.version}/user-manual/reference/ossec-conf/index.html) for possible values
+        '';
         type = types.submodule {
           freeformType = types.attrsOf xmlValue;
 
@@ -136,14 +146,9 @@ in {
             };
           };
         };
-        description = ''
-          Wazuh-agent configuration written in Nix. This will be serialized to XML and passed as `ossec.conf`
-
-          Note that the root `ossec_config` tag is added automatically here
-        '';
       };
 
-      extraPackages = mkOption {
+      defaultPackages = mkOption {
         type = types.listOf types.package;
         default = with pkgs; [
           util-linux
@@ -159,8 +164,18 @@ in {
             ps
           ];
         '';
-        example = lib.literalExpression "[ pkgs.util-linux pkgs.coreutils_full pkgs.nettools ]";
-        description = "List of packages to put in wazuh-agent's path.";
+        example = "lib.mkForce []";
+        description = ''
+          List of packages added to wazuh-agents `$PATH` by default.
+          These can be removed/overridden with `lib.mkForce`
+          To add additional packages, use `services.wazuh.agent.extraPackages` instead
+        '';
+      };
+      extraPackages = mkOption {
+        type = types.listOf types.package;
+        default = [];
+        example = lib.literalExpression "[ pkgs.hello ]";
+        description = "List of extra packages added to wazuh-agent's `$PATH`";
       };
 
       agentAuthPassword = mkOption {
