@@ -261,7 +261,6 @@ in {
             Type = "oneshot";
             User = cfg.user;
             Group = cfg.group;
-            #TODO is lib.getExe necessary?
             ExecStart = lib.getExe pkgs.writeShellApplication {
               name = "wazuh-prestart";
               text = ''
