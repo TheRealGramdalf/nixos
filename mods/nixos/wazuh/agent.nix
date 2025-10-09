@@ -23,7 +23,6 @@
   stateDir = "/var/ossec";
   cfg = config.services.wazuh.agent;
   agentAuthPassword = config.services.wazuh.agent.agentAuthPassword;
-  wazuhVersion = cfg.package.version;
 
   daemons = [
     "wazuh-modulesd"
@@ -300,7 +299,7 @@ in {
       };
 
     security.wrappers = listToAttrs (
-      forEach daemons (
+      forEach daemons (Privsep_SetUser
         d:
           nameValuePair d {
             setgid = true;
