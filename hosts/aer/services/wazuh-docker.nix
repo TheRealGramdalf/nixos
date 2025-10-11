@@ -136,4 +136,16 @@ in {
       ];
     };
   };
+
+  users = {
+    users."wazuh-server" = {
+      uid = 1000;
+      groups = [
+        "wazuh-server"
+      ];
+    };
+    groups."wazuh-server" = {
+      gid = 1000;
+    };
+  };
 }
