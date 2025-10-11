@@ -50,8 +50,8 @@ in {
       #  "hl.host" = "${name}";
       #};
       extraOptions = [
-        "--ulimit memlock=-1:-1"
-        "--ulimit nofile=655360:655360"
+        "--ulimit=memlock=-1:-1"
+        "--ulimit=nofile=655360:655360"
         "--dns=1.1.1.1"
         "--dns-search=."
       ];
@@ -77,8 +77,8 @@ in {
         "${configDir}/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml"
       ];
       extraOptions = [
-        "--ulimit memlock=-1:-1"
-        "--ulimit nofile=655360:655360"
+        "--ulimit=memlock=-1:-1"
+        "--ulimit=nofile=655360:655360"
         "--dns=1.1.1.1"
         "--dns-search=."
       ];
