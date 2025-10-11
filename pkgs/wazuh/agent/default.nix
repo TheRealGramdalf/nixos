@@ -139,14 +139,14 @@ in
         --replace-fail "cd ''${LOCAL}" ""
 
       substituteInPlace src/external/audit-userspace/autogen.sh \
-        --replace-warn "cp INSTALL.tmp INSTALL" ""
+        --replace-fail "cp INSTALL.tmp INSTALL" ""
 
       substituteInPlace src/external/openssl/config \
-        --replace-warn "/usr/bin/env" "env"
+        --replace-fail "/usr/bin/env" "env"
 
       substituteInPlace src/init/inst-functions.sh \
-        --replace-warn "WAZUH_GROUP='wazuh'" "WAZUH_GROUP='nixbld'" \
-        --replace-warn "WAZUH_USER='wazuh'" "WAZUH_USER='nixbld'"
+        --replace-fail "WAZUH_GROUP='wazuh'" "WAZUH_GROUP='nixbld'" \
+        --replace-fail "WAZUH_USER='wazuh'" "WAZUH_USER='nixbld'"
 
       substituteInPlace src/external/libbpf-bootstrap/CMakeLists.txt \
         --replace-fail "/usr/bin/clang" "${clang}/bin/clang"
