@@ -45,13 +45,13 @@ in {
         "${configDir}/wazuh_indexer_ssl_certs/wazuh.manager-key.pem:/etc/ssl/filebeat.key"
         "${configDir}/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf"
       ];
-      #labels = {
-      #  "traefik.enable" = "true";
-      #  "traefik.http.services.${name}.loadbalancer.server.port" = "8686";
-      #  "traefik.http.routers.${name}.service" = "${name}";
-      #  "traefik.http.routers.${name}.middlewares" = "local-only@file";
-      #  "hl.host" = "${name}";
-      #};
+      labels = {
+        "traefik.enable" = "false";
+        #"traefik.http.services.${name}.loadbalancer.server.port" = "8686";
+        #"traefik.http.routers.${name}.service" = "${name}";
+        #"traefik.http.routers.${name}.middlewares" = "local-only@file";
+        #"hl.host" = "${name}";
+      };
       extraOptions = [
         "--ulimit=memlock=-1:-1"
         "--ulimit=nofile=655360:655360"
@@ -88,6 +88,13 @@ in {
         #"--dns=1.1.1.1"
         #"--dns-search=."
       ];
+      labels = {
+        "traefik.enable" = "false";
+        #"traefik.http.services.${name}.loadbalancer.server.port" = "8686";
+        #"traefik.http.routers.${name}.service" = "${name}";
+        #"traefik.http.routers.${name}.middlewares" = "local-only@file";
+        #"hl.host" = "${name}";
+      };
     };
     "wazuh-dashboard" = {
       image = "wazuh/wazuh-dashboard:4.13.1";
