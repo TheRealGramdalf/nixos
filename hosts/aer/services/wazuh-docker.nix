@@ -1,6 +1,4 @@
-{
-  ...
-}: let
+{...}: let
   serviceDir = "/persist/services/wazuh";
   configDir = "${serviceDir}/config";
   ossec = "${serviceDir}/manager/ossec";
