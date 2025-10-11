@@ -18,5 +18,6 @@
     ./loki.nix
     ./minecraft.nix
     ./wazuh.nix
+    ./wazuh-docker.nix
   ];
 }
