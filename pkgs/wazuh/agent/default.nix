@@ -27,13 +27,20 @@
   zlib,
   ...
 }: let
-  version = "4.12.0";
-  dependencyVersion = "40";
+  inherit (lib) getExe;
+  version = "4.13.1";
+  dependencyVersion = "43";
+
   external-dependencies = (
-    import ./dependencies {
-      inherit fetchurl lib dependencyVersion;
-    }
+    lib.mapAttrsToList (
+      _: dep:
+        fetchurl {
+          url = "https://packages.wazuh.com/deps/${dependencyVersion}/libraries/sources/${dep.name}.tar.gz";
+          sha256 = dep.sha256;
+        }
+    ) (import ./dependencies/external-dependencies.nix)
   );
+
   wazuh-http-request = fetchFromGitHub {
     owner = "wazuh";
     repo = "wazuh-http-request";
