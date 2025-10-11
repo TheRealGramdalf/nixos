@@ -140,9 +140,7 @@ in {
   users = {
     users."wazuh-server" = {
       uid = 1000;
-      group = [
-        "wazuh-server"
-      ];
+      group = "wazuh-server";
     };
     groups."wazuh-server" = {
       gid = 1000;
