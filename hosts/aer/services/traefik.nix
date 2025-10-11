@@ -34,6 +34,7 @@ in {
       providers.docker = {
         defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.aer.dedyn.io`)";
         watch = true;
+        exposedByDefault = false;
       };
       global.checkNewVersion = false;
       serversTransport.insecureSkipVerify = true;
