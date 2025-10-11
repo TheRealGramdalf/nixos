@@ -183,12 +183,14 @@ in
         --replace-fail "cd ''${LOCAL}" "#"
 
       chmod u+x $out/bin/* $out/active-response/bin/*
+    '';
 
-      ${removeReferencesTo}/bin/remove-references-to \
+    fixupPhase = ''
+      ${getExe removeReferencesTo} \
         -t ${libgcc.out} \
         $out/lib/*
 
-      ${patchelf}/bin/patchelf --add-rpath ${systemd}/lib $out/bin/wazuh-logcollector
+      ${getExe patchelf} --add-rpath ${systemd}/lib $out/bin/wazuh-logcollector
       rm -rf $out/src
     '';
 
