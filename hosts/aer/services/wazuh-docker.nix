@@ -1,6 +1,4 @@
 {
-  config,
-  pkgs,
   ...
 }: let
   serviceDir = "/persist/services/wazuh";
