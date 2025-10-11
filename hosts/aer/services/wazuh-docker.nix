@@ -139,6 +139,7 @@ in {
 
   users = {
     users."wazuh-server" = {
+      isNormalUser = true;
       uid = 1000;
       group = "wazuh-server";
     };
