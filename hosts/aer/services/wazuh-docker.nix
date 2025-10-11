@@ -8,7 +8,6 @@ in {
     "wazuh-manager" = {
       image = "wazuh/wazuh-manager:4.13.1";
       hostname = "wazuh.manager";
-      restart = "always";
       #ports = [
       #  "1514:1514"
       #  "1515:1515"
@@ -61,7 +60,6 @@ in {
     "wazuh-indexer" = {
       image = "wazuh/wazuh-indexer:4.13.1";
       hostname = "wazuh.indexer";
-      restart = "always";
       #ports = [
       #  "9200:9200"
       #];
@@ -88,7 +86,6 @@ in {
     "wazuh-dashboard" = {
       image = "wazuh/wazuh-dashboard:4.13.1";
       hostname = "wazuh.dashboard";
-      restart = "always";
       #ports = [
       #  "443:5601"
       #];
