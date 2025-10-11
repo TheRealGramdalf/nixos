@@ -300,7 +300,6 @@ in {
 
     security.wrappers = listToAttrs (
       forEach daemons (
-        Privsep_SetUser
         d:
           nameValuePair d {
             setgid = true;
