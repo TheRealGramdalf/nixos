@@ -9,6 +9,7 @@ in {
       image = "wazuh/wazuh-manager:4.13.1";
       hostname = "wazuh.manager";
       networks = [
+        "bridge"
         "wazuh-bridge"
       ];
       #ports = [
@@ -64,6 +65,7 @@ in {
       image = "wazuh/wazuh-indexer:4.13.1";
       hostname = "wazuh.indexer";
       networks = [
+        "bridge"
         "wazuh-bridge"
       ];
       #ports = [
@@ -100,6 +102,7 @@ in {
       image = "wazuh/wazuh-dashboard:4.13.1";
       hostname = "wazuh.dashboard";
       networks = [
+        "bridge"
         "wazuh-bridge"
       ];
       #ports = [
