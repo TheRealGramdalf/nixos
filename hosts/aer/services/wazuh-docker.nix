@@ -52,8 +52,8 @@ in {
       extraOptions = [
         "--ulimit=memlock=-1:-1"
         "--ulimit=nofile=655360:655360"
-        "--dns=1.1.1.1"
-        "--dns-search=."
+        #"--dns=1.1.1.1"
+        #"--dns-search=."
       ];
     };
 
@@ -79,8 +79,8 @@ in {
       extraOptions = [
         "--ulimit=memlock=-1:-1"
         "--ulimit=nofile=655360:655360"
-        "--dns=1.1.1.1"
-        "--dns-search=."
+        #"--dns=1.1.1.1"
+        #"--dns-search=."
       ];
     };
     "wazuh-dashboard" = {
@@ -122,8 +122,8 @@ in {
         "--ulimit nofile=655360:655360"
         "--link wazuh.indexer:wazuh.indexer"
         "--link wazuh.manager:wazuh.manager"
-        "--dns=1.1.1.1"
-        "--dns-search=."
+        #"--dns=1.1.1.1"
+        #"--dns-search=."
       ];
     };
   };
