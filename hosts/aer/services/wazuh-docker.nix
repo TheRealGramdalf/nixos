@@ -128,7 +128,7 @@ in {
         name = "wazuh-dashboard";
       in {
         "traefik.enable" = "true";
-        "traefik.http.services.${name}.loadbalancer.server.port" = "443";
+        "traefik.http.services.${name}.loadbalancer.server.port" = "5601";
         "traefik.http.services.${name}.loadbalancer.server.scheme" = "https";
         "traefik.http.routers.${name}.service" = "${name}";
         "traefik.http.routers.${name}.middlewares" = "local-only@file";
