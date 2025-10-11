@@ -4,6 +4,7 @@
   ...
 }: let
   serviceDir = "/persist/services/wazuh";
+  configDir = "${serviceDir}/config";
   ossec = "${serviceDir}/manager/ossec";
   filebeat = "${serviceDir}/manager/filebeat";
 in {
@@ -41,10 +42,10 @@ in {
         "${ossec}/wodles:/var/ossec/wodles"
         "${filebeat}/etc:/etc/filebeat"
         "${filebeat}/var:/var/lib/filebeat"
-        "./config/wazuh_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem"
-        "./config/wazuh_indexer_ssl_certs/wazuh.manager.pem:/etc/ssl/filebeat.pem"
-        "./config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem:/etc/ssl/filebeat.key"
-        "./config/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf"
+        "${configDir}/wazuh_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.manager.pem:/etc/ssl/filebeat.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.manager-key.pem:/etc/ssl/filebeat.key"
+        "${configDir}/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf"
       ];
       #labels = {
       #  "traefik.enable" = "true";
@@ -73,13 +74,13 @@ in {
       };
       volumes = [
         "${serviceDir}/indexer/var:/var/lib/wazuh-indexer"
-        "./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem"
-        "./config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.key"
-        "./config/wazuh_indexer_ssl_certs/wazuh.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.pem"
-        "./config/wazuh_indexer_ssl_certs/admin.pem:/usr/share/wazuh-indexer/certs/admin.pem"
-        "./config/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/certs/admin-key.pem"
-        "./config/wazuh_indexer/wazuh.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml"
-        "./config/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml"
+        "${configDir}/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.key"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/admin.pem:/usr/share/wazuh-indexer/certs/admin.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/certs/admin-key.pem"
+        "${configDir}/wazuh_indexer/wazuh.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml"
+        "${configDir}/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml"
       ];
       extraOptions = [
         "--ulimit memlock=-1:-1"
@@ -105,11 +106,11 @@ in {
         API_PASSWORD = "MyS3cr37P450r.*-";
       };
       volumes = [
-        "./config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem"
-        "./config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-        "./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem"
-        "./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml"
-        "./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
+        "${configDir}/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem"
+        "${configDir}/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml"
+        "${configDir}/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml"
         "${serviceDir}/dashboard/config:/usr/share/wazuh-dashboard/data/wazuh/config"
         "${serviceDir}/dashboard/custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom"
       ];
@@ -121,7 +122,7 @@ in {
         "traefik.http.services.${name}.loadbalancer.server.port" = "443";
         "traefik.http.routers.${name}.service" = "${name}";
         "traefik.http.routers.${name}.middlewares" = "local-only@file";
-        "hl.host" = "${name}";
+        "hl.host" = "secops";
       };
       extraOptions = [
         "--ulimit memlock=-1:-1"
