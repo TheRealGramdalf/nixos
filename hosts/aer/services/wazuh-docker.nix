@@ -107,7 +107,7 @@ in {
         "${serviceDir}/dashboard/config:/usr/share/wazuh-dashboard/data/wazuh/config"
         "${serviceDir}/dashboard/custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom"
       ];
-      dependsOn = "wazuh-indexer";
+      dependsOn = ["wazuh-indexer"];
       labels = let
         name = "wazuh-dashboard";
       in {
