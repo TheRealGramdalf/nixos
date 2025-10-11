@@ -73,7 +73,7 @@ in
     };
 
     dontConfigure = true;
-    dontFixup = true;
+    #dontFixup = true;
 
     hardeningDisable = [
       "zerocallusedregs"
