@@ -127,10 +127,8 @@ in {
         "hl.host" = "secops";
       };
       extraOptions = [
-        "--ulimit memlock=-1:-1"
-        "--ulimit nofile=655360:655360"
-        "--link wazuh.indexer:wazuh.indexer"
-        "--link wazuh.manager:wazuh.manager"
+        "--link=wazuh.indexer:wazuh.indexer"
+        "--link=wazuh.manager:wazuh.manager"
         #"--dns=1.1.1.1"
         #"--dns-search=."
       ];
