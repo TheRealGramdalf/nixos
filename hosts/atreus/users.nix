@@ -6,10 +6,10 @@
     sharedModules = [
       ./mods/home/main.nix
     ];
-    users."meebling" = import ../../users/meebling/main.nix;
-    users."meeblingthedevilish" = import ../../users/meebling/devilish.nix;
-    users."zoom" = import ../../users/meebling/zoom.nix;
-    users."music" = import ../../users/meebling/music.nix;
+    users."meebling" = import ../../../users/meebling/main.nix;
+    users."meeblingthedevilish" = import ../../../users/meebling/devilish.nix;
+    users."zoom" = import ../../../users/meebling/zoom.nix;
+    users."music" = import ../../../users/meebling/music.nix;
   };
   users.mutableUsers = false;
   users.users."meebling" = {
