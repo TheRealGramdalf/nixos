@@ -19,22 +19,6 @@
       ${builtins.concatStringsSep "\n" exports}
       gamescope --steam ${toString oscfg.gamescopeSession.args} -- steam ${builtins.toString oscfg.gamescopeSession.steamArgs}
     '';
-  #steam-gamescope = let
-  #  exports = builtins.attrValues (builtins.mapAttrs (n: v: "export ${n}=${v}") cfg.gamescopeSession.env);
-  #in
-  #  pkgs.writeShellScriptBin "steam-gamescope" ''
-  #    ${builtins.concatStringsSep "\n" exports}
-  #    gamescope --steam ${toString cfg.gamescopeSession.args} -- steam -tenfoot -pipewire-dmabuf
-  #  '';
-  #
-  #gamescopeSessionFile = (pkgs.writeTextDir "share/wayland-sessions/steam.desktop" ''
-  #  [Desktop Entry]
-  #  Name=Steam
-  #  Comment=A digital distribution platform
-  #  Exec=${steam-gamescope}/bin/steam-gamescope
-  #  Type=Application
-  #'')
-  #.overrideAttrs (_: {passthru.providedSessions = ["steam"];});
 in {
   options.tomeutils.vapor = {
     enable = mkEnableOption "steam";
@@ -57,12 +41,4 @@ in {
         oscfg.protontricks.package.override {inherit extraCompatPaths;}
       );
   };
-  #wayland.windowManager.hyprland.settings = lib.mkIf (config.wayland.windowManager.hyprland.enable) {
-  #  windowrulev2 = [
-  # Windowrules for steam (src: https://www.reddit.com/r/hyprland/comments/183tmfy/comment/kark334)
-  #windowrule=float,^(.*.exe)$
-  #windowrule=float,^(steam_app_.*)$
-  #windowrule=float,^(steam_proton)$
-  #  ];
-  #};
 }
