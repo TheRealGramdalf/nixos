@@ -4,9 +4,8 @@
   #enabled = true; # This is enabled automatically
   #devNodes = /dev/disk/by-partlabel; # Might have issues with legacy BIOS, since it can't read GPT labels?
   #};
-  # Since swapfile isn't available, enable zramswap
+  # Zram might be causing double compression and causing the system to hang in an OOM state
   zramSwap = {
-    enable = true;
-    memoryPercent = 60;
+    enable = false;
   };
 }
