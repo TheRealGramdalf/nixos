@@ -1,8 +1,9 @@
 {
   lib,
-  buildPythonApplication,
+  stdenv,
+  python,
+  fetchFromGitHub,
   makeWrapper,
-  setuptools,
   # deps
   flask,
   flask-sqlalchemy,
@@ -14,21 +15,9 @@
 }: let
   pname = "timekpr-webui";
   version = "unstable-2025-10-12";
-in
-  buildPythonApplication {
-    inherit pname version;
-    pyproject = true;
 
-    src = fetchFromGitHub {
-      owner = "adambie";
-      repo = pname;
-      rev = "f777cdfb2009b39ec72282913969486a2140ba3d";
-      hash = "sha256-u31ms+cVJo17S6L4OKxeSynR8lyf87zmPnietuhWnNc=";
-    };
-
-    build-system = [setuptools];
-
-    dependencies = [
+  pyWithLibs = python.buildEnv.override {
+    extraLibs = [
       flask
       flask-sqlalchemy
       sqlalchemy
@@ -37,16 +26,30 @@ in
       gunicorn
       bcrypt
     ];
+  };
+in
+  stdenv.mkDerivation {
+    inherit pname version;
 
-    #installPhase = ''
-    #  mkdir $out
-    #  cp -R $src/* $out
-    #
-    #  mkdir $out/bin
-    #  makeWrapper ${lib.getExe pyWithLibs} $out/bin/fwmm \
-    #    --add-flag $out/main.py \
-    #    --chdir $out
-    #'';
+    src = fetchFromGitHub {
+      owner = "adambie";
+      repo = pname;
+      rev = "f777cdfb2009b39ec72282913969486a2140ba3d";
+      hash = "sha256-C46t6329sh0qVN+DY3qlp4kTjqI61SVkhnyamMqUres=";
+    };
+
+    nativeBuildInputs = [
+      makeWrapper
+    ];
+
+    installPhase = ''
+      mkdir $out
+      cp -R $src/* $out
+
+      mkdir $out/bin
+      makeWrapper ${lib.getExe pyWithLibs} $out/bin/timekpr-webui \
+        --add-flag $out/app.py
+    '';
 
     meta = {
       homepage = "https://github.com/adambie/timekpr-webui";

@@ -267,7 +267,7 @@
       wazuh-agent = pkgs.callPackage ./pkgs/wazuh/agent {};
       wazuh-manager = pkgs.callPackage ./pkgs/wazuh/manager {};
       filedialpy = pkgs.python3Packages.callPackage ./pkgs/filedialpy.nix {};
-      timekpr-webui = pkgs.python3Packages.callPackage ./pkgs/timekpr-webui.nix {};
+      timekpr-webui = pkgs.python3Packages.callPackage ./pkgs/timekpr-webui.nix {python = pkgs.python313;};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
       tasmota-ssl = pkgs.callPackage ./pkgs/tasmota.nix {
