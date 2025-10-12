@@ -4,19 +4,19 @@
   pkgs,
   ...
 }: let
-  inherit (lib) types;
-  inherit (lib) mkIf mkDefault mkEnableOption mkOption;
   cfg = config.tomeutils.vapor;
   gamescopeCfg = config.programs.gamescope;
 
   extraCompatPaths = lib.makeSearchPathOutput "steamcompattool" "" cfg.extraCompatPackages;
 
   steam-gamescope = let
-    exports = builtins.attrValues (builtins.mapAttrs (n: v: "export ${n}=${v}") cfg.gamescopeSession.env);
+    exports = builtins.attrValues (
+      builtins.mapAttrs (n: v: "export ${n}=${v}") cfg.gamescopeSession.env
+    );
   in
     pkgs.writeShellScriptBin "steam-gamescope" ''
       ${builtins.concatStringsSep "\n" exports}
-      gamescope --steam ${toString cfg.gamescopeSession.args} -- steam ${builtins.toString cfg.gamescopeSession.steamArgs}
+      gamescope --steam ${builtins.toString cfg.gamescopeSession.args} -- steam ${builtins.toString cfg.gamescopeSession.steamArgs}
     '';
 
   gamescopeSessionFile =
@@ -26,11 +26,13 @@
       Comment=A digital distribution platform
       Exec=${steam-gamescope}/bin/steam-gamescope
       Type=Application
-    '')
-    .overrideAttrs (_: {passthru.providedSessions = ["steam"];});
+    '').overrideAttrs
+    (_: {
+      passthru.providedSessions = ["steam"];
+    });
 in {
   options.tomeutils.vapor = {
-    enable = mkEnableOption "system-wide support for steam in userspace";
+    enable = lib.mkEnableOption "steam";
 
     package = lib.mkOption {
       type = lib.types.package;
@@ -101,6 +103,7 @@ in {
         Additional packages to add to the Steam environment.
       '';
     };
+
     extraCompatPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = [];
@@ -131,49 +134,49 @@ in {
       '';
     };
 
-    remotePlay.openFirewall = mkOption {
-      type = types.bool;
+    remotePlay.openFirewall = lib.mkOption {
+      type = lib.types.bool;
       default = false;
       description = ''
         Open ports in the firewall for Steam Remote Play.
       '';
     };
 
-    dedicatedServer.openFirewall = mkOption {
-      type = types.bool;
+    dedicatedServer.openFirewall = lib.mkOption {
+      type = lib.types.bool;
       default = false;
       description = ''
         Open ports in the firewall for Source Dedicated Server.
       '';
     };
 
-    localNetworkGameTransfers.openFirewall = mkOption {
-      type = types.bool;
+    localNetworkGameTransfers.openFirewall = lib.mkOption {
+      type = lib.types.bool;
       default = false;
       description = ''
         Open ports in the firewall for Steam Local Network Game Transfers.
       '';
     };
 
-    gamescopeSession = mkOption {
+    gamescopeSession = lib.mkOption {
       description = "Run a GameScope driven Steam session from your display-manager";
       default = {};
-      type = types.submodule {
+      type = lib.types.submodule {
         options = {
-          enable = mkEnableOption "GameScope Session";
-          args = mkOption {
-            type = types.listOf types.str;
+          enable = lib.mkEnableOption "GameScope Session";
+          args = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
             default = [];
             description = ''
               Arguments to be passed to GameScope for the session.
             '';
           };
 
-          env = mkOption {
-            type = types.attrsOf types.str;
+          env = lib.mkOption {
+            type = lib.types.attrsOf lib.types.str;
             default = {};
             description = ''
-              Environment variables to be passed to GameScope for the session.
+              Environmental variables to be passed to GameScope for the session.
             '';
           };
 
@@ -202,14 +205,14 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     hardware.graphics = {
       # this fixes the "glXChooseVisual failed" bug, context: https://github.com/NixOS/nixpkgs/issues/47932
       enable = true;
       enable32Bit = true;
     };
 
-    security.wrappers = mkIf (cfg.gamescopeSession.enable && gamescopeCfg.capSysNice) {
+    security.wrappers = lib.mkIf (cfg.gamescopeSession.enable && gamescopeCfg.capSysNice) {
       # needed or steam fails
       bwrap = {
         owner = "root";
@@ -221,8 +224,10 @@ in {
 
     programs.steam.extraPackages = cfg.fontPackages;
 
-    programs.gamescope.enable = mkDefault cfg.gamescopeSession.enable;
-    services.displayManager.sessionPackages = mkIf cfg.gamescopeSession.enable [gamescopeSessionFile];
+    programs.gamescope.enable = lib.mkDefault cfg.gamescopeSession.enable;
+    services.displayManager.sessionPackages = lib.mkIf cfg.gamescopeSession.enable [
+      gamescopeSessionFile
+    ];
 
     # enable 32bit pulseaudio/pipewire support if needed
     services.pulseaudio.support32Bit = config.services.pulseaudio.enable;
@@ -230,12 +235,22 @@ in {
 
     hardware.steam-hardware.enable = true;
 
+    #environment.systemPackages =
+    #  [
+    #    cfg.package
+    #    cfg.package.run
+    #  ]
+    #  ++ lib.optional cfg.gamescopeSession.enable steam-gamescope
+    #  ++ lib.optional cfg.protontricks.enable (
+    #    cfg.protontricks.package.override {inherit extraCompatPaths;}
+    #  );
+
     networking.firewall = lib.mkMerge [
-      (mkIf (cfg.remotePlay.openFirewall || cfg.localNetworkGameTransfers.openFirewall) {
+      (lib.mkIf (cfg.remotePlay.openFirewall || cfg.localNetworkGameTransfers.openFirewall) {
         allowedUDPPorts = [27036]; # Peer discovery
       })
 
-      (mkIf cfg.remotePlay.openFirewall {
+      (lib.mkIf cfg.remotePlay.openFirewall {
         allowedTCPPorts = [27036];
         allowedUDPPortRanges = [
           {
@@ -245,12 +260,12 @@ in {
         ];
       })
 
-      (mkIf cfg.dedicatedServer.openFirewall {
+      (lib.mkIf cfg.dedicatedServer.openFirewall {
         allowedTCPPorts = [27015]; # SRCDS Rcon port
         allowedUDPPorts = [27015]; # Gameplay traffic
       })
 
-      (mkIf cfg.localNetworkGameTransfers.openFirewall {
+      (lib.mkIf cfg.localNetworkGameTransfers.openFirewall {
         allowedTCPPorts = [27040]; # Data transfers
       })
     ];
