@@ -5,6 +5,7 @@
       extraCompatPackages = [
         pkgs.proton-ge-bin
       ];
+      extraPackages = [pkgs.gamescope];
     };
   };
   services.netbird.enable = true;

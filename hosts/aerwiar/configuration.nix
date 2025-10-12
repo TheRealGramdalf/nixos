@@ -62,7 +62,7 @@
       extraCompatPackages = [
         pkgs.proton-ge-bin
       ];
+      extraPackages = [pkgs.gamescope];
     };
-    #adhde.enable = true;
   };
 }

@@ -1,6 +1,3 @@
 {pkgs, ...}: {
-  tomeutils.vapor = {
-    enable = true;
-    extraPackages = [pkgs.gamescope];
-  };
+  tomeutils.vapor.enable = true;
 }

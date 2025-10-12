@@ -4,6 +4,7 @@
     extraCompatPackages = [
       pkgs.proton-ge-bin
     ];
+    extraPackages = [pkgs.gamescope];
   };
 
   powerManagement.enable = true;
