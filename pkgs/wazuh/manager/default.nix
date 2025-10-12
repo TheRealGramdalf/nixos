@@ -36,7 +36,7 @@
       _: dep:
         fetchurl {
           url = "https://packages.wazuh.com/deps/${dependencyVersion}/libraries/sources/${dep.name}.tar.gz";
-          hash = dep.sha256;
+          hash = dep.hash;
         }
     ) (import ./dependencies/external-dependencies.nix)
   );
