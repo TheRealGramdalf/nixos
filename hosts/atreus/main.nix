@@ -12,6 +12,8 @@
     ./nvidia.nix
     ./peripherals.nix
     ./users.nix
+    ./timekpr.nix
+    ./kanidm.nix
   ];
   time.timeZone = "America/Vancouver";
   nixpkgs.config.allowUnfree = true;
