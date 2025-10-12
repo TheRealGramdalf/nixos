@@ -19,5 +19,6 @@
     ./minecraft.nix
     ./wazuh.nix
     ./wazuh-docker.nix
+    ./timekpr-webui
   ];
 }
