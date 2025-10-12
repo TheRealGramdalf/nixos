@@ -79,3 +79,11 @@ Again, disable the built-in fetching of `modern.bpf.c`. This is replaced by `fet
 ```
 
 The purpose of this is currently unkown
+
+
+## Oddities
+
+These are observations made while packaging Wazuh that may or may not have any significance. In no particular order:
+
+- `prefetch-external-dependencies.sh` runs `nix-prefetch-url` twice, and it appears that the file is fetched fully twice - this should be investigated and reduced to a single invocation if possible
+- During the unpack phase of the Wazuh source, the `external-dependencies` are fetched. This has the side effect of causing the download progress bar to "stall" when it is nearly complete, seemingly doing nothing as it downloads said dependencies. These should be separated if possible
