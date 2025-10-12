@@ -6,7 +6,7 @@
     sharedModules = [
       ./mods/home/main.nix
     ];
-    users."gramdalf" = import ../../../users/gramdalf/main.nix;
+    users."gramdalf" = import ../../users/gramdalf/main.nix;
   };
   users.mutableUsers = false;
   users.users."gramdalf" = {

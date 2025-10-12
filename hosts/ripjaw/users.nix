@@ -6,8 +6,8 @@
     sharedModules = [
       ./mods/home/main.nix
     ];
-    users."games" = import ../../../users/games/main.nix;
-    users."jhon" = import ../../../users/jhon/main.nix;
+    users."games" = import ../../users/games/main.nix;
+    users."jhon" = import ../../users/jhon/main.nix;
   };
   users.users."games" = {
     isNormalUser = true;
