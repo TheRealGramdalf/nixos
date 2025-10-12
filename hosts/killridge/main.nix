@@ -10,11 +10,11 @@
   argon = {
     ipk = builtins.fetchurl {
       url = "https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.2/luci-theme-argon_2.3.2-r20250207_all.ipk";
-      sha256 = "sha256:0csaa17wln1sy4x6v7dj2w6ly7v8s7xznxwhgb411mll1yxycdl8";
+      hash = "sha256:0csaa17wln1sy4x6v7dj2w6ly7v8s7xznxwhgb411mll1yxycdl8";
     };
     config-ipk = builtins.fetchurl {
       url = "https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk";
-      sha256 = "sha256:1mgz9a3b51m0mwr36y4105wfmqk97gnw0ilrx85df0fd6ddhb35x";
+      hash = "sha256:1mgz9a3b51m0mwr36y4105wfmqk97gnw0ilrx85df0fd6ddhb35x";
     };
     deps = [
       "luci-compat"

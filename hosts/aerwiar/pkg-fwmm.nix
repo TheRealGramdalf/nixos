@@ -33,7 +33,7 @@ in
       owner = "DedFishy";
       repo = "FWMM";
       rev = version;
-      sha256 = "sha256-XgJ4MpUNS7lC2vFP57+mDq+FLZbm9vuw+2dbopAoHwM=";
+      hash = "sha256-XgJ4MpUNS7lC2vFP57+mDq+FLZbm9vuw+2dbopAoHwM=";
     };
 
     nativeBuildInputs = [

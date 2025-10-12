@@ -50,7 +50,7 @@ for dep in "${EXTERNAL_DEPS[@]}"; do
 
 "$dep" = {
     name = "$dep";
-    sha256 = "$HASH";
+    hash = "$HASH";
 };
 EOF
 done

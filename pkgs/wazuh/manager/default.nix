@@ -36,7 +36,7 @@
       _: dep:
         fetchurl {
           url = "https://packages.wazuh.com/deps/${dependencyVersion}/libraries/sources/${dep.name}.tar.gz";
-          sha256 = dep.sha256;
+          hash = dep.sha256;
         }
     ) (import ./dependencies/external-dependencies.nix)
   );
@@ -45,14 +45,14 @@
     owner = "wazuh";
     repo = "wazuh-http-request";
     rev = "75384783d339a817b8d8f13f778051a878d642a6";
-    sha256 = "sha256-yCKxwzG65BB3Cr1gEkX4qxbGCjG5zzJpq9di5L1couU=";
+    hash = "sha256-yCKxwzG65BB3Cr1gEkX4qxbGCjG5zzJpq9di5L1couU=";
   };
   libbpf_bootstrap_deps = {
     bootstrap = fetchFromGitHub {
       owner = "libbpf";
       repo = "libbpf-bootstrap";
       rev = "aa18cc0d8fc8ef4104fb74d218ae6a20cf6eb176";
-      sha256 = "sha256-ggIDf/I4QlSypFpsRibsdWd9bSevC2mfyEenlYZQdqI=";
+      hash = "sha256-ggIDf/I4QlSypFpsRibsdWd9bSevC2mfyEenlYZQdqI=";
       fetchSubmodules = true;
     };
     modern_bpf_c = fetchurl {
@@ -69,7 +69,7 @@ in
       owner = "wazuh";
       repo = "wazuh";
       tag = "v${version}";
-      sha256 = "sha256-LmMt2t2ra7kPiYwcy+GIKg5a+LPebTNct/FP5en5JR0=";
+      hash = "sha256-LmMt2t2ra7kPiYwcy+GIKg5a+LPebTNct/FP5en5JR0=";
     };
 
     dontConfigure = true;

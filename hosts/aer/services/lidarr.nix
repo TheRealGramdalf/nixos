@@ -10,7 +10,7 @@
     repo = "arr-scripts";
     rev = "f7c59f85192b771e16cc9f52aaf06289136ee0d7";
     fetchSubmodules = false;
-    sha256 = "sha256-kUcmeeHoCHMQuRrtOrLPrpvpW0LmRf2smbzncQIIC9Y=";
+    hash = "sha256-kUcmeeHoCHMQuRrtOrLPrpvpW0LmRf2smbzncQIIC9Y=";
   };
 in {
   virtualisation.oci-containers.containers."lidarr" = {
