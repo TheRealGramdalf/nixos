@@ -1,4 +1,8 @@
-{inputs, lib, ...}: let 
+{
+  inputs,
+  lib,
+  ...
+}: let
   user = "timekpr-webui";
   group = user;
   stateDir = "/persist/services/timekpr-webui/";
@@ -12,9 +16,9 @@ in {
   };
 
   systemd.services."timekpr-webui" = {
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" ];
+    wantedBy = ["multi-user.target"];
+    wants = ["network-online.target"];
+    after = ["network-online.target"];
     serviceConfig = {
       User = user;
       Group = group;
@@ -23,7 +27,7 @@ in {
     };
   };
 
-    services.cone.extraFiles."timekpr".settings = {
+  services.cone.extraFiles."timekpr".settings = {
     http.routers."timekpr" = {
       rule = "Host(`timekeeper.aer.dedyn.io`)";
       service = "timekpr";
