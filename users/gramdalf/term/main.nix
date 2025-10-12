@@ -9,8 +9,8 @@
     };
     ssh = {
       enable = true;
-      compression = true;
       matchBlocks."*" = {
+        compression = true;
         identityFile = "~/.ssh/gramdalf-key";
         user = "root";
       };
