@@ -4,7 +4,7 @@
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
     sharedModules = [
-      ./mods/home/main.nix
+      ../../mods/home/main.nix
     ];
     users."gramdalf" = import ../../users/gramdalf/main.nix;
   };
