@@ -62,7 +62,7 @@
   };
 in
   stdenv.mkDerivation {
-    pname = "wazuh-agent";
+    pname = "wazuh-manager";
     inherit version;
 
     src = fetchFromGitHub {
@@ -105,7 +105,7 @@ in
 
     makeFlags = [
       "-C src"
-      "TARGET=agent"
+      "TARGET=manager"
       "INSTALLDIR=$out"
     ];
 
@@ -154,20 +154,19 @@ in
       cat << EOF > "etc/preloaded-vars.conf"
       USER_LANGUAGE="en"
       USER_NO_STOP="y"
-      USER_INSTALL_TYPE="agent"
+      USER_INSTALL_TYPE="manager"
       USER_DIR="$out"
       USER_DELETE_DIR="n"
       USER_ENABLE_ACTIVE_RESPONSE="y"
       USER_ENABLE_SYSCHECK="n"
       USER_ENABLE_ROOTCHECK="y"
-      USER_AGENT_SERVER_IP=127.0.0.1
       USER_CA_STORE="n"
       EOF
     '';
 
     preBuild = ''
-      make -C src TARGET=agent settings
-      make -C src TARGET=agent INSTALLDIR=$out deps
+      make -C src TARGET=manager settings
+      make -C src TARGET=manager INSTALLDIR=$out deps
     '';
 
     installPhase = ''
@@ -195,7 +194,7 @@ in
     '';
 
     meta = {
-      description = "Wazuh agent for NixOS";
+      description = "Wazuh manager for NixOS";
       homepage = "https://wazuh.com";
     };
   }
