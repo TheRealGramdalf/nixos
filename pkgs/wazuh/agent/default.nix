@@ -68,7 +68,7 @@ in
     src = fetchFromGitHub {
       owner = "wazuh";
       repo = "wazuh";
-      rev = "v${version}";
+      tag = "v${version}";
       sha256 = "sha256-LmMt2t2ra7kPiYwcy+GIKg5a+LPebTNct/FP5en5JR0=";
     };
 
