@@ -4,7 +4,7 @@
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
     sharedModules = [
-      ../.../../mods/home/main.nix
+      ../../mods/home/main.nix
     ];
     users."meebling" = import ../../users/meebling/main.nix;
     users."meeblingthedevilish" = import ../../users/meebling/devilish.nix;
