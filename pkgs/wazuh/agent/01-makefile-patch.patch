@@ -73,7 +73,7 @@ index 4a7cd9714d..f442facb03 100644
 -        }
 -    }
 -
-     if ((stat(buff, &buff_stat) < 0) || !S_ISDIR(buff_stat.st_mode)) {
+     if ((w_stat(buff, &buff_stat) < 0) || !S_ISDIR(buff_stat.st_mode)) {
          os_free(buff);
          merror_exit(HOME_ERROR);
 diff --git a/src/shared/privsep_op.c b/src/shared/privsep_op.c
