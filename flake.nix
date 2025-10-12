@@ -123,29 +123,6 @@
           ./hosts/ripjaw/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
-              sharedModules = [
-                ./mods/home/main.nix
-              ];
-              users."games" = import ./users/games/main.nix;
-              users."jhon" = import ./users/jhon/main.nix;
-            };
-            users.users."games" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.games";
-              extraGroups = ["video" "network"];
-            };
-            users.users."jhon" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.jhon";
-              extraGroups = ["video" "network" "render"];
-            };
-            users.mutableUsers = false;
-          }
         ];
       };
       "aerwiar" = nixosSystem {
@@ -155,25 +132,6 @@
           ./hosts/aerwiar/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
-              sharedModules = [
-                ./mods/home/main.nix
-              ];
-              users."gramdalf" = import ./users/gramdalf/main.nix;
-            };
-            users.mutableUsers = false;
-            users.users."gramdalf" = {
-              isNormalUser = true;
-              extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "plugdev" "wireshark" "dialout"];
-              hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
-              group = "gramdalf";
-            };
-            users.groups."gramdalf" = {};
-          }
         ];
       };
       "muffin-time" = stableNixosSystem {
@@ -188,41 +146,6 @@
           ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
           home-manager-stable.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
-              sharedModules = [
-                ./mods/home/main.nix
-              ];
-              users."meebling" = import ./users/meebling/main.nix;
-              users."meeblingthedevilish" = import ./users/meebling/devilish.nix;
-              users."zoom" = import ./users/meebling/zoom.nix;
-              users."music" = import ./users/meebling/music.nix;
-            };
-            users.mutableUsers = false;
-            users.users."meebling" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
-              extraGroups = ["video" "networkmanager"];
-            };
-            users.users."meeblingthedevilish" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "networkmanager"];
-            };
-            users.users."zoom" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "networkmanager"];
-            };
-            users.users."music" = {
-              isNormalUser = true;
-              hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
-              extraGroups = ["video" "networkmanager"];
-            };
-          }
         ];
       };
       "aer" = nixosSystem {

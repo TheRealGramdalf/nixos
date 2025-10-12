@@ -12,6 +12,7 @@
     ./configuration.nix
     ./arm.nix
     ./kani.nix
+    ./users.nix
   ];
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
