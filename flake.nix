@@ -141,11 +141,11 @@
           ./hosts/muffin-time/main.nix
         ];
       };
-      "atreus" = stableNixosSystem {
+      "atreus" = nixosSystem {
         modules = [
           ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
-          home-manager-stable.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
         ];
       };
       "aer" = nixosSystem {
