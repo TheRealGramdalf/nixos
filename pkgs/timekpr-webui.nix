@@ -46,6 +46,9 @@ in
       mkdir $out
       cp -R $src/* $out
 
+      substituteInPlace $out/app.py \
+        --replace-fail "    app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)" "    app.run(host='127.0.0.1', port=5000, debug=False, use_reloader=False)"
+
       mkdir $out/bin
       makeWrapper ${lib.getExe pyWithLibs} $out/bin/timekpr-webui \
         --add-flag $out/app.py
@@ -54,6 +57,7 @@ in
     meta = {
       homepage = "https://github.com/adambie/timekpr-webui";
       description = "Flask-based webUI for timekpr-next";
+      mainProgram = "timekpr-webui";
       license = lib.licenses.mit;
     };
   }
