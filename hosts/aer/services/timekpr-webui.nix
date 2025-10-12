@@ -16,8 +16,8 @@ in {
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
     serviceConfig = {
-      User = cfg.user;
-      Group = cfg.group;
+      User = user;
+      Group = group;
       WorkingDirectory = stateDir;
       ExecStart = "${lib.getExe inputs.self.packages.x86_64-linux.timekpr-webui}";
     };
