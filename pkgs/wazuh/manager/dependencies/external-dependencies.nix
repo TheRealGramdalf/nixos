@@ -1,4 +1,5 @@
 {
+
   "audit-userspace" = {
     name = "audit-userspace";
     sha256 = "sha256-6Coy5e35OwVRYOFLyX9B3q05KHklhR3ICnY44tTTBDQ=";
@@ -22,6 +23,11 @@
   "cpp-httplib" = {
     name = "cpp-httplib";
     sha256 = "sha256-ZRdXMmNhFoa5IZunlsNfVKMG6yfcPHLhgH8qCjTKweg=";
+  };
+
+  "cpython_x86_64" = {
+    name = "cpython_x86_64";
+    sha256 = "sha256-swJjIHxnjLnmSd981fl1xWhK2AkZxUpNHj6wG1wyR3Y=";
   };
 
   "curl" = {

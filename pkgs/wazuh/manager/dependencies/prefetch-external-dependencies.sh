@@ -7,6 +7,7 @@ EXTERNAL_DEPS=(
     "bzip2"
     "cJSON"
     "cpp-httplib"
+    "cpython_x86_64"
     "curl"
     "flatbuffers"
     "googletest"
