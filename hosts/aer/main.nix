@@ -14,7 +14,7 @@
     # Services
     ./services/services.nix
   ];
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+  boot.kernelPackages = pkgs.linuxPackages_6_17;
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
