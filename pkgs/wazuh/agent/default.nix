@@ -141,8 +141,8 @@ in
       substituteInPlace src/external/audit-userspace/autogen.sh \
         --replace-fail "cp INSTALL.tmp INSTALL" ""
 
-      substituteInPlace src/external/openssl/config \
-        --replace-fail "/usr/bin/env" "env"
+      #substituteInPlace src/external/openssl/config \
+      #  --replace-fail "/usr/bin/env" "env"
 
       substituteInPlace src/init/inst-functions.sh \
         --replace-fail "WAZUH_GROUP='wazuh'" "WAZUH_GROUP='nixbld'" \
