@@ -8,4 +8,4 @@ result
 
 # tasmota OTA files
 ota
-pkgs/wazuh/agent/dependencies/wazuh
+pkgs/wazuh/wazuh
