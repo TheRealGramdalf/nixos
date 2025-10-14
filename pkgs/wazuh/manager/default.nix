@@ -125,8 +125,12 @@ in
 
       mkdir -p src/external
 
-      tar -xzf ${cpython-external-dep} -c src/external
-      mv src/external/cpython_x86_64 src/external/cpython
+      echo "grabbing cpython:"
+      cd src/external
+      cp ${cpython-external-dep} ./cpython.tar.gz
+      gunzip cpython.tar.gz
+      cd ../..
+      
       ${lib.strings.concatMapStringsSep "\n" (
           dep: "tar -xzf ${dep} -C src/external"
         )
