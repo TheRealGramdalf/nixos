@@ -40,7 +40,6 @@ BASE_URL="https://packages.wazuh.com/deps/$DEPENDENCY_VERSION/libraries/sources"
 echo "{" >external-dependencies.nix
 
 for dep in "${EXTERNAL_DEPS[@]}"; do
-    nix-prefetch-url "$BASE_URL/$dep.tar.gz" --type sha256 --print-path
     HASH=$(
         nix-prefetch-url "$BASE_URL/$dep.tar.gz" --type sha256 |
             xargs nix hash convert --from nix32 --to sri --hash-algo sha256
