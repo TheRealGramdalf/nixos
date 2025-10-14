@@ -59,10 +59,10 @@
       url = "https://raw.githubusercontent.com/wazuh/wazuh/v${version}/src/syscheckd/src/ebpf/src/modern.bpf.c";
       hash = "sha256-D7NPWwrBblP43U7DoBgZewo4wmn3HWGr14wU85+fOC8=";
     };
-    cpython-external-dep = fetchurl {
+  };
+  cpython-external-dep = fetchurl {
     name = "cpython_x86_64";
     hash = "sha256-swJjIHxnjLnmSd981fl1xWhK2AkZxUpNHj6wG1wyR3Y=";
-    };
   };
 in
   stdenv.mkDerivation {
