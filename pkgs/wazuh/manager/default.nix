@@ -61,7 +61,7 @@
     };
   };
   cpython-external-dep = fetchurl {
-    name = "cpython_x86_64";
+    url = "https://packages.wazuh.com/deps/${dependencyVersion}/libraries/sources/cpython_x86_64.tar.gz";
     hash = "sha256-swJjIHxnjLnmSd981fl1xWhK2AkZxUpNHj6wG1wyR3Y=";
   };
 in
