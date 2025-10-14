@@ -1,4 +1,5 @@
 {
+
   "audit-userspace" = {
     name = "audit-userspace";
     hash = "sha256-6Coy5e35OwVRYOFLyX9B3q05KHklhR3ICnY44tTTBDQ=";
@@ -127,6 +128,11 @@
   "rpm" = {
     name = "rpm";
     hash = "sha256-rvwlMB7M8irFHL2BOn89RHHxxCYYFy7lSKKbGVmsW68=";
+  };
+
+  "simdjson" = {
+    name = "simdjson";
+    hash = "sha256-8DNneHHbAjapYWA7y5/vMP8MZaTR+0lvqPrj+RyLVss=";
   };
 
   "sqlite" = {

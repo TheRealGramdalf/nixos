@@ -30,6 +30,7 @@ EXTERNAL_DEPS=(
     "procps"
     "rocksdb"
     "rpm"
+    "simdjson"
     "sqlite"
     "zlib"
 )
