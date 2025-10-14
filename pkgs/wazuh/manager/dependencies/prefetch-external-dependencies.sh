@@ -7,7 +7,8 @@ EXTERNAL_DEPS=(
     "bzip2"
     "cJSON"
     "cpp-httplib"
-    "cpython_x86_64"
+    # The source name differs, this is fetched elsewhere
+    #"cpython_x86_64"
     "curl"
     "flatbuffers"
     "googletest"

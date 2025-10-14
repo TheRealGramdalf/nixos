@@ -24,11 +24,6 @@
     hash = "sha256-ZRdXMmNhFoa5IZunlsNfVKMG6yfcPHLhgH8qCjTKweg=";
   };
 
-  "cpython_x86_64" = {
-    name = "cpython_x86_64";
-    hash = "sha256-swJjIHxnjLnmSd981fl1xWhK2AkZxUpNHj6wG1wyR3Y=";
-  };
-
   "curl" = {
     name = "curl";
     hash = "sha256-qTtbg5JV2SSHo/mtffraHcc6sBaALH9mncCaiRxlRvo=";
