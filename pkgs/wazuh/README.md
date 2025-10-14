@@ -1,5 +1,39 @@
 Since wazuh is both complex and relied uppon for security information, decisions regarding implementation that differs from upstream should be recorded here - include the changes made, the motivation for the change, and source code (pinned to a revision) from upstream if relevant. For information regarding the NixOS Module, see the accompanying document in `nixos/modules/security/wazuh/README.md`
 
+
+## Common Build Errors
+
+If a build fails, check the errors below to see if it matches. These are errors that may crop up in the future due to dependency changes and the like.
+
+##### External-dependencies base URL
+
+The `prefetch-external-dependencies.sh` script fetches dependencies for Wazuh from their servers. At the moment, a base URL of `https://packages.wazuh.com/deps/$DEPENDENCY_VERSION/libraries/sources` is used. There is also `https://packages.wazuh.com/deps/$DEPENDENCY_VERSION/libraries/linux/amd64` available, the full implications of using this instead is currently unkown.
+
+##### External-dependencies failiure
+If you see something along the lines of:
+```sh
+curl -so external/cpython.tar.gz https://packages.wazuh.com/deps/43/libraries/linux/amd64/cpython.tar.gz || true
+cd external && [ -f cpython.tar.gz ] && gunzip cpython.tar.gz || true
+test -e external/cpython.tar ||\
+(curl -so external/cpython.tar.gz https://packages.wazuh.com/deps/43/libraries/sources/cpython_x86_64.tar.gz &&\
+cd external && gunzip cpython.tar.gz && tar -xf cpython.tar && rm cpython.tar)
+make: *** [Makefile:1499: external/cpython.tar.gz] Error 6
+make: Leaving directory '/build/src
+```
+This is most likely an issue with how Wazuh deals with external dependencies. The basic gist of the logic is this:
+
+> Try to download and extract a prebuilt binary of {dependency} for `hostPlatform` (`libraries/linux/amd64/...`)
+> If that fails or doesn’t produce a usable directory, fall back to downloading and extracting the source version instead.
+> Always continue even if something fails (never abort).
+
+In the nix sandbox, there is no network access - the `curl` command fails, but it continues anyway due to `|| true`.
+This works to our advantage, since one can simply use `fetchurl` to prefetch the dependencies and place them in the directory Wazuh expects.
+The network call will fail, but you still end up with the same result due to the file being prefetched and placed where it expects.
+The definition for this can be found in `src/Makefile:1500` as of Wazuh 4.13.1
+
+This can be an indicator of two problems - either a missing `external-dependency`, or an incorrect name. With `cpython` in particular, the file as it gets downloaded (from sources) is suffixed with `_x86_64`. The Makefile, however, expects just `cpython.tar.gz`. To fix this, the current best method is to hardcode an extra step for the dependency in `default.nix` that references a `let in` expression with the `fetchurl`.
+In the case of a missing dependency, simply adding it's name under `{url}` to `prefetch-external-dependencies.sh` and running it should suffice. Each component (agent, manager) has a different set of required dependencies, ensure you are editing the correct script
+
 ## 01-makefile-patch.patch
 
 ```diff
@@ -85,5 +119,5 @@ The purpose of this is currently unkown
 
 These are observations made while packaging Wazuh that may or may not have any significance. In no particular order:
 
-- `prefetch-external-dependencies.sh` runs `nix-prefetch-url` twice, and it appears that the file is fetched fully twice - this should be investigated and reduced to a single invocation if possible
-- During the unpack phase of the Wazuh source, the `external-dependencies` are fetched. This has the side effect of causing the download progress bar to "stall" when it is nearly complete, seemingly doing nothing as it downloads said dependencies. These should be separated if possible
+- [X] ~~`prefetch-external-dependencies.sh` runs `nix-prefetch-url` twice, and it appears that the file is fetched fully twice - this should be investigated and reduced to a single invocation if possible~~ Fixed, only one invocation is needed since the dependency name is already known, the only thing to gather is the hash. `--print-path` could be added to change from `path is '$outpath'` to just `$outpath`
+- [ ] During the unpack phase of the Wazuh source, the `external-dependencies` are fetched. This has the side effect of causing the download progress bar to "stall" when it is nearly complete, seemingly doing nothing as it downloads said dependencies. These should be separated if possible
