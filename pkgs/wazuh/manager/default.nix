@@ -25,6 +25,7 @@
   stdenv,
   systemd,
   zlib,
+  breakpointHook,
   ...
 }: let
   inherit (lib) getExe;
@@ -94,6 +95,7 @@ in
       policycoreutils
       python312
       zlib
+      #breakpointHook
     ];
 
     buildInputs = [
@@ -119,16 +121,14 @@ in
       ./03-rocksdb-overflow.patch
     ];
 
-    unpackPhase = ''
-      runHook preUnpack
-
-      cp -rf --no-preserve=all "$src"/* .
+    postUnpack = ''
+      pushd $sourceRoot
 
       mkdir -p src/external
 
       echo "grabbing cpython:"
       cd src/external
-      cp ${cpython-external-dep} ./cpython.tar.gz
+      cp --preserve=timestamps --reflink=auto -- ${cpython-external-dep} ./cpython.tar.gz
       gunzip cpython.tar.gz
       cd ../..
 
@@ -138,14 +138,16 @@ in
         external-dependencies}
 
       mkdir -p src/external/libbpf-bootstrap/src
-      cp --no-preserve=all -rf ${libbpf_bootstrap_deps.bootstrap}/* src/external/libbpf-bootstrap
+      cp -r --preserve=timestamps --reflink=auto -- ${libbpf_bootstrap_deps.bootstrap}/* src/external/libbpf-bootstrap
       cp ${libbpf_bootstrap_deps.modern_bpf_c} src/external/libbpf-bootstrap/src/modern.bpf.c
 
-      cp --no-preserve=all -rf ${wazuh-http-request}/* src/shared_modules/http-request/
+      mkdir -p src/shared_modules/http-request
+      cp -r --preserve=timestamps --reflink=auto -- ${wazuh-http-request}/* src/shared_modules/http-request
 
-      chmod +x src/analysisd/compiled_rules/register_rule.sh
+      echo "done"
 
-      runHook postUnpack
+      #chmod +x src/analysisd/compiled_rules/register_rule.sh
+      popd
     '';
 
     prePatch = ''
