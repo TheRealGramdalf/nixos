@@ -135,6 +135,32 @@ Again, disable the built-in fetching of `modern.bpf.c`. This is replaced by `fet
 The purpose of this is currently unkown
 
 
+## 03-rocksdb-overflow.patch
+
+```diff
+--- a/src/external/rocksdb/util/string_util.cc
++++ b/src/external/rocksdb/util/string_util.cc
+@@ -115,7 +115,7 @@ void AppendEscapedStringTo(std::string* str, const Slice& value) {
+ }
+
+ std::string NumberToHumanString(int64_t num) {
+-  char buf[19];
++  char buf[21];
+   int64_t absnum = num < 0 ? -num : num;
+   if (absnum < 10000) {
+     snprintf(buf, sizeof(buf), "%" PRIi64, num);
+```
+
+This patches the `NumberToHumanString` method in rocksdb to increase the buffer size which prevents the compiler from erroring. This mirrors an identical change made upstream in `rocksdb` that is not present in the version used by Wazuh; see https://github.com/facebook/rocksdb/blame/112ff5bb703787186b01d496bc5b32e9477bddbb/util/string_util.cc#L103
+
+This is what Wazuh member Stuti Gupta had to say about it:
+
+> This build failure isn’t specific to Wazuh or RocksDB, but rather to how NixOS handles compilation. NixOS enforces a hardened build environment that treats many compiler warnings as fatal errors. When you build Wazuh from source, it uses vendored RocksDB code that triggers a harmless truncation warning on newer GCC and glibc versions. Under normal Linux builds, this would just be a warning, but NixOS’ defaults—-D_FORTIFY_SOURCE=3, -Werror, and -Wformat-truncation—turn it into a hard failure.
+> CMake 4.1.1 isn’t the problem here; it’s the stricter environment. To resolve this you can refer to:
+> https://github.com/NixOS/nixpkgs/issues/445447
+> You can see the discussion for the same: https://www.reddit.com/r/NixOS/comments/1o48xc2/breaking_hundreds_of_packages_because_of_cmake/Alternatively, you can patch the affected line in string_util.cc to use a larger buffer (e.g., change `char buf[20];` to `char buf[32];`), which prevents the compiler from complaining. https://stackoverflow.com/questions/51534284/how-to-circumvent-format-truncation-warning-in-gccIn short, the issue isn’t caused by Wazuh itself but by NixOS’ strict hardening and warning policies with modern GCC/glibc behavior. Relaxing those checks or applying the small patch allows Wazuh to build successfully.
+
+
 ## Oddities
 
 These are observations made while packaging Wazuh that may or may not have any significance. In no particular order:
