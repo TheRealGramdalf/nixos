@@ -109,7 +109,7 @@ in
 
     makeFlags = [
       "-C src"
-      "TARGET=manager"
+      "TARGET=server"
       "INSTALLDIR=$out"
     ];
 
@@ -130,7 +130,7 @@ in
       cp ${cpython-external-dep} ./cpython.tar.gz
       gunzip cpython.tar.gz
       cd ../..
-      
+
       ${lib.strings.concatMapStringsSep "\n" (
           dep: "tar -xzf ${dep} -C src/external"
         )
@@ -165,7 +165,7 @@ in
       cat << EOF > "etc/preloaded-vars.conf"
       USER_LANGUAGE="en"
       USER_NO_STOP="y"
-      USER_INSTALL_TYPE="manager"
+      USER_INSTALL_TYPE="server"
       USER_DIR="$out"
       USER_DELETE_DIR="n"
       USER_ENABLE_ACTIVE_RESPONSE="y"
@@ -176,8 +176,8 @@ in
     '';
 
     preBuild = ''
-      make -C src TARGET=manager settings
-      make -C src TARGET=manager INSTALLDIR=$out deps
+      make -C src TARGET=server settings
+      make -C src TARGET=server INSTALLDIR=$out deps
     '';
 
     installPhase = ''
