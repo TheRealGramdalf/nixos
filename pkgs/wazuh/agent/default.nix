@@ -25,6 +25,7 @@
   stdenv,
   systemd,
   zlib,
+  breakpointHook,
   ...
 }: let
   inherit (lib) getExe;
@@ -90,6 +91,7 @@ in
       policycoreutils
       python312
       zlib
+      #breakpointHook
     ];
 
     buildInputs = [
@@ -114,10 +116,8 @@ in
       ./02-libbpf-bootstrap.patch
     ];
 
-    unpackPhase = ''
-      runHook preUnpack
-
-      cp -rf --no-preserve=all "$src"/* .
+    postUnpack = ''
+      pushd $sourceRoot
 
       mkdir -p src/external
       ${lib.strings.concatMapStringsSep "\n" (
@@ -125,13 +125,19 @@ in
         )
         external-dependencies}
 
+      echo 'grabbing libbpf-bootstrap...'
       mkdir -p src/external/libbpf-bootstrap/src
-      cp --no-preserve=all -rf ${libbpf_bootstrap_deps.bootstrap}/* src/external/libbpf-bootstrap
+      cp -r --preserve=timestamps --reflink=auto -- ${libbpf_bootstrap_deps.bootstrap}/* src/external/libbpf-bootstrap
+
+      echo 'grabbing modern_bpf_c...'
       cp ${libbpf_bootstrap_deps.modern_bpf_c} src/external/libbpf-bootstrap/src/modern.bpf.c
 
-      cp --no-preserve=all -rf ${wazuh-http-request}/* src/shared_modules/http-request/
+      echo 'grabbing wazuh-http-request...'
+      mkdir -p src/shared_modules/http-request
+      cp -r --preserve=timestamps --reflink=auto -- ${wazuh-http-request}/* src/shared_modules/http-request
 
-      runHook postUnpack
+      #chmod +x src/analysisd/compiled_rules/register_rule.sh
+      popd
     '';
 
     prePatch = ''
