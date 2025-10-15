@@ -1,5 +1,25 @@
 Since wazuh is both complex and relied uppon for security information, decisions regarding implementation that differs from upstream should be recorded here - include the changes made, the motivation for the change, and source code (pinned to a revision) from upstream if relevant. For information regarding the NixOS Module, see the accompanying document in `nixos/modules/security/wazuh/README.md`
 
+## Build Targets
+
+Available build targets can be found by running:
+```sh
+$ nix develop
+$ git clone https://github.com/wazuh/wazuh -b $VERSION
+$ cd wazuh/src
+$ make
+```
+
+Current targets (as of v4.13.1) are:
+Differences between server, local, and hybrid are unkown
+```
+TARGET is required:
+   make TARGET=server   to build the server
+   make TARGET=local      - local version of server
+   make TARGET=hybrid     - hybrid version of server
+   make TARGET=agent    to build the unix agent
+   make TARGET=winagent to build the windows agent
+```
 
 ## Common Build Errors
 
