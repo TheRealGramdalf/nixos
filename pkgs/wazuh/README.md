@@ -141,3 +141,11 @@ These are observations made while packaging Wazuh that may or may not have any s
 
 - [X] ~~`prefetch-external-dependencies.sh` runs `nix-prefetch-url` twice, and it appears that the file is fetched fully twice - this should be investigated and reduced to a single invocation if possible~~ Fixed, only one invocation is needed since the dependency name is already known, the only thing to gather is the hash. `--print-path` could be added to change from `path is '$outpath'` to just `$outpath`
 - [ ] During the unpack phase of the Wazuh source, the `external-dependencies` are fetched. This has the side effect of causing the download progress bar to "stall" when it is nearly complete, seemingly doing nothing as it downloads said dependencies. These should be separated if possible
+
+## Todos
+
+- [ ] Figure out what licence to use for Wazuh
+   - the LICENCE states `This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License (version 2) as published by the FSF - Free Software Foundation.`, but it also has some other copyright information e.g. `Portions Copyright (C) 2015, Wazuh Inc. Based on work Copyright (C) 2003 - 2013 Trend Micro, Inc.`
+- [ ] What `platforms`/`badPlatforms` or `availableOn` types should be used?
+   - See https://nixos.org/manual/nixpkgs/stable/#var-meta-platforms
+   - Is the meta attribute for where it can be built, or where it can be used? 
