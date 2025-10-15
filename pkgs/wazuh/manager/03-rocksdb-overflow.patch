@@ -1,5 +1,5 @@
---- a/src/external/rocksdb/string_util.cc
-+++ b/src/external/rocksdb/string_util.cc
+--- a/src/external/rocksdb/util/string_util.cc
++++ b/src/external/rocksdb/util/string_util.cc
 @@ -115,7 +115,7 @@ void AppendEscapedStringTo(std::string* str, const Slice& value) {
  }
 
