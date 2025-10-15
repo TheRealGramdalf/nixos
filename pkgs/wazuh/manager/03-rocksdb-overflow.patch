@@ -5,7 +5,7 @@
 
  std::string NumberToHumanString(int64_t num) {
 -  char buf[19];
-+  char buf[20];
++  char buf[21];
    int64_t absnum = num < 0 ? -num : num;
    if (absnum < 10000) {
      snprintf(buf, sizeof(buf), "%" PRIi64, num);
