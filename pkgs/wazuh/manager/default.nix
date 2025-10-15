@@ -116,6 +116,7 @@ in
     patches = [
       ./01-makefile-patch.patch
       ./02-libbpf-bootstrap.patch
+      ./03-rocksdb-overflow.patch
     ];
 
     unpackPhase = ''
