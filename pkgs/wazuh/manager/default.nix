@@ -143,6 +143,8 @@ in
 
       cp --no-preserve=all -rf ${wazuh-http-request}/* src/shared_modules/http-request/
 
+      chmod +x src/analysisd/compiled_rules/register_rule.sh
+
       runHook postUnpack
     '';
 
