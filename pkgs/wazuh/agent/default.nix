@@ -25,6 +25,9 @@
   stdenv,
   systemd,
   zlib,
+
+  # Needed for makefile
+  ps,
   breakpointHook,
   ...
 }: let
@@ -87,6 +90,7 @@ in
       cmake
       curl
       perl
+      ps
       pkg-config
       policycoreutils
       python312

@@ -28,6 +28,8 @@
 
   # Needed for makefile
   ps,
+  # Appears to be used by rocksdb build
+  git,
   breakpointHook,
   ...
 }: let
@@ -93,6 +95,7 @@ in
       clang
       cmake
       curl
+      git
       perl
       ps
       pkg-config
