@@ -218,5 +218,6 @@ in
     meta = {
       description = "Wazuh manager for NixOS";
       homepage = "https://wazuh.com";
+      license = [lib.licenses.gpl2only];
     };
   }
