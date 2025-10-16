@@ -175,3 +175,190 @@ These are observations made while packaging Wazuh that may or may not have any s
 - [ ] What `platforms`/`badPlatforms` or `availableOn` types should be used?
    - See https://nixos.org/manual/nixpkgs/stable/#var-meta-platforms
    - Is the meta attribute for where it can be built, or where it can be used? 
+- [ ] `install.sh` throws `No action was made to configure Wazuh to start during the boot. Add the following line to your init script: /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/bin/wazuh-control start` - check what exactly causes this (probably `binary-install`?), and see what `wazuh-control` does
+- [ ] Wazuh manager throws `substituteStream() in derivation wazuh-manager-4.13.1: ERROR: pattern cd\  doesn't match anything in file '/nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/bin/wazuh-control'` - check how `''${LOCAL}` needs to be escaped
+- [ ] `install: cannot change ownership of '/nix/store/...-wazuh-manager-4.13.1/...': Invalid argument` is thrown many times, most likely due to `-DUSER` and `-DGLOBALGROUP`
+- [ ] Figure out what `cpython` actually does, and how it needs to be patched to work properly:
+```sh
+mkdir -p /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python
+cp external/cpython.tar.gz /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python/cpython.tar.gz && tar -xf /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python/cpython.tar.gz -C /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python && rm -rf /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python/cpython.tar.gz
+find /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python -name "*libpython3.10.so.1.0" -exec ln -f {} /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/lib/libpython3.10.so.1.0 \;
+cd ../framework && /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python/bin/python3 -m pip install . --use-pep517 --prefix=/nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python && rm -rf build/
+sh: line 1: /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/framework/python/bin/python3: No such file or directory
+```
+- [ ] `grep: /etc/os-release: No such file or directory` is thrown when running `make`, figure out what this does and whether it needs to be fixed or not
+- [ ] `install: invalid user 'wazuh'` is thrown right after `install: cannot change ownership of '/nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/etc/local_internal_options.conf': Invalid argument`
+- [ ] `install.sh` uses these options currently:
+```sh
+cat: /etc/resolv.conf: No such file or directory
+cat: /etc/resolv.conf: No such file or directory
+
+ Wazuh v4.13.1 (Rev. rc1) Installation Script - https://www.wazuh.com
+
+ You are about to start the installation process of Wazuh.
+ You must have a C compiler pre-installed in your system.
+
+  - System: Linux localhost 6.16.11 (Linux 0.0)
+  - User: nixbld
+  - Host: localhost
+
+
+  -- Press ENTER to continue or Ctrl-C to abort. --
+./install.sh: hash: line 37: ps: not found
+./install.sh: hash: line 37: ps: not found
+./install.sh: hash: line 37: ps: not found
+
+    - Installation will be made at  /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1 .
+
+3- Configuring Wazuh.
+
+  3.1- Do you want e-mail notification? (y/n) [n]:
+   --- Email notification disabled.
+
+  3.2- Do you want to run the integrity check daemon? (y/n) [y]:
+   - Not running syscheck (integrity check daemon).
+
+  3.3- Do you want to run the rootkit detection engine? (y/n) [y]:
+   - Running rootcheck (rootkit detection).
+
+  3.5- Active response allows you to execute a specific
+       command based on the events received.
+       By default, no active responses are defined.
+
+   - Default white list for the active response:
+
+   - Do you want to add more IPs to the white list? (y/n)? [n]:
+  3.6- Do you want to enable remote syslog (port 514 udp)? (y/n) [y]:
+   - Remote syslog enabled.
+
+  3.7 - Do you want to run the Auth daemon? (y/n) [y]:
+   - Running Auth daemon.
+
+  3.8- Do you want to start Wazuh after the installation? (y/n) [y]:
+   - Wazuh will start at the end of installation.
+
+  3.9- Setting the configuration to analyze the following logs:
+
+    -- /nix/store/48pihjafyikymv466kx0gvdq2z2clbz3-wazuh-manager-4.13.1/logs/active-responses.log
+
+ - If you want to monitor any other file, just change
+   the ossec.conf and add a new localfile entry.
+   Any questions about the configuration can be answered
+   by visiting us online at https://documentation.wazuh.com/.
+
+
+   --- Press ENTER to continue ---
+```
+- [ ] `make settings` gives this output - useful for investigation
+```sh
+General settings:
+    TARGET:             server
+    V:
+    DEBUG:
+    DEBUGAD
+    INSTALLDIR:         ut
+    DATABASE:
+    ONEWAY:             no
+    CLEANFULL:          no
+    RESOURCES_URL:      https://packages.wazuh.com/deps/43
+    EXTERNAL_SRC_ONLY:
+    HTTP_REQUEST_BRANCH:75384783d339a817b8d8f13f778051a878d642a6
+User settings:
+    WAZUH_GROUP:        wazuh
+    WAZUH_USER:         wazuh
+USE settings:
+    USE_ZEROMQ:         no
+    USE_GEOIP:          no
+    USE_PRELUDE:        no
+    USE_INOTIFY:        no
+    USE_BIG_ENDIAN:     no
+    USE_SELINUX:        no
+    USE_AUDIT:          yes
+    DISABLE_SYSC:       no
+    DISABLE_CISCAT:     no
+    IMAGE_TRUST_CHECKS: 1
+    CA_NAME:            DigiCert Assured ID Root CA
+Mysql settings:
+    includes:
+    libs:
+Pgsql settings:
+    includes:
+    libs:
+Defines:
+    -DOSSECHIDS -DUSER="wazuh" -DGROUPGLOBAL="wazuh" -DLinux -DINOTIFY_ENABLED -D_XOPEN_SOURCE=600 -D_GNU_SOURCE -DIMAGE_TRUST_CHECKS=1 -DCA_NAME='DigiCert Assured ID Root CA' -DENABLE_SYSC -DENABLE_CISCAT -DENABLE_AUDIT
+Compiler:
+    CFLAGS            -pthread -Iexternal/pacman/lib/libalpm/ -Iexternal/libarchive/libarchive -Wl,--start-group -Iexternal/audit-userspace/lib -g -DNDEBUG -O2 -DOSSECHIDS -DUSER="wazuh" -DGROUPGLOBAL="wazuh" -DLinux -DINOTIFY_ENABLED -D_XOPEN_SOURCE=600 -D_GNU_SOURCE -DIMAGE_TRUST_CHECKS=1 -DCA_NAME='DigiCert Assured ID Root CA' -DENABLE_SYSC -DENABLE_CISCAT -DENABLE_AUDIT -pipe -Wall -Wextra -std=gnu99 -I./ -I./headers/ -Iexternal/openssl/include -Iexternal/cJSON/ -Iexternal/libyaml/include -Iexternal/curl/include -Iexternal/msgpack/include -Iexternal/bzip2/ -Ishared_modules/common -Ishared_modules/dbsync/include -Ishared_modules/rsync/include -Iwazuh_modules/syscollector/include  -Idata_provider/include  -Iexternal/libpcre2/include -Iexternal/rpm//builddir/output/include -Isyscheckd/include -Ishared_modules/router/include -Ishared_modules/content_manager/include -Iwazuh_modules/vulnerability_scanner/include -Iwazuh_modules/inventory_harvester/include -I./shared_modules/
+    LDFLAGS           '-Wl,-rpath,/../lib' -pthread -lrt -ldl -O2 -Lshared_modules/dbsync/build/lib -Lshared_modules/rsync/build/lib  -Lwazuh_modules/syscollector/build/lib -Ldata_provider/build/lib -Lsyscheckd/build/lib
+    LIBS              -lrt -ldl -lm
+    CC                gcc
+    MAKE              make
+```
+- [ ] `/nix/store/7h3qnwgvkw6z2r8lq4j5mks4l6r5x2cq-binutils-2.44/bin/ld: missing --end-group; added as last command line option` is randomly thrown, figure out what that comes from
+- [ ] `cd wazuh_modules/syscollector/ && mkdir -p build && cd build && cmake -DTARGET=server -DCMAKE_SYMBOLS_IN_RELEASE=ON    .. && make` throws `CMake Warning: Manually-specified variables were not used by the project: TARGET` - check where that comes from (env var or CLI flag) and remove if possible
+- [ ] Nix throws `Warning: supplying the --target bpf != x86_64-unknown-linux-gnu argument to a nix-wrapped compiler may not work correctly - cc-wrapper is currently not designed with multi-target compilers in mind. You may want to use an un-wrapped compiler instead.`. Investigate.
+- [ ] cmake throws a deprecation warning, ask the Wazuh team about this (nix uses cmake `4.x`, wazuh docs ask for `3.18`)
+```
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_policy):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+```
+- [ ] Investigate rocksdb dependencies (`liburing` and `git` were not present)
+```
+cd external/rocksdb/ && mkdir -p build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DWITH_GFLAGS=0 -DWITH_TESTS=0 -DWITH_BENCHMARK_TOOLS=0 -DWITH_TOOLS=0 -DUSE_RTTI=1 -DROCKSDB_BUILD_SHARED=1 -DWITH_BZ2=1 -DBZIP2_INCLUDE_DIR=/build/source/src/external/bzip2 -DBZIP2_LIBRARIES=/build/source/src/external/bzip2/libbz2.a -DCMAKE_POSITION_INDEPENDENT_CODE=1 -DWITH_ALL_TESTS=0 -DWITH_RUNTIME_DEBUG=0 -DWITH_TRACE_TOOLS=0 -DPORTABLE=1 && make
+-- The CXX compiler identification is GNU 14.3.0
+-- The C compiler identification is GNU 14.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /nix/store/dmypp1h4ldn0vfk3fi6yfyf5yxp9yz0k-gcc-wrapper-14.3.0/bin/gcc
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /nix/store/dmypp1h4ldn0vfk3fi6yfyf5yxp9yz0k-gcc-wrapper-14.3.0/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /nix/store/dmypp1h4ldn0vfk3fi6yfyf5yxp9yz0k-gcc-wrapper-14.3.0/bin/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found BZip2: /build/source/src/external/bzip2/libbz2.a (found version "1.0.8")
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Performing Test HAVE_OMIT_LEAF_FRAME_POINTER
+-- Performing Test HAVE_OMIT_LEAF_FRAME_POINTER - Success
+-- Performing Test BUILTIN_ATOMIC
+-- Performing Test BUILTIN_ATOMIC - Success
+-- Could NOT find uring (missing: uring_LIBRARIES uring_INCLUDE_DIR)
+-- Enabling RTTI in all builds
+-- Performing Test HAVE_FALLOCATE
+-- Performing Test HAVE_FALLOCATE - Success
+-- Performing Test HAVE_SYNC_FILE_RANGE_WRITE
+-- Performing Test HAVE_SYNC_FILE_RANGE_WRITE - Success
+-- Performing Test HAVE_PTHREAD_MUTEX_ADAPTIVE_NP
+-- Performing Test HAVE_PTHREAD_MUTEX_ADAPTIVE_NP - Success
+-- Looking for malloc_usable_size
+-- Looking for malloc_usable_size - found
+-- Looking for sched_getcpu
+-- Looking for sched_getcpu - found
+-- Looking for getauxval
+-- Looking for getauxval - not found
+-- Looking for F_FULLFSYNC
+-- Looking for F_FULLFSYNC - not found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- ROCKSDB_PLUGINS:
+-- ROCKSDB PLUGINS TO BUILD
+-- Could NOT find Git (missing: GIT_EXECUTABLE)
+-- JNI library is disabled
+-- Configuring done (8.1s)
+-- Generating done (0.2s)
+-- Build files have been written to: /build/source/src/external/rocksdb/build
+```
+- [ ] `jemalloc` build throws:
+```
+./configure: line 8372: cd: null directory
+Missing VERSION file, and unable to generate it; creating bogus VERSION
+```
