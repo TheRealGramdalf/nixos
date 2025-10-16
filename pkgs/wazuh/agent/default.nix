@@ -207,6 +207,6 @@ in
     meta = {
       description = "Wazuh agent for NixOS";
       homepage = "https://wazuh.com";
-      license = [lib.licenses.gpl2only];
+      license = [lib.licenses.gpl2Only];
     };
   }
