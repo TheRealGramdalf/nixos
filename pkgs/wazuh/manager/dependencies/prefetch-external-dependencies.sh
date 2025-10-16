@@ -1,6 +1,7 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p bash nixfmt
 
+# These have been verified to be required for a target of `server`
 EXTERNAL_DEPS=(
     "audit-userspace"
     "benchmark"
