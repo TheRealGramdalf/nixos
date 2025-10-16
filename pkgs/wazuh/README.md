@@ -170,7 +170,9 @@ These are observations made while packaging Wazuh that may or may not have any s
 
 ## Todos
 
-- [ ] Figure out what licence to use for Wazuh
+- [X] ~~Figure out what licence to use for Wazuh~~
+   - `gpl2only` - Alyssa Ross says:
+> gpl2 is deprecated, so at the very least it should be gpl2Only or gpl2Plus. "talk of copyright" isn't an issue generally — it's normal to assert copyright while also offering a license — that's how it works.
    - the LICENCE states `This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License (version 2) as published by the FSF - Free Software Foundation.`, but it also has some other copyright information e.g. `Portions Copyright (C) 2015, Wazuh Inc. Based on work Copyright (C) 2003 - 2013 Trend Micro, Inc.`
 - [ ] What `platforms`/`badPlatforms` or `availableOn` types should be used?
    - See https://nixos.org/manual/nixpkgs/stable/#var-meta-platforms
