@@ -143,6 +143,8 @@
       #  withCryptsetup = true;
       #  withXfs = true;
       #})
+      minicom
+      esptool
       firehol
       iperf3
       dmidecode
