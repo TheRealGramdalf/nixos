@@ -194,7 +194,10 @@
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
       tasmota-ssl = pkgs.callPackage ./pkgs/tasmota.nix {
-        userConfig = builtins.readFile ./hosts/smarthome/brightbulb.h;
+        userConfig = builtins.readFile ./hosts/smarthome/tasmota-tls.h;
+      };
+      tasmota-kuled = pkgs.callPackage ./pkgs/tasmota.nix {
+        userConfig = builtins.readFile ./hosts/smarthome/kuled.h;
       };
       peetscastle = pkgs.callPackage ./hosts/peetscastle/main.nix {
         inherit inputs;
