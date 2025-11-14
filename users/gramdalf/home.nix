@@ -179,8 +179,8 @@
     };
     git = {
       enable = true;
-      userEmail = "gramdalftech@gmail.com";
-      userName = "TheRealGramdalf";
+      user.email = "gramdalftech@gmail.com";
+      user.name = "TheRealGramdalf";
     };
   };
 
