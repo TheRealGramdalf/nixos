@@ -103,7 +103,7 @@
       # Partition tools
       testdisk
       gparted
-      rpi-imager
+      #rpi-imager
       # Settings
       dconf-editor
       gnome-tweaks
