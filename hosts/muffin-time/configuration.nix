@@ -29,7 +29,7 @@
     # MS Teams
     #teams
     # MS Office alternative
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     # Google spyware
     google-chrome
     # MIDI/digital audio workstation
