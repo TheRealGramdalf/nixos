@@ -42,14 +42,14 @@
       chatterino2
       # Word Processing
       libreoffice
-      onlyoffice-bin # For improved compatibility over libreoffice
+      onlyoffice-desktopeditors # For improved compatibility over libreoffice
       vscodium
       obsidian
       # Add graphviz for dot. nox = no xorg
       graphviz-nox
       pandoc
       # Services
-      bitwarden
+      bitwarden-desktop
       denaro
       #celeste
       jellyfin-web
@@ -143,7 +143,8 @@
       #  withCryptsetup = true;
       #  withXfs = true;
       #})
-      minicom
+      tio
+      itch
       esptool
       firehol
       iperf3
