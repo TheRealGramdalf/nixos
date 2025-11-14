@@ -15,11 +15,11 @@
       zoom-us
       # Word Processing
       libreoffice
-      onlyoffice-bin # For improved compatibility over libreoffice
+      onlyoffice-desktopeditors # For improved compatibility over libreoffice
       vscodium
       obsidian
       # Services
-      bitwarden
+      bitwarden-desktop
       # File editors
       audacity
       # pitivi # Video editor
