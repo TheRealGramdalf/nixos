@@ -5,7 +5,14 @@
 }: {
   services.hardware.bolt.enable = true;
 
-  hardware.enableAllFirmware = true;
+  hardware = {
+    enableAllFirmware = true;
+    keyboard.qmk.enable = true;
+  };
+
+  environment.systemPackages = [
+    pkgs.qmk
+  ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
   boot.initrd.kernelModules = [];
