@@ -50,8 +50,7 @@
     audacity
     # zotero
     zotero
-    # libreoffice
-    libreoffice
+   
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
