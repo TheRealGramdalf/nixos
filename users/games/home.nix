@@ -12,7 +12,7 @@
       nautilus
       # Word Processing
       libreoffice
-      onlyoffice-bin # For improved compatibility over libreoffice
+      onlyoffice-desktopeditors # For improved compatibility over libreoffice
       vscodium
       obsidian
       evince # Document viewer
