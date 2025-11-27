@@ -56,6 +56,8 @@ in {
         replication_factor = 1;
       };
 
+      frontend.address = "127.0.0.1";
+
       store_gateway.sharding_ring.replication_factor = 1;
     };
   };
