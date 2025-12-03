@@ -119,7 +119,6 @@
       mangohud # System usage stats
       orca-slicer
       #### CLI ####
-      kanidm_1_7 # Kanidm client
       exiftool
       cmatrix
       android-tools
