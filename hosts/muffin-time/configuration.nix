@@ -50,6 +50,9 @@
     audacity
     # zotero
     zotero
+    # lightweight spotify
+    spotify-qt
+
    
   ];
   nixpkgs.config.permittedInsecurePackages = [
