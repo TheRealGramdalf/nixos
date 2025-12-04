@@ -40,12 +40,6 @@
     zoom-us
     # Musescore
     musescore
-    # Adobe reader
-    adobe-reader
-    # koreader
-    koreader
-    # Master PDF
-    masterpdfeditor
     # Audacity
     audacity
     # zotero
