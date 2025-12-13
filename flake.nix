@@ -143,6 +143,7 @@
       };
       "atreus" = nixosSystem {
         modules = [
+          nixos-hardware.nixosModules.framework-16-7040-amd
           ./hosts/atreus/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
