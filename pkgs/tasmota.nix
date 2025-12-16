@@ -9,27 +9,29 @@
   python312Packages,
   userConfig ? null,
   variant ? "tasmota",
-  version ? "v14.5.0",
-}:
-stdenv.mkDerivation (finalAttrs: {
+  version ? "v15.1.0",
+}: 
+stdenv.mkDerivation {
   pname = "tasmota";
   inherit version;
   src = fetchFromGitHub {
     owner = "arendst";
     repo = "Tasmota";
-    rev = version;
-    hash = "sha256-edJ+Zh0Sx/DF3v3zqXizE8x7uuWwINYg/Twch/E3GRQ=";
+    tag = version;
+    hash = "sha256-0wAGaOwVwfvMxKeIIxQjuMnWocwPE9sXWrKOwWJDu+Q=";
   };
+
+
   configurePhase = ''
     echo "Writing settings override..."
     echo '${userConfig}' > tasmota/user_config_override.h
   '';
   buildPhase = ''
-    platformio run -e ${variant} --disable-auto-clean
+    pio run -e ${variant} --disable-auto-clean
   '';
   installPhase = ''
     mkdir $out
-    cp -R build_output/* $out
+    cp -r --reflink=auto -- build_output/* $out
   '';
 
   nativeBuildInputs = [
@@ -51,4 +53,4 @@ stdenv.mkDerivation (finalAttrs: {
     license = lib.licenses.gpl3;
     maintainers = [lib.maintainers.therealgramdalf];
   };
-})
+}
