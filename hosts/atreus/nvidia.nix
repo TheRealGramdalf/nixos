@@ -7,7 +7,7 @@
     thermald.enable = true;
   };
   hardware.graphics = {
-    extraPackages = with pkgs [
+    extraPackages = with pkgs; [
       vulkan-loader
       vulkan-validation-layers
       vulkan-extension-layer
