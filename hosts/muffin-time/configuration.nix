@@ -46,6 +46,8 @@
     zotero
     # lightweight spotify
     spotify-qt
+    # Actual Budget
+    actual-server
 
    
   ];
