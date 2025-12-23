@@ -55,7 +55,7 @@
       jellyfin-web
       pika-backup
       protonvpn-gui
-      nextcloud-client
+      #nextcloud-client
       # File editors
       #audacity
       # pitivi # Video editor
