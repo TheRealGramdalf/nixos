@@ -37,7 +37,8 @@
       neovim
       nerd-fonts.fantasque-sans-mono
       # Communication
-      webcord
+      vesktop
+      dorion
       electron-mail
       chatterino2
       # Word Processing
