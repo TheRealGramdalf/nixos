@@ -21,7 +21,7 @@ in {
 
   # Needs kanidm to be up so it can query for OIDC config
   systemd.services."netbird-management" = {
-      after = nixosConfig.systemd.services."kanidm".name;
+      after = config.systemd.services."kanidm".name;
     };
 
   services.cone.extraFiles = {
