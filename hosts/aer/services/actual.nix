@@ -14,13 +14,13 @@ in {
       hostname = "127.0.0.1";
       dataDir = "/persist/services/actual";
       loginMethod = "openid";
+      allowedLoginMethods = ["openid"]; # Disable password authentication
       openId = {
         discoveryURL = "https://auth.aer.dedyn.io/oauth2/openid/${client_id}/.well-known/openid-configuration";
         client_id = client_id;
         client_secret._secret = "/persist/secrets/actual/client_secret";
         server_hostname = "https://actual.aer.dedyn.io";
         authMethod = "openid"; # Enables full OIDC discovery
-        enforce = true; # Use OIDC only
       };
       token_expiration = "3600"; # 1hr
     };
