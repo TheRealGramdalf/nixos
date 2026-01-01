@@ -10,6 +10,7 @@ in {
   services.actual = {
     enable = true;
     settings = {
+      port = 5006;
       hostname = "127.0.0.1";
       dataDir = "/persist/services/actual";
       loginMethod = "openid";
