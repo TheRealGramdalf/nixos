@@ -20,5 +20,6 @@
     ./wazuh.nix
     ./wazuh-docker.nix
     ./timekpr-webui.nix
+    ./actual.nix
   ];
 }
