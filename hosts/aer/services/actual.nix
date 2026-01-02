@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   dataDir = "/persist/services/actual";
@@ -10,7 +11,7 @@
 in {
   services.actual = {
     enable = true;
-    package = actual-server.override {
+    package = pkgs.actual-server.override {
       yarn-berry_4 = (yarn-berry_4.override {nodejs = nodejs_22;}).overrideAttrs (old: {
         passthru =
           old.passthru
@@ -22,7 +23,7 @@ in {
     settings = {
       port = 5006;
       hostname = "127.0.0.1";
-      inherit dataDir;
+      dataDir = dataDir;
       userFiles = "${dataDir}/user-files";
       serverFiles = "${dataDir}/server-files";
       loginMethod = "openid";
