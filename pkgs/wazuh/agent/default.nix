@@ -25,7 +25,6 @@
   stdenv,
   systemd,
   zlib,
-
   # Needed for makefile
   ps,
   breakpointHook,

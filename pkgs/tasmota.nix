@@ -10,7 +10,7 @@
   userConfig ? null,
   variant ? "tasmota",
   version ? "v15.1.0",
-}: 
+}:
 stdenv.mkDerivation {
   pname = "tasmota";
   inherit version;
@@ -20,7 +20,6 @@ stdenv.mkDerivation {
     tag = version;
     hash = "sha256-0wAGaOwVwfvMxKeIIxQjuMnWocwPE9sXWrKOwWJDu+Q=";
   };
-
 
   configurePhase = ''
     echo "Writing settings override..."

@@ -1,5 +1,4 @@
 {
-
   "audit-userspace" = {
     name = "audit-userspace";
     hash = "sha256-6Coy5e35OwVRYOFLyX9B3q05KHklhR3ICnY44tTTBDQ=";

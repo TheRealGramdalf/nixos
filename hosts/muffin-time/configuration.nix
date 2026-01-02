@@ -48,8 +48,6 @@
     spotify-qt
     # Actual Budget
     actual-server
-
-   
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"

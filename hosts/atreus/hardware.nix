@@ -3,11 +3,10 @@
   lib,
   ...
 }: {
-  
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   hardware.enableAllFirmware = true;
 
@@ -47,7 +46,7 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/atreus-zboot";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = ["fmask=0022" "dmask=0022"];
     neededForBoot = false;
   };
 
