@@ -3,6 +3,7 @@
   lib,
   ...
 }: let
+  dataDir = "/persist/services/actual";
   cfg = config.services.actual;
   name = "actual";
   client_id = "actual-server-aer_rs";
@@ -12,9 +13,9 @@ in {
     settings = {
       port = 5006;
       hostname = "127.0.0.1";
-      dataDir = "/persist/services/actual";
-      userFiles = "${cfg.settings.dataDir}/user-files";
-      serverFiles = "${cfg.settings.dataDir}/server-files";
+      inherit dataDir;
+      userFiles = "${dataDir}/user-files";
+      serverFiles = "${dataDir}/server-files";
       loginMethod = "openid";
       enforceOpenId = true;
       allowedLoginMethods = ["openid"]; # Disable password authentication
