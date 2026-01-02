@@ -14,7 +14,9 @@ in {
       hostname = "127.0.0.1";
       dataDir = "/persist/services/actual";
       loginMethod = "openid";
+      enforceOpenId = true;
       allowedLoginMethods = ["openid"]; # Disable password authentication
+      userCreationMode = "login";
       openId = {
         discoveryURL = "https://auth.aer.dedyn.io/oauth2/openid/${client_id}/.well-known/openid-configuration";
         client_id = client_id;
