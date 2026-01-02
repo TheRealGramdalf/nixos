@@ -13,6 +13,8 @@ in {
       port = 5006;
       hostname = "127.0.0.1";
       dataDir = "/persist/services/actual";
+      userFiles = "${cfg.settings.dataDir}/user-files";
+      serverFiles = "${cfg.settings.dataDir}/server-files";
       loginMethod = "openid";
       enforceOpenId = true;
       allowedLoginMethods = ["openid"]; # Disable password authentication
