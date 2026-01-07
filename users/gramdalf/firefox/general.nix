@@ -11,4 +11,86 @@ _: {
       };
     };
   };
+  programs.firefox.profiles."gramdalf" = {
+    search = {
+      force = true;
+      default = "ddg";
+      order = [
+        "ddg"
+      ];
+      bing.metaData.hidden = true;
+      ebay.metaData.hidden = true;
+      ddg.metaData.alias = ":ddg";
+      engines = {
+        "nix-packages" = {
+          name = "NixOS Search [PKGS]";
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          definedAliases = [":np"];
+        };
+        "nix-options" = {
+          name = "NixOS Search [OPTS]";
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          definedAliases = [":no"];
+        };
+        "nix-issues" = {
+          name = "Nixpkgs Issues";
+          urls = [
+            {
+              template = "https://github.com/NixOS/nixpkgs/issues";
+              params = [
+                {
+                  name = "q";
+                  value = "is%3Aissue%20state%3Aopen%20{searchTerms}";
+                }
+              ];
+            }
+          ];
+          definedAliases = [":ni"];
+        };
+      };
+      "nix-wiki" = {
+        name = "NixOS Wiki";
+        urls = [
+          {
+            template = "https://wiki.nixos.org/w/index.php";
+            params = [
+              {
+                name = "search";
+                value = "{searchTerms}";
+              }
+            ];
+          }
+        ];
+        definedAliases = [":nw"];
+      };
+    };
+  };
 }
