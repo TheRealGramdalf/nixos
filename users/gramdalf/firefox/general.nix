@@ -18,10 +18,10 @@ _: {
       order = [
         "ddg"
       ];
-      bing.metaData.hidden = true;
-      ebay.metaData.hidden = true;
-      ddg.metaData.alias = ":ddg";
       engines = {
+        bing.metaData.hidden = true;
+        ebay.metaData.hidden = true;
+        ddg.metaData.alias = ":ddg";
         "nix-packages" = {
           name = "NixOS Search [PKGS]";
           urls = [
@@ -75,21 +75,21 @@ _: {
           ];
           definedAliases = [":ni"];
         };
-      };
-      "nix-wiki" = {
-        name = "NixOS Wiki";
-        urls = [
-          {
-            template = "https://wiki.nixos.org/w/index.php";
-            params = [
-              {
-                name = "search";
-                value = "{searchTerms}";
-              }
-            ];
-          }
-        ];
-        definedAliases = [":nw"];
+        "nix-wiki" = {
+          name = "NixOS Wiki";
+          urls = [
+            {
+              template = "https://wiki.nixos.org/w/index.php";
+              params = [
+                {
+                  name = "search";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          definedAliases = [":nw"];
+        };
       };
     };
   };
