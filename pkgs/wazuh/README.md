@@ -364,3 +364,5 @@ cd external/rocksdb/ && mkdir -p build && cd build && cmake .. -DCMAKE_BUILD_TYP
 ./configure: line 8372: cd: null directory
 Missing VERSION file, and unable to generate it; creating bogus VERSION
 ```
+- [ ] `/usr/bin/file` missing
+- [ ] The docker image uses init scripts at `/etc/cont-init.d` to handle file permissions and migrations as well as permanent data
