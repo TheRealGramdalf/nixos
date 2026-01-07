@@ -11,15 +11,6 @@
 in {
   services.actual = {
     enable = true;
-    package = pkgs.actual-server.override {
-      yarn-berry_4 = (pkgs.yarn-berry_4.override {nodejs = pkgs.nodejs_22;}).overrideAttrs (old: {
-        passthru =
-          old.passthru
-          // {
-            yarnBerryConfigHook = old.passthru.yarnBerryConfigHook.override {nodejs = pkgs.nodejs_22;};
-          };
-      });
-    };
     settings = {
       port = 5006;
       hostname = "127.0.0.1";
