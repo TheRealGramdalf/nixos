@@ -14,3 +14,4 @@
 
 ### Tasmota Configuration
 https://templates.blakadder.com/ce_smart_home-WF500D.html
+https://www.cesmarthome.com/products/CWF500D-3W?locale=en#specifications

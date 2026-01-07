@@ -18,3 +18,5 @@ https://templates.blakadder.com/feit_electric-DIM-WIFI.html
 ### ESPHome Configuration
 https://devices.esphome.io/devices/Feit-BPDIM-WIFI-2
 https://devices.esphome.io/devices/Feit-DIMSMART-3-CAN
+
+https://images.salsify.com/image/upload/s--tZ0ML6Fy--/vmpbz8rckn9nwdntrusc.pdf

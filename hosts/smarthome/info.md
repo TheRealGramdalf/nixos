@@ -19,3 +19,9 @@ Also see:
 - https://templates.blakadder.com/bright_741235077572.html
 - (Bricked, needs serial flash) https://templates.blakadder.com/bright_741235077565.html
 
+3 - relay 1=red light,
+4 - 0=on, 1=off
+
+switch1 - button pressed down=on
+
+20:20:49.190 MQT: stat/tasmota_EED64E/STATUS8 = {"StatusSNS":{"Time":"2025-11-01T20:20:49","Switch1":"OFF","Switch2":"ON","Switch4":"ON","Switch5":"ON","Switch6":"ON","Switch7":"OFF","Switch8":"OFF","COUNTER":{"C1":0,"C2":0,"C3":0}}}
