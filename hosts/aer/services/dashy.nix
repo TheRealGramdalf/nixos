@@ -83,6 +83,12 @@ in {
               icon = "si-paperlessngx";
               url = "https://paperless.aer.dedyn.io";
             }
+            {
+              title = "Actual";
+              description = "Manage budgets with Actual server";
+              icon = "si-actualbudget";
+              url = "https://actual.aer.dedyn.io";
+            }
           ];
         }
         {
