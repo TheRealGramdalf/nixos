@@ -54,8 +54,11 @@
   virtualisation.docker.storageDriver = "overlay2";
   programs = {
     wireshark.enable = true;
-    adb.enable = true;
   };
+
+  environment.systemPackages = [
+    pkgs.android-tools
+  ];
   tomeutils = {
     vapor = {
       enable = true;
