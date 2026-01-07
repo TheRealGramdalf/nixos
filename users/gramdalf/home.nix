@@ -38,7 +38,6 @@
       nerd-fonts.fantasque-sans-mono
       # Communication
       vesktop
-      dorion
       electron-mail
       chatterino2
       # Word Processing
