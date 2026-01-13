@@ -9,7 +9,7 @@
       heroic
       prismlauncher
       scarab
-      webcord
+      vesktop
       #itch
     ];
   };
