@@ -24,12 +24,12 @@
   };
   users.users."zoom" = {
     isNormalUser = true;
-    hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+    hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
     extraGroups = ["video" "networkmanager"];
   };
   users.users."music" = {
     isNormalUser = true;
-    hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
+    hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
     extraGroups = ["video" "networkmanager"];
   };
 }
