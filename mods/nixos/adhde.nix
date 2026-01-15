@@ -66,7 +66,7 @@ in {
       services.pipewire = {
         enable = true;
         audio.enable = true;
-        alsa.enable = true;
+        alsa.enable = false;
         pulse.enable = true;
         wireplumber.enable = true;
       };

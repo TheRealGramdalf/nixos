@@ -84,7 +84,7 @@
     # Enable pulse emulation to get a GUI
     pipewire = {
       pulse.enable = true;
-      alsa.enable = true;
+      alsa.enable = false;
     };
     # The actual printing control daemon
     printing = {

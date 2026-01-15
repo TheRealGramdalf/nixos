@@ -28,10 +28,11 @@
     powerOnBoot = false;
   };
   services = {
-    # Enable pulse/alsa emulation to try and get KDE's GUI working
+    # Enable pulse emulation for the KDE GUI
     pipewire = {
       pulse.enable = true;
-      alsa.enable = true;
+      # Disable alsa to reduce the number of audio outputs
+      alsa.enable = false;
     };
     # For piper
     ratbagd = {

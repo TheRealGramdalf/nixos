@@ -30,10 +30,10 @@
     powerOnBoot = false;
   };
   services = {
-    # Enable pulse/alsa emulation to try and get KDE's GUI working
+    # Enable pulse emulation get KDE's GUI working
     pipewire = {
       pulse.enable = true;
-      alsa.enable = true;
+      alsa.enable = false;
     };
     # Enable fingerprint reader
     fprintd.enable = false;
