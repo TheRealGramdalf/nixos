@@ -21,7 +21,6 @@ _: {
       engines = {
         bing.metaData.hidden = true;
         ebay.metaData.hidden = true;
-        ddg.metaData.alias = ":ddg";
         "nix-packages" = {
           name = "NixOS Search [PKGS]";
           urls = [
@@ -39,7 +38,7 @@ _: {
               ];
             }
           ];
-          definedAliases = [":np"];
+          definedAliases = ["@np"];
         };
         "nix-options" = {
           name = "NixOS Search [OPTS]";
@@ -58,7 +57,7 @@ _: {
               ];
             }
           ];
-          definedAliases = [":no"];
+          definedAliases = ["@no"];
         };
         "nix-issues" = {
           name = "Nixpkgs Issues";
@@ -73,7 +72,7 @@ _: {
               ];
             }
           ];
-          definedAliases = [":ni"];
+          definedAliases = ["@ni"];
         };
         "nix-wiki" = {
           name = "NixOS Wiki";
@@ -88,7 +87,7 @@ _: {
               ];
             }
           ];
-          definedAliases = [":nw"];
+          definedAliases = ["@nw"];
         };
       };
     };
