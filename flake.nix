@@ -208,6 +208,10 @@
         inherit inputs;
         inherit pkgs;
       };
+      klipperwrt = pkgs.callPackage ./hosts/klipperwrt/main.nix {
+        inherit inputs;
+        inherit pkgs;
+      };
     };
   };
 }
