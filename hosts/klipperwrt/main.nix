@@ -6,12 +6,12 @@
   ...
 }: let
   ssh-pub-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5ibKzd+V2eR1vmvBAfSWcZmPB8zUYFMAN3FS6xY9ma";
-  profiles = inputs.openwrt-imagebuilder.lib.profiles {inherit pkgs;};
+  release = "25.12.0-rc2";
 
   config =
-    profiles.identifyProfile "creality_wb-01"
+    (inputs.openwrt-imagebuilder.lib.profiles {inherit release pkgs;}).identifyProfile "creality_wb-01"
     // {
-      release = "25.12.0-rc2";
+      inherit release;
       extraImageName = "klipperwrt";
       packages =
         [
@@ -30,6 +30,8 @@
           # To fetch klipper
           "git-http" # smaller than straight git
         ];
+      ## NOTE TO SELF
+      # When using wifi as a client (station mode) on the wb-01, it can't be on a bridge with eth0.
       files = pkgs.runCommand "image-files" {} ''
 
         
@@ -45,42 +47,71 @@
           exec >/root/uci-defaults.log 2>&1
           uci export >> /root/uci.defaults
           uci batch << EOI
-            # This is *not* referring to mDNS - it instead
-            # refers to a feature in dnsmasq similar to
-            # mDNS that resolves the hostnames of DHCP clients
-            # as `[hostname].lan`, via regular DNS lookups.
-            # Do not set this to `.local`, as that is reserved for
-            # mDNS exclusively.
-            #set dhcp.@dnsmasq[0].local='/lan/'
-            #set dhcp.@dnsmasq[0].domain='lan'
+            # Lower log buffer size, and write logs to RAM instead
+            # This helps reduce writes to the micro SD card and keep CPU usage down
+            system.@system[0].log_file='/tmp/system.log'
+            system.@system[0].log_size='16'
+
+            # Set countrycode for proper wireless bands
+            set wireless.radio0.country='CA'
+
+            # Set the static address so it won't conflict with most setups
+            del network.lan.ipaddr
+            add_list network.lan.ipaddr='192.168.42.1/24'
+            # Something about ipv6?
+            del dhcp.lan.ra_slaac
+            set dhcp.lan.ra_preference='medium'
+
+            ## Adding a wlan interface
+            # Create an interface for wireless
+            set network.wlan='interface'
+            set network.wlan.proto='dhcp'
+
+            # Add the wlan iface to the lan firewall zone
+            add_list firewall.@zone[0].network='wlan'
+
+            # Set a dhcp server for wlan, but ensure that it is disabled
+            # If there is no dhcp section for wlan, it could be activated accidentally (probably?)
+            set dhcp.wlan='dhcp'
+            set dhcp.wlan.interface='wlan'
+            set dhcp.wlan.ignore='1'
+
+            # When doing this from the UI it enables packet steering:
+            set network.globals.packet_steering='1'
+            
 
 
-            # Set the static address so it won't conflict
-            #set network.lan.ipaddr='192.168.1.2'
-            # Set the gateway and DNS server to the edge router
-            #set network.lan.gateway='192.168.1.1'
-            #add_list network.lan.dns='192.168.1.1'
-            # Set a DNS search domain. When the OpenWrt device itself
-            # resolves a (non-FQDN) hostname, it is supposed to try `dns_search`
-            # `local` here refers to mDNS, whereas `lan` refers to the DNS
-            # records fabricated by unbound using hostnames of DHCP clients.
-            #add_list network.lan.dns_search='local'
-            #add_list network.lan.dns_search='lan'
+            # Set wifi to station
+
+            # Channel width 20 -> 40 
+            set wireless.radio0.htmode='HT40'
+            # Auto select channel
+            set wireless.radio0.channel='auto'
+            set wireless.radio0.cell_density='0'
+            set wireless.default_radio0.mode='sta'
+            # sae-mixed is wpa2/wpa3 mixed, this should work for almost all cases
+            set wireless.default_radio0.encryption='sae-mixed'
+            # Operating channel verification, part of wpa2/wpa3 mixed mode. Disabled.
+            set wireless.default_radio0.ocv='0'
+            # Assign the radio to the wlan interface
+            set wireless.default_radio0.network='wlan'
+
+            # Enable the wifi network:
+            del wireless.radio0.disabled='0'
+            del wireless.default_radio0.disabled='1'
+
+            # Set wireless network info
+
 
             # Set hostname, timezone
-            #del system.ntp.enabled
-            #del system.ntp.enable_server
             set system.@system[0].hostname='klipperwrt'
             set system.@system[0].description='OpenWRT host for Klipper'
             set system.@system[0].zonename='America/Vancouver'
             set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
-            #set system.@system[0].log_proto='udp'
-            #set system.@system[0].conloglevel='8'
-            #set system.@system[0].cronloglevel='7'
 
             # Disable password authentication on SSH
-            set dropbear.main.PasswordAuth='off'
-            set dropbear.main.RootPasswordAuth='off'
+            #set dropbear.main.PasswordAuth='off'
+            #set dropbear.main.RootPasswordAuth='off'
 
 
             # Redirect HTTP requests to HTTPS (LUCI)
