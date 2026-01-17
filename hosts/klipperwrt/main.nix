@@ -101,7 +101,9 @@
             del wireless.default_radio0.disabled='1'
 
             # Set wireless network info
-
+            set wireless.default_radio0.ssid='networkname'
+            set wireless.default_radio0.bssid='00:00:00:00:00:00'
+            set wireless.default_radio0.key='CHANGEME'
 
             # Set hostname, timezone
             set system.@system[0].hostname='klipperwrt'
