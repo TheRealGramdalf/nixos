@@ -159,6 +159,15 @@
           ./mods/nixos/main.nix
         ];
       };
+      "klippy" = nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit tome;
+        };
+        modules = [
+          ./hosts/klippy/main.nix
+        ];
+      };
       "orthanc" = nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
