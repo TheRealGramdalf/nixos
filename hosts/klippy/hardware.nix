@@ -18,13 +18,6 @@ _: {
     fsType = "zfs";
   };
 
-  fileSystems."/persist" = {
-    device = "klippy-zroot/safe/persist";
-    fsType = "zfs";
-    # Required for `hashedPasswordFile` etc. to work properly
-    neededForBoot = true;
-  };
-
   boot.loader.systemd-boot = {
     enable = true;
     editor = false;

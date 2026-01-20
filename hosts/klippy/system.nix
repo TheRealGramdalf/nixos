@@ -1,6 +1,5 @@
 _: {
   users.mutableUsers = false;
-  users.users."root".hashedPasswordFile = "/persist/root.pw";
 
   services.auto-cpufreq.enable = true;
 

@@ -70,8 +70,6 @@ in {
         };
         "safe/persist" = {
           type = "zfs_fs";
-          # fstab, not zfsprop
-          mountpoint = "/persist";
           options = {
             mountpoint = "/persist";
           };
