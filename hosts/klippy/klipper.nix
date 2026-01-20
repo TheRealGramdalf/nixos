@@ -2,7 +2,7 @@ _: {
   services.klipper = {
     enable = true;
     mutableConfig = true;
-    configDir = "/persist/services/klipper"
+    configDir = "/persist/services/klipper";
   };
   services.mainsail = {
     enable = true;
