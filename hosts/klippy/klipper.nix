@@ -3,10 +3,13 @@ _: {
     enable = true;
     mutableConfig = true;
     configDir = "/persist/services/klipper";
+    configFile = "/persist/services/klipper/printer.cfg";
   };
   services.mainsail = {
-    enable = true;
+    enable = false;
   };
+
+  security.polkit.enable = true;
   services.moonraker = {
     enable = true;
     allowSystemControl = true;
