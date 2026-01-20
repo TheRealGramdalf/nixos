@@ -73,7 +73,7 @@ in {
           # fstab, not zfsprop
           mountpoint = "/persist";
           options = {
-            mountpoint = "legacy";
+            mountpoint = "/persist";
           };
         };
         "safe/persist/services" = {
