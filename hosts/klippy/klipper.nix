@@ -11,6 +11,6 @@ _: {
     enable = true;
     allowSystemControl = true;
     configDir = "/persist/services/moonraker/config";
-    stateDir = "/persist/services/moonraker"
-  }
+    stateDir = "/persist/services/moonraker";
+  };
 }
