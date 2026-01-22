@@ -27,13 +27,12 @@
           "fdisk"
           # For serving the klipper webserver
           "nginx-ssl"
-          # To fetch klipper
-          "git-http" # smaller than straight git
+          # git can't fetch by http without this
+          "git-http"
         ];
       ## NOTE TO SELF
       # When using wifi as a client (station mode) on the wb-01, it can't be on a bridge with eth0.
       files = pkgs.runCommand "image-files" {} ''
-
         
 
         # Add ssh key
@@ -101,9 +100,9 @@
             del wireless.default_radio0.disabled='1'
 
             # Set wireless network info
-            set wireless.default_radio0.ssid='networkname'
-            set wireless.default_radio0.bssid='00:00:00:00:00:00'
-            set wireless.default_radio0.key='CHANGEME'
+            set wireless.default_radio0.ssid='aerwiar-iotlan'
+            set wireless.default_radio0.bssid='00:25:9C:13:7B:E4'
+            set wireless.default_radio0.key='ornorcleor'
 
             # Set hostname, timezone
             set system.@system[0].hostname='klipperwrt'
@@ -112,6 +111,7 @@
             set system.@system[0].timezone='PST8PDT,M3.2.0,M11.1.0'
 
             # Disable password authentication on SSH
+            # Not working right now for some reason?
             #set dropbear.main.PasswordAuth='off'
             #set dropbear.main.RootPasswordAuth='off'
 
