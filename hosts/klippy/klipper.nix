@@ -1,7 +1,8 @@
 {config, ...}: {
   services.klipper = {
     enable = true;
-    group = config.services.moonraker.group;
+    user = "klipper";
+    group = "klipper";
     mutableConfig = true;
     configDir = "/persist/services/klipper";
     configFile = "/persist/services/klipper/printer.cfg";
@@ -39,4 +40,5 @@
       ];
     };
   };
+  systemd.services."moonraker".serviceConfig.SupplementaryGroups = [config.users.groups."klipper".name];
 }
