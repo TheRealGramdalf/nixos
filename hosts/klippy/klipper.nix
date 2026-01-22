@@ -21,7 +21,6 @@ _: {
   services.moonraker = {
     enable = true;
     allowSystemControl = true;
-    configDir = "/persist/services/moonraker/config";
     stateDir = "/persist/services/moonraker";
     settings.authorization = {
       trusted_clients = [
