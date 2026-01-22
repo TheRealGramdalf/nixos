@@ -13,6 +13,9 @@ _: {
   services.mainsail = {
     enable = true;
   };
+  networking.firewall = {
+    allowedTCPPorts = [80];
+  };
 
   security.polkit.enable = true;
   services.moonraker = {
@@ -20,5 +23,20 @@ _: {
     allowSystemControl = true;
     configDir = "/persist/services/moonraker/config";
     stateDir = "/persist/services/moonraker";
+    settings = {
+      trusted_clients = [
+        "10.0.0.0/8"
+        "127.0.0.0/8"
+        "169.254.0.0/16"
+        "172.16.0.0/12"
+        "192.168.0.0/16"
+        "FE80::/10"
+        "::1/128"
+      ];
+      cors_domains = [
+        "http://*.local"
+        "http://*.lan"
+      ];
+    };
   };
 }
