@@ -6,7 +6,7 @@ _: {
     configFile = "/persist/services/klipper/printer.cfg";
   };
   services.mainsail = {
-    enable = false;
+    enable = true;
   };
 
   security.polkit.enable = true;
