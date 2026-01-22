@@ -1,6 +1,7 @@
-_: {
+{config, ...}: {
   services.klipper = {
     enable = true;
+    group = config.services.moonraker.group;
     mutableConfig = true;
     configDir = "/persist/services/klipper";
     configFile = "/persist/services/klipper/printer.cfg";
