@@ -13,27 +13,26 @@
     // {
       inherit release;
       extraImageName = "klipperwrt";
-      packages =
-        [
-          "luci" # https://github.com/astro/nix-openwrt-imagebuilder/issues/53
-          #"luci-ssl" # For HTTPS support
-          # For extroot:
-          "block-mount"
-          "kmod-fs-ext4"
-          "kmod-usb-storage"
-          "kmod-usb-ohci"
-          "kmod-usb-uhci"
-          "e2fsprogs"
-          "fdisk"
-          # For serving the klipper webserver
-          "nginx-ssl"
-          # git can't fetch by http without this
-          "git-http"
-        ];
+      packages = [
+        "luci" # https://github.com/astro/nix-openwrt-imagebuilder/issues/53
+        #"luci-ssl" # For HTTPS support
+        # For extroot:
+        "block-mount"
+        "kmod-fs-ext4"
+        "kmod-usb-storage"
+        "kmod-usb-ohci"
+        "kmod-usb-uhci"
+        "e2fsprogs"
+        "fdisk"
+        # For serving the klipper webserver
+        "nginx-ssl"
+        # git can't fetch by http without this
+        "git-http"
+      ];
       ## NOTE TO SELF
       # When using wifi as a client (station mode) on the wb-01, it can't be on a bridge with eth0.
       files = pkgs.runCommand "image-files" {} ''
-        
+
 
         # Add ssh key
         mkdir -p $out/etc/dropbear
@@ -77,12 +76,12 @@
 
             # When doing this from the UI it enables packet steering:
             set network.globals.packet_steering='1'
-            
+
 
 
             # Set wifi to station
 
-            # Channel width 20 -> 40 
+            # Channel width 20 -> 40
             set wireless.radio0.htmode='HT40'
             # Auto select channel
             set wireless.radio0.channel='auto'
