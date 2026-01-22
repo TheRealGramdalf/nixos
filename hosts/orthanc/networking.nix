@@ -45,10 +45,10 @@ _: {
   };
   services = {
     resolved = {
-      llmnr = "false";
+      LLMNR = "false";
       enable = true;
-      domains = ["local"];
-      fallbackDns = [
+      Domains = ["local"];
+      FallbackDns = [
         "1.1.1.1"
         "1.0.0.1"
       ];

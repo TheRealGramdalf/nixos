@@ -218,7 +218,7 @@ in {
 
       # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
       services.resolved = {
-        llmnr = "false";
+        LLMNR = "false";
         settings."Resolve".MulticastDNS = "resolve";
       };
       # Disable avahi due to it's low level of integration with systemd-networkd
