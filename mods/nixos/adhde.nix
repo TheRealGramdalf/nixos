@@ -217,9 +217,9 @@ in {
       # the primary advantage of avahi is it's ability to publish records other than hostnames, such as SMB shares
 
       # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
-      services.resolved = {
+      services.resolved.settings."Resolve" = {
+        MulticastDNS = true;
         LLMNR = "false";
-        settings."Resolve".MulticastDNS = "resolve";
       };
       # Disable avahi due to it's low level of integration with systemd-networkd
       # Avahi may still be desirable on static devices like servers, where `allowinterfaces` can be tuned properly

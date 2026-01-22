@@ -52,15 +52,17 @@
   systemd.services."NetworkManager-wait-online".enable = false;
   services = {
     resolved = {
-      LLMNR = "false";
       enable = true;
-      Domains = ["local"];
-      FallbackDns = [
-        "1.1.1.1"
-        "1.0.0.1"
-      ];
-      # Enable resolution only, leave responding to avahi
-      settings."Resolve".MulticastDNS = "resolve";
+      settings."Resolve" = {
+        LLMNR = "false";
+        Domains = ["local"];
+        FallbackDns = [
+          "1.1.1.1"
+          "1.0.0.1"
+        ];
+        # Enable resolution only, leave responding to avahi
+        MulticastDNS = "resolve";
+      };
     };
     # Printing, mDNS etc
     avahi = {
