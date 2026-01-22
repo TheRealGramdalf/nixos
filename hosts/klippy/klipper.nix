@@ -41,4 +41,9 @@
     };
   };
   systemd.services."moonraker".serviceConfig.SupplementaryGroups = [config.users.groups."klipper".name];
+  users.users."klipper" = {
+    group = "klipper";
+    isSystemUser = true;
+  };
+  users.groups."klipper" = {};
 }
