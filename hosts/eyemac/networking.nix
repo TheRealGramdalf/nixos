@@ -36,10 +36,7 @@ _: {
         "1.1.1.1"
         "1.0.0.1"
       ];
-      extraConfig = ''
-        [Resolve]
-        MulticastDNS = false
-      '';
+      settings."Resolve".MulticastDNS = "resolve";
     };
     avahi = {
       enable = true;

@@ -35,10 +35,7 @@ _: {
         "1.0.0.1"
       ];
       # Enable resolution only, leave responding to avahi
-      extraConfig = ''
-        [Resolve]
-        MulticastDNS = resolve
-      '';
+      settings."Resolve".MulticastDNS = "resolve";
     };
     avahi = {
       enable = true;

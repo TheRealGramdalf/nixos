@@ -161,10 +161,7 @@ in {
       # Enable full mDNS support. `iwd` will use this as the default if systemd integration is enabled.
       services.resolved = {
         llmnr = "false";
-        extraConfig = ''
-          [Resolve]
-          MulticastDNS = true
-        '';
+        settings."Resolve".MulticastDNS = "resolve";
       };
       # Disable avahi due to it's low level of integration with systemd-networkd
       # Avahi may still be desirable on static devices like servers, where `allowinterfaces` can be tuned properly
