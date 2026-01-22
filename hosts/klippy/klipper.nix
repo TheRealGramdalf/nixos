@@ -7,9 +7,11 @@
     configDir = "/persist/services/klipper";
     configFile = "/persist/services/klipper/printer.cfg";
     firmwares."anycubic-i3-mega" = {
-      enable = true;
+      # Don't bother compiling this unless needed
+      enable = false;
       serial = "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0";
-      enableKlipperFlash = true;
+      # Needs flashing via AVRDude
+      enableKlipperFlash = false;
       configFile = ./firmware-config;
     };
   };
