@@ -23,7 +23,7 @@ _: {
     allowSystemControl = true;
     configDir = "/persist/services/moonraker/config";
     stateDir = "/persist/services/moonraker";
-    settings = {
+    settings.authorization = {
       trusted_clients = [
         "10.0.0.0/8"
         "127.0.0.0/8"
