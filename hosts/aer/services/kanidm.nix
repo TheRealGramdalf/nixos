@@ -33,7 +33,7 @@ in {
     };
     clientSettings.uri = cfg.serverSettings.origin;
     unixSettings = {
-      pam_allowed_login_groups = ["3fd496d1-bdcb-42b3-bbab-040b6befcaac"];
+      kanidm.pam_allowed_login_groups = ["3fd496d1-bdcb-42b3-bbab-040b6befcaac"];
       home_attr = "uuid";
       home_alias = "spn";
     };
