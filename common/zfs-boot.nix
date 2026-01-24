@@ -8,4 +8,6 @@
   zramSwap = {
     enable = true;
   };
+  # Use zram more agressively (prefer swap over OOM)
+  boot.kernel.sysctl."vm.swappiness" = 180;
 }
