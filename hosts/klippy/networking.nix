@@ -46,6 +46,7 @@ _: {
       nssmdns6 = false;
       openFirewall = true;
       publish.enable = true;
+      publish.addresses = true;
     };
     chrony.enable = true;
   };
