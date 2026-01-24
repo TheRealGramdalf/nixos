@@ -41,9 +41,11 @@ _: {
     };
     avahi = {
       enable = true;
+      ipv6 = false;
       nssmdns4 = false;
       nssmdns6 = false;
       openFirewall = true;
+      publish.enable = true;
     };
     chrony.enable = true;
   };
