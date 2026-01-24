@@ -21,5 +21,6 @@
     ./wazuh-docker.nix
     ./timekpr-webui.nix
     ./actual.nix
+    ./ollama.nix
   ];
 }
