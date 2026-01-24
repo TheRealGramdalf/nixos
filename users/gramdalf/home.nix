@@ -24,7 +24,7 @@
       NH_FLAKE = "nix";
     };
     packages = with pkgs; [
-      jetbrains.idea-oss
+      #jetbrains.idea-oss
       wlr-randr
       ripgrep
       #### GUI ####
