@@ -44,7 +44,10 @@
       cors_domains = [
         "http://*.local"
         "http://*.lan"
+        "http://*.local:7125"
+        "http://*.lan:7125"
         "http://${config.networking.hostName}"
+        "http://${config.networking.hostName}:7125"
       ];
     };
   };
