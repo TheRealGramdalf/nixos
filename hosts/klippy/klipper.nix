@@ -19,7 +19,7 @@
     enable = true;
   };
   networking.firewall = {
-    allowedTCPPorts = [80];
+    allowedTCPPorts = [80 config.services.moonraker.port];
   };
 
   security.polkit.enable = true;
@@ -27,6 +27,10 @@
     enable = true;
     allowSystemControl = true;
     stateDir = "/persist/services/moonraker";
+    # Listen on all addresses so we can expose moonraker directly
+    # Required because if orca-slicer tries to load moonraker directly it crashes
+    # Connecting to moonraker allows it to upload gcode
+    address = "0.0.0.0";
     settings.authorization = {
       trusted_clients = [
         "10.0.0.0/8"
