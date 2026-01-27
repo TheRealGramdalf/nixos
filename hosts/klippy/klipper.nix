@@ -1,11 +1,11 @@
 {config, ...}: {
   services.klipper = {
     enable = true;
-    user = "klipper";
-    group = "klipper";
+    user = "moonraker";
+    group = "moonraker";
     mutableConfig = true;
-    configDir = "/persist/services/klipper";
-    configFile = "/persist/services/klipper/printer.cfg";
+    configDir = "/persist/services/klipper/config";
+    configFile = "/persist/services/klipper/config/printer.cfg";
     firmwares."anycubic-i3-mega" = {
       # Don't bother compiling this unless needed
       enable = false;
@@ -48,10 +48,4 @@
       octoprint_compat = {};
     };
   };
-  systemd.services."moonraker".serviceConfig.SupplementaryGroups = [config.users.groups."klipper".name];
-  users.users."klipper" = {
-    group = "klipper";
-    isSystemUser = true;
-  };
-  users.groups."klipper" = {};
 }
