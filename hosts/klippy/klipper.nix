@@ -26,7 +26,7 @@
   services.moonraker = {
     enable = true;
     allowSystemControl = true;
-    stateDir = "/persist/services/moonraker";
+    stateDir = "/persist/services/klipper";
     settings = {
       authorization = {
         trusted_clients = [
