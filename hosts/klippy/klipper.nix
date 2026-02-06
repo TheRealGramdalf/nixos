@@ -17,6 +17,9 @@
   };
   services.mainsail = {
     enable = true;
+    nginx.extraConfig = ''
+      client_max_body_size 2G;
+    '';
   };
   networking.firewall = {
     allowedTCPPorts = [80 config.services.moonraker.port];
@@ -28,7 +31,7 @@
     allowSystemControl = true;
     stateDir = "/persist/services/klipper";
     settings = {
-      server.max_upload_size = 4096;
+      server.max_upload_size = 2048;
       authorization = {
         trusted_clients = [
           "10.0.0.0/8"
