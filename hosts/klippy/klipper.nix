@@ -28,6 +28,7 @@
     allowSystemControl = true;
     stateDir = "/persist/services/klipper";
     settings = {
+      server.max_upload_size = 4096;
       authorization = {
         trusted_clients = [
           "10.0.0.0/8"
