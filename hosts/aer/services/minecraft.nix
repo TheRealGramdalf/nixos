@@ -6,7 +6,7 @@
   ...
 }: let
   # Target minecraft version
-  mcVersion = "1.21.6";
+  mcVersion = "1.21.11";
   fabricVersion = "0.16.14";
   # Format minecraft version, replacing . with _
   serverVersion = lib.replaceStrings ["."] ["_"] "fabric-${mcVersion}";
