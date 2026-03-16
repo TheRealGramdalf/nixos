@@ -7,6 +7,7 @@
     ../../common/backdoor.nix
 
     # Host-specific config
+    ./localsend.nix
     ./hardware.nix
     ./configuration.nix
     ./nvidia.nix
