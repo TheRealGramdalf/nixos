@@ -134,7 +134,7 @@
         youtube-tui
         btrbk
         plocate
-        neofetch
+        fastfetch
         tealdeer
         pdfmixtool
         #(ventoy.override {
