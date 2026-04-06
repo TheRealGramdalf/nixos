@@ -163,7 +163,7 @@
         cadaver
         piper
         freecad
-      ]
+      ];
   };
   programs = {
     home-manager.enable = true;
