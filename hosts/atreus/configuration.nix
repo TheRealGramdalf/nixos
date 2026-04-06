@@ -37,16 +37,9 @@
     # Required for KDE to control wifi via GUI
     networkmanager = {
       enable = true;
-      wifi.backend = "iwd";
       dns = "systemd-resolved";
     };
     dhcpcd.enable = false;
-    wireless.iwd.settings.Network = {
-      # Integrate with systemd for e.g. mDNS
-      NameResolvingService = "systemd";
-      # Set the priority high to prefer ethernet when available
-      RoutePriorityOffset = 300;
-    };
   };
   # Disable NM's wait-online service. This delays boot significantly
   systemd.services."NetworkManager-wait-online".enable = false;
