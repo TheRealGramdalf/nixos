@@ -23,4 +23,11 @@
     '';
     force = true;
   };
+  home.file.".config/kwalletrc" = {
+    text = ''
+      [Wallet]
+      Enabled=false
+    '';
+    force = true;
+  };
 }
