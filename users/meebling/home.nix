@@ -27,6 +27,7 @@
       gimp
       #calibre
       drawio
+      spotify
       # Utilities
       inkscape
       gnome-solanum # Pomodoro timer
