@@ -13,7 +13,7 @@
   ];
   environment.enableAllTerminfo = true;
   nix = {
-    package = pkgs.nixVersions.nix_2_32;
+    package = pkgs.nixVersions.nix_2_34;
     settings = {
       experimental-features = [
         "nix-command"
