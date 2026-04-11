@@ -23,147 +23,146 @@
       EDITOR = "nvim";
       NH_FLAKE = "nix";
     };
-    packages = with pkgs;
-      [
-        zoom-us
-        ardour
-        lsp-plugins
-        arduino-ide
-        jetbrains.idea-oss
-        wlr-randr
-        ripgrep
-        #### GUI ####
-        exfatprogs
-        #handbrake
-        meld
-        remmina
-        android-studio
-        # Shell/terminal
-        neovim
-        nerd-fonts.fantasque-sans-mono
-        # Communication
-        vesktop
-        electron-mail
-        chatterino2
-        # Word Processing
-        libreoffice
-        onlyoffice-desktopeditors # For improved compatibility over libreoffice
-        vscodium
-        obsidian
-        # Add graphviz for dot. nox = no xorg
-        graphviz-nox
-        pandoc
-        # Services
-        bitwarden-desktop
-        denaro
-        #celeste
-        jellyfin-web
-        #pika-backup
-        protonvpn-gui
-        #nextcloud-client
-        # File editors
-        audacity
-        # pitivi # Video editor
-        blender
-        gimp
-        #calibre # https://github.com/NixOS/nixpkgs/issues/305577
-        drawio
-        # Utilities
-        btop
-        inkscape
-        picard # MusicBrainz Tagger
-        wireshark
-        dive
-        filezilla
-        motrix # Download manager
-        gnome-calculator
-        gnome-system-monitor
-        gnome-sound-recorder
-        gnome-obfuscate
-        baobab # Disk usage analyzer
-        gnome-disk-utility
-        whatip
-        gnome-solanum # Pomodoro timer
-        #eartag # File tag editor - broken, python sucks
-        evince # Document viewer
-        clapper # Video viewer
-        eog # Photo viewer
-        gnome-power-manager # Battery stats
-        #textpieces # Manipulate text without random websites
-        dialect # Translate app
-        iotas # MD notes app
-        drawing
-        vlc
-        gnome-clocks
-        gnome-maps
-        nautilus
-        simple-scan
-        #gnome-connections
-        gnome-secrets
-        gnome-font-viewer
-        obs-studio
-        tauon
-        podman-desktop
-        # Partition tools
-        testdisk
-        gparted
-        #rpi-imager
-        # Settings
-        dconf-editor
-        gnome-tweaks
-        # Web browsers
-        brave
-        epiphany
-        qbittorrent
-        # Hypervisors
-        bottles
-        # Games
-        prismlauncher
-        mangohud # System usage stats
-        orca-slicer
-        #### CLI ####
-        exiftool
-        cmatrix
-        android-tools
-        speedtest-cli
-        unzip
-        nix-index
-        gh
-        git
-        gitg
-        youtube-tui
-        btrbk
-        plocate
-        fastfetch
-        tealdeer
-        pdfmixtool
-        #(ventoy.override {
-        #  withGtk3 = true;
-        #  defaultGuiType = "gtk3";
-        #  withNtfs = true;
-        #  withExt4 = true;
-        #  withCryptsetup = true;
-        #  withXfs = true;
-        #})
-        tio
-        itch
-        esptool
-        firehol
-        iperf3
-        dmidecode
-        usbutils
-        pciutils
-        smartmontools
-        ffmpeg_6-full
-        traceroute
-        nmap
-        arp-scan
-        tree
-        dig
-        cadaver
-        piper
-        freecad
-      ];
+    packages = with pkgs; [
+      zoom-us
+      ardour
+      lsp-plugins
+      arduino-ide
+      jetbrains.idea-oss
+      wlr-randr
+      ripgrep
+      #### GUI ####
+      exfatprogs
+      #handbrake
+      meld
+      remmina
+      android-studio
+      # Shell/terminal
+      neovim
+      nerd-fonts.fantasque-sans-mono
+      # Communication
+      vesktop
+      electron-mail
+      chatterino2
+      # Word Processing
+      libreoffice
+      onlyoffice-desktopeditors # For improved compatibility over libreoffice
+      vscodium
+      obsidian
+      # Add graphviz for dot. nox = no xorg
+      graphviz-nox
+      pandoc
+      # Services
+      bitwarden-desktop
+      denaro
+      #celeste
+      jellyfin-web
+      #pika-backup
+      protonvpn-gui
+      #nextcloud-client
+      # File editors
+      audacity
+      # pitivi # Video editor
+      blender
+      gimp
+      #calibre # https://github.com/NixOS/nixpkgs/issues/305577
+      drawio
+      # Utilities
+      btop
+      inkscape
+      picard # MusicBrainz Tagger
+      wireshark
+      dive
+      filezilla
+      motrix # Download manager
+      gnome-calculator
+      gnome-system-monitor
+      gnome-sound-recorder
+      gnome-obfuscate
+      baobab # Disk usage analyzer
+      gnome-disk-utility
+      whatip
+      gnome-solanum # Pomodoro timer
+      #eartag # File tag editor - broken, python sucks
+      evince # Document viewer
+      clapper # Video viewer
+      eog # Photo viewer
+      gnome-power-manager # Battery stats
+      #textpieces # Manipulate text without random websites
+      dialect # Translate app
+      iotas # MD notes app
+      drawing
+      vlc
+      gnome-clocks
+      gnome-maps
+      nautilus
+      simple-scan
+      #gnome-connections
+      gnome-secrets
+      gnome-font-viewer
+      obs-studio
+      tauon
+      podman-desktop
+      # Partition tools
+      testdisk
+      gparted
+      #rpi-imager
+      # Settings
+      dconf-editor
+      gnome-tweaks
+      # Web browsers
+      brave
+      epiphany
+      qbittorrent
+      # Hypervisors
+      bottles
+      # Games
+      prismlauncher
+      mangohud # System usage stats
+      orca-slicer
+      #### CLI ####
+      exiftool
+      cmatrix
+      android-tools
+      speedtest-cli
+      unzip
+      nix-index
+      gh
+      git
+      gitg
+      youtube-tui
+      btrbk
+      plocate
+      fastfetch
+      tealdeer
+      pdfmixtool
+      #(ventoy.override {
+      #  withGtk3 = true;
+      #  defaultGuiType = "gtk3";
+      #  withNtfs = true;
+      #  withExt4 = true;
+      #  withCryptsetup = true;
+      #  withXfs = true;
+      #})
+      tio
+      itch
+      esptool
+      firehol
+      iperf3
+      dmidecode
+      usbutils
+      pciutils
+      smartmontools
+      ffmpeg_6-full
+      traceroute
+      nmap
+      arp-scan
+      tree
+      dig
+      cadaver
+      piper
+      freecad
+    ];
   };
   programs = {
     home-manager.enable = true;
