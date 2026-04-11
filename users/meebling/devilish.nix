@@ -10,7 +10,7 @@
       prismlauncher
       scarab
       vesktop
-      #itch
+      lutris
     ];
   };
 }

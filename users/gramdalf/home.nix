@@ -58,7 +58,7 @@
       #celeste
       jellyfin-web
       #pika-backup
-      protonvpn-gui
+      proton-vpn
       #nextcloud-client
       # File editors
       audacity
@@ -162,6 +162,7 @@
       cadaver
       piper
       freecad
+      lutris
     ];
   };
   programs = {
