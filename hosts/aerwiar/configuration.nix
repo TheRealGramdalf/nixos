@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   boot = {
     loader = {
       systemd-boot = {
@@ -32,19 +32,26 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    kanidm.enableClient = true;
-    kanidm.clientSettings.uri = "https://auth.aer.dedyn.io";
+    kanidm.client = {
+      enable = true;
+      settings.uri = "https://auth.aer.dedyn.io";
+    };
     kanidm.package = pkgs.kanidm_1_8;
     fwupd.enable = true;
   };
 
   virtualisation.libvirtd = {
     enable = true;
+    # Don't autostart previously running VMs
+    onBoot = "ignore";
     qemu = {
       vhostUserPackages = [pkgs.virtiofsd]; # Enables virtiofs shares
       #package = pkgs.qemu_kvm; # Look into, to save disk space?
     };
   };
+  # Make libvirtd only socket activated
+  systemd.services.libvirtd.wantedBy = lib.mkForce [];
+
   programs.virt-manager.enable = true;
   # Docker
   virtualisation.docker = {
@@ -68,4 +75,5 @@
       extraPackages = [pkgs.gamescope];
     };
   };
+  services.ollama.enable = true;
 }
