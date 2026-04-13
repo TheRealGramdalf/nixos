@@ -32,7 +32,7 @@ in {
         bindaddress = "127.0.0.1:8443";
       };
     };
-    client.settings.uri = cfg.serverSettings.origin;
+    client.settings.uri = cfg.server.settings.origin;
     unix = {
       enable = true;
       settings = {
@@ -45,15 +45,15 @@ in {
 
   networking.hosts = {
     "127.0.0.1" = [
-      "${cfg.serverSettings.domain}"
+      "${cfg.server.settings.domain}"
     ];
   };
 
   services.cone.extraFiles."auth".settings = {
     http.routers."auth" = {
       service = "auth";
-      rule = "Host(`${cfg.serverSettings.domain}`)";
+      rule = "Host(`${cfg.server.settings.domain}`)";
     };
-    http.services."auth".loadBalancer.servers = [{url = "https://${cfg.serverSettings.bindaddress}";}];
+    http.services."auth".loadBalancer.servers = [{url = "https://${cfg.server.settings.bindaddress}";}];
   };
 }
