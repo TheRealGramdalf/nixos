@@ -132,7 +132,7 @@ in {
               title = "Kanidm";
               description = "Single Sign-on (Server Account)";
               icon = "fas fa-lock";
-              url = "${config.services.kanidm.serverSettings.origin}";
+              url = "${config.services.kanidm.server.settings.origin}";
             }
             {
               title = "Vaultwarden";
