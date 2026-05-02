@@ -40,7 +40,7 @@
       enable = true;
       settings.uri = "https://auth.aer.dedyn.io";
     };
-    kanidm.package = pkgs.kanidm_1_8;
+    kanidm.package = pkgs.kanidm_1_9;
     fwupd.enable = true;
   };
 
@@ -64,7 +64,7 @@
   };
   virtualisation.docker.storageDriver = "overlay2";
   programs = {
-    wireshark.enable = true;
+    wireshark.enable = false;
   };
 
   environment.systemPackages = [
