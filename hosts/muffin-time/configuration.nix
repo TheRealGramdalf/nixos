@@ -50,6 +50,8 @@
     actual-server
     # Whatsapp
     whatsapp-for-mac
+    # FFMPEG
+    ffmpeg
   ];
   nixpkgs.config.permittedInsecurePackages = [
     "adobe-reader-9.5.5"
