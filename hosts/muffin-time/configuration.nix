@@ -49,8 +49,6 @@
     spotify-qt
     # Actual Budget
     actual-server
-    # Whatsapp
-    whatsapp-for-mac
     # FFMPEG
     ffmpeg
   ];
