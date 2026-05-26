@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   boot = {
     loader = {
       systemd-boot = {
@@ -16,6 +16,7 @@
     };
     tmp.cleanOnBoot = true;
   };
+  nix.package = lib.mkForce pkgs.nixVersions.nix_2_32;
   # Enable uBlock Origin manually. Thanks, google
   programs.chromium = {
     enable = true;
