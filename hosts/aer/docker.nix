@@ -3,7 +3,7 @@
   virtualisation.docker = {
     enable = true;
     liveRestore = true;
-    package = pkgs.docker_28;
+    package = pkgs.docker_29;
     storageDriver = "zfs";
     daemon.settings = {
       # ipv6 support isn't here yet
