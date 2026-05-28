@@ -118,7 +118,7 @@
     };
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; stability = "unstable";};
         modules = [
           ./hosts/ripjaw/main.nix
           ./mods/nixos/main.nix
@@ -126,7 +126,7 @@
         ];
       };
       "aerwiar" = nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; stability = "unstable";};
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./hosts/aerwiar/main.nix
@@ -135,13 +135,14 @@
         ];
       };
       "muffin-time" = stableNixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; stability = "stable";};
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
           ./hosts/muffin-time/main.nix
         ];
       };
       "atreus" = nixosSystem {
+        specialArgs = {stability = "unstable";};
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./hosts/atreus/main.nix
@@ -153,6 +154,7 @@
         specialArgs = {
           inherit inputs;
           inherit tome;
+          stability = "unstable";
         };
         modules = [
           ./hosts/aer/main.nix
@@ -163,13 +165,14 @@
         specialArgs = {
           inherit inputs;
           inherit tome;
+          stability = "unstable";
         };
         modules = [
           ./hosts/klippy/main.nix
         ];
       };
       "orthanc" = nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; stability = "unstable";};
         modules = [
           ./hosts/orthanc/main.nix
           ./mods/nixos/main.nix
@@ -177,6 +180,7 @@
       };
       "iso" = nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {stability = "unstable";};
         modules = [
           ./common/tomeutils.nix
           ({modulesPath, ...}: {
