@@ -9,7 +9,7 @@
   python312Packages,
   userConfig ? null,
   variant ? "tasmota",
-  version ? "v15.1.0",
+  version ? "v15.4.0",
 }:
 stdenv.mkDerivation {
   pname = "tasmota";
@@ -18,7 +18,7 @@ stdenv.mkDerivation {
     owner = "arendst";
     repo = "Tasmota";
     tag = version;
-    hash = "sha256-0wAGaOwVwfvMxKeIIxQjuMnWocwPE9sXWrKOwWJDu+Q=";
+    hash = "sha256-uNby3U9UxQUp4L4FLP6+YnFYbajLoM3Z4wZHCDJViWU=";
   };
 
   configurePhase = ''
