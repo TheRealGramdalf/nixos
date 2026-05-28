@@ -11,7 +11,7 @@
     nix-tree # See where nix closure size goes
     unzip # Good to have in general
   ];
-  environment.enableAllTerminfo = true;
+  environment.enableAllTerminfo = stability == "stable";
   nix = {
     package = if stability == "unstable" then pkgs.nixVersions.nix_2_34 else pkgs.nixVersions.nix_2_32;
     settings = {
