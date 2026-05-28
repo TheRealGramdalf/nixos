@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, stability, ...}: {
   environment.systemPackages = with pkgs; [
     lsd # ls deluxe
     neovim # Text editor
