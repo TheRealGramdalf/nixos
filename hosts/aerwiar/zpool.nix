@@ -40,6 +40,7 @@ in {
         compression = "zstd";
         xattr = "sa";
         acltype = "posix";
+        longname = "on"; # Allow filenames greater than 255 bytes
       };
 
       datasets = {

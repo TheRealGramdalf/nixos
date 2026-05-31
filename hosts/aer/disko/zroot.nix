@@ -44,6 +44,7 @@ in {
         acltype = "posix"; # Allows extra attributes i.e. SELinux
         dnodesize = "auto"; # Requires a feature (ZFS 0.8.4+), but sizes metadata nodes more efficiently
         normalization = "formD"; # Validate and normalize file names, good for SMB
+        longname = "on"; # Allow filenames greater than 255 bytes
       };
 
       datasets = {
