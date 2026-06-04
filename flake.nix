@@ -201,8 +201,6 @@
     in {
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
-      wazuh-agent = pkgs.callPackage ./pkgs/wazuh/agent {};
-      wazuh-manager = pkgs.callPackage ./pkgs/wazuh/manager {};
       filedialpy = pkgs.python3Packages.callPackage ./pkgs/filedialpy.nix {};
       timekpr-webui = pkgs.python3Packages.callPackage ./pkgs/timekpr-webui.nix {python = pkgs.python313;};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
