@@ -33,6 +33,11 @@ in {
       "mqtt"
       # tp-link Kasa smart home
       "tplink"
+      # Media devices
+      "apple_tv"
+      "androidtv_remote"
+      # chromecast
+      "cast"
       # Printing
       "ipp"
       "brother"
