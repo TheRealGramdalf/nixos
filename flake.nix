@@ -13,8 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
