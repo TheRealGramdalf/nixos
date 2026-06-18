@@ -120,7 +120,10 @@
     };
     nixosConfigurations = {
       "ripjaw" = nixosSystem {
-        specialArgs = {inherit inputs; stability = "unstable";};
+        specialArgs = {
+          inherit inputs;
+          stability = "unstable";
+        };
         modules = [
           ./hosts/ripjaw/main.nix
           ./mods/nixos/main.nix
@@ -128,7 +131,10 @@
         ];
       };
       "aerwiar" = nixosSystem {
-        specialArgs = {inherit inputs; stability = "unstable";};
+        specialArgs = {
+          inherit inputs;
+          stability = "unstable";
+        };
         modules = [
           nixos-hardware.nixosModules.framework-16-7040-amd
           ./hosts/aerwiar/main.nix
@@ -137,7 +143,10 @@
         ];
       };
       "muffin-time" = stableNixosSystem {
-        specialArgs = {inherit inputs; stability = "stable";};
+        specialArgs = {
+          inherit inputs;
+          stability = "stable";
+        };
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
           ./hosts/muffin-time/main.nix
@@ -174,7 +183,10 @@
         ];
       };
       "orthanc" = nixosSystem {
-        specialArgs = {inherit inputs; stability = "unstable";};
+        specialArgs = {
+          inherit inputs;
+          stability = "unstable";
+        };
         modules = [
           ./hosts/orthanc/main.nix
           ./mods/nixos/main.nix

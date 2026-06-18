@@ -1,4 +1,8 @@
-{pkgs, stability, ...}: {
+{
+  pkgs,
+  stability,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     lsd # ls deluxe
     neovim # Text editor
@@ -13,7 +17,10 @@
   ];
   environment.enableAllTerminfo = stability == "stable";
   nix = {
-    package = if stability == "unstable" then pkgs.nixVersions.nix_2_34 else pkgs.nixVersions.nix_2_32;
+    package =
+      if stability == "unstable"
+      then pkgs.nixVersions.nix_2_34
+      else pkgs.nixVersions.nix_2_32;
     settings = {
       experimental-features = [
         "nix-command"
