@@ -37,6 +37,7 @@
 
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
     services.xserver.videoDrivers = [ "nvidia" ];
+    nixpkgs.config.nvidia.acceptLicense = true;
   };
 
   hardware = {
