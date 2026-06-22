@@ -15,10 +15,29 @@
     pkgs.qmk
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  specialisation."framework-16".configuration = {
+    boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
+    boot.initrd.kernelModules = [];
+    boot.kernelModules = ["kvm-amd"];
+    boot.extraModulePackages = [];
+  };
+
+  specialisation."asus-l210k".configuration = {
+    boot.initrd.availableKernelModules = ["xhci_pci" "uas" "sd_mod" "sdhci_pci"];
+    boot.initrd.kernelModules = [];
+    boot.kernelModules = ["kvm-intel"];
+    boot.extraModulePackages = [];
+  };
+
+  specialisation."msi-krait-gtx660".configuration = {
+    boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
+    boot.initrd.kernelModules = [];
+    boot.kernelModules = [];
+    boot.extraModulePackages = [];
+
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    services.xserver.videoDrivers = [ "nvidia" ];
+  };
 
   hardware = {
     brillo.enable = true;
