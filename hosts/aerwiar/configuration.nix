@@ -47,6 +47,7 @@
     fwupd.enable = true;
   };
 
+
   virtualisation.libvirtd = {
     enable = true;
     # Don't autostart previously running VMs
@@ -70,8 +71,12 @@
     wireshark.enable = false;
   };
 
+  services.udev.packages = [ pkgs.vial ];
+  hardware.keyboard.qmk.enable = true;
   environment.systemPackages = [
     pkgs.android-tools
+    pkgs.qmk
+    pkgs.vial
   ];
   tomeutils = {
     vapor = {
