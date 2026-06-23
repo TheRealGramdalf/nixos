@@ -16,6 +16,7 @@
   ];
 
   specialisation."framework-16".configuration = {
+    environment.etc."specialisation".text = "framework-16";
     boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
     boot.initrd.kernelModules = [];
     boot.kernelModules = ["kvm-amd"];
@@ -23,6 +24,7 @@
   };
 
   specialisation."asus-l210k".configuration = {
+    environment.etc."specialisation".text = "asus-l210k";
     boot.initrd.availableKernelModules = ["xhci_pci" "uas" "sd_mod" "sdhci_pci"];
     boot.initrd.kernelModules = [];
     boot.kernelModules = ["kvm-intel"];
@@ -30,6 +32,7 @@
   };
 
   specialisation."msi-krait-gtx660".configuration = {
+    environment.etc."specialisation".text = "msi-krait-gtx660";
     boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
     boot.initrd.kernelModules = [];
     boot.kernelModules = [];
