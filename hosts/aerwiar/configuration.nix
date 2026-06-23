@@ -13,6 +13,7 @@
     };
     zfs = {
       devNodes = "/dev/disk/by-partlabel";
+      # STATEVERSION
       forceImportRoot = false;
     };
     plymouth = {
