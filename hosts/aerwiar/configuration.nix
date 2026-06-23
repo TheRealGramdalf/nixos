@@ -11,7 +11,10 @@
       };
       timeout = 0;
     };
-    zfs.devNodes = "/dev/disk/by-partlabel";
+    zfs = {
+      devNodes = "/dev/disk/by-partlabel";
+      forceImportRoot = false;
+    };
     plymouth = {
       enable = true;
       theme = "catppuccin-mocha";

@@ -22,6 +22,7 @@
     permittedInsecurePackages = [
       "electron-39.8.10"
     ];
+    nvidia.acceptLicense = true;
   };
   networking = {
     hostName = "aerwiar";

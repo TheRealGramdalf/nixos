@@ -35,9 +35,14 @@
     boot.kernelModules = [];
     boot.extraModulePackages = [];
 
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    # latest version that supports the gtx660
+    hardware.nvidia.branch = "legacy_470";
     services.xserver.videoDrivers = [ "nvidia" ];
-    nixpkgs.config.nvidia.acceptLicense = true;
+    # disable bluetooth, no card present on this machine
+    hardware.bluetooth.enable = lib.mkForce false;
+    # Legacy 470 drivers fail to compile with 7.X kernels
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
+    hardware.nvidia.modesetting.enable = true;
   };
 
   hardware = {
