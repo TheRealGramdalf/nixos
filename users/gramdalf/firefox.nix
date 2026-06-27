@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   imports = [
     ./firefox/bitwarden.nix
     ./firefox/adblock.nix
@@ -14,6 +14,8 @@
   # - https://mozilla.github.io/policy-templates
   programs.firefox = {
     enable = true;
+    #STATEVERSION
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     profiles."gramdalf" = {
       isDefault = true;
       search.default = "ddg";
