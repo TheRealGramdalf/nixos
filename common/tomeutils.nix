@@ -22,6 +22,7 @@
       then pkgs.nixVersions.nix_2_34
       else pkgs.nixVersions.nix_2_32;
     settings = {
+      auto-optimise-store = true;
       experimental-features = [
         "nix-command"
         "flakes"
