@@ -199,9 +199,8 @@
     home-manager.enable = true;
     bash.enable = true;
 
-    vscode = {
+    vscodium = {
       enable = true;
-      package = pkgs.vscodium;
       profiles."default".extensions = with pkgs.vscode-extensions; [
         # VSCodium Extensions
         arrterian.nix-env-selector
