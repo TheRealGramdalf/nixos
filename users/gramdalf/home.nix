@@ -193,6 +193,7 @@
                 builtins.filter (p: (p.pname or "") != "openldap") originalPkgs ++ [customLdap];
             });
       })
+      nixd
     ];
   };
   programs = {
