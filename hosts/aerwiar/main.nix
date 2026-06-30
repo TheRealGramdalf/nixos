@@ -4,6 +4,7 @@
     ../../common/zfs-boot.nix
     ../../common/tomeutils.nix
     ../../common/nh.nix
+    ../../common/lix.nix
 
     # Host-specific config
     ./hardware.nix
