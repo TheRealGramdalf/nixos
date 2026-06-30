@@ -2,7 +2,7 @@
   fonts = {
     packages = [
       pkgs.overpass
-      (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+      pkgs.nerd-fonts.symbols-only
     ];
     enableDefaultPackages = false;
     fontDir.enable = true;
