@@ -101,7 +101,6 @@
       gnome-font-viewer
       obs-studio
       tauon
-      podman-desktop
       # Partition tools
       testdisk
       gparted
