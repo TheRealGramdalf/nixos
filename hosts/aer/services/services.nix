@@ -17,7 +17,7 @@
     ./mimir.nix
     ./loki.nix
     ./minecraft.nix
-    ./wazuh.nix
+    #./wazuh.nix
     ./wazuh-docker.nix
     ./timekpr-webui.nix
     ./actual.nix
