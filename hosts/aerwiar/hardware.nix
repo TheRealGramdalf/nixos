@@ -43,8 +43,6 @@
     services.xserver.videoDrivers = [ "nvidia" ];
     # disable bluetooth, no card present on this machine
     hardware.bluetooth.enable = lib.mkForce false;
-    # Legacy 470 drivers fail to compile with 7.X kernels
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
     hardware.nvidia.modesetting.enable = true;
   };
 
