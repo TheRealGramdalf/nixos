@@ -40,7 +40,7 @@
 
     # latest version that supports the gtx660
     hardware.nvidia.branch = "legacy_470";
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = ["nvidia"];
     # disable bluetooth, no card present on this machine
     hardware.bluetooth.enable = lib.mkForce false;
     hardware.nvidia.modesetting.enable = true;

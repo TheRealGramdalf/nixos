@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  inherit (lib)  mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.tomeutils.vapor;
   oscfg = osConfig.tomeutils.vapor;
   gamescopeCfg = osConfig.programs.gamescope;

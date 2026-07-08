@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   dataDir = "/persist/services/actual";
   cfg = config.services.actual;
   name = "actual";

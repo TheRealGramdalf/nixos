@@ -11,7 +11,18 @@
   users.mutableUsers = false;
   users.users."gramdalf" = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "netdev" "docker" "adbusers" "plugdev" /* "wireshark" */ "dialout"];
+    extraGroups = [
+      "wheel"
+      "video"
+      "netdev"
+      "docker"
+      "adbusers"
+      "plugdev"
+      /*
+      "wireshark"
+      */
+      "dialout"
+    ];
     hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
     group = "gramdalf";
   };

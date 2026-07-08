@@ -32,7 +32,7 @@
 
   nix.settings = {
     # Should be automatic with auto-allocate-uids, not working due to bug?
-    system-features = [ "uid-range" ];
+    system-features = ["uid-range"];
     auto-allocate-uids = true;
     use-cgroups = true;
     auto-optimise-store = true;
@@ -54,7 +54,6 @@
     kanidm.package = pkgs.kanidm_1_10;
     fwupd.enable = true;
   };
-
 
   virtualisation.libvirtd = {
     enable = true;
@@ -79,7 +78,7 @@
     wireshark.enable = false;
   };
 
-  services.udev.packages = [ pkgs.vial ];
+  services.udev.packages = [pkgs.vial];
   hardware.keyboard.qmk.enable = true;
   environment.systemPackages = [
     pkgs.android-tools
