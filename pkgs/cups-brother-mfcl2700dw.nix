@@ -96,7 +96,7 @@ in
       homepage = "http://www.brother.com/";
       description = "Brother MFC-L2700DW printer driver";
       sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
-      platforms = builtins.map (arch: "${arch}-linux") arches;
+      platforms = map (arch: "${arch}-linux") arches;
       maintainers = [maintainers.lovesegfault];
     };
   }

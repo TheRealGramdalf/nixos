@@ -1,4 +1,4 @@
-_: {
+{
   users.groups."arm".gid = 911;
   users.users."arm" = {
     description = "A.R.M. service account";

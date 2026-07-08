@@ -5,8 +5,7 @@
   tome,
   ...
 }: let
-  cfg = config.services.postgresql;
-  cfg2 = config.services.pogadmin;
+  cfg = config.services.pogadmin;
   name = "db";
   authurl = "https://auth.aer.dedyn.io";
   clientid = "pgadmin-aer_rs";
@@ -176,7 +175,7 @@ in {
         middlewares = ["local-only"];
       };
       http.services."${name}-ui".loadbalancer.servers = [
-        {url = "http://127.0.0.1:${toString cfg2.port}";}
+        {url = "http://127.0.0.1:${toString cfg.port}";}
       ];
     };
   };

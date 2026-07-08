@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   imports = [
     ../../common/tomeutils.nix
     ./networking.nix

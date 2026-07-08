@@ -5,8 +5,7 @@
   osConfig,
   ...
 }: let
-  inherit (lib) mkOption mkEnableOption literalExpression optionalAttrs optional optionals mkIf;
-  inherit (lib) types;
+  inherit (lib)  mkEnableOption mkIf;
   cfg = config.tomeutils.vapor;
   oscfg = osConfig.tomeutils.vapor;
   gamescopeCfg = osConfig.programs.gamescope;
@@ -17,7 +16,7 @@
   in
     pkgs.writeShellScriptBin "steam-gamescope" ''
       ${builtins.concatStringsSep "\n" exports}
-      gamescope --steam ${toString oscfg.gamescopeSession.args} -- steam ${builtins.toString oscfg.gamescopeSession.steamArgs}
+      gamescope --steam ${toString oscfg.gamescopeSession.args} -- steam ${toString oscfg.gamescopeSession.steamArgs}
     '';
 in {
   options.tomeutils.vapor = {

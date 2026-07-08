@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   imports = [
     ../../common/tomeutils.nix
     ../../common/zfs-boot.nix

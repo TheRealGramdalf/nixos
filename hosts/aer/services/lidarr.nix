@@ -4,7 +4,6 @@
   ...
 }: let
   name = "lidarr";
-  cfg = config.services.lidarr;
   arr_scripts = pkgs.fetchFromGitHub {
     owner = "RandomNinjaAtk";
     repo = "arr-scripts";

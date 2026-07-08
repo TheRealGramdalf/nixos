@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   services.kanidm = {
     package = pkgs.kanidm_1_10;
     enablePam = true;

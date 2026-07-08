@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib.types) listOf str nullOr;
+  inherit (lib.types) listOf str nullOr oneOf;
   inherit (lib) mkEnableOption mkMerge mkOption mkIf;
   cfg = config.tome;
 in {

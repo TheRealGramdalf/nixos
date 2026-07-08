@@ -1,4 +1,4 @@
-_: {
+{
   services.zrepl = {
     enable = true;
     settings = {

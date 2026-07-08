@@ -1,6 +1,4 @@
-lib: let
-  inherit (lib) mkIf mkForce;
-in {
+lib: {
   #mkTraefik = servicename: lbserver:
   mkUnixdService = {
     nixosConfig,
@@ -9,7 +7,7 @@ in {
     ...
   }: {
     "${serviceName}" = {
-      serviceConfig = mkIf (extraServiceConfig != null) extraServiceConfig;
+      serviceConfig = lib.mkIf (extraServiceConfig != null) extraServiceConfig;
       # Using the `.name` attribute will throw an error if `kanidm-unixd` is not defined
       after = [
         nixosConfig.systemd.services."kanidm-unixd".name

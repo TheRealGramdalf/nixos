@@ -1,4 +1,4 @@
-_: let
+let
   name = "media";
   port = "8096";
 in {

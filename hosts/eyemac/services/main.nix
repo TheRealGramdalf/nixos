@@ -1,4 +1,4 @@
-_: {
+{
   imporst = [
     ./traefik.nix
     ./arm.nix

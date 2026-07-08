@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./firefox/bitwarden.nix
     ./firefox/adblock.nix

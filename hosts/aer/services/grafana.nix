@@ -7,7 +7,6 @@
   graf = "sys";
   hl.authurl = "auth.aer.dedyn.io";
   srcfg = config.services.grafana.settings.server;
-  cfg = config.services.grafana.settings;
   client_id = "grafana-aer_rs";
 in {
   services.grafana = {

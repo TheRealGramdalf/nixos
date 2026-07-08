@@ -1,4 +1,4 @@
-_: let
+let
   lock-true = {
     Value = true;
     Status = "locked";

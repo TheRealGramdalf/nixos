@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   imports = [
     # Commonly used config
     ../../common/zfs-boot.nix
