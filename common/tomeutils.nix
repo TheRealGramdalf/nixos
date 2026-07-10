@@ -16,7 +16,7 @@
     unzip # Good to have in general
     trashy
   ];
-  environment.enableAllTerminfo = stability == "stable";
+  environment.enableAllTerminfo = true;
   nix = {
     package =
       if stability == "unstable"
