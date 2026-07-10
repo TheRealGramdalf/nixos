@@ -14,6 +14,7 @@
     btop # System stats
     nix-tree # See where nix closure size goes
     unzip # Good to have in general
+    trashy
   ];
   environment.enableAllTerminfo = stability == "stable";
   nix = {
