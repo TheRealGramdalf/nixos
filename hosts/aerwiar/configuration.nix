@@ -35,7 +35,6 @@
     system-features = ["uid-range"];
     auto-allocate-uids = true;
     use-cgroups = true;
-    auto-optimise-store = true;
     experimental-features = [
       "cgroups"
       "auto-allocate-uids"
