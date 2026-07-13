@@ -3,6 +3,7 @@
     ../../common/tomeutils.nix
     ../../common/zfs-boot.nix
     ../../common/backdoor.nix
+    ../../common/nix3.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix

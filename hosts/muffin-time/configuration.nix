@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   boot = {
@@ -20,7 +19,6 @@
     };
     tmp.cleanOnBoot = true;
   };
-  nix.package = lib.mkForce pkgs.nixVersions.nix_2_32;
   # Enable uBlock Origin manually. Thanks, google
   programs.chromium = {
     enable = true;
@@ -56,16 +54,8 @@
     # FFMPEG
     ffmpeg
   ];
-  nixpkgs.config.permittedInsecurePackages = [
-    "adobe-reader-9.5.5"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [];
 
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
 
   users.mutableUsers = false;
   users.groups."muffin" = {};
