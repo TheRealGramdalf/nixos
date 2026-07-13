@@ -31,6 +31,7 @@ in {
         };
       };
     };
+    # https://docs.high-availability.com/ZFS-Tuning-Guide/#access-time-atimeonoff
     zpool."${hostname}-zroot" = {
       type = "zpool";
       options.ashift = "12";
@@ -44,6 +45,7 @@ in {
         acltype = "posix"; # Allows extra attributes i.e. SELinux
         dnodesize = "auto"; # Requires a feature (ZFS 0.8.4+), but sizes metadata nodes more efficiently
         normalization = "formD"; # Validate and normalize file names, good for SMB
+        longname = "on";
       };
 
       datasets = {
