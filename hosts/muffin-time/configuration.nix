@@ -10,13 +10,7 @@
       };
     };
     zfs.devNodes = "/dev/disk/by-partlabel";
-    plymouth = {
-      enable = true;
-      theme = "catppuccin-mocha";
-      themePackages = [
-        (pkgs.catppuccin-plymouth.override {variant = "mocha";})
-      ];
-    };
+    plymouth.enable = true;
     tmp.cleanOnBoot = true;
   };
   # Enable uBlock Origin manually. Thanks, google
