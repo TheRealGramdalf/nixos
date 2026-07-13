@@ -18,7 +18,7 @@ in {
           };
           "${hostname}-zroot" = {
             label = "${hostname}-zroot";
-            end = "-512M"; # Negative end means "Leave this much empty space at the end of the device"
+            end = "-2G"; # Negative end means "Leave this much empty space at the end of the device"
             content = {
               type = "zfs";
               pool = "zroot";
