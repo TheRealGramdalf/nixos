@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   boot.kernelPackages = pkgs.linuxPackages_7_0;
   boot.zfs.package = pkgs.zfs_2_4;
+  boot.loader.efi.canTouchEfiVariables = true;
   #boot.zfs = {
   #enabled = true; # This is enabled automatically
   #devNodes = /dev/disk/by-partlabel; # Might have issues with legacy BIOS, since it can't read GPT labels?
