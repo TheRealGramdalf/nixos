@@ -115,6 +115,7 @@
         packages = with x86pkgs; [
           bun
           inputs.bun2nix.packages.x86_64-linux.default
+          http-server
           # cargo-tauri
           # cargo
         ];
