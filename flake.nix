@@ -43,6 +43,11 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    bun2nix = {
+      url = "github:nix-community/bun2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs @ {
@@ -101,6 +106,17 @@
           avrdude
           stm32flash
           #wxGTK32 # For bossac, whatever that is
+        ];
+      };
+      "mindwtr" = x86pkgs.mkShellNoCC {
+        name = "mindwtr-bun2nix";
+        meta.description = "Devshell with bun and the bun2nix binary";
+        # Instructions:
+        packages = with x86pkgs; [
+          bun
+          inputs.bun2nix.packages.x86_64-linux.default
+          # cargo-tauri
+          # cargo
         ];
       };
       "tasmota" = x86pkgs.mkShell {
@@ -216,6 +232,9 @@
       cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
       dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
       filedialpy = pkgs.python3Packages.callPackage ./pkgs/filedialpy.nix {};
+      mindwtr-web = pkgs.callPackage ./pkgs/mindwtr/web {
+        bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
+      };
       timekpr-webui = pkgs.python3Packages.callPackage ./pkgs/timekpr-webui.nix {python = pkgs.python313;};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
