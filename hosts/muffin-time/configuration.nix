@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   boot = {
     loader = {
       systemd-boot = {
@@ -49,7 +46,6 @@
     ffmpeg
   ];
   nixpkgs.config.permittedInsecurePackages = [];
-
 
   users.mutableUsers = false;
   users.groups."muffin" = {};

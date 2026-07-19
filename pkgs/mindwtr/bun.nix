@@ -5,11 +5,7 @@
 # Consume this with `fetchBunDeps` (recommended)
 # or `pkgs.callPackage` if you wish to handle
 # it manually.
-{
-  fetchurl,
-  ...
-}:
-{
+{fetchurl, ...}: {
   "@0no-co/graphql.web@1.2.0" = fetchurl {
     url = "https://registry.npmjs.org/@0no-co/graphql.web/-/graphql.web-1.2.0.tgz";
     hash = "sha512-/1iHy9TTr63gE1YcR5idjx8UREz1s0kFhydf3bBLCXyqjhkIc6igAzTOx3zPifCwFR87tsh/4Pa9cNts6d2otw==";
