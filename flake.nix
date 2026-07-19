@@ -236,6 +236,9 @@
       mindwtr-web = pkgs.callPackage ./pkgs/mindwtr/web {
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
       };
+      mindwtr-desktop = pkgs.callPackage ./pkgs/mindwtr/desktop {
+        bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
+      };
       timekpr-webui = pkgs.python3Packages.callPackage ./pkgs/timekpr-webui.nix {python = pkgs.python313;};
       # Must be built with --option sandbox false at the moment due to platformio fetching dependencies
       #tasmota = pkgs.callPackage ./pkgs/tasmota.nix {};
