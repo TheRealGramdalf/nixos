@@ -6,7 +6,7 @@ in {
   # Add a listen address for nginx
   services.nginx.virtualHosts."${domain}" = {
 
-    root = inputs.self.outputs.packages.x86_64-linux.mindwtr-web;
+    root = "${inputs.self.outputs.packages.x86_64-linux.mindwtr-web}/dist";
     listen = [
     {
       addr = "127.0.0.1";
