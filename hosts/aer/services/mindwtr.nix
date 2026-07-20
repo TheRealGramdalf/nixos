@@ -24,7 +24,7 @@ in {
     environment = {
       MINDWTR_CLOUD_DATA_DIR = cfg.dataDir;
       MINDWTR_CLOUD_AUTH_TOKENS_FILE = cfg.tokensFile;
-      MINDWTR_CLOUD_TRUST_PROXY_HEADERS = true;
+      MINDWTR_CLOUD_TRUST_PROXY_HEADERS = "true";
       MINDWTR_CLOUD_TRUSTED_PROXY_IPS = "127.0.0.1";
       MINDWTR_CLOUD_CORS_ORIGIN = "${cfg.name}.aer.dedyn.io";
     };
