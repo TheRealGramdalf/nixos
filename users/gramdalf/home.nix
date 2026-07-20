@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
@@ -159,6 +159,7 @@
       freecad
       lutris
       nixd
+      inputs.self.packages.x86_64-linux.mindwtr-desktop
     ];
   };
   programs = {
