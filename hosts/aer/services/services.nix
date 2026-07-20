@@ -22,5 +22,6 @@
     ./timekpr-webui.nix
     ./actual.nix
     ./ollama.nix
+    ./mindwtr.nix
   ];
 }
