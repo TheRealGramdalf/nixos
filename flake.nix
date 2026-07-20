@@ -229,8 +229,6 @@
     packages.x86_64-linux = let
       pkgs = x86pkgs;
     in {
-      cups-brother-mfcl2700dw = pkgs.callPackage ./pkgs/cups-brother-mfcl2700dw.nix {};
-      dashy-ui = pkgs.callPackage ./pkgs/dashy-ui.nix {};
       filedialpy = pkgs.python3Packages.callPackage ./pkgs/filedialpy.nix {};
       mindwtr-web = pkgs.callPackage ./pkgs/mindwtr/web {
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
