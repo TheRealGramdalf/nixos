@@ -1,10 +1,10 @@
 { inputs, ...}: let
-  cfg.domain = "mindwtr.aer.dedyn.io";
+  domain = "mindwtr.aer.dedyn.io";
   port = 6940;
 in {
 
   # Add a listen address for nginx
-  services.nginx.virtualHosts."${cfg.domain}" = {
+  services.nginx.virtualHosts."${domain}" = {
 
     root = inputs.self.outputs.packages.x86_64-linux.mindwtr-web;
     listen = [
@@ -53,7 +53,7 @@ in {
   # Proxy nginx through traefik
   services.cone.extraFiles."mindwtr-web".settings = {
     http.routers."mindwtr-web" = {
-      rule = "Host(`${cfg.virtualHost.domain}`)";
+      rule = "Host(`${domain}`)";
       service = "mindwtr-web";
       middlewares = "local-only";
     };
