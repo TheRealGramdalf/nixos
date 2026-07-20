@@ -13,7 +13,6 @@ in {
       inherit port;
     }
   ];
-    index = "index.html";
     extraConfig = ''
       index index.html;
       add_header X-Content-Type-Options "nosniff" always;
