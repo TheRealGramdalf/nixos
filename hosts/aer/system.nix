@@ -10,4 +10,15 @@
     enable = true;
     flake = "/etc/nixos";
   };
+  nixpkgs.overlays = [
+    (prev: final: {
+      bun = prev.bun.override {
+        src = builtins.fetchurl {
+        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-x64-baseline.zip";
+        hash = "";
+      };
+      };
+    })
+  ]
+  ;
 }
