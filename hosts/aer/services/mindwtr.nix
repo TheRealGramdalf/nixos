@@ -29,7 +29,6 @@ in {
       MINDWTR_CLOUD_CORS_ORIGIN = "${cfg.name}.aer.dedyn.io";
     };
     serviceConfig = {
-      EnvironmentFile = cfg.environmentFile;
       ExecStart = "${lib.getExe cfg.package} -- --port ${toString cfg.port} --host ${cfg.host}";
       Type = "simple";
       User = cfg.user;
