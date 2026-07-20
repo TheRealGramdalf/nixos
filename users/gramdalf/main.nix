@@ -6,7 +6,4 @@
     ./term/main.nix
     ./steam.nix
   ];
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
 }
