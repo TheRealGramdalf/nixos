@@ -60,11 +60,11 @@ in {
   };
 
   services.cone.extraFiles."mindwtr-cloud".settings = {
-    http.routers."${cfg.name}" = {
-      rule = "Host(`${cfg.name}.aer.dedyn.io`)";
-      service = "${cfg.name}";
+    http.routers."${cfg.name}-cloud" = {
+      rule = "Host(`cloud.${cfg.name}.aer.dedyn.io`)";
+      service = "${cfg.name}-cloud";
       middlewares = "local-only";
     };
-    http.services."${cfg.name}".loadbalancer.servers = [{url = "http://${cfg.host}:${toString cfg.port}";}];
+    http.services."${cfg.name}-cloud".loadbalancer.servers = [{url = "http://${cfg.host}:${toString cfg.port}";}];
   };
 }
