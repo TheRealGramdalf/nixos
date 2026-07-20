@@ -23,7 +23,8 @@
       then pkgs.nixVersions.nix_2_34
       else pkgs.nixVersions.nix_2_32;
     settings = {
-      auto-optimise-store = true;
+      # https://github.com/NixOS/nix/issues/6033
+      # auto-optimise-store = true;
       experimental-features = [
         "nix-command"
         "flakes"
