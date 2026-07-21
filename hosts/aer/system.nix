@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   boot.initrd.systemd.enable = true;
   system.etc.overlay.enable = false;
   users.mutableUsers = false;
@@ -11,12 +11,12 @@
     flake = "/etc/nixos";
   };
   nixpkgs.overlays = [
-    (prev: final: {
-      bun = prev.bun.override {
-        src = builtins.fetchurl {
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-x64-baseline.zip";
-        hash = "";
-      };
+    (final: prev: {
+      bun = prev.bun.overrideAttrs {
+          passthru.sources."x86_64-linux" = pkgs.fetchurl {
+          url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-x64-baseline.zip";
+          hash = "sha256-nYokKSpwaAkCBdqsCloiP19pc29Sh+N7+I07QDHtx1A=";
+        };
       };
     })
   ]
