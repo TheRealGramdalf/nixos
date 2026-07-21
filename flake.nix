@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     bun2nix = {
-      url = "github:nix-community/bun2nix";
+      url = "github:therealgramdalf/bun2nix-baseline";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

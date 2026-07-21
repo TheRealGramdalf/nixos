@@ -54,16 +54,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1782772816,
-        "narHash": "sha256-s9BuFv0mRuZx9C1MF8qPHRdcAK14ONi0A5m6E2wqOoM=",
-        "owner": "nix-community",
-        "repo": "bun2nix",
-        "rev": "5a39d717029e94163ac223aee8d5c9946cafed1c",
+        "lastModified": 1784594411,
+        "narHash": "sha256-xaeVPXC+NEMmqRX390XniCgrD1Rw5UFd3Fx2532ih38=",
+        "owner": "therealgramdalf",
+        "repo": "bun2nix-baseline",
+        "rev": "230674556db0923960749f0ed27b53b70e2fabba",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "bun2nix",
+        "owner": "therealgramdalf",
+        "repo": "bun2nix-baseline",
         "type": "github"
       }
     },
