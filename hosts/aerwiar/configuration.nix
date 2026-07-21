@@ -29,7 +29,11 @@
     enable = true;
     scsiLinkPolicy = "med_power_with_dipm";
   };
-  # You probably want systemd.oomd.enableSystemSlice = true; systemd.oomd.enableUserSlices = true;
+
+  systemd.oomd = {
+    enableUserSlices = true;
+    enableSystemSlice = true;
+  };
   nix.settings = {
     # Should be automatic with auto-allocate-uids, not working due to bug?
     system-features = ["uid-range"];
