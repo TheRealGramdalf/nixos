@@ -5,6 +5,8 @@
       "tank"
       "medusa"
     ];
+    #STATEVERSION
+    forceImportRoot = false;
   };
 
   hardware.enableAllFirmware = true;
