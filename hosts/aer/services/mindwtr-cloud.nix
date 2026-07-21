@@ -27,9 +27,10 @@ in {
       MINDWTR_CLOUD_TRUST_PROXY_HEADERS = "true";
       MINDWTR_CLOUD_TRUSTED_PROXY_IPS = "127.0.0.1";
       MINDWTR_CLOUD_CORS_ORIGIN = "${cfg.name}.aer.dedyn.io";
+      HOST = cfg.host;
     };
     serviceConfig = {
-      ExecStart = "${lib.getExe cfg.package} -- --port ${toString cfg.port} --host ${cfg.host}";
+      ExecStart = "${lib.getExe cfg.package} -- --port ${toString cfg.port}";
       Type = "simple";
       User = cfg.user;
       Group = cfg.group;
