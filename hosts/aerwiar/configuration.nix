@@ -30,10 +30,15 @@
     scsiLinkPolicy = "med_power_with_dipm";
   };
 
+  ### Experimental
   systemd.oomd = {
     enableUserSlices = true;
     enableSystemSlice = true;
   };
+  security.sudo-rs.enable = true;
+
+  ###
+
   nix.settings = {
     # Should be automatic with auto-allocate-uids, not working due to bug?
     system-features = ["uid-range"];
