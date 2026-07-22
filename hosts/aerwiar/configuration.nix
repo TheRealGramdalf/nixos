@@ -41,6 +41,11 @@
     groups."trusted-users" = {};
     users."gramdalf".extraGroups = ["trusted-users"];
   };
+  services.dbus.implementation = "broker";
+  system.etc.overlay = {
+    enable = true;
+    mutable = true;
+  };
   ###
 
   nix.settings = {
