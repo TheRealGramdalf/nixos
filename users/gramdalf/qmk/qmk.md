@@ -2,4 +2,6 @@
 - RGB matrix support (?) https://github.com/flytiger/vial-qmk/tree/AW20216S
   - https://www.reddit.com/r/glorious/comments/ofxljz/my_try_on_qmkvial_firmware/
 - Determine keyboard revision https://blog.mbo.dev/archives/2048
+- `qmk flash -kb gmmk/pro/ansi/rev1 -km vial`
+- https://community.frame.work/t/custom-qmk-firmware/46459/14
   
