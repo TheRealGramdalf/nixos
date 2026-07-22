@@ -37,9 +37,14 @@
   };
   security.sudo-rs.enable = true;
 
+  users = {
+    groups."trusted-users" = {};
+    users."gramdalf".extraGroups = ["trusted-users"];
+  };
   ###
 
   nix.settings = {
+    trusted-users = [ "@trusted-users"];
     # Should be automatic with auto-allocate-uids, not working due to bug?
     system-features = ["uid-range"];
     auto-allocate-uids = true;
