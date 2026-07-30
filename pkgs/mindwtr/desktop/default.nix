@@ -21,10 +21,11 @@ in
     src = fetchFromGitHub {
       owner = "dongdongbh";
       repo = "mindwtr";
-      tag = version;
-      hash = "sha256-QVkav1IaLwlg/+IDLdA/rZgFgCQxAHmPpy0k50wZRao=";
+      #tag = version;
+      rev = "eba61c096b6c891813ea4fb1619b05b65c136d86";
+      hash = "sha256-kofFjdHFl8I8sTcpVv4EFC28d9ZHB83yiX0Jray5Q3Q=";
     };
-    cargoHash = "sha256-Uc6apZv3NZoJBBVyrxgc2shTvtxjGU+X5CxSxvWunPw=";
+    cargoHash = "sha256-eCC0Ilu+swwT7DNuqMb0UdIyMwoaMVT9xVTy76KeXLk=";
 
     nativeBuildInputs = [
       bun2nix.hook

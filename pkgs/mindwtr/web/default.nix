@@ -11,8 +11,9 @@ in
     src = fetchFromGitHub {
       owner = "dongdongbh";
       repo = "mindwtr";
-      tag = version;
-      hash = "sha256-QVkav1IaLwlg/+IDLdA/rZgFgCQxAHmPpy0k50wZRao=";
+      rev = "eba61c096b6c891813ea4fb1619b05b65c136d86";
+      #tag = version;
+      hash = "sha256-kofFjdHFl8I8sTcpVv4EFC28d9ZHB83yiX0Jray5Q3Q=";
     };
 
     nativeBuildInputs = [
