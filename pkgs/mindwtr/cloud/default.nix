@@ -2,7 +2,7 @@
   fetchFromGitHub,
   bun2nix,
 }: let
-  version = "v1.1.0";
+  version = "v1.1.5";
 in
   bun2nix.writeBunApplication {
     pname = "mindwtr-cloud";
@@ -11,7 +11,7 @@ in
       owner = "dongdongbh";
       repo = "mindwtr";
       tag = version;
-      hash = "sha256-nIMMzvjW0+jcw9/VtASxniAJPDF59Cl03XPUEEqWFf8=";
+      hash = "sha256-QVkav1IaLwlg/+IDLdA/rZgFgCQxAHmPpy0k50wZRao=";
     };
 
     dontUseBunBuild = true;
