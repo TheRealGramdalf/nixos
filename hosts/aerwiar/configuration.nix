@@ -31,6 +31,9 @@
   };
 
   ### Experimental
+  boot.kernelParams = [
+    "zfs.zfs_arc_sys_free=${toString (3 * 1024*1024*1024)}"
+  ];
   systemd.oomd = {
     enableUserSlices = true;
     enableSystemSlice = true;
@@ -43,7 +46,7 @@
   };
   services.dbus.implementation = "broker";
   system.etc.overlay = {
-    enable = true;
+    enable = false;
     mutable = true;
   };
   ###
