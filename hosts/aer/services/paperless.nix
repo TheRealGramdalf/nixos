@@ -61,7 +61,7 @@ in {
       "paperless-secret-key" =
       {
         # Systemd service uses the wrong group here as well:
-        serviceConfig.Group = cfg.user;
+        serviceConfig.Group = lib.mkForce cfg.user;
       }
       // wantsKani;
   };
@@ -142,7 +142,7 @@ in {
 
   # Create a blank user to fix missing attributes
   users.users.${cfg.user} = {
-    group = cfg.user;
+    group = "shouldnotexist";
     enable = false;
   };
 
