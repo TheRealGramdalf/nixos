@@ -127,7 +127,7 @@ in {
       enable = false;
       isSystemUser = true;
     };
-    groups."shouldnotexist".enable = false;
+    groups."shouldnotexist"= {};
   };
 
   services.cone.extraFiles."${name}".settings = {
