@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  boot.kernelPackages = pkgs.linuxPackages_7_0;
+  boot.kernelPackages = pkgs.linuxPackages_7_1;
   boot.zfs.package = pkgs.zfs_2_4;
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.zfs = {
