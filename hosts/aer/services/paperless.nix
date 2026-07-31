@@ -120,10 +120,14 @@ in {
   );
 
   # Create a blank user to fix missing attributes
-  users.users.${cfg.user} = {
+  users.users = {
+    ${cfg.user} = {
     group = "shouldnotexist";
     name = "shouldnotexist";
     enable = false;
+    isSystemUser = true;
+  };
+  users.groups."shouldnotexist".enable = false;
   };
 
   services.cone.extraFiles."${name}".settings = {
