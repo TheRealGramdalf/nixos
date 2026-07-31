@@ -140,6 +140,12 @@ in {
     }
   );
 
+  # Create a blank user to fix missing attributes
+  users.users.${cfg.user} = {
+    group = cfg.user;
+    enable = false;
+  };
+
   services.cone.extraFiles."${name}".settings = {
     http.routers."${name}" = {
       service = "${name}";
