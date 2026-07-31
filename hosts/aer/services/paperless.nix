@@ -23,9 +23,6 @@ in {
         serviceConfig = {
           # Conflicts with the database connection
           PrivateNetwork = lib.mkForce false;
-          EnvironmentFile = [
-            "/persist/secrets/paperless/paperless.env"
-          ];
         };
       }
       // wantsKani;
@@ -34,31 +31,12 @@ in {
         serviceConfig = {
           # Conflicts with the database connection
           PrivateNetwork = lib.mkForce false;
-          EnvironmentFile = [
-            "/persist/secrets/paperless/paperless.env"
-          ];
         };
       }
       // wantsKani;
-    "paperless-task-queue" =
-      {
-        serviceConfig = {
-          EnvironmentFile = [
-            "/persist/secrets/paperless/paperless.env"
-          ];
-        };
-      }
-      // wantsKani;
-    "paperless-web" =
-      {
-        serviceConfig = {
-          EnvironmentFile = [
-            "/persist/secrets/paperless/paperless.env"
-          ];
-        };
-      }
-      // wantsKani;
-      "paperless-secret-key" =
+    "paperless-task-queue" = {} // wantsKani;
+    "paperless-web" = {} // wantsKani;
+    "paperless-secret-key" =
       {
         # Systemd service uses the wrong group here as well:
         serviceConfig.Group = lib.mkForce cfg.user;
@@ -69,6 +47,7 @@ in {
     enable = true;
     mediaDir = "/tank/paperless";
     dataDir = "/persist/services/paperless/data";
+    environmentFile = "/persist/secrets/paperless/paperless.env";
     address = "127.0.0.1";
     user = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
     settings = {
