@@ -58,6 +58,12 @@ in {
         };
       }
       // wantsKani;
+      "paperless-secret-key" =
+      {
+        # Systemd service uses the wrong group here as well:
+        serviceConfig.Group = cfg.user;
+      }
+      // wantsKani;
   };
   services.paperless = {
     enable = true;
