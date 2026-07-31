@@ -122,6 +122,7 @@ in {
   # Create a blank user to fix missing attributes
   users.users.${cfg.user} = {
     group = "shouldnotexist";
+    name = "shouldnotexist";
     enable = false;
   };
 
