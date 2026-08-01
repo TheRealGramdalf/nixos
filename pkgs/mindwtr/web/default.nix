@@ -3,7 +3,7 @@
   bun2nix,
   stdenv,
 }: let
-  version = "v1.1.5";
+  version = "v1.1.6";
 in
   stdenv.mkDerivation {
     pname = "mindwtr-web";
@@ -11,9 +11,8 @@ in
     src = fetchFromGitHub {
       owner = "dongdongbh";
       repo = "mindwtr";
-      rev = "eba61c096b6c891813ea4fb1619b05b65c136d86";
-      #tag = version;
-      hash = "sha256-kofFjdHFl8I8sTcpVv4EFC28d9ZHB83yiX0Jray5Q3Q=";
+      tag = version;
+      hash = "sha256-5zGeQ8Y4HS1BwihgRyyWgzUfFu4vIkrqvQPWcycy19o=";
     };
 
     nativeBuildInputs = [
