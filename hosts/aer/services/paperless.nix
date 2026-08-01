@@ -49,6 +49,10 @@ in {
     dataDir = "/persist/services/paperless/data";
     environmentFile = "/persist/secrets/paperless/paperless.env";
     address = "127.0.0.1";
+    # Note: to run `paperless-manage`, use the following:
+    # sudo -u "e89bf800-37ae-453b-8e9c-6b7f55dd82c6" -g "redis-paperless" -i
+    # USER="e89bf800-37ae-453b-8e9c-6b7f55dd82c6" paperless-manage ...
+    # The USER variable uses the SPN rather than UUID
     user = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
     settings = {
       # Postgres connection settings. Port is implicit, password is secret
