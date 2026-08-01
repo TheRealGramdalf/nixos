@@ -10,7 +10,7 @@
     # Services
     ./services/services.nix
   ];
-  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_default;
+  boot.kernelPackages = pkgs.linux_latest;
   boot.zfs.package = pkgs.zfs_2_4;
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
