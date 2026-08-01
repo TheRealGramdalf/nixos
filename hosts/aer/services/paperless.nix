@@ -55,6 +55,7 @@ in {
       PAPERLESS_DBHOST = "localhost";
       PAPERLESS_DBNAME = "paperless-ngx-aer";
       PAPERLESS_DBUSER = "paperless-ngx-aer";
+      PAPERLESS_DBENGINE = "postgresql";
 
       PAPERLESS_ADMIN_USER = "root";
       # Password is also secret here
@@ -66,10 +67,11 @@ in {
       PAPERLESS_EMPTY_TRASH_DIR = "${cfg.mediaDir}/media/.trash"; # Relative to `src/`, should be changed
       PAPERLESS_USE_X_FORWARD_HOST = true;
       PAPERLESS_USE_X_FORWARD_PORT = true;
+      PAPERLESS_PROXY_SSL_HEADER = ["HTTP_X_FORWARDED_PROTO" "https"];
+      PAPERLESS_TRUSTED_PROXIES = "127.0.0.1";
       # OpenID Configuration:
       # See https://docs.paperless-ngx.com/configuration/#PAPERLESS_ACCOUNT_DEFAULT_GROUPS
       # for automatic group membership
-      PAPERLESS_PROXY_SSL_HEADER = ["HTTP_X_FORWARDED_PROTO" "https"];
       PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
       ## This environment variable expects a string of JSON value
       #PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
