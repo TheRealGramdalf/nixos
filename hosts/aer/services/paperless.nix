@@ -61,7 +61,7 @@ in {
       # Password is also secret here
 
       PAPERLESS_DEBUG = false;
-      PAPERLESS_FILENAME_FORMAT = "{owner_username}{created_year}/{created_month_name_short}/{title}/{doc_pk}";
+      PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}/{created_month_name_short}/{title}/{doc_pk}";
       PAPERLESS_AUDIT_LOG_ENABLED = true; # Set up once things are running properly
       PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS = true;
       PAPERLESS_EMPTY_TRASH_DIR = "${cfg.mediaDir}/media/.trash"; # Relative to `src/`, should be changed
