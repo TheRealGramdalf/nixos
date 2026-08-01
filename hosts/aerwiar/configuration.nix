@@ -32,7 +32,7 @@
 
   ### Experimental
   boot.kernelParams = [
-    "zfs.zfs_arc_sys_free=${toString (3 * 1024*1024*1024)}"
+    "zfs.zfs_arc_sys_free=${toString (3 * 1024 * 1024 * 1024)}"
   ];
   systemd.oomd = {
     enableUserSlices = true;
@@ -52,7 +52,7 @@
   ###
 
   nix.settings = {
-    trusted-users = [ "@trusted-users"];
+    trusted-users = ["@trusted-users"];
     # Should be automatic with auto-allocate-uids, not working due to bug?
     system-features = ["uid-range"];
     auto-allocate-uids = true;
