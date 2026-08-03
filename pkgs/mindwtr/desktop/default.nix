@@ -43,8 +43,10 @@ in
       libayatana-appindicator #libappindicator-sys
     ];
 
+    # Rename the `.desktop` file to make sure the app ID links correctly
     postFixup = ''
       patchelf --add-needed ${libayatana-appindicator}/lib/libayatana-appindicator3.so $out/bin/.mindwtr-wrapped
+      mv $out/share/applications/Mindwtr.desktop $out/share/applications/mindwtr.desktop
     '';
     bunDeps = bun2nix.fetchBunDeps {
       bunNix = ../bun.nix;
