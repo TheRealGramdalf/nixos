@@ -15,33 +15,13 @@
     pkgs.qmk
   ];
 
-  specialisation."framework-16".configuration = {
-    environment.etc."specialisation".text = "framework-16";
-    boot = {
-      kernelParams = [
-        "amdgpu.freesync_video=1"
-      ];
-      initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
-      kernelModules = ["kvm-amd"];
-    };
-  };
-
-  specialisation."asus-l210k".configuration = {
-    environment.etc."specialisation".text = "asus-l210k";
-    boot.initrd.availableKernelModules = ["xhci_pci" "uas" "sd_mod" "sdhci_pci"];
-    boot.kernelModules = ["kvm-intel"];
-  };
-
-  specialisation."msi-krait-gtx660".configuration = {
-    environment.etc."specialisation".text = "msi-krait-gtx660";
-    boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
-
-    # latest version that supports the gtx660
-    hardware.nvidia.branch = "legacy_470";
-    services.xserver.videoDrivers = ["nvidia"];
-    # disable bluetooth, no card present on this machine
-    hardware.bluetooth.enable = lib.mkForce false;
-    hardware.nvidia.modesetting.enable = true;
+  environment.etc."specialisation".text = "framework-16";
+  boot = {
+    kernelParams = [
+      "amdgpu.freesync_video=1"
+    ];
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
+    kernelModules = ["kvm-amd"];
   };
 
   hardware = {
