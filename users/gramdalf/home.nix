@@ -28,7 +28,7 @@
       ardour
       lsp-plugins
       arduino-ide
-      jetbrains.idea-oss
+      jetbrains.idea
       wlr-randr
       ripgrep
       #### GUI ####
