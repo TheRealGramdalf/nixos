@@ -47,6 +47,9 @@ in {
       service = "${name}";
       rule = "Host(`${name}.aer.dedyn.io`)";
     };
-    http.services."${name}".loadBalancer.servers = [{url = "http://127.0.0.1:${cfg.config.ROCKET_PORT}";}];
+    http.services."${name}".loadBalancer = {
+      servers = [{url = "http://127.0.0.1:${cfg.config.ROCKET_PORT}";}];
+      healthcheck.path = "/alive";
+    };
   };
 }

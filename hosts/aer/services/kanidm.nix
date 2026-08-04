@@ -54,6 +54,9 @@ in {
       service = "auth";
       rule = "Host(`${cfg.server.settings.domain}`)";
     };
-    http.services."auth".loadBalancer.servers = [{url = "https://${cfg.server.settings.bindaddress}";}];
+    http.services."auth".loadBalancer = {
+      servers = [{url = "https://${cfg.server.settings.bindaddress}";}];
+      healthcheck.path = "/status";
+    };
   };
 }
