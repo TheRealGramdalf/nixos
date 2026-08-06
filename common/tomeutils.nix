@@ -15,6 +15,7 @@
     nix-tree # See where nix closure size goes
     unzip # Good to have in general
     trashy
+    fclones
   ];
   environment.enableAllTerminfo = true;
   nix = {
