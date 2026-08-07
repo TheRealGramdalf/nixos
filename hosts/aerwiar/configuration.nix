@@ -32,7 +32,7 @@
 
   ### Experimental
   boot.kernelParams = [
-    "zfs.zfs_arc_sys_free=${toString (3 * 1024 * 1024 * 1024)}"
+    "zfs.zfs_arc_sys_free=3221225472" # 3GiB
   ];
   systemd.oomd = {
     enableUserSlices = true;
