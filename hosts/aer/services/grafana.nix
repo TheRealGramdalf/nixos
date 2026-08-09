@@ -72,7 +72,7 @@ in {
           rule = "Host(`${srcfg.domain}`)";
           service = "${graf}";
         };
-        http.services."${graf}".loadbalancer.servers = [{url = "${srcfg.protocol}\://${srcfg.http_addr}\:${toString srcfg.http_port}";}];
+        http.services."${graf}".loadbalancer.servers = [{url = "${srcfg.protocol}://${srcfg.http_addr}:${toString srcfg.http_port}";}];
       };
     };
   };

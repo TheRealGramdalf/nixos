@@ -141,6 +141,6 @@ in {
       service = "${name}";
       rule = "Host(`${name}.aer.dedyn.io`)";
     };
-    http.services."${name}".loadBalancer.servers = [{url = "http://${cfg.address}\:${port}";}];
+    http.services."${name}".loadBalancer.servers = [{url = "http://${cfg.address}:${port}";}];
   };
 }
