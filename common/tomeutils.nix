@@ -21,8 +21,8 @@
   nix = {
     package =
       if stability == "unstable"
-      then pkgs.nixVersions.nix_2_34
-      else pkgs.nixVersions.nix_2_32;
+      then pkgs.nixVersions.nix_2_35
+      else pkgs.nixVersions.nix_2_34;
     settings = {
       # https://github.com/NixOS/nix/issues/6033
       # auto-optimise-store = true;
