@@ -11,7 +11,8 @@
   hardware.enableAllFirmware = true;
 
   boot.zfs = {
-    #package = lib.mkForce pkgs.zfs_unstable;
+    #STATEVERSION
+    forceImportRoot = false;
     devNodes = "/dev/disk/by-partlabel";
   };
 
