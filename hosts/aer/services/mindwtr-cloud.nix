@@ -3,10 +3,9 @@
   config,
   ...
 }: let
-    env = config.services.mindwtr.cloud.environment;
-    name = "mindwtr";
+  env = config.services.mindwtr.cloud.environment;
+  name = "mindwtr";
 in {
-
   imports = [
     inputs.mindwtr-flake.nixosModules.default
   ];

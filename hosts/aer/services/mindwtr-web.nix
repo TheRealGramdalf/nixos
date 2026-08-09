@@ -1,4 +1,8 @@
-{inputs, config, ...}: let
+{
+  inputs,
+  config,
+  ...
+}: let
   port = 6940;
 in {
   services.mindwtr.web = {
@@ -14,7 +18,6 @@ in {
       ];
     };
   };
-  
 
   # Proxy nginx through traefik
   services.cone.extraFiles."mindwtr-web".settings = {

@@ -5,7 +5,6 @@
 }: let
   hostname = config.networking.hostName;
 in {
-
   boot = {
     kernelParams = [
       "zfs.zfs_arc_sys_free=3221225472" # 3GiB
