@@ -44,10 +44,11 @@
         "type": "github"
       }
     },
-    "bun2nix": {
+    "bun2nix-baseline": {
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
+          "mindwtr-flake",
           "nixpkgs"
         ],
         "systems": "systems_2",
@@ -107,7 +108,8 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
-          "bun2nix",
+          "mindwtr-flake",
+          "bun2nix-baseline",
           "nixpkgs"
         ]
       },
@@ -185,6 +187,27 @@
         "owner": "nix-community",
         "ref": "release-26.05",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "mindwtr-flake": {
+      "inputs": {
+        "bun2nix-baseline": "bun2nix-baseline",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786300240,
+        "narHash": "sha256-XYfm2wQnXZLy7w0gTI8QWnZfAwbKVZOWzUuNTE5YM5c=",
+        "owner": "therealgramdalf",
+        "repo": "mindwtr-flake",
+        "rev": "c23458433d9164b213cae892439bfaa99250c761",
+        "type": "github"
+      },
+      "original": {
+        "owner": "therealgramdalf",
+        "repo": "mindwtr-flake",
         "type": "github"
       }
     },
@@ -344,9 +367,9 @@
     "root": {
       "inputs": {
         "anyrun": "anyrun",
-        "bun2nix": "bun2nix",
         "home-manager": "home-manager",
         "home-manager-stable": "home-manager-stable",
+        "mindwtr-flake": "mindwtr-flake",
         "minegrub-theme": "minegrub-theme",
         "nix-minecraft": "nix-minecraft",
         "nixos-generators": "nixos-generators",
@@ -456,7 +479,8 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "bun2nix",
+          "mindwtr-flake",
+          "bun2nix-baseline",
           "nixpkgs"
         ]
       },
