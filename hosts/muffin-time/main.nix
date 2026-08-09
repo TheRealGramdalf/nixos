@@ -4,6 +4,7 @@
     ../../common/zfs-boot.nix
     ../../common/backdoor.nix
     ../../common/nix3.nix
+    ../../common/nh.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix
