@@ -6,7 +6,11 @@
         editor = false;
       };
     };
-    zfs.devNodes = "/dev/disk/by-partlabel";
+    zfs = {
+      #STATEVERSION
+      forceImportRoot = false;
+      devNodes = "/dev/disk/by-partlabel";
+    };
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
   };
