@@ -3,8 +3,7 @@
   config,
   ...
 }: let
-    cfg = config.services.mindwtr.cloud;
-    env = cfg.environment;
+    env = config.services.mindwtr.cloud.environment;
     name = "mindwtr";
 in {
 
@@ -31,6 +30,6 @@ in {
       service = "${name}-cloud";
       middlewares = "local-only";
     };
-    http.services."${name}-cloud".loadbalancer.servers = [{url = "http://${env.HOST}:${toString cfg.port}";}];
+    http.services."${name}-cloud".loadbalancer.servers = [{url = "http://${env.HOST}:${env.PORT}";}];
   };
 }
