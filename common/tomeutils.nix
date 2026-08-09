@@ -16,6 +16,9 @@
     unzip # Good to have in general
     trashy
     fclones
+    glow
+    delta
+    nixpkgs-review
   ];
   environment.enableAllTerminfo = true;
   nix = {
