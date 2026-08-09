@@ -1,55 +1,25 @@
-{inputs, ...}: let
-  domain = "mindwtr.aer.dedyn.io";
+{inputs, config, ...}: let
   port = 6940;
 in {
-  # Add a listen address for nginx
-  services.nginx.virtualHosts."${domain}" = {
-    root = "${inputs.self.outputs.packages.x86_64-linux.mindwtr-web}/dist";
-    listen = [
-      {
-        addr = "127.0.0.1";
-        inherit port;
-      }
-    ];
-    extraConfig = ''
-      index index.html;
-      add_header X-Content-Type-Options "nosniff" always;
-      add_header X-Frame-Options "SAMEORIGIN" always;
-    '';
-
-    locations = {
-      # Hashed build assets: cache forever, and a missing chunk must 404 so the
-      # client can recover — never fall back to index.html (Safari then fails the
-      # module import with "Importing a module script failed", and a service
-      # worker could cache the HTML under the chunk URL).
-      # Note: add_header in a location disables inheritance, so the security
-      # headers are repeated here and below.
-      "/assets/" = {
-        extraConfig = ''
-          add_header X-Content-Type-Options "nosniff" always;
-          add_header X-Frame-Options "SAMEORIGIN" always;
-          add_header Cache-Control "public, max-age=31536000, immutable" always;
-        '';
-        tryFiles = "$uri =404";
-      };
-
-      # Everything else (index.html, sw.js, manifest, icons) must revalidate so a
-      # redeployed image is picked up instead of serving stale chunk references.
-      "/" = {
-        extraConfig = ''
-          add_header X-Content-Type-Options "nosniff" always;
-          add_header X-Frame-Options "SAMEORIGIN" always;
-          add_header Cache-Control "no-cache" always;
-        '';
-        tryFiles = "$uri /index.html";
-      };
+  services.mindwtr.web = {
+    enable = true;
+    package = inputs.mindwtr-flake.packages.x86_64-linux."mindwtr-web";
+    nginx = {
+      virtualHost = "mindwtr.aer.dedyn.io";
+      listen = [
+        {
+          addr = "127.0.0.1";
+          inherit port;
+        }
+      ];
     };
   };
+  
 
   # Proxy nginx through traefik
   services.cone.extraFiles."mindwtr-web".settings = {
     http.routers."mindwtr-web" = {
-      rule = "Host(`${domain}`)";
+      rule = "Host(`${config.services.mindwtr.web.nginx.virtualHost}`)";
       service = "mindwtr-web";
       middlewares = "local-only";
     };
