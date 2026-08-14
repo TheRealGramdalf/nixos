@@ -15,24 +15,22 @@
     pkgs.qmk
   ];
 
-
   specialisation."kde-patched" = {
     environment.etc."specialisation".text = "kde-patched";
-    
-  nixpkgs.overlays = [
-    (final: prev: {
-      kdePackages = prev.kdePackages.overrideScope (
-        kdeFinal: kdePrev: {
-          # https://old.reddit.com/r/NixOS/comments/1pdtc3v/kde_plasma_is_slow_compared_to_any_other_distro/
-          # https://github.com/NixOS/nixpkgs/issues/126590#issuecomment-3194531220
-          plasma-workspace =
-            let
+
+    nixpkgs.overlays = [
+      (final: prev: {
+        kdePackages = prev.kdePackages.overrideScope (
+          kdeFinal: kdePrev: {
+            # https://old.reddit.com/r/NixOS/comments/1pdtc3v/kde_plasma_is_slow_compared_to_any_other_distro/
+            # https://github.com/NixOS/nixpkgs/issues/126590#issuecomment-3194531220
+            plasma-workspace = let
               # the package we want to override
               basePkg = kdePrev.plasma-workspace;
               # a helper package that merges all the XDG_DATA_DIRS into a single directory
               xdgdataPkg = final.stdenv.mkDerivation {
                 name = "${basePkg.name}-xdgdata";
-                buildInputs = [ basePkg ];
+                buildInputs = [basePkg];
                 dontUnpack = true;
                 dontFixup = true;
                 dontWrapQtApps = true;
@@ -65,11 +63,11 @@
                 '';
               };
             in
-            derivedPkg;
-        }
-      );
-    })
-  ];
+              derivedPkg;
+          }
+        );
+      })
+    ];
   };
   boot = {
     kernelParams = [
