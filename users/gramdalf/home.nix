@@ -163,7 +163,7 @@
       freecad
       lutris
       nixd
-      inputs.self.packages.x86_64-linux.mindwtr-desktop
+      inputs.mindwtr-flake.packages.x86_64-linux.mindwtr
     ];
   };
   programs = {
