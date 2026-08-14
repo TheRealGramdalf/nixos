@@ -15,7 +15,7 @@
     pkgs.qmk
   ];
 
-  specialisation."kde-patched" = {
+  specialisation."kde-patched".configuration = {
     environment.etc."specialisation".text = "kde-patched";
 
     nixpkgs.overlays = [
