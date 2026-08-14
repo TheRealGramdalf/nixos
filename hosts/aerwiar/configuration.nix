@@ -72,7 +72,7 @@
       enable = true;
       settings.uri = "https://auth.aer.dedyn.io";
     };
-    kanidm.package = pkgs.kanidm_1_10;
+    kanidm.package = pkgs.kanidm_1_11;
     fwupd.enable = true;
   };
 
