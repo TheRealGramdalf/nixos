@@ -2,6 +2,8 @@
   hostname = config.networking.hostName;
 in {
   boot.zfs = {
+    ##STATEVERSION
+    forceImportRoot = false;
     devNodes = "/dev/disk/by-partlabel";
     extraPools = [
       "isengard"
