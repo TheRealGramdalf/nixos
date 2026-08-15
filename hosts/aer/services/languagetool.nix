@@ -1,8 +1,13 @@
 {config, ...}: let
   name = "languagetool";
+  dataDir = "/persist/services/languagetool";
 in {
   services.languagetool = {
     enable = true;
+    settings = {
+      languageModel = "${dataDir}/ngrams";
+      fasttextModel = "${dataDir}/fasttext";
+    };
   };
 
   services.cone.extraFiles."${name}".settings = {
