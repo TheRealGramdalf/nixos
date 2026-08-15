@@ -4,6 +4,7 @@
 in {
   services.languagetool = {
     enable = true;
+    allowOrigin = "*";
     settings = {
       languageModel = "${dataDir}/ngrams";
       fasttextModel = "${dataDir}/fasttext/lid.176.bin";
