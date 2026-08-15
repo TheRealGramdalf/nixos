@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, pkgs, lib, ...}: let
   name = "languagetool";
   dataDir = "/persist/services/languagetool";
 in {
@@ -7,6 +7,8 @@ in {
     settings = {
       languageModel = "${dataDir}/ngrams";
       fasttextModel = "${dataDir}/fasttext";
+      fasttextBinary = "${lib.getExe pkgs.fasttext}";
+      trustXForwardForHeader = true;
     };
   };
 
