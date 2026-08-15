@@ -6,7 +6,7 @@ in {
     enable = true;
     settings = {
       languageModel = "${dataDir}/ngrams";
-      fasttextModel = "${dataDir}/fasttext";
+      fasttextModel = "${dataDir}/fasttext/lid.176.bin";
       fasttextBinary = "${lib.getExe pkgs.fasttext}";
       trustXForwardForHeader = true;
     };
