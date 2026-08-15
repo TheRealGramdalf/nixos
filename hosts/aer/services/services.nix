@@ -24,5 +24,6 @@
     ./ollama.nix
     ./mindwtr-cloud.nix
     ./mindwtr-web.nix
+    ./languagetool.nix
   ];
 }
