@@ -1,4 +1,9 @@
-{config, pkgs, lib, ...}: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   name = "languagetool";
   dataDir = "/persist/services/languagetool";
 in {

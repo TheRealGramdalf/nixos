@@ -14,7 +14,7 @@
   #  config.systemd.services;
   sysMapped =
     mapAttrs (
-      n: _v: {
+      _n: _v: {
         services.n = {
           after = ["kanidm-unixd.service"];
           requires = ["kanidm-unixd.service"];

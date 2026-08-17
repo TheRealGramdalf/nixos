@@ -54,7 +54,6 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
-    home-manager-stable,
     nixos-hardware,
     ...
   }:

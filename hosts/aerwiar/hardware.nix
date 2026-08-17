@@ -21,7 +21,7 @@
     nixpkgs.overlays = [
       (final: prev: {
         kdePackages = prev.kdePackages.overrideScope (
-          kdeFinal: kdePrev: {
+          _kdeFinal: kdePrev: {
             # https://old.reddit.com/r/NixOS/comments/1pdtc3v/kde_plasma_is_slow_compared_to_any_other_distro/
             # https://github.com/NixOS/nixpkgs/issues/126590#issuecomment-3194531220
             plasma-workspace = let

@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+let
   mainGroup = "0359756e-7db7-410a-bc16-89621465f64a"; # atreus-login
 in {
   services.kanidm = {

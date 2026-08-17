@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   name = "ytdlp";
   srvPath = "/persist/services/ytdlp";
 in {

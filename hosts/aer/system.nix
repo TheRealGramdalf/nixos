@@ -11,7 +11,7 @@
     flake = "/etc/nixos";
   };
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: prev: {
       bun = prev.bun.overrideAttrs {
         passthru.sources."x86_64-linux" = pkgs.fetchurl {
           url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-x64-baseline.zip";

@@ -4,7 +4,7 @@
   ...
 }: {
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: prev: {
       inherit
         (prev.lixPackageSets.stable)
         nix-eval-jobs

@@ -9,7 +9,7 @@ in {
     settings = {
       port = 5006;
       hostname = "127.0.0.1";
-      dataDir = dataDir;
+      inherit dataDir;
       userFiles = "${dataDir}/user-files";
       serverFiles = "${dataDir}/server-files";
       loginMethod = "openid";
@@ -18,7 +18,7 @@ in {
       userCreationMode = "login";
       openId = {
         discoveryURL = "https://auth.aer.dedyn.io/oauth2/openid/${client_id}/.well-known/openid-configuration";
-        client_id = client_id;
+        inherit client_id;
         client_secret._secret = "/persist/secrets/actual/client_secret";
         server_hostname = "https://actual.aer.dedyn.io";
         authMethod = "openid"; # Enables full OIDC discovery
