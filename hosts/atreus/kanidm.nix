@@ -2,8 +2,7 @@
   mainGroup = "0359756e-7db7-410a-bc16-89621465f64a"; # atreus-login
 in {
   services.kanidm = {
-    package = pkgs.kanidm_1_11;
-    client.settings.uri = "https://auth.aer.dedyn.io";
+    client.enable = true;
     unix = {
       enable = true;
       settings = {

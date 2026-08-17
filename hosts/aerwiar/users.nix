@@ -22,6 +22,7 @@
       "wireshark"
       */
       "dialout"
+      "trusted-users"
     ];
     hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
     group = "gramdalf";

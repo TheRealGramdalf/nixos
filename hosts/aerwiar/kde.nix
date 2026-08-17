@@ -19,10 +19,6 @@
   # Disable NM's wait-online service. This delays boot significantly
   systemd.services."NetworkManager-wait-online".enable = false;
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
   services = {
     # Enable pulse emulation for the KDE GUI
     pipewire = {
@@ -42,8 +38,6 @@
         };
       };
     };
-    # Enable fingerprint reader
-    fprintd.enable = true;
     # Printing, mDNS etc
     avahi = {
       enable = true;

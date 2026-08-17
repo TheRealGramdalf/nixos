@@ -5,12 +5,12 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/backdoor.nix
+    ../../common/posix-client.nix
 
     # Host-specific config
     ./localsend.nix
     ./hardware.nix
     ./configuration.nix
-    ./nvidia.nix
     ./peripherals.nix
     ./users.nix
     ./timekpr.nix

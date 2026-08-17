@@ -5,6 +5,7 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/backdoor.nix
+    ../../common/posix-client.nix
     ./netbird.nix
 
     # Host-specific config

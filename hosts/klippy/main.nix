@@ -1,14 +1,16 @@
 {pkgs, ...}: {
   imports = [
+    ../../common/tomeutils.nix
+    ../../common/zfs-boot.nix
+    ../../common/nix3.nix
+    ../../common/nh.nix
+
     ./networking.nix
     ./hardware.nix
     ./ssh.nix
-    ../../common/tomeutils.nix
     ./system.nix
     ./klipper.nix
   ];
-  boot.kernelPackages = pkgs.linuxPackages_7_1;
-  boot.zfs.package = pkgs.zfs_2_4;
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
@@ -19,10 +21,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    git
-    sysz
-    neovim
-    tmux # Detached shell sessions
     smartmontools # SMART monitoring for block devices
   ];
 }

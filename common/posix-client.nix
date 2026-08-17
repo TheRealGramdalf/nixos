@@ -1,9 +1,10 @@
 {pkgs, ...}: {
   services.kanidm = {
     package = pkgs.kanidm_1_11;
-    enablePam = true;
-    clientSettings.uri = "https://auth.aer.dedyn.io";
-    unixSettings = {
+    client.settings.uri = "https://auth.aer.dedyn.io";
+    # Unix and client is only configured here, not enabled
+    unix.settings = {
+      version = "2";
       home_prefix = "/home/";
       home_attr = "uuid";
       home_alias = "spn";

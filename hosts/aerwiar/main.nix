@@ -5,6 +5,7 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/lix.nix
+    ../../common/posix-client.nix
 
     # Host-specific config
     ./hardware.nix

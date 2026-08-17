@@ -42,13 +42,8 @@
 
   users = {
     groups."trusted-users" = {};
-    users."gramdalf".extraGroups = ["trusted-users"];
   };
   services.dbus.implementation = "broker";
-  system.etc.overlay = {
-    enable = false;
-    mutable = true;
-  };
   ###
 
   nix.settings = {
@@ -70,9 +65,7 @@
   services = {
     kanidm.client = {
       enable = true;
-      settings.uri = "https://auth.aer.dedyn.io";
     };
-    kanidm.package = pkgs.kanidm_1_11;
     fwupd.enable = true;
   };
 
