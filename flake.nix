@@ -140,7 +140,7 @@
           stability = "unstable";
         };
         modules = [
-          {specialisation."framework-16".configuration = {imports = [nixos-hardware.nixosModules.framework-16-7040-amd];};}
+          nixos-hardware.nixosModules.framework-16-7040-amd
           ./hosts/aerwiar/main.nix
           ./mods/nixos/main.nix
           home-manager.nixosModules.home-manager
