@@ -18,6 +18,7 @@
     fclones
     glow
     delta
+    nix-output-monitor
     nixpkgs-review
   ];
   environment.enableAllTerminfo = true;
