@@ -4,6 +4,7 @@
     ../../common/zfs-boot.nix
     ../../common/nix3.nix
     ../../common/nh.nix
+    ../../common/ntfs.nix
 
     ./networking.nix
     ./hardware.nix

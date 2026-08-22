@@ -5,6 +5,7 @@
     ../../common/backdoor.nix
     ../../common/nix3.nix
     ../../common/nh.nix
+    ../../common/ntfs.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix

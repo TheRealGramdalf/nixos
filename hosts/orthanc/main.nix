@@ -1,6 +1,7 @@
 {
   imports = [
     ../../common/tomeutils.nix
+    ../../common/ntfs.nix
     ./networking.nix
     ./hardware.nix
     ./ssh.nix

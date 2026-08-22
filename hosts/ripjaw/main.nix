@@ -6,6 +6,7 @@
     ../../common/nh.nix
     ../../common/backdoor.nix
     ../../common/posix-client.nix
+    ../../common/ntfs.nix
     ./netbird.nix
 
     # Host-specific config

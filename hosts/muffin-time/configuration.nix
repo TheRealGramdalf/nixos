@@ -22,8 +22,6 @@
     ];
   };
   environment.systemPackages = with pkgs; [
-    # NTFS (windows filesystem) support
-    ntfs3g
     # MS Office alternative
     onlyoffice-desktopeditors
     # Google spyware
