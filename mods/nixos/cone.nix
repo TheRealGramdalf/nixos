@@ -37,7 +37,7 @@ let
   json = pkgs.formats.json { };
 in
 {
-  # Disable the upstream module
+  # Replace the upstream module
   disabledModules = [ "services/web-servers/traefik.nix" ];
   
   imports = [
