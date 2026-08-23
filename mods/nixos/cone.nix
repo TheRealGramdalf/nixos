@@ -527,6 +527,7 @@ in
       jackr
       therealgramdalf
     ];
-    doc = ./traefik.md;
+    # Fix eval error on local copy
+    #doc = ./traefik.md;
   };
 }
