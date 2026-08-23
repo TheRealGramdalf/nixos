@@ -67,16 +67,14 @@ in {
   };
 
   # Proxy the alloy debug UI (?) through traefik
-  services.cone = {
-    extraFiles = {
-      "${alloy}".settings = {
-        http.routers."${alloy}" = {
-          rule = "Host(`${alloy}.aer.dedyn.io`)";
-          service = "${alloy}";
-          middlewares = "local-only";
-        };
-        http.services."${alloy}".loadbalancer.servers = [{url = "http://${listenAddr}";}];
+  services.traefik.routing.extraFiles = {
+    "${alloy}".settings = {
+      http.routers."${alloy}" = {
+        rule = "Host(`${alloy}.aer.dedyn.io`)";
+        service = "${alloy}";
+        middlewares = "local-only";
       };
+      http.services."${alloy}".loadbalancer.servers = [{url = "http://${listenAddr}";}];
     };
   };
 }

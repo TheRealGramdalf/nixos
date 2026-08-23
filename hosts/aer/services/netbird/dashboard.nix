@@ -24,7 +24,7 @@ in {
     }
   ];
 
-  services.cone.extraFiles = {
+  services.traefik.routing.extraFiles = {
     "netbird-dash".settings = {
       http.routers."netbird-dash" = {
         rule = "Host(`${cfg.domain}`)";

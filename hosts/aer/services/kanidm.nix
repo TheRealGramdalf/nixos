@@ -49,7 +49,7 @@ in {
     ];
   };
 
-  services.cone.extraFiles."auth".settings = {
+  services.traefik.routing.extraFiles."auth".settings = {
     http.routers."auth" = {
       service = "auth";
       rule = "Host(`${cfg.server.settings.domain}`)";

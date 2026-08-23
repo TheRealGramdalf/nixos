@@ -1,16 +1,16 @@
 {config, ...}: let
-  cfg = config.services.cone;
+  cfg = config.services.traefik;
 in {
-  services.cone = {
+  services.traefik = {
     enable = true;
     # Traefik's user/group must be local, since it's required for `kanidm-unixd` to function properly
     supplementaryGroups = ["docker"];
     dataDir = "/persist/services/traefik";
-    dynamic.dir = "/persist/services/traefik/dynamic-config";
+    routing.dir = "/persist/services/traefik/routing";
     environmentFiles = [
       "/persist/secrets/traefik/traefik.env"
     ];
-    extraFiles = {
+    routing.extraFiles = {
       "dashboard".settings = {
         http.routers."dashboard" = {
           service = "api@internal";
@@ -29,7 +29,7 @@ in {
         ];
       };
     };
-    static.settings = {
+    install.settings = {
       log.level = "DEBUG";
       providers.docker = {
         defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.aer.dedyn.io`)";
@@ -101,14 +101,16 @@ in {
       };
     };
   };
+
   networking.firewall = {
     allowedUDPPorts = [80 443 8883];
     allowedTCPPorts = [80 443 8883];
   };
+  
   environment.etc."alloy/traefik.alloy".text = ''
     prometheus.scrape "traefik" {
       targets = [{
-        __address__ = "${cfg.static.settings.entryPoints."metrics".address}",
+        __address__ = "${cfg.install.settings.entryPoints."metrics".address}",
       }]
       forward_to = [prometheus.remote_write.mimir.receiver]
     }

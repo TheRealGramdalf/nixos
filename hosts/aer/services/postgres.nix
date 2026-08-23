@@ -158,7 +158,7 @@ in {
     };
   };
 
-  services.cone.extraFiles = {
+  services.traefik.routing.extraFiles = {
     #"postgres".settings = {
     #  http.routers.${name} = {
     #    rule = "Host(`${name}.aer.dedyn.io`)";

@@ -20,7 +20,7 @@ in {
   };
 
   # Proxy nginx through traefik
-  services.cone.extraFiles."mindwtr-web".settings = {
+  services.traefik.routing.extraFiles."mindwtr-web".settings = {
     http.routers."mindwtr-web" = {
       rule = "Host(`${config.services.mindwtr.web.nginx.virtualHost}`)";
       service = "mindwtr-web";

@@ -24,7 +24,7 @@ in {
     allowedUDPPorts = [1900 7359]; # DLNA and client discovery respectively
   };
 
-  services.cone.extraFiles."${name}".settings = {
+  services.traefik.routing.extraFiles."${name}".settings = {
     http.routers."${name}" = {
       service = "${name}";
       rule = "Host(`${name}.aer.dedyn.io`)";

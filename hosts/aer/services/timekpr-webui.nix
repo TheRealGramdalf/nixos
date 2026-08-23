@@ -27,7 +27,7 @@ in {
     };
   };
 
-  services.cone.extraFiles."timekpr".settings = {
+  services.traefik.routing.extraFiles."timekpr".settings = {
     http.routers."timekpr" = {
       rule = "Host(`timekeeper.aer.dedyn.io`)";
       service = "timekpr";

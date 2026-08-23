@@ -107,26 +107,24 @@ in {
   };
 
   # Proxy home-assistant and MQTT through traefik
-  services.cone = {
-    extraFiles = {
-      "${ha}".settings = {
-        http.routers."${ha}" = {
-          rule = "Host(`${ha}.aer.dedyn.io`)";
-          service = "${ha}";
-          middlewares = "local-only";
-        };
-        http.services."${ha}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString ha-port}";}];
+  services.traefik.routing.extraFiles = {
+    "${ha}".settings = {
+      http.routers."${ha}" = {
+        rule = "Host(`${ha}.aer.dedyn.io`)";
+        service = "${ha}";
+        middlewares = "local-only";
       };
-      "${mq}".settings = {
-        tcp.routers."${mq}" = {
-          rule = "HostSNI(`${mq}.aer.dedyn.io`)";
-          tls = true;
-          service = "${mq}";
-          middlewares = "local-only";
-          entryPoints = ["mqtt"];
-        };
-        tcp.services."${mq}".loadbalancer.servers = [{address = "127.0.0.1:${toString mq-port}";}];
+      http.services."${ha}".loadbalancer.servers = [{url = "http://127.0.0.1:${toString ha-port}";}];
+    };
+    "${mq}".settings = {
+      tcp.routers."${mq}" = {
+        rule = "HostSNI(`${mq}.aer.dedyn.io`)";
+        tls = true;
+        service = "${mq}";
+        middlewares = "local-only";
+        entryPoints = ["mqtt"];
       };
+      tcp.services."${mq}".loadbalancer.servers = [{address = "127.0.0.1:${toString mq-port}";}];
     };
   };
 }

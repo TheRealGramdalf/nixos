@@ -23,7 +23,7 @@ in {
     };
   };
 
-  services.cone.extraFiles."mindwtr-cloud".settings = {
+  services.traefik.routing.extraFiles."mindwtr-cloud".settings = {
     http.routers."${name}-cloud" = {
       rule = "Host(`cloud.${name}.aer.dedyn.io`)";
       service = "${name}-cloud";

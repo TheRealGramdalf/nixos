@@ -95,16 +95,12 @@ in {
 
   users.users."loki".enable = false;
   # Proxy loki through traefik for TLS
-  services.cone = {
-    extraFiles = {
-      "${loki.name}".settings = {
-        http.routers."${loki.name}" = {
-          rule = "Host(`${loki.name}.aer.dedyn.io`)";
-          service = "${loki.name}";
-          middlewares = "local-only";
-        };
-        http.services."${loki.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}:${toString cfg.server.http_listen_port}";}];
-      };
+  services.traefik.routing.extraFiles."${loki.name}".settings = {
+    http.routers."${loki.name}" = {
+      rule = "Host(`${loki.name}.aer.dedyn.io`)";
+      service = "${loki.name}";
+      middlewares = "local-only";
     };
+    http.services."${loki.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}:${toString cfg.server.http_listen_port}";}];
   };
 }

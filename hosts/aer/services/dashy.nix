@@ -344,7 +344,7 @@ in {
     }
   ];
   # Proxy nginx through traefik
-  services.cone.extraFiles."dashy".settings = {
+  services.traefik.routing.extraFiles."dashy".settings = {
     http.routers."dashy" = {
       rule = "Host(`${cfg.virtualHost.domain}`)";
       service = "dashy";

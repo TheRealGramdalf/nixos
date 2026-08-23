@@ -47,7 +47,7 @@ in {
     }
   ];
 
-  services.cone.extraFiles = {
+  services.traefik.routing.extraFiles = {
     "netbird-dash".settings = {
       http.routers."netbird-dash" = {
         rule = "Host(`${cfg.domain}`)";
@@ -75,7 +75,7 @@ in {
       http.services."netbird-api".loadbalancer.servers = [{url = "h2c://127.0.0.1:${mgmtPort}";}];
     };
   };
-  services.cone.static.settings.entryPoints."3478" = {
+  services.traefik.install.settings.entryPoints."3478" = {
     http.tls.certResolver = "letsencrypt";
     address = ":3478/udp";
   };

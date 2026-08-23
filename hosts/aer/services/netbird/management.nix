@@ -24,7 +24,7 @@ in {
     after = [config.systemd.services."kanidm".name];
   };
 
-  services.cone.extraFiles = {
+  services.traefik.routing.extraFiles = {
     "netbird-mgmt".settings = {
       http.routers."netbird-mgmt" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/api`)";

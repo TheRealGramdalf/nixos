@@ -9,7 +9,7 @@ in {
     };
   };
 
-  services.cone.extraFiles = {
+  services.traefik.routing.extraFiles = {
     "netbird-signal".settings = {
       http.routers."netbird-signal" = {
         rule = "Host(`${cfg.domain}`) && PathPrefix(`/signalexchange.SignalExchange/`)";

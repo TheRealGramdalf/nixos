@@ -74,16 +74,12 @@ in {
   };
 
   # Proxy mimir through traefik for TLS
-  services.cone = {
-    extraFiles = {
-      "${mimir.name}".settings = {
-        http.routers."${mimir.name}" = {
-          rule = "Host(`${mimir.name}.aer.dedyn.io`)";
-          service = "${mimir.name}";
-          middlewares = "local-only";
-        };
-        http.services."${mimir.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}:${toString cfg.server.http_listen_port}";}];
-      };
+  services.traefik.routing.extraFiles."${mimir.name}".settings = {
+    http.routers."${mimir.name}" = {
+      rule = "Host(`${mimir.name}.aer.dedyn.io`)";
+      service = "${mimir.name}";
+      middlewares = "local-only";
     };
+    http.services."${mimir.name}".loadbalancer.servers = [{url = "http://${cfg.server.http_listen_address}:${toString cfg.server.http_listen_port}";}];
   };
 }
