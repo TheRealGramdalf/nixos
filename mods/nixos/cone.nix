@@ -157,7 +157,13 @@ in
                 filename = mkOption {
                   default = cfg.routing.file;
                   defaultText = literalExpression "config.services.traefik.routing.file";
-                  description = "Load routing configuration from a file.";
+                  description = ''
+                    Load routing configuration from a file
+
+                    ::: {.note}
+                    Prefer setting {option}`services.traefik.routing.`
+                    :::
+                  '';
                 };
                 directory = mkOption {
                   default = cfg.routing.dir;
@@ -430,6 +436,13 @@ in
           Setting the primary group to 'docker' will cause files, such as those generated
           by 'services.traefik.routing.extraFiles', to be owned by the group 'docker', which
           may be a security risk. Use 'services.traefik.supplementaryGroups' instead.
+        '';
+      }
+      {
+        assertion = (lib.collect (val: val == { })) cfg.install.settings == [];
+        message = ''
+          `services.traefik.install.settings` contains empty attribute sets, which are now reserved for filtering unset typed options.
+          Instead of e.g. `services.traefik.install.settings.api = {};`, use `services.traefik.install.settings.api = true;`
         '';
       }
     ];
