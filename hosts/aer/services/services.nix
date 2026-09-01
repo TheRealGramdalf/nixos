@@ -19,7 +19,7 @@
     ./minecraft.nix
     #./wazuh.nix
     ./wazuh-docker.nix
-    ./timekpr-webui.nix
+    #./timekpr-webui.nix
     ./actual.nix
     ./ollama.nix
     ./mindwtr-cloud.nix
