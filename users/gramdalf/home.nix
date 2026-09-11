@@ -162,6 +162,7 @@
       piper
       freecad
       lutris
+      tuxpaint
       nixd
       inputs.mindwtr-flake.packages.x86_64-linux.mindwtr
     ];

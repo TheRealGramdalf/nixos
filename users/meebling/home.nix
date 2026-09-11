@@ -38,6 +38,7 @@
       dialect # Translate app
       drawing
       nautilus
+      tuxpaint
     ];
   };
   programs = {

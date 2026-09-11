@@ -44,6 +44,8 @@
     actual-server
     # FFMPEG
     ffmpeg
+    # Need I explain?
+    tuxpaint
   ];
   nixpkgs.config.permittedInsecurePackages = [];
 
