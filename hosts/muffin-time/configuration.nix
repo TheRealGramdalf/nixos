@@ -14,11 +14,11 @@
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
   };
-  # Enable uBlock Origin manually. Thanks, google
+  # Enable uBoL
   programs.chromium = {
     enable = true;
     extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
     ];
   };
   environment.systemPackages = with pkgs; [
