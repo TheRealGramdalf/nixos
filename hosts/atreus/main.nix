@@ -7,6 +7,7 @@
     ../../common/backdoor.nix
     ../../common/posix-client.nix
     ../../common/ntfs.nix
+    ../../common/msfonts.nix
 
     # Host-specific config
     ./localsend.nix

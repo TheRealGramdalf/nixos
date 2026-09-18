@@ -6,6 +6,7 @@
     ../../common/nix3.nix
     ../../common/nh.nix
     ../../common/ntfs.nix
+    ../../common/msfonts.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix
