@@ -9,7 +9,7 @@ let
   cfg = config.services.paperless;
   opt = options.services.paperless;
 
-  defaultUser = "paperless";
+  defaultUsername = "paperless";
   defaultFont = "${pkgs.liberation_ttf}/share/fonts/truetype/LiberationSerif-Regular.ttf";
 
   # Don't start a redis instance if the user sets a custom redis connection
@@ -70,7 +70,7 @@ let
     if [[ "$USER" != ${cfg.user} ]]; then
       ${
         if config.security.sudo.enable then
-          "sudo='exec ${config.security.wrapperDir}/sudo -u ${cfg.user} -E'"
+          "sudo='exec ${config.security.wrapperDir}/sudo -u ${cfg.user} -g ${cfg.group} -E'"
         else
           ">&2 echo 'Aborting, paperless-manage must be run as user `${cfg.user}`!'; exit 2"
       }
@@ -121,15 +121,21 @@ let
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
+    SupplementaryGroups = lib.optional enableRedis redisServer.group;
     SystemCallArchitectures = "native";
     SystemCallFilter = [
       "@system-service"
       "~@privileged @setuid @keyring"
     ];
     UMask = "0066";
+    User = cfg.user;
+    Group = cfg.group;
   };
 in
 {
+  # Replace the upstream module
+  disabledModules = [ "services/misc/paperless.nix" ];
+
   meta.maintainers = with lib.maintainers; [
     leona
     SuperSandro2000
@@ -268,7 +274,7 @@ in
 
     user = lib.mkOption {
       type = lib.types.str;
-      default = defaultUser;
+      default = defaultUsername;
       description = ''
         User under which Paperless runs
 
@@ -282,7 +288,7 @@ in
 
     group = lib.mkOption {
       type = lib.types.str;
-      default = defaultUser;
+      default = defaultUsername;
       description = ''
         Primary group under which Paperless runs
 
@@ -496,8 +502,7 @@ in
         systemd.tmpfiles.settings."10-paperless" =
           let
             defaultRule = {
-              inherit (cfg) user;
-              inherit (config.users.users.${cfg.user}) group;
+              inherit (cfg) user group;
             };
           in
           {
@@ -530,8 +535,8 @@ in
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
-            User = cfg.user;
-            Group = config.users.users.${cfg.user}.group;
+            User = defaultServiceConfig.user;
+            Group = defaultServiceConfig.group;
             UMask = "0077";
             Slice = "system-paperless.slice";
             EnvironmentFile = lib.optional (cfg.environmentFile != null) cfg.environmentFile;
@@ -565,7 +570,6 @@ in
             "paperless-task-queue.service"
           ];
           serviceConfig = defaultServiceConfig // {
-            User = cfg.user;
             ExecStart = "${cfg.package}/bin/celery --app paperless beat --loglevel INFO";
             Restart = "on-failure";
             LoadCredential = lib.optionalString (
@@ -624,7 +628,6 @@ in
           ]
           ++ lib.optional cfg.database.createLocally "postgresql.target";
           serviceConfig = defaultServiceConfig // {
-            User = cfg.user;
             ExecStart = "${cfg.package}/bin/celery --app paperless worker --loglevel INFO";
             Restart = "on-failure";
             # The `mbind` syscall is needed for running the classifier.
@@ -646,7 +649,6 @@ in
           ]
           ++ lib.optional cfg.database.createLocally "postgresql.target";
           serviceConfig = defaultServiceConfig // {
-            User = cfg.user;
             ExecStart = "${lib.getExe cfg.package} document_consumer";
             Restart = "on-failure";
             PrivateNetwork = cfg.database.createLocally; # defaultServiceConfig enables this by default, needs to be disabled for remote DBs
@@ -668,7 +670,6 @@ in
           ]
           ++ lib.optional cfg.database.createLocally "postgresql.target";
           serviceConfig = defaultServiceConfig // {
-            User = cfg.user;
             ExecStart = "${lib.getExe cfg.package.python.pkgs.granian} --interface asginl --ws paperless.asgi:application";
             Restart = "on-failure";
 
@@ -686,16 +687,18 @@ in
           unitConfig.JoinsNamespaceOf = "paperless-task-queue.service";
         };
 
-        users = lib.optionalAttrs (cfg.user == defaultUser) {
-          users.${defaultUser} = {
-            extraGroups = [ config.services.redis.servers.paperless.group ];
-            group = defaultUser;
+        users = lib.optionalAttrs (cfg.user == defaultUsername) {
+          users.${cfg.user} = {
+            extraGroups = lib.optional enableRedis redisServer.group;
+            group = cfg.group;
             home = cfg.dataDir;
             uid = config.ids.uids.paperless;
           };
 
-          groups.${defaultUser} = {
-            gid = config.ids.gids.paperless;
+          groups = lib.optionalAttrs (cfg.group == defaultUsername) {
+            ${cfg.group} = {
+              gid = config.ids.gids.paperless;
+            };
           };
         };
 
@@ -714,7 +717,7 @@ in
 
       (lib.mkIf cfg.exporter.enable {
         systemd.tmpfiles.rules = [
-          "d '${cfg.exporter.directory}' - ${cfg.user} ${config.users.users.${cfg.user}.group} - -"
+          "d '${cfg.exporter.directory}' - ${cfg.user} ${cfg.group} - -"
         ];
 
         services.paperless.exporter.settings = options.services.paperless.exporter.settings.default;
@@ -722,7 +725,8 @@ in
         systemd.services.paperless-exporter = {
           startAt = lib.defaultTo [ ] cfg.exporter.onCalendar;
           serviceConfig = {
-            User = cfg.user;
+            User = defaultServiceConfig.User;
+            Group = defaultServiceConfig.group;
             WorkingDirectory = cfg.dataDir;
           };
           unitConfig =
