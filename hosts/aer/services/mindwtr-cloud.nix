@@ -29,6 +29,9 @@ in {
       service = "${name}-cloud";
       middlewares = "local-only";
     };
-    http.services."${name}-cloud".loadbalancer.servers = [{url = "http://${env.HOST}:${env.PORT}";}];
+    http.services."${name}-cloud".loadbalancer = {
+      servers = [{url = "http://${env.HOST}:${env.PORT}";}];
+      healthcheck.path = "/ready";
+    };
   };
 }
