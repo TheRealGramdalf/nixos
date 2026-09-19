@@ -18,30 +18,11 @@
   };
 in {
   systemd.services = {
-    "paperless-scheduler" =
-      {
-        serviceConfig = {
-          # Conflicts with the database connection
-          PrivateNetwork = lib.mkForce false;
-        };
-      }
-      // wantsKani;
-    "paperless-consumer" =
-      {
-        serviceConfig = {
-          # Conflicts with the database connection
-          PrivateNetwork = lib.mkForce false;
-        };
-      }
-      // wantsKani;
+    "paperless-scheduler" = {} // wantsKani;
+    "paperless-consumer" = {} // wantsKani;
     "paperless-task-queue" = {} // wantsKani;
     "paperless-web" = {} // wantsKani;
-    "paperless-secret-key" =
-      {
-        # Systemd service uses the wrong group here as well:
-        serviceConfig.Group = lib.mkForce cfg.user;
-      }
-      // wantsKani;
+    "paperless-secret-key" = {} // wantsKani;
   };
   services.paperless = {
     enable = true;
@@ -54,6 +35,7 @@ in {
     # USER="e89bf800-37ae-453b-8e9c-6b7f55dd82c6" paperless-manage ...
     # The USER variable uses the SPN rather than UUID
     user = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
+    group = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
     settings = {
       # Postgres connection settings. Port is implicit, password is secret
       PAPERLESS_DBHOST = "localhost";
@@ -106,34 +88,6 @@ in {
       # (if doing so please consider security measures such as reverse proxy)
       PAPERLESS_URL = "https://${name}.aer.dedyn.io";
     };
-  };
-
-  # Override the module which incorrectly assumes user creation
-  systemd.tmpfiles.settings."10-paperless" = lib.mkForce (
-    let
-      defaultRule = {
-        inherit (cfg) user;
-        group = cfg.user;
-      };
-    in {
-      "${cfg.dataDir}".d = defaultRule;
-      "${cfg.mediaDir}".d = defaultRule;
-      "${cfg.consumptionDir}".d =
-        if cfg.consumptionDirIsPublic
-        then {mode = "777";}
-        else defaultRule;
-    }
-  );
-
-  # Create a blank user to fix missing attributes
-  users = {
-    users.${cfg.user} = {
-      group = "shouldnotexist";
-      name = "shouldnotexist";
-      enable = false;
-      isSystemUser = true;
-    };
-    groups."shouldnotexist" = {};
   };
 
   services.traefik.routing.extraFiles."${name}".settings = {
