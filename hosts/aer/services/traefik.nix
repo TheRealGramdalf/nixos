@@ -106,7 +106,7 @@ in {
     allowedUDPPorts = [80 443 8883];
     allowedTCPPorts = [80 443 8883];
   };
-  
+
   environment.etc."alloy/traefik.alloy".text = ''
     prometheus.scrape "traefik" {
       targets = [{

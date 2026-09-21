@@ -44,7 +44,7 @@
     groups."trusted-users" = {};
   };
   services.dbus.implementation = "broker";
-  fonts.packages = [ pkgs.liberation_ttf_v2 ];
+  fonts.packages = [pkgs.liberation_ttf_v2];
   ###
 
   nix.settings = {
