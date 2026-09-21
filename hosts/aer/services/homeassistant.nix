@@ -42,6 +42,8 @@ in {
       "time_date"
       # So the logs stop spamming errors
       "google_translate"
+      # website scraping
+      "scrape"
       # From the nixosmodule by default:
       "default_config"
       "esphome"
