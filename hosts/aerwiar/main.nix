@@ -8,6 +8,7 @@
     ../../common/posix-client.nix
     ../../common/ntfs.nix
     ../../common/msfonts.nix
+    ../../common/hyperlegible.nix
 
     # Host-specific config
     ./hardware.nix
