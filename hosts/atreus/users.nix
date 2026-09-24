@@ -15,17 +15,20 @@
     isNormalUser = true;
     hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
     extraGroups = ["video" "networkmanager"];
+    homeMode = "705";
   };
   users.users."mlem" = {
     description = "School Only";
     isNormalUser = true;
     hashedPasswordFile = "/persist/secrets/passwdfile.meebling";
     extraGroups = ["video" "networkmanager"];
+    homeMode = "705";
   };
   users.users."meeblingthedevilish" = {
     description = "Gaming";
     isNormalUser = true;
     hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
     extraGroups = ["video" "networkmanager"];
+    homeMode = "705";
   };
 }
