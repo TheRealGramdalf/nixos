@@ -23,6 +23,7 @@
     extraGroups = ["video" "networkmanager"];
   };
   users.users."meeblingthedevilish" = {
+    description = "Gaming";
     isNormalUser = true;
     hashedPasswordFile = "/persist/secrets/passwdfile.meeblingthedevilish";
     extraGroups = ["video" "networkmanager"];
