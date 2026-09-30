@@ -5,6 +5,7 @@
     ./hardware.nix
     ./ssh.nix
     ../../common/tomeutils.nix
+    ../../common/treewide-defaults.nix
     ./system.nix
 
     # Services

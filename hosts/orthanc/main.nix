@@ -3,6 +3,7 @@
     ../../common/tomeutils.nix
     ../../common/ntfs.nix
     ../../common/systemd-boot.nix
+    ../../common/treewide-defaults.nix
     ./networking.nix
     ./hardware.nix
     ./ssh.nix

@@ -9,10 +9,6 @@
     };
   };
   services.netbird.enable = true;
-  environment.sessionVariables = {
-    NB_ADMIN_URL = "https://vpn.aer.dedyn.io";
-    NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
-  };
 
   users.users."root".openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUC4zNha0aecrBoeptHPDsmfcwj6RopBNEpv6+NnzIM"];
 

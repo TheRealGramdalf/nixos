@@ -9,6 +9,7 @@
     ../../common/ntfs.nix
     ../../common/msfonts.nix
     ../../common/hyperlegible.nix
+    ../../common/treewide-defaults.nix
 
     # Host-specific config
     ./localsend.nix

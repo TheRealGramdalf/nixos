@@ -7,6 +7,7 @@
     ../../common/backdoor.nix
     ../../common/posix-client.nix
     ../../common/ntfs.nix
+    ../../common/treewide-defaults.nix
     ./netbird.nix
 
     # Host-specific config
