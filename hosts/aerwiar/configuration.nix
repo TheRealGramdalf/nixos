@@ -32,7 +32,6 @@
     enableUserSlices = true;
     enableSystemSlice = true;
   };
-  security.sudo-rs.enable = true;
 
   users = {
     groups."trusted-users" = {};

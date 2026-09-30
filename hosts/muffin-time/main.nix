@@ -9,6 +9,7 @@
     ../../common/msfonts.nix
     ../../common/systemd-boot.nix
     ../../common/hyperlegible.nix
+    ../../common/treewide-defaults.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix

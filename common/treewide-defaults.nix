@@ -3,4 +3,7 @@
     NB_ADMIN_URL = "https://vpn.aer.dedyn.io";
     NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
   };
+
+  # The world must be oxidized
+  security.sudo-rs.enable = true;
 }

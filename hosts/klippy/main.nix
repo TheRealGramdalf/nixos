@@ -6,6 +6,7 @@
     ../../common/nh.nix
     ../../common/systemd-boot.nix
     ../../common/ntfs.nix
+    ../../common/treewide-defaults.nix
 
     ./networking.nix
     ./hardware.nix
