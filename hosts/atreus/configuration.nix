@@ -15,21 +15,9 @@
   powerManagement.enable = true;
 
   programs.localsend.enable = true;
-
-  # Enable KDE
-  services.desktopManager.plasma6 = {
-    enable = true;
-    enableQt5Integration = true;
-  };
   environment.plasma6.excludePackages = [
     pkgs.kdePackages.konsole
   ];
-  services.displayManager.sddm = {
-    # SDDM isn't enabled by the plasma6 module
-    enable = true;
-    # Enable Wayland in SDDM so the system doesn't need X11
-    wayland.enable = true;
-  };
 
   networking = {
     # Required for KDE to control wifi via GUI
@@ -39,8 +27,6 @@
     };
     dhcpcd.enable = false;
   };
-  # Disable NM's wait-online service. This delays boot significantly
-  systemd.services."NetworkManager-wait-online".enable = false;
   services = {
     resolved = {
       enable = true;
@@ -71,15 +57,5 @@
     colord.enable = true;
     # Disable orca since it's unneeded at the moment
     orca.enable = false;
-    # Enable pulse emulation to get a GUI
-    pipewire = {
-      pulse.enable = true;
-      alsa.enable = false;
-    };
-    # The actual printing control daemon
-    printing = {
-      enable = true;
-      drivers = with pkgs; [gutenprint hplip splix brlaser];
-    };
   };
 }

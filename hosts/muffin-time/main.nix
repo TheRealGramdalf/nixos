@@ -10,6 +10,7 @@
     ../../common/systemd-boot.nix
     ../../common/hyperlegible.nix
     ../../common/treewide-defaults.nix
+    ../../common/kde.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix

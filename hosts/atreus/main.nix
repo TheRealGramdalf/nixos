@@ -10,6 +10,7 @@
     ../../common/msfonts.nix
     ../../common/hyperlegible.nix
     ../../common/treewide-defaults.nix
+    ../../common/kde.nix
 
     # Host-specific config
     ./hardware.nix
