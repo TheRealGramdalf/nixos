@@ -27,7 +27,7 @@ in {
     http.routers."${name}-cloud" = {
       rule = "Host(`cloud.${name}.aer.dedyn.io`)";
       service = "${name}-cloud";
-      middlewares = "local-only";
+      #middlewares = "local-only";
     };
     http.services."${name}-cloud".loadbalancer = {
       servers = [{url = "http://${env.HOST}:${env.PORT}";}];
