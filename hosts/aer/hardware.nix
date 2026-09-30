@@ -30,11 +30,6 @@
     neededForBoot = true;
   };
 
-  boot.loader.systemd-boot = {
-    enable = true;
-    editor = false;
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/aer-zboot";
     fsType = "vfat";

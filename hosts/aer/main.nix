@@ -6,6 +6,7 @@
     ./ssh.nix
     ../../common/tomeutils.nix
     ../../common/treewide-defaults.nix
+    ../../common/systemd-boot.nix
     ./system.nix
 
     # Services
