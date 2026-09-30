@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{inputs, config, lib, ...}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -18,12 +18,11 @@
       "docker"
       "adbusers"
       "plugdev"
-      /*
-      "wireshark"
-      */
       "dialout"
       "trusted-users"
-    ];
+    ]
+    ++ lib.optional (config.programs.wireshark.enable) "wireshark"
+    ;
     hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
     group = "gramdalf";
   };
