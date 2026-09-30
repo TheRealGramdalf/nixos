@@ -2,6 +2,7 @@
   imports = [
     ../../common/tomeutils.nix
     ../../common/ntfs.nix
+    ../../common/systemd-boot.nix
     ./networking.nix
     ./hardware.nix
     ./ssh.nix

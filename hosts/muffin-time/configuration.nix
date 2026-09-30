@@ -1,11 +1,5 @@
 {pkgs, ...}: {
   boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-        editor = false;
-      };
-    };
     zfs = {
       #STATEVERSION
       forceImportRoot = false;

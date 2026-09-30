@@ -5,6 +5,7 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     #../../common/lix.nix
+    ../../common/systemd-boot.nix
     ../../common/posix-client.nix
     ../../common/ntfs.nix
     ../../common/msfonts.nix

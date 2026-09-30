@@ -7,6 +7,7 @@
     ../../common/nh.nix
     ../../common/ntfs.nix
     ../../common/msfonts.nix
+    ../../common/systemd-boot.nix
     ../../common/hyperlegible.nix
     ./configuration.nix
     ./hardware.nix

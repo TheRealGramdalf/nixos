@@ -4,13 +4,7 @@
   ...
 }: {
   boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-        editor = false;
-      };
-      timeout = 0;
-    };
+    loader.timeout = 0;
     zfs = {
       devNodes = "/dev/disk/by-partlabel";
       # STATEVERSION

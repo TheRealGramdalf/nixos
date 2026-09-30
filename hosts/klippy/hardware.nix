@@ -18,11 +18,6 @@
     fsType = "zfs";
   };
 
-  boot.loader.systemd-boot = {
-    enable = true;
-    editor = false;
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/klippy-zboot";
     fsType = "vfat";
