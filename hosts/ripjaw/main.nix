@@ -8,6 +8,7 @@
     ../../common/posix-client.nix
     ../../common/ntfs.nix
     ../../common/treewide-defaults.nix
+    ../../common/kde.nix
     ./netbird.nix
 
     # Host-specific config
