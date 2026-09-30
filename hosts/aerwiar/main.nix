@@ -20,6 +20,7 @@
     ./netbird.nix
     ./fwmm.nix
     ./users.nix
+    ./virt.nix
     #./fprint.nix
   ];
   time.timeZone = "America/Vancouver";
