@@ -29,8 +29,6 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      "electron-39.8.10"
-      "pnpm-10.29.2"
     ];
     nvidia.acceptLicense = true;
   };
