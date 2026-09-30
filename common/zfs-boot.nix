@@ -11,4 +11,5 @@
   };
   # Use zram more agressively (prefer swap over OOM)
   boot.kernel.sysctl."vm.swappiness" = 180;
+  virtualisation.docker.storageDriver = "zfs";
 }
