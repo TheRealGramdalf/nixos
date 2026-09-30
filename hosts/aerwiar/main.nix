@@ -22,6 +22,8 @@
   ];
   time.timeZone = "America/Vancouver";
   system.stateVersion = "24.05";
+  i18n.defaultLocale = "en_US.UTF-8";
+  nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [

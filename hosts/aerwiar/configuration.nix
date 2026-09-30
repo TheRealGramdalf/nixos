@@ -61,8 +61,6 @@
     ];
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
   services = {
     kanidm.client = {
       enable = true;
