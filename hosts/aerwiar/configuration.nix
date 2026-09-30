@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   boot = {
@@ -55,12 +54,10 @@
   };
 
   services = {
-    kanidm.client = {
-      enable = true;
-    };
+    kanidm.client.enable = true;
     fwupd.enable = true;
   };
-  
+
   programs = {
     wireshark.enable = false;
     localsend.enable = true;

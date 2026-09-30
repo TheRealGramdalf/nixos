@@ -1,4 +1,9 @@
-{inputs, config, lib, ...}: {
+{
+  inputs,
+  config,
+  lib,
+  ...
+}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -11,18 +16,18 @@
   users.mutableUsers = false;
   users.users."gramdalf" = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "video"
-      "netdev"
-      "docker"
-      "adbusers"
-      "plugdev"
-      "dialout"
-      "trusted-users"
-    ]
-    ++ lib.optional (config.programs.wireshark.enable) "wireshark"
-    ;
+    extraGroups =
+      [
+        "wheel"
+        "video"
+        "netdev"
+        "docker"
+        "adbusers"
+        "plugdev"
+        "dialout"
+        "trusted-users"
+      ]
+      ++ lib.optional (config.programs.wireshark.enable) "wireshark";
     hashedPasswordFile = "/persist/secrets/passwdfile.gramdalf";
     group = "gramdalf";
   };

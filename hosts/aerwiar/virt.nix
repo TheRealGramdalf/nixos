@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   virtualisation.libvirtd = {
     enable = true;
     # Don't autostart previously running VMs
