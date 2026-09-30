@@ -3,13 +3,14 @@
   imports = [
     ./printing.nix
   ];
-  
+
   # Enable KDE
   services.desktopManager.plasma6 = {
     enable = true;
     enableQt5Integration = true;
   };
-  qt.style = "breeze";
+  ##TODO check
+  #qt.style = "breeze";
   services.displayManager.sddm = {
     # SDDM isn't enabled by the plasma6 module
     enable = true;
@@ -19,14 +20,29 @@
 
   networking = {
     # Required for KDE to control wifi via GUI
-    networkmanager.enable = true;
-    #TODO Verify
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
     search = [ "local" "lan" ];
   };
   # Disable NM's wait-online service. This delays boot significantly
   systemd.services."NetworkManager-wait-online".enable = false;
 
   services = {
+    # DNS
+    resolved = {
+      enable = true;
+      settings."Resolve" = {
+        LLMNR = "false";
+        FallbackDns = [
+          "1.1.1.1"
+          "1.0.0.1"
+        ];
+        # Enable resolution only, leave responding to avahi
+        MulticastDNS = "resolve";
+      };
+    };
     # Enable pulse emulation for the KDE GUI
     pipewire = {
       pulse.enable = true;
@@ -36,9 +52,9 @@
     # Printing, mDNS etc
     avahi = {
       enable = true;
-      openFirewall = true;
-      nssmdns4 = true;
       publish.enable = true;
+      nssmdns4 = false;
+      nssmdns6 = false;
     };
   };
 }
