@@ -17,7 +17,6 @@
     ./configuration.nix
     ./kde.nix
     ./netbird.nix
-    ./localsend.nix
     ./fwmm.nix
     ./users.nix
     #./fprint.nix

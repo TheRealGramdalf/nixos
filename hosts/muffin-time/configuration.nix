@@ -9,11 +9,14 @@
     tmp.cleanOnBoot = true;
   };
   # Enable uBoL
-  programs.chromium = {
-    enable = true;
-    extensions = [
-      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-    ];
+  programs = {
+    localsend.enable = true;
+    chromium = {
+      enable = true;
+      extensions = [
+        "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+      ];
+    };
   };
   environment.systemPackages = with pkgs; [
     # MS Office alternative

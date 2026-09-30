@@ -64,6 +64,7 @@
   
   programs = {
     wireshark.enable = false;
+    localsend.enable = true;
   };
 
   services.udev.packages = [pkgs.vial];

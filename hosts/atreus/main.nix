@@ -12,7 +12,6 @@
     ../../common/treewide-defaults.nix
 
     # Host-specific config
-    ./localsend.nix
     ./hardware.nix
     ./configuration.nix
     ./peripherals.nix
