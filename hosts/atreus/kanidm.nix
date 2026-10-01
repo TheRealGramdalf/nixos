@@ -9,15 +9,15 @@ in {
         version = "2";
         kanidm = {
           # In version 2, this is under `kanidm`
-          pam_allowed_login_groups = ["${mainGroup}"];
+          pam_allowed_login_groups = [ mainGroup ];
           map_group = [
             {
               local = "video";
-              "with" = "${mainGroup}";
+              "with" = mainGroup;
             }
             {
               local = "networkmanager";
-              "with" = "${mainGroup}";
+              "with" = mainGroup;
             }
             {
               local = "timekpr";
