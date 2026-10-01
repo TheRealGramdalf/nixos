@@ -19,36 +19,6 @@
     pkgs.kdePackages.konsole
   ];
 
-  networking = {
-    # Required for KDE to control wifi via GUI
-    networkmanager = {
-      enable = true;
-      dns = "systemd-resolved";
-    };
-    dhcpcd.enable = false;
-  };
-  services = {
-    resolved = {
-      enable = true;
-      settings."Resolve" = {
-        LLMNR = "false";
-        Domains = ["local"];
-        FallbackDns = [
-          "1.1.1.1"
-          "1.0.0.1"
-        ];
-        # Enable resolution only, leave responding to avahi
-        MulticastDNS = "resolve";
-      };
-    };
-    # Printing, mDNS etc
-    avahi = {
-      enable = true;
-      openFirewall = true;
-      nssmdns4 = false;
-      nssmdns6 = false;
-    };
-  };
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
