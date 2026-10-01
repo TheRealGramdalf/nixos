@@ -1,5 +1,4 @@
-{pkgs, config, lib, ...}: {
-
+{
   imports = [
     ./printing.nix
   ];
@@ -24,7 +23,7 @@
       enable = true;
       dns = "systemd-resolved";
     };
-    search = [ "local" "lan" ];
+    search = ["local" "lan"];
   };
   # Disable NM's wait-online service. This delays boot significantly
   systemd.services."NetworkManager-wait-online".enable = false;

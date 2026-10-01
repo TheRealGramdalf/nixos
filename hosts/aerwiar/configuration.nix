@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   boot = {
     loader.timeout = 0;
     zfs = {
