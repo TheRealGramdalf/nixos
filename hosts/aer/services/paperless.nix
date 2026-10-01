@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   ...
 }: let
   cfg = config.services.paperless;
