@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  config,
   ...
 }: let
   user = "timekpr-webui";
@@ -29,7 +30,7 @@ in {
 
   services.traefik.routing.extraFiles."timekpr".settings = {
     http.routers."timekpr" = {
-      rule = "Host(`timekeeper.aer.dedyn.io`)";
+      rule = "Host(`timekeeper.${config.networking.fqdn}`)";
       service = "timekpr";
       middlewares = "local-only";
     };

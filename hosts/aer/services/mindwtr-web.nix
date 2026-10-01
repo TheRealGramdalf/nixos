@@ -9,7 +9,7 @@ in {
     enable = true;
     package = inputs.mindwtr-flake.packages.x86_64-linux."mindwtr-web";
     nginx = {
-      virtualHost = "mindwtr.aer.dedyn.io";
+      virtualHost = "mindwtr.${config.networking.fqdn}";
       listen = [
         {
           addr = "127.0.0.1";

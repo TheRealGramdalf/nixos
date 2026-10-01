@@ -7,13 +7,13 @@ in {
   services.netbird.server = {
     # This top level switch enables some defaults based on top level options
     enable = true;
-    domain = "vpn.aer.dedyn.io";
+    domain = "vpn.${config.networking.fqdn}";
     management = {
       port = 6969;
       logLevel = "DEBUG";
       disableAnonymousMetrics = true;
       disableSingleAccountMode = true;
-      oidcConfigEndpoint = "https://auth.aer.dedyn.io/oauth2/openid/${cid}/.well-known/openid-configuration";
+      oidcConfigEndpoint = "https://auth.${config.networking.fqdn}/oauth2/openid/${cid}/.well-known/openid-configuration";
       settings = {
         HttpConfig.AuthAudience = cid;
         TURNConfig.Secret = {_secret = "/persist/secrets/netbird/turn-secret";};
@@ -27,7 +27,7 @@ in {
       settings = {
         AUTH_AUDIENCE = cid;
         AUTH_CLIENT_ID = cid;
-        AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
+        AUTH_AUTHORITY = "https://auth.${config.networking.fqdn}/oauth2/openid/${cid}";
         AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
       };
     };

@@ -76,7 +76,7 @@ in {
   # Proxy mimir through traefik for TLS
   services.traefik.routing.extraFiles."${mimir.name}".settings = {
     http.routers."${mimir.name}" = {
-      rule = "Host(`${mimir.name}.aer.dedyn.io`)";
+      rule = "Host(`${mimir.name}.${config.networking.fqdn}`)";
       service = "${mimir.name}";
       middlewares = "local-only";
     };

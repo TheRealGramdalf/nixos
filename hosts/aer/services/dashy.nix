@@ -6,7 +6,7 @@ in {
     enable = true;
     virtualHost = {
       enableNginx = true;
-      domain = "aer.dedyn.io";
+      domain = config.networking.fqdn;
     };
     settings = {
       pageInfo = {
@@ -80,13 +80,13 @@ in {
               title = "Paperless";
               description = "Scan, index, and archive physical paper documents";
               icon = "si-paperlessngx";
-              url = "https://paperless.aer.dedyn.io";
+              url = "https://paperless.${config.networking.fqdn}";
             }
             {
               title = "Actual";
               description = "Manage budgets with Actual server";
               icon = "si-actualbudget";
-              url = "https://actual.aer.dedyn.io";
+              url = "https://actual.${config.networking.fqdn}";
             }
           ];
         }
@@ -98,17 +98,17 @@ in {
               title = "Jellyfin";
               description = "Stream Music, Movies, and TV Shows";
               icon = "si-jellyfin";
-              url = "https://media.aer.dedyn.io";
+              url = "https://media.${config.networking.fqdn}";
             }
             #{
             #  title = "Lidarr";
             #  description = "Music Library Manager";
-            #  url = "https://lidarr.aer.dedyn.io";
+            #  url = "https://lidarr.${config.networking.fqdn}";
             #}
             #{
             #  title = "OneTag";
             #  description = "Semi-automated Music organization/tagging";
-            #  url = "https://onetag.aer.dedyn.io";
+            #  url = "https://onetag.${config.networking.fqdn}";
             #}
           ];
         }
@@ -120,7 +120,7 @@ in {
               title = "Home Assistant";
               description = "Home automation platform with thousands of integrations";
               icon = "si-homeassistant";
-              url = "https://home.aer.dedyn.io/auth/oidc/redirect";
+              url = "https://home.${config.networking.fqdn}/auth/oidc/redirect";
             }
           ];
         }
@@ -220,7 +220,7 @@ in {
               title = "Traefik";
               description = "Debugging dashboard";
               icon = "si-traefikproxy";
-              url = "https://traefik.aer.dedyn.io";
+              url = "https://traefik.${config.networking.fqdn}";
             }
             {
               title = "Dell iDrac";
@@ -238,7 +238,7 @@ in {
         #      title = "Grafana";
         #      description = "Data visualised on dashboards";
         #      icon = "si-grafana";
-        #      url = "https://monitor.aer.dedyn.io";
+        #      url = "https://monitor.${config.networking.fqdn}";
         #    }
         #  ];
         #}

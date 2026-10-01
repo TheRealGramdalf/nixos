@@ -5,7 +5,7 @@
   ...
 }: let
   graf = "sys";
-  hl.authurl = "auth.aer.dedyn.io";
+  hl.authurl = "auth.${config.networking.fqdn}";
   srcfg = config.services.grafana.settings.server;
   client_id = "grafana-aer_rs";
 in {
@@ -14,7 +14,7 @@ in {
     dataDir = "/persist/services/grafana";
     settings = {
       server = {
-        domain = "${graf}.aer.dedyn.io";
+        domain = "${graf}.${config.networking.fqdn}";
         enable_gzip = true;
         enforce_domain = true;
         protocol = "http";

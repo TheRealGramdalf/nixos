@@ -18,14 +18,14 @@ in {
       MINDWTR_CLOUD_AUTH_TOKENS_FILE = "/persist/secrets/mindwtr/tokens";
       MINDWTR_CLOUD_TRUST_PROXY_HEADERS = "true";
       MINDWTR_CLOUD_TRUSTED_PROXY_IPS = ["127.0.0.1"];
-      MINDWTR_CLOUD_CORS_ORIGIN = "${name}.aer.dedyn.io";
+      MINDWTR_CLOUD_CORS_ORIGIN = "${name}.${config.networking.fqdn}";
       HOST = "127.0.0.1";
     };
   };
 
   services.traefik.routing.extraFiles."mindwtr-cloud".settings = {
     http.routers."${name}-cloud" = {
-      rule = "Host(`cloud.${name}.aer.dedyn.io`)";
+      rule = "Host(`cloud.${name}.${config.networking.fqdn}`)";
       service = "${name}-cloud";
       #middlewares = "local-only";
     };

@@ -1,3 +1,4 @@
+{config, ...}:
 let
   alloy = "alloy";
   listenAddr = "127.0.0.1:12346";
@@ -20,7 +21,7 @@ in {
     }
     prometheus.remote_write "mimir" {
       endpoint {
-        url = "https://mimir.aer.dedyn.io/api/v1/push"
+        url = "https://mimir.${config.networking.fqdn}/api/v1/push"
       }
     }
   '';
@@ -51,7 +52,7 @@ in {
     }
     loki.write "logging" {
       endpoint {
-        url = "https://loki.aer.dedyn.io/loki/api/v1/push"
+        url = "https://loki.${config.networking.fqdn}/loki/api/v1/push"
       }
     }
   '';
@@ -70,7 +71,7 @@ in {
   services.traefik.routing.extraFiles = {
     "${alloy}".settings = {
       http.routers."${alloy}" = {
-        rule = "Host(`${alloy}.aer.dedyn.io`)";
+        rule = "Host(`${alloy}.${config.networking.fqdn}`)";
         service = "${alloy}";
         middlewares = "local-only";
       };

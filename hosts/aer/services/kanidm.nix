@@ -22,8 +22,8 @@ in {
       settings = {
         version = "2";
         #log_level = "debug";
-        origin = "https://auth.aer.dedyn.io";
-        domain = "auth.aer.dedyn.io";
+        origin = "https://auth.${config.networking.fqdn}";
+        domain = "auth.${config.networking.fqdn}";
         # Needs https://github.com/NixOS/nixpkgs/pull/323676 to work properly
         #db_path = "${dataDir}/db/kanidm.db";
         db_fs_type = "zfs";

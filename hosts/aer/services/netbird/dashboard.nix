@@ -9,7 +9,7 @@ in {
       settings = {
         AUTH_AUDIENCE = cid;
         AUTH_CLIENT_ID = cid;
-        AUTH_AUTHORITY = "https://auth.aer.dedyn.io/oauth2/openid/${cid}";
+        AUTH_AUTHORITY = "https://auth.${config.networking.fqdn}/oauth2/openid/${cid}";
         AUTH_SUPPORTED_SCOPES = "openid profile email offline_access api";
         # Fix Kanidm not supporting fragmented URIs
         AUTH_REDIRECT_URI = "/peers";

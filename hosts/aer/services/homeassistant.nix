@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, config, ...}: let
   ha = "home";
   ha-port = 8123;
   mq = "mqtt";
@@ -52,7 +52,7 @@ in {
     config = {
       auth_oidc = {
         client_id = "home-assistant-aer_rs";
-        discovery_url = "https://auth.aer.dedyn.io/oauth2/openid/home-assistant-aer_rs/.well-known/openid-configuration";
+        discovery_url = "https://auth.${config.networking.fqdn}/oauth2/openid/home-assistant-aer_rs/.well-known/openid-configuration";
         id_token_signing_alg = "ES256";
         features.include_groups_scope = true;
         roles.admin = "15cdd9ec-08d0-4ca0-930f-5b9631c5ccb0";
@@ -71,8 +71,8 @@ in {
       default_config = {};
       homeassistant = {
         name = "Home";
-        internal_url = "https://${ha}.aer.dedyn.io";
-        external_url = "https://${ha}.aer.dedyn.io";
+        internal_url = "https://${ha}.${config.networking.fqdn}";
+        external_url = "https://${ha}.${config.networking.fqdn}";
         unit_system = "metric";
         temperature_unit = "C";
       };
@@ -112,7 +112,7 @@ in {
   services.traefik.routing.extraFiles = {
     "${ha}".settings = {
       http.routers."${ha}" = {
-        rule = "Host(`${ha}.aer.dedyn.io`)";
+        rule = "Host(`${ha}.${config.networking.fqdn}`)";
         service = "${ha}";
         middlewares = "local-only";
       };
@@ -120,7 +120,7 @@ in {
     };
     "${mq}".settings = {
       tcp.routers."${mq}" = {
-        rule = "HostSNI(`${mq}.aer.dedyn.io`)";
+        rule = "HostSNI(`${mq}.${config.networking.fqdn}`)";
         tls = true;
         service = "${mq}";
         middlewares = "local-only";

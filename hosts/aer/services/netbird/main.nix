@@ -1,8 +1,8 @@
-{
+{config, ...}: {
   services.netbird.server = {
     # This top level switch enables some defaults based on top level options
     enable = true;
-    domain = "vpn.aer.dedyn.io";
+    domain = "vpn.${config.networking.fqdn}";
   };
   imports = [
     ./coturn.nix

@@ -7,7 +7,7 @@
 }: let
   cfg = config.services.pogadmin;
   name = "db";
-  authurl = "https://auth.aer.dedyn.io";
+  authurl = "https://auth.${config.networking.fqdn}";
   clientid = "pgadmin-aer_rs";
 in {
   systemd.services = lib.mkMerge [
@@ -45,7 +45,7 @@ in {
     package = pkgs.postgresql_16;
     dataDir = "/persist/services/postgres";
     initdbArgs = [
-      "--username=postgres-aer@auth.aer.dedyn.io"
+      "--username=postgres-aer@auth.${config.networking.fqdn}"
       "--debug"
     ];
     #identMap = ''
@@ -73,7 +73,7 @@ in {
     enable = true;
     user = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
     group = "e3a51f72-3dfb-4742-b2b2-d7088e9be7be";
-    initialEmail = "pgadmin-aer@auth.aer.dedyn.io";
+    initialEmail = "pgadmin-aer@auth.${config.networking.fqdn}";
     initialPasswordFile = "/persist/secrets/pgadmin/pwfile";
     extraConfig = ''
       import os
@@ -161,7 +161,7 @@ in {
   services.traefik.routing.extraFiles = {
     #"postgres".settings = {
     #  http.routers.${name} = {
-    #    rule = "Host(`${name}.aer.dedyn.io`)";
+    #    rule = "Host(`${name}.${config.networking.fqdn}`)";
     #    service = ${name};
     #  };
     #  http.services.${name}.loadbalancer.servers = [
@@ -170,7 +170,7 @@ in {
     #};
     "postgres-ui".settings = {
       http.routers."${name}-ui" = {
-        rule = "Host(`${name}.aer.dedyn.io`)";
+        rule = "Host(`${name}.${config.networking.fqdn}`)";
         service = "${name}-ui";
         middlewares = ["local-only"];
       };

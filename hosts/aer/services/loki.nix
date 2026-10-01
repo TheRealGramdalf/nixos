@@ -97,7 +97,7 @@ in {
   # Proxy loki through traefik for TLS
   services.traefik.routing.extraFiles."${loki.name}".settings = {
     http.routers."${loki.name}" = {
-      rule = "Host(`${loki.name}.aer.dedyn.io`)";
+      rule = "Host(`${loki.name}.${config.networking.fqdn}`)";
       service = "${loki.name}";
       middlewares = "local-only";
     };

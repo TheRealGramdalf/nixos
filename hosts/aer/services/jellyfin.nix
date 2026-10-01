@@ -27,7 +27,7 @@ in {
   services.traefik.routing.extraFiles."${name}".settings = {
     http.routers."${name}" = {
       service = "${name}";
-      rule = "Host(`${name}.aer.dedyn.io`)";
+      rule = "Host(`${name}.${config.networking.fqdn}`)";
     };
     http.services."${name}".loadBalancer = {
       servers = [{url = "http://127.0.0.1:${port}";}];

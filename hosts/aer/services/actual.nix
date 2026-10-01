@@ -17,10 +17,10 @@ in {
       allowedLoginMethods = ["openid"]; # Disable password authentication
       userCreationMode = "login";
       openId = {
-        discoveryURL = "https://auth.aer.dedyn.io/oauth2/openid/${client_id}/.well-known/openid-configuration";
+        discoveryURL = "https://auth.${config.networking.fqdn}/oauth2/openid/${client_id}/.well-known/openid-configuration";
         inherit client_id;
         client_secret._secret = "/persist/secrets/actual/client_secret";
-        server_hostname = "https://actual.aer.dedyn.io";
+        server_hostname = "https://actual.${config.networking.fqdn}";
         authMethod = "openid"; # Enables full OIDC discovery
       };
       token_expiration = "3600"; # 1hr
@@ -30,7 +30,7 @@ in {
   services.traefik.routing.extraFiles."${name}".settings = {
     http.routers."${name}" = {
       service = "${name}";
-      rule = "Host(`${name}.aer.dedyn.io`)";
+      rule = "Host(`${name}.${config.networking.fqdn}`)";
     };
     http.services."${name}".loadBalancer = {
       servers = [{url = "http://${cfg.settings.hostname}:${toString cfg.settings.port}";}];

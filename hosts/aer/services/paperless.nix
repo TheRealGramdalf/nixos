@@ -69,7 +69,7 @@ in {
       #        provider_id = "kanidm-aer";
       #        # This secret is substituted from the environment file
       #        secret = "$OAUTH2_SECRET";
-      #        settings.server_url = "https://auth.aer.dedyn.io/oauth2/openid/paperless-ngx-aer_rs";
+      #        settings.server_url = "https://auth.${config.networking.fqdn}/oauth2/openid/paperless-ngx-aer_rs";
       #      }
       #    ];
       #    OAUTH_PKCE_ENABLED = "True";
@@ -86,14 +86,14 @@ in {
 
       # This is required if you will be exposing Paperless-ngx on a public domain
       # (if doing so please consider security measures such as reverse proxy)
-      PAPERLESS_URL = "https://${name}.aer.dedyn.io";
+      PAPERLESS_URL = "https://${name}.${config.networking.fqdn}";
     };
   };
 
   services.traefik.routing.extraFiles."${name}".settings = {
     http.routers."${name}" = {
       service = "${name}";
-      rule = "Host(`${name}.aer.dedyn.io`)";
+      rule = "Host(`${name}.${config.networking.fqdn}`)";
     };
     http.services."${name}".loadBalancer.servers = [{url = "http://${cfg.address}:${port}";}];
   };

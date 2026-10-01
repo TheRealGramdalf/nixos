@@ -14,7 +14,7 @@ in {
       "dashboard".settings = {
         http.routers."dashboard" = {
           service = "api@internal";
-          rule = "Host(`traefik.aer.dedyn.io`)";
+          rule = "Host(`traefik.${config.networking.fqdn}`)";
           middlewares = ["local-only"];
         };
       };
@@ -32,7 +32,7 @@ in {
     install.settings = {
       log.level = "DEBUG";
       providers.docker = {
-        defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.aer.dedyn.io`)";
+        defaultRule = "Host(`{{ index .Labels \"hl.host\"}}.${config.networking.fqdn}`)";
         watch = true;
         exposedByDefault = false;
       };

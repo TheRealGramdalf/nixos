@@ -21,6 +21,7 @@
   networking = {
     hostName = "aer";
     hostId = "943c5a42";
+    fqdn = "aer.dedyn.io";
   };
 
   environment.systemPackages = with pkgs; [

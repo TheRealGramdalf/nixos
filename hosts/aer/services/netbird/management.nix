@@ -9,7 +9,7 @@ in {
       logLevel = "DEBUG";
       disableAnonymousMetrics = true;
       disableSingleAccountMode = true;
-      oidcConfigEndpoint = "https://auth.aer.dedyn.io/oauth2/openid/${cid}/.well-known/openid-configuration";
+      oidcConfigEndpoint = "https://auth.${config.networking.fqdn}/oauth2/openid/${cid}/.well-known/openid-configuration";
       settings = {
         HttpConfig.AuthAudience = cid;
         TURNConfig.Secret = {_secret = "/persist/secrets/netbird/turn-secret";};
