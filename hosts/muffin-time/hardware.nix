@@ -5,8 +5,13 @@
 }: let
   hostname = config.networking.hostName;
 in {
-  hardware.bluetooth.enable = true;
-  
+  hardware = {
+    bluetooth.enable = true;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    # Fixes iwlwifi not loading
+    enableAllFirmware = true;
+  };
+
   services = {
     # Enable fingerprint reader
     fprintd.enable = false;
@@ -18,15 +23,17 @@ in {
   };
 
   boot = {
+    zfs = {
+      #STATEVERSION
+      forceImportRoot = false;
+      devNodes = "/dev/disk/by-partlabel";
+    };
     kernelParams = [
       "zfs.zfs_arc_sys_free=3221225472" # 3GiB
     ];
     initrd.availableKernelModules = ["xhci_pci" "nvme" "uas" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
     kernelModules = ["kvm-intel"];
   };
-
-  # Fixes iwlwifi not loading
-  hardware.enableAllFirmware = true;
 
   fileSystems."/" = {
     device = "${hostname}-zroot/system-state";
@@ -50,6 +57,4 @@ in {
     fsType = "vfat";
     neededForBoot = false;
   };
-
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

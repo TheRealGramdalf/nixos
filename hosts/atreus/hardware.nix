@@ -6,8 +6,11 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
   boot.kernelModules = ["kvm-amd"];
 
-  hardware.enableAllFirmware = true;
-  hardware.bluetooth.enable = true;
+  hardware = {
+    enableAllFirmware = true;
+    bluetooth.enable = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
 
   boot.zfs = {
     #STATEVERSION
@@ -43,6 +46,4 @@
     options = ["fmask=0022" "dmask=0022"];
     neededForBoot = false;
   };
-
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

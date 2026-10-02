@@ -9,6 +9,8 @@
   hardware = {
     enableAllFirmware = true;
     keyboard.qmk.enable = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    bluetooth.enable = true;
   };
 
   environment.systemPackages = [
@@ -69,6 +71,8 @@
       })
     ];
   };
+
+
   boot = {
     kernelParams = [
       "amdgpu.freesync_video=1"
@@ -77,7 +81,6 @@
     kernelModules = ["kvm-amd"];
   };
 
-  hardware.bluetooth.enable = true;
 
   fileSystems."/" = {
     device = "aerwiar-zpool/system-state";
@@ -106,6 +109,4 @@
     fsType = "vfat";
     neededForBoot = false;
   };
-
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

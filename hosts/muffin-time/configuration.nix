@@ -1,11 +1,4 @@
 {pkgs, ...}: {
-  boot = {
-    zfs = {
-      #STATEVERSION
-      forceImportRoot = false;
-      devNodes = "/dev/disk/by-partlabel";
-    };
-  };
   # Enable uBoL
   programs = {
     localsend.enable = true;
