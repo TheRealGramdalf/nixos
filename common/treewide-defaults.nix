@@ -8,6 +8,8 @@
     NB_MANAGEMENT_URL = "https://vpn.aer.dedyn.io";
   };
 
+  hardware.bluetooth.powerOnBoot = false;
+
   # The world must be oxidized
   security.sudo-rs.enable = true;
 }
