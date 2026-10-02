@@ -9,6 +9,7 @@
   };
 
   hardware.bluetooth.powerOnBoot = false;
+  boot.tmp.cleanOnBoot = true;
 
   # The world must be oxidized
   security.sudo-rs.enable = true;
