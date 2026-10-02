@@ -1,6 +1,9 @@
 {
-  boot.loader.systemd-boot = {
-    enable = true;
-    editor = false;
+  boot = {
+    loader.systemd-boot = {
+      enable = true;
+      editor = false;
+    };
+    plymouth.enable = true;
   };
 }
