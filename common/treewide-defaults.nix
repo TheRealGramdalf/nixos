@@ -10,6 +10,8 @@
 
   hardware.bluetooth.powerOnBoot = false;
   boot.tmp.cleanOnBoot = true;
+  # Not needed (already default? might be stateversion)
+  services.dbus.implementation = "broker";
 
   # The world must be oxidized
   security.sudo-rs.enable = true;
