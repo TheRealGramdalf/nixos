@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   cfg = config.services.paperless;
   name = "paperless";
   port = "28981";

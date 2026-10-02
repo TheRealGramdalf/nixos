@@ -1,4 +1,8 @@
-{pkgs, config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   ha = "home";
   ha-port = 8123;
   mq = "mqtt";

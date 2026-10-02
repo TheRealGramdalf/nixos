@@ -72,7 +72,6 @@
     ];
   };
 
-
   boot = {
     kernelParams = [
       "amdgpu.freesync_video=1"
@@ -80,7 +79,6 @@
     initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid"];
     kernelModules = ["kvm-amd"];
   };
-
 
   fileSystems."/" = {
     device = "aerwiar-zpool/system-state";
