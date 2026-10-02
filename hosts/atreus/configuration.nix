@@ -20,10 +20,6 @@
     pkgs.kdePackages.konsole
   ];
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
   services = {
     colord.enable = true;
     # Disable orca since it's unneeded at the moment

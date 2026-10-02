@@ -7,6 +7,7 @@
   boot.kernelModules = ["kvm-amd"];
 
   hardware.enableAllFirmware = true;
+  hardware.bluetooth.enable = true;
 
   boot.zfs = {
     #STATEVERSION
