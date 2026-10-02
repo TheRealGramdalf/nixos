@@ -1,12 +1,13 @@
 {
-  boot.zfs = {
-    devNodes = "/dev/disk/by-partlabel";
-  };
-
   hardware.enableAllFirmware = true;
-  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"];
-  boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-intel"];
+  boot = {
+    zfs = {
+      devNodes = "/dev/disk/by-partlabel";
+    };
+    initrd.availableKernelModules = ["ahci" "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"];
+    initrd.kernelModules = ["dm-snapshot"];
+    kernelModules = ["kvm-intel"];
+  };
 
   fileSystems."/" = {
     device = "klippy-zroot/system-state";

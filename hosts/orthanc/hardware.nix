@@ -1,16 +1,15 @@
 {config, ...}: let
   hostname = config.networking.hostName;
 in {
-  boot.zfs = {
-    ##STATEVERSION
-    forceImportRoot = false;
-    devNodes = "/dev/disk/by-partlabel";
-    extraPools = [
-      "isengard"
-    ];
-  };
-
   boot = {
+    zfs = {
+      ##STATEVERSION
+      forceImportRoot = false;
+      devNodes = "/dev/disk/by-partlabel";
+      extraPools = [
+        "isengard"
+      ];
+    };
     initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "aacraid" "usbhid" "sd_mod"];
     kernelModules = ["kvm-intel"];
   };
