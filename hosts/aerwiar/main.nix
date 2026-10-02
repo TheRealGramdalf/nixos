@@ -12,6 +12,7 @@
     ../../common/hyperlegible.nix
     ../../common/treewide-defaults.nix
     ../../common/kde.nix
+    ../../common/laptop.nix
 
     # Host-specific config
     ./hardware.nix

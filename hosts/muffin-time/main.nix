@@ -11,6 +11,7 @@
     ../../common/hyperlegible.nix
     ../../common/treewide-defaults.nix
     ../../common/kde.nix
+    ../../common/laptop.nix
     ./configuration.nix
     ./hardware.nix
     ./kde.nix
