@@ -1,0 +1,56 @@
+{
+    "nix.serverSettings": {
+        "nixd": {
+            "nixpkgs": {
+                // For flake.
+                // "expr": "import (builtins.getFlake \"/home/lyc/workspace/CS/OS/NixOS/flakes\").inputs.nixpkgs { }   "
+                // This expression will be interpreted as "nixpkgs" toplevel
+                // Nixd provides package, lib completion/information from it.
+                ///
+                // Resource Usage: Entries are lazily evaluated, entire nixpkgs takes 200~300MB for just "names".
+                ///                Package documentation, versions, are evaluated by-need.
+                "expr": "import <nixpkgs> { }"
+            },
+            "formatting": {
+                // Which command you would like to do formatting
+                "command": [
+                    "nix",
+                    "fmt"
+                ]
+            },
+            // Tell the language server your desired option set, for completion
+            // This is lazily evaluated.
+            "options": { // Map of eval information
+                // By default, this entriy will be read from `import <nixpkgs> { }`
+                // You can write arbitary nix expression here, to produce valid "options" declaration result.
+                //
+                // *NOTE*: Replace "<name>" below with your actual configuration name.
+                // If you're unsure what to use, you can verify with `nix repl` by evaluating
+                // the expression directly.
+                //
+                "nixos": {
+                    "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.aerwiar.options"
+                },
+                // Before configuring Home Manager options, consider your setup:
+                // Which command do you use for home-manager switching?
+                //
+                //  A. home-manager switch --flake .#... (standalone Home Manager)
+                //  B. nixos-rebuild switch --flake .#... (NixOS with integrated Home Manager)
+                //
+                // Configuration examples for both approaches are shown below.
+                "home-manager": {
+                    // A:
+                    //"expr": "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.<name>.options"
+                    // B:
+                    "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.aerwiar.options.home-manager.users.type.getSubOptions []"
+                }
+            },
+            // Control the diagnostic system
+            //"diagnostic": {
+            //  "suppress": [
+            //    "sema-extra-with"
+            //  ]
+            //}
+        }
+    }
+}
