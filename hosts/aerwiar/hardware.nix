@@ -77,12 +77,7 @@
     kernelModules = ["kvm-amd"];
   };
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-  };
+  hardware.bluetooth.enable = true;
 
   fileSystems."/" = {
     device = "aerwiar-zpool/system-state";
