@@ -1,15 +1,3 @@
-# TODO
-- [] Configuration test via https://github.com/traefik/traefik/issues/10804 (need to grab schema from traefik pkg, add schema output to traefik pkg)
-CHANGELOG
-- Removed usage of `with`, replacing it with `inherit` instead
-- Do not always assume the systemd user must be created by NixOS
-- Rename options to be more ergonomic and in line with the spirit of RFC 42
-- (minimal downtime)
-- Added `mkRenamedOptionModule`s where appropriate
-- If created, the `traefik` users home directory is no longer created
-- Increase UDP buffer sizes similar to caddy
-
-
 ? ~~reset gidnumber for unix accounts~~ (Groups not done yet, )
 Figure out netbird multiple accounts - OIDC sync only possible with cloud version at the moment, manual invite may require mail server
 Add modals to network shares on dashy
@@ -25,12 +13,6 @@ Breakpoint hook:
 https://unix.stackexchange.com/a/728663
 https://nixos.org/manual/nixos/stable/#sec-replace-modules
 
-HA integrations to investigate:
-- https://www.home-assistant.io/integrations/luci/
-- https://www.home-assistant.io/integrations/ubus/
-- https://www.home-assistant.io/integrations/opnsense/
-- https://www.home-assistant.io/integrations/paperless_ngx/
-- https://www.home-assistant.io/integrations/prometheus/
 
 Add release note links
 - Vaultwarden https://github.com/dani-garcia/vaultwarden/releases
