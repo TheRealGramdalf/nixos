@@ -50,10 +50,8 @@
   };
 
   services = {
-    services = {
-      kanidm.client.enable = true;
-      fwupd.enable = true;
-    };
+    kanidm.client.enable = true;
+    fwupd.enable = true;
     ollama.enable = true;
     udev.packages = [pkgs.vial];
   };
