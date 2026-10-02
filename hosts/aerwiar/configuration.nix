@@ -13,7 +13,6 @@
         (pkgs.catppuccin-plymouth.override {variant = "mocha";})
       ];
     };
-    tmp.cleanOnBoot = true;
   };
   powerManagement = {
     enable = true;
