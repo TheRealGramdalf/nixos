@@ -14,8 +14,6 @@
     devNodes = "/dev/disk/by-partlabel";
   };
 
-  boot.plymouth.enable = true;
-
   fileSystems."/" = {
     device = "atreus-zroot/system-state";
     fsType = "zfs";

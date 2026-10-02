@@ -5,7 +5,6 @@
       forceImportRoot = false;
       devNodes = "/dev/disk/by-partlabel";
     };
-    plymouth.enable = true;
   };
   # Enable uBoL
   programs = {
