@@ -44,17 +44,20 @@
     ];
   };
 
-  services = {
-    kanidm.client.enable = true;
-    fwupd.enable = true;
-  };
-
   programs = {
     wireshark.enable = false;
     localsend.enable = true;
   };
 
-  services.udev.packages = [pkgs.vial];
+  services = {
+    services = {
+      kanidm.client.enable = true;
+      fwupd.enable = true;
+    };
+    ollama.enable = true;
+    udev.packages = [pkgs.vial];
+  };
+
   hardware.keyboard.qmk.enable = true;
   environment.systemPackages = [
     pkgs.android-tools
@@ -70,5 +73,4 @@
       extraPackages = [pkgs.gamescope];
     };
   };
-  services.ollama.enable = true;
 }
