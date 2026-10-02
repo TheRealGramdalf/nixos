@@ -17,6 +17,12 @@
     pkgs.qmk
   ];
 
+  # 046d:c537 - g602 receiver
+  # Disable wakeup from mouse
+  # https://bbs.archlinux.org/viewtopic.php?id=305417
+  services.udev.extraRules = ''
+    ACTION=="add" SUBSYSTEM=="usb" ENV{DEVTYPE}=="usb_device" ATTRS{idVendor}=="046d" ATTRS{idProduct}=="c537" ATTR{power/wakeup}="disabled"
+  '';
   specialisation."kde-patched".configuration = {
     environment.etc."specialisation".text = "kde-patched";
 
