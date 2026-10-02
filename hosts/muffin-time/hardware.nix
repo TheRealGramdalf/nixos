@@ -28,9 +28,6 @@ in {
       forceImportRoot = false;
       devNodes = "/dev/disk/by-partlabel";
     };
-    kernelParams = [
-      "zfs.zfs_arc_sys_free=3221225472" # 3GiB
-    ];
     initrd.availableKernelModules = ["xhci_pci" "nvme" "uas" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
     kernelModules = ["kvm-intel"];
   };
