@@ -14,7 +14,6 @@
     ../../common/laptop.nix
     ./configuration.nix
     ./hardware.nix
-    ./kde.nix
   ];
   time.timeZone = "America/Vancouver";
   nixpkgs.hostPlatform = "x86_64-linux";
