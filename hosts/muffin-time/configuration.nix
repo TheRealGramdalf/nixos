@@ -9,6 +9,8 @@
   # Enable uBoL
   programs = {
     localsend.enable = true;
+    # Firefox is slightly more integrated (i.e. KDE Connect)
+    firefox.enable = true;
     chromium = {
       enable = true;
       extensions = [

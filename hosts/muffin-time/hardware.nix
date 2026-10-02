@@ -5,6 +5,18 @@
 }: let
   hostname = config.networking.hostName;
 in {
+  hardware.bluetooth.enable = true;
+  
+  services = {
+    # Enable fingerprint reader
+    fprintd.enable = false;
+    # Control the malfunctioning fan
+    thinkfan.enable = true;
+  };
+  specialisation."no-thinkfan".configuration = {
+    services.thinkfan.enable = lib.mkForce false;
+  };
+
   boot = {
     kernelParams = [
       "zfs.zfs_arc_sys_free=3221225472" # 3GiB
