@@ -12,6 +12,7 @@
     ../../common/treewide-defaults.nix
     ../../common/kde.nix
     ../../common/laptop.nix
+    ../../common/systemd-boot.nix
 
     # Host-specific config
     ./hardware.nix
