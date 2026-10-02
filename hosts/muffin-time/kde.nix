@@ -1,14 +1,8 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   # Firefox slightly more integrated (i.e. KDE Connect)
   programs.firefox.enable = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
+  hardware.bluetooth.enable = true;
   services = {
     # Enable fingerprint reader
     fprintd.enable = false;
