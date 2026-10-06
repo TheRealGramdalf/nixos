@@ -147,6 +147,8 @@ let
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
+    User = cfg.user;
+    Group = cfg.group;
     SupplementaryGroups = lib.optional enableRedis redisServer.group;
     SystemCallArchitectures = "native";
     SystemCallFilter = [
@@ -154,8 +156,6 @@ let
       "~@privileged @setuid @keyring"
     ];
     UMask = "0066";
-    User = cfg.user;
-    Group = cfg.group;
   };
 in
 {
@@ -746,13 +746,15 @@ in
           "d '${cfg.exporter.directory}' - ${cfg.user} ${cfg.group} - -"
         ];
 
-        services.paperless.exporter.settings = options.services.paperless.exporter.settings.default;
+        services.paperless.exporter.settings = lib.mapAttrs (
+          _: v: lib.mkDefault v
+        ) options.services.paperless.exporter.settings.default;
 
         systemd.services.paperless-exporter = {
           startAt = lib.defaultTo [ ] cfg.exporter.onCalendar;
           serviceConfig = {
             User = defaultServiceConfig.User;
-            Group = defaultServiceConfig.group;
+            Group = defaultServiceConfig.Group;
             WorkingDirectory = cfg.dataDir;
           };
           unitConfig =
