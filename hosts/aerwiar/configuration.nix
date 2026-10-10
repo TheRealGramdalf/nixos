@@ -58,6 +58,7 @@
 
   hardware.keyboard.qmk.enable = true;
   environment.systemPackages = [
+    pkgs.wireshark
     pkgs.android-tools
     pkgs.qmk
     pkgs.vial
