@@ -45,7 +45,7 @@
   };
 
   programs = {
-    wireshark.enable = false;
+    wireshark.enable = true;
     localsend.enable = true;
   };
 
