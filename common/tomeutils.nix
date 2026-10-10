@@ -21,7 +21,6 @@
     nix-output-monitor
     nixpkgs-review
   ];
-  environment.enableAllTerminfo = true;
   nix = {
     package =
       if stability == "unstable"
