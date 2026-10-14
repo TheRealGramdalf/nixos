@@ -24,6 +24,7 @@
     enableSystemSlice = true;
   };
 
+  gtk.iconCache.enable = true;
   users = {
     groups."trusted-users" = {};
   };
