@@ -20,6 +20,8 @@
     delta
     nix-output-monitor
     nixpkgs-review
+    nurl
+    nix-init
   ];
   nix = {
     package =
