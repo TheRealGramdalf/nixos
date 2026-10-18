@@ -3,6 +3,8 @@
   boot = {
     zfs = {
       devNodes = "/dev/disk/by-partlabel";
+      ##STATEVERSION
+      forceImportRoot = false;
     };
     initrd.availableKernelModules = ["ahci" "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"];
     initrd.kernelModules = ["dm-snapshot"];
