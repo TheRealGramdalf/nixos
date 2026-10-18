@@ -48,7 +48,7 @@
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
-          "mindwtr-flake",
+          "mindwtr",
           "nixpkgs"
         ],
         "systems": "systems_2",
@@ -109,7 +109,7 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
-          "mindwtr-flake",
+          "mindwtr",
           "bun2nix",
           "nixpkgs"
         ]
@@ -191,7 +191,7 @@
         "type": "github"
       }
     },
-    "mindwtr-flake": {
+    "mindwtr": {
       "inputs": {
         "bun2nix": "bun2nix",
         "nixpkgs": [
@@ -199,11 +199,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792275343,
-        "narHash": "sha256-YYU4sLJVudiiCaErLGyLciigZpjX04EDDCyF5cgGJS8=",
+        "lastModified": 1792312455,
+        "narHash": "sha256-xVTYFaE7/a1c0kZNeQzox7sKaJUEH+yAYORpux6qaOI=",
         "owner": "therealgramdalf",
         "repo": "mindwtr-flake",
-        "rev": "a21d05330c61d7b84a527a5ffd00564d7c35dc48",
+        "rev": "afd5a8edb1595546255ce0205f430d6c17d40d95",
         "type": "github"
       },
       "original": {
@@ -370,7 +370,7 @@
         "anyrun": "anyrun",
         "home-manager": "home-manager",
         "home-manager-stable": "home-manager-stable",
-        "mindwtr-flake": "mindwtr-flake",
+        "mindwtr": "mindwtr",
         "minegrub-theme": "minegrub-theme",
         "nix-minecraft": "nix-minecraft",
         "nixos-generators": "nixos-generators",
@@ -480,7 +480,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "mindwtr-flake",
+          "mindwtr",
           "bun2nix",
           "nixpkgs"
         ]

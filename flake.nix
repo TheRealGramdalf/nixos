@@ -35,7 +35,7 @@
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mindwtr-flake = {
+    mindwtr = {
       url = "github:therealgramdalf/mindwtr-flake";
       #url = "git+file:///home/gramdalf/Documents/mindwtr-flake";
       inputs.nixpkgs.follows = "nixpkgs";

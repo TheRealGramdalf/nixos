@@ -7,7 +7,7 @@
 in {
   services.mindwtr.web = {
     enable = true;
-    package = inputs.mindwtr-flake.packages.x86_64-linux."mindwtr-web";
+    package = inputs.mindwtr.packages.x86_64-linux."mindwtr-web";
     nginx = {
       virtualHost = "mindwtr.${config.networking.fqdn}";
       listen = [

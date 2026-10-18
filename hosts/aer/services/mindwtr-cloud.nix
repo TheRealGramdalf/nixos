@@ -7,12 +7,12 @@
   name = "mindwtr";
 in {
   imports = [
-    inputs.mindwtr-flake.nixosModules.default
+    inputs.mindwtr.nixosModules.default
   ];
 
   services.mindwtr.cloud = {
     enable = true;
-    package = inputs.mindwtr-flake.packages.x86_64-linux."mindwtr-cloud";
+    package = inputs.mindwtr.packages.x86_64-linux."mindwtr-cloud";
     environment = {
       MINDWTR_CLOUD_DATA_DIR = "/persist/services/mindwtr";
       MINDWTR_CLOUD_AUTH_TOKENS_FILE = "/persist/secrets/mindwtr/tokens";
