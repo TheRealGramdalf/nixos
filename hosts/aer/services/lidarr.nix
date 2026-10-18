@@ -13,7 +13,7 @@
   };
 in {
   virtualisation.oci-containers.containers."lidarr" = {
-    image = "lscr.io/linuxserver/lidarr:2.14.5";
+    image = "lscr.io/linuxserver/lidarr:3.1.0";
     volumes = [
       "/persist/services/lidarr/config:/config"
       "/persist/services/lidarr/custom-services:/custom-services.d"
