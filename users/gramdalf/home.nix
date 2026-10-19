@@ -6,7 +6,7 @@
   home = {
     username = "gramdalf";
     homeDirectory = "/home/gramdalf";
-    stateVersion = "24.05";
+    stateVersion = "26.05";
     shellAliases = {
       lla = "ls -la";
       resu = "sudo !!";
