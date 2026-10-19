@@ -117,7 +117,9 @@
       # Games
       prismlauncher
       mangohud # System usage stats
-      orca-slicer
+      # https://github.com/NixOS/nixpkgs/pull/575578
+      #orca-slicer
+      inputs.nixpkgs-orcaslicer.legacyPackages.x86_64-linux.orca-slicer
       #### CLI ####
       exiftool
       cmatrix

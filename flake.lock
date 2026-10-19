@@ -327,6 +327,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-orcaslicer": {
+      "locked": {
+        "lastModified": 1792323722,
+        "narHash": "sha256-8cPHTDc7jWSc2MEXWkGDxvqRyknb64JzVSNozoyuQ+o=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6d615949fc85c978074eecf52398db490b0d374e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6d615949fc85c978074eecf52398db490b0d374e",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1792030654,
@@ -376,6 +392,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-orcaslicer": "nixpkgs-orcaslicer",
         "nixpkgs-stable": "nixpkgs-stable",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "spicetify-nix": "spicetify-nix"
