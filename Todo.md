@@ -76,3 +76,10 @@ https://github.com/FrameworkComputer/linux-docs/blob/main/usb-events/readme.md
 - `programs.trippy.enable`
 - `programs.udevil.enable`
 - `programs.vivid.enable`
+
+# Diffing nixos configurations
+
+- `nix eval .#nixosConfigurations.<name>.system.build.toplevel` - get drv path
+- Make change, `nix eval` to get the second path
+- `nix diff path1 path2`
+- Profit
