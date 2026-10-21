@@ -84,32 +84,6 @@ let
     esac
   ''
   );
-  #paperlessManageScript = (
-  #pkgs.writeShellScriptBin "paperless-manage" ''
-  #  set -a
-  #  ${lib.concatMapStringsSep "\n" (envFile: ''
-  #    . "${envFile}"
-  #  '') cfg.environmentFiles}
-  #  set +a
-  #  export PYTHONPATH=${finalPackage.pythonPath}
-  #  case "$(whoami)" in
-  #    "root")
-  #      ${lib.getExe' pkgs.util-linux "runuser"} ${
-  #        lib.cli.toCommandLineShellGNU { } {
-  #          preserve-environment = true;
-  #          user = "netbox";
-  #          supp-group = if cfg.redis.createLocally then config.services.redis.servers.netbox.group else null;
-  #        }
-  #      } -- ${finalPackage}/bin/netbox "$@";;
-  #    "netbox")
-  #      exec ${finalPackage}/bin/netbox "$@";;
-  #    *)
-  #      echo "This must be run by either the root or the 'netbox' user." >&2
-  #      exit 1
-  #  esac
-  #''
-  #);
-
 
   defaultServiceConfig = {
     Slice = "system-paperless.slice";
