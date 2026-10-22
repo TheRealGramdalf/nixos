@@ -23,12 +23,22 @@
     enableUserSlices = true;
     enableSystemSlice = true;
   };
+  environment.sessionVariables.KWIN_DRM_DISABLE_TRIPLE_BUFFERING = 1;
 
   gtk.iconCache.enable = true;
   users = {
     groups."trusted-users" = {};
   };
   fonts.packages = [pkgs.liberation_ttf_v2];
+
+  nix.buildMachines."aer" = {
+    hostName = "aer";
+    protocol = "ssh-ng";
+    system = "x86_64-linux";
+    sshUser = "gramdalf";
+    sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
+  };
+  nix.distributedBuilds = true;
   ###
 
   nix.settings = {
