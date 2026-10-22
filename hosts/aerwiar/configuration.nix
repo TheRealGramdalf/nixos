@@ -31,13 +31,17 @@
   };
   fonts.packages = [pkgs.liberation_ttf_v2];
 
-  nix.buildMachines."aer" = {
-    hostName = "aer";
-    protocol = "ssh-ng";
-    system = "x86_64-linux";
-    sshUser = "gramdalf";
-    sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
-  };
+  nix.buildMachines = [
+    {
+      "aer" = {
+        hostName = "aer";
+        protocol = "ssh-ng";
+        system = "x86_64-linux";
+        sshUser = "gramdalf";
+        sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
+      };
+    }
+  ];
   nix.distributedBuilds = true;
   ###
 
