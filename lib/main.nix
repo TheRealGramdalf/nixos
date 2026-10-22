@@ -17,4 +17,12 @@ lib: {
       ];
     };
   };
+
+  # importNixFiles ./.;
+  importNixFiles =
+  dir:
+  lib.pipe (builtins.readDir dir) [
+    (lib.filterAttrs (name: _: name != "default.nix" && lib.hasSuffix ".nix" name))
+    (lib.mapAttrsToList (name: _: dir + "/${name}"))
+  ];
 }
