@@ -35,6 +35,7 @@ in {
     client.settings.uri = cfg.server.settings.origin;
     unix = {
       enable = true;
+      sshIntegration = true;
       settings = {
         kanidm.pam_allowed_login_groups = ["3fd496d1-bdcb-42b3-bbab-040b6befcaac"];
         home_attr = "uuid";
