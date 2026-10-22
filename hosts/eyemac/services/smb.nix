@@ -44,9 +44,13 @@
       '';
     };
     avahi = {
-      publish.enable = true;
-      publish.userServices = true;
-      # ^^ Needed for samba to automatically register mDNS records
+      settings.publish = {
+        # Enable publishing
+        disable-publishing = false;
+        disable-user-service-publishing = false;
+        # ^^ Needed for samba to automatically register mDNS records
+        publish-addresses = true;
+      };
     };
   };
 }

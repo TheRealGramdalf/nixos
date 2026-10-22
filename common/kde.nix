@@ -51,7 +51,11 @@
     # Printing, mDNS etc
     avahi = {
       enable = true;
-      publish.enable = true;
+      # Enable publishing
+      settings.publish = {
+        disable-publishing = false;
+        publish-addresses = true;
+      };
       nssmdns4 = false;
       nssmdns6 = false;
     };

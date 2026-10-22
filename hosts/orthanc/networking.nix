@@ -58,9 +58,10 @@
       nssmdns4 = false;
       nssmdns6 = false;
       openFirewall = true;
-      publish = {
-        enable = true;
-        addresses = true;
+      settings.publish = {
+        # Enable publishing
+        disable-publishing = false;
+        publish-addresses = true;
       };
     };
     chrony.enable = true;
