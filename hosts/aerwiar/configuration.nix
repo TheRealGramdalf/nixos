@@ -33,13 +33,14 @@
 
   nix.buildMachines = [
     {
-      "aer" = {
-        hostName = "aer";
-        protocol = "ssh-ng";
-        system = "x86_64-linux";
-        sshUser = "gramdalf";
-        sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
-      };
+      hostName = "aer";
+      protocol = "ssh-ng";
+      system = "x86_64-linux";
+      sshUser = "gramdalf";
+      sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      maxJobs = 3;
+      speedFactor = 2;
     }
   ];
   nix.distributedBuilds = true;
