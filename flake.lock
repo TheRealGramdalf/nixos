@@ -199,11 +199,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792521695,
-        "narHash": "sha256-/BuQT5tbFtU3qSR0hRc0a+PJZ0RlJVVXIVkCvy/9cFE=",
+        "lastModified": 1792741111,
+        "narHash": "sha256-nPmcXGK3TNhJT5UVHfvk0SS37EwuqAW+zgwTvxLYhPM=",
         "owner": "therealgramdalf",
         "repo": "mindwtr-flake",
-        "rev": "74d5bfa8efaadcc0967914ef261d8a07e8a119fd",
+        "rev": "b5fcba799bdd5c4f37a13d447b36bba5cda38131",
         "type": "github"
       },
       "original": {
