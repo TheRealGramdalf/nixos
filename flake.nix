@@ -4,8 +4,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
-    nixpkgs-orcaslicer.url = "github:NixOS/nixpkgs/6d615949fc85c978074eecf52398db490b0d374e";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
