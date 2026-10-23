@@ -61,7 +61,7 @@
       proton-vpn
       #nextcloud-client
       # File editors
-      audacity
+      #audacity
       # pitivi # Video editor
       blender
       gimp
