@@ -39,7 +39,7 @@
       sshUser = "gramdalf";
       sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
       supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-      maxJobs = 3;
+      maxJobs = 20;
       speedFactor = 2;
     }
   ];
