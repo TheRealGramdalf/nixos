@@ -1,4 +1,4 @@
-{
+{stability, ...}: {
   imports = [
     ./printing.nix
   ];
@@ -49,15 +49,28 @@
       alsa.enable = false;
     };
     # Printing, mDNS etc
-    avahi = {
-      enable = true;
-      # Enable publishing
-      settings.publish = {
-        disable-publishing = false;
-        publish-addresses = true;
-      };
-      nssmdns4 = false;
-      nssmdns6 = false;
-    };
+    avahi =
+      {
+        enable = true;
+        nssmdns4 = false;
+        nssmdns6 = false;
+      }
+      // (
+        if (stability == "unstable")
+        then
+          # Enable publishing
+          {
+            settings.publish = {
+              disable-publishing = false;
+              publish-addresses = true;
+            };
+          }
+        else {
+          publish = {
+            enable = true;
+            addresses = true;
+          };  
+        }
+      );
   };
 }
