@@ -83,3 +83,12 @@ https://github.com/FrameworkComputer/linux-docs/blob/main/usb-events/readme.md
 - Make change, `nix eval` to get the second path
 - `nix diff path1 path2`
 - Profit
+
+# Remote builds
+
+Check whether you are a trusted user
+- `nix build nixpkgs#hello --option substituters "https://nix-community.cachix.org"`
+
+- You must define `i686-linux` as a system for 32bit builds (e.g. audacity SDL)
+- `--max-jobs 0` forces remote builders to be used
+- Set the `posix` group
