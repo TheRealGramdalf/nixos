@@ -41,14 +41,16 @@
     };
     avahi = {
       enable = true;
-      ipv6 = false;
       nssmdns4 = false;
       nssmdns6 = false;
       openFirewall = true;
-      settings.publish = {
-        # Enable publishing
-        disable-publishing = false;
-        publish-addresses = true;
+      settings = {
+        server.use-ipv6 = false;
+        publish = {
+          # Enable publishing
+          disable-publishing = false;
+          publish-addresses = true;
+        };
       };
     };
     chrony.enable = true;
