@@ -58,5 +58,4 @@
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ACTION=="add", RUN+="/bin/sh -c 'echo FIRMWARE_RESTART > ${config.services.klipper.inputTTY}'"
   '';
-  # curl --unix-socket comms/moonraker.sock http://localhost/ -d '{"jsonrpc":"2.0","method":"printer.firmware_restart","id":8463}␃' --http0.9
 }
