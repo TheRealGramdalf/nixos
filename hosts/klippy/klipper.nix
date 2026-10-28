@@ -56,6 +56,6 @@
   # Auto restart klipper when the printer is connected via usb
   # Credit https://github.com/Klipper3d/klipper/issues/835#issuecomment-441186301
   services.udev.extraRules = ''
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ACTION=="add", RUN+="/bin/sh -c 'echo FIRMWARE_RESTART > ${config.services.klipper.inputTTY}'"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ACTION=="add", RUN+="/bin/sh -c 'sleep 3 && echo FIRMWARE_RESTART > ${config.services.klipper.inputTTY}'"
   '';
 }
