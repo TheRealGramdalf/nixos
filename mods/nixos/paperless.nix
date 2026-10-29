@@ -76,9 +76,9 @@ let
               group = cfg.group;
               supp-group = if enableRedis then redisServer.group else null;
             }
-          } -- ${loadEnv} "$@";;
+          } -- ${lib.getExe loadEnv} "$@";;
         "${cfg.user}")
-          ${loadEnv} "$@"  ;;
+          ${lib.getExe loadEnv} "$@"  ;;
         *)
           echo "Aborting, paperless-manage must be run as 'root' or user '${cfg.user}'!" >&2
           echo "You may wish to rerun this with 'sudo'  " >&2
