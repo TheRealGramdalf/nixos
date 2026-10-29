@@ -1,6 +1,8 @@
 {
   programs.nushell = {
     enable = true;
+    ## STATEVERSION
+    loadSessionVariables = true;
   };
 
   programs.carapace = {
