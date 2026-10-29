@@ -53,23 +53,19 @@ let
       toString s
   ) cfg.settings);
 
+  loadEnv = pkgs.writeShellScriptBin "paperless-manage-load-env" ''
+    set -o allexport # Export the following env vars
+    ${lib.toShellVars env}
+    ${lib.optionalString (cfg.environmentFile != null) "source ${cfg.environmentFile}"}
+    if [[ -z "''${PAPERLESS_SECRET_KEY:-}" && -e '${secretKeyFile}' ]]; then
+      source '${secretKeyFile}'
+    fi
+    set +o allexport
+    cd '${cfg.dataDir}'
+    ${lib.getExe cfg.package} "$@"
+  '';
   manage = (
   pkgs.writeShellScriptBin "paperless-manage" ''
-      run_script() {
-
-        set -o allexport # Export the following env vars
-        ${lib.toShellVars env}
-        ${lib.optionalString (cfg.environmentFile != null) "source ${cfg.environmentFile}"}
-        if [[ -z "''${PAPERLESS_SECRET_KEY:-}" && -e '${secretKeyFile}' ]]; then
-          source '${secretKeyFile}'
-        fi
-        set +o allexport
-
-        cd '${cfg.dataDir}'
-
-        ${lib.getExe cfg.package} "$@"
-      }
-
       # Switch user and run script
       case "$(whoami)" in
         "root")
@@ -80,9 +76,9 @@ let
               group = cfg.group;
               supp-group = if enableRedis then redisServer.group else null;
             }
-          } -- run_script "$@";;
+          } -- ${loadEnv} "$@";;
         "${cfg.user}")
-          exec run_script "$@";;
+          ${loadEnv} "$@"  ;;
         *)
           echo "Aborting, paperless-manage must be run as 'root' or user '${cfg.user}'!" >&2
           echo "You may wish to rerun this with 'sudo'  " >&2
