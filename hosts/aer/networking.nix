@@ -80,7 +80,7 @@ in {
       nssmdns4 = false;
       nssmdns6 = false;
       openFirewall = true;
-      settings.server.allowInterfaces = ["eno1"];
+      settings.server.allow-interfaces = ["eno1"];
     };
     samba-wsdd = {
       enable = true;
