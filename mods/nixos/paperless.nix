@@ -79,6 +79,7 @@ let
               user = cfg.user;
               group = cfg.group;
               supp-group = if enableRedis then redisServer.group else null;
+              whitelist-environment = ["PAPERLESS_SECRET_KEY"]; 
             }
           } -- run_script "$@";;
         "${cfg.user}")
