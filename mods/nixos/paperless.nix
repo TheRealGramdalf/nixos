@@ -55,34 +55,40 @@ let
 
   manage = (
   pkgs.writeShellScriptBin "paperless-manage" ''
-    set -o allexport # Export the following env vars
-    ${lib.toShellVars env}
-    ${lib.optionalString (cfg.environmentFile != null) "source ${cfg.environmentFile}"}
-    if [[ -z "''${PAPERLESS_SECRET_KEY:-}" && -e '${secretKeyFile}' ]]; then
-      source '${secretKeyFile}'
-    fi
-    set +o allexport
+      run_script() {
 
-    cd '${cfg.dataDir}'
+        set -o allexport # Export the following env vars
+        ${lib.toShellVars env}
+        ${lib.optionalString (cfg.environmentFile != null) "source ${cfg.environmentFile}"}
+        if [[ -z "''${PAPERLESS_SECRET_KEY:-}" && -e '${secretKeyFile}' ]]; then
+          source '${secretKeyFile}'
+        fi
+        set +o allexport
 
-    # Switch user and run script
-    case "$(whoami)" in
-      "root")
-        ${lib.getExe' pkgs.util-linux "runuser"} ${
-          lib.cli.toCommandLineShellGNU { } {
-            preserve-environment = true;
-            user = cfg.user;
-            group = cfg.group;
-            supp-group = if enableRedis then redisServer.group else null;
-          }
-        } -- ${lib.getExe cfg.package} "$@";;
-      "${cfg.user}")
-        exec ${lib.getExe cfg.package} "$@";;
-      *)
-        echo "Aborting, paperless-manage must be run as `root` or user `${cfg.user}`!" >&2
-        exit 2
-    esac
-  ''
+        cd '${cfg.dataDir}'
+
+        ${lib.getExe cfg.package} "$@"
+      }
+
+      # Switch user and run script
+      case "$(whoami)" in
+        "root")
+          ${lib.getExe' pkgs.util-linux "runuser"} ${
+            lib.cli.toCommandLineShellGNU { } {
+              preserve-environment = true;
+              user = cfg.user;
+              group = cfg.group;
+              supp-group = if enableRedis then redisServer.group else null;
+            }
+          } -- run_script "$@";;
+        "${cfg.user}")
+          exec run_script "$@";;
+        *)
+          echo "Aborting, paperless-manage must be run as 'root' or user '${cfg.user}'!" >&2
+          echo "You may wish to rerun this with 'sudo'  " >&2
+          exit 2
+      esac
+    ''
   );
 
   defaultServiceConfig = {
