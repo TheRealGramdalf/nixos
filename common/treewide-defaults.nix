@@ -18,4 +18,10 @@
 
   # The world must be oxidized
   security.sudo-rs.enable = true;
+
+  nixpkgs.config = {
+    problems.handlers = {
+      "gtk+".broken = "warn"; # or "ignore"
+    };
+  };
 }
