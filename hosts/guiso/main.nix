@@ -9,6 +9,7 @@
     ../../common/tomeutils.nix
     ../../common/nh.nix
     ../../common/ntfs.nix
+    ../../common/apfs.nix
     ../../common/treewide-defaults.nix
     ../../common/backdoor.nix
 
