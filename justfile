@@ -13,10 +13,10 @@ clean:
   nix fmt
 
 geniso:
-  nix build .#nixosConfigurations.iso.config.system.build.isoImage
+  nix build --option builders "" .#nixosConfigurations.iso.config.system.build.isoImage
 
 genguiso:
-  nix build .#nixosConfigurations.guiso.config.system.build.isoImage
+  nix build --option builders "" .#nixosConfigurations.guiso.config.system.build.isoImage
 
 checkhosts:
   nix eval .#nixosConfigurations.aer.config.system.build.toplevel
