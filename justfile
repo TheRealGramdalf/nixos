@@ -15,7 +15,7 @@ clean:
 geniso:
   nix build .#nixosConfigurations.iso.config.system.build.isoImage
 
-genuiso:
+genguiso:
   nix build .#nixosConfigurations.guiso.config.system.build.isoImage
 
 checkhosts:
