@@ -213,6 +213,16 @@
           })
         ];
       };
+      "guiso" = nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit tome;
+          stability = "unstable";
+        };
+        modules = [
+          ./hosts/guiso/main.nix
+        ];
+      };
     };
     packages.x86_64-linux = let
       pkgs = x86pkgs;
