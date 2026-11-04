@@ -1,4 +1,8 @@
-{ modulesPath, ... }: {
+{
+  modulesPath,
+  lib,
+  ...
+}: {
   imports = [
     # Commonly used config
     ../../common/zfs-boot.nix
@@ -10,6 +14,10 @@
 
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
   ];
+
+  # sudo-rs conflicts with install cd module
+  security.sudo.enable = lib.mkForce false;
+
   time.timeZone = "America/Vancouver";
   system.stateVersion = "26.11";
   i18n.defaultLocale = "en_US.UTF-8";
