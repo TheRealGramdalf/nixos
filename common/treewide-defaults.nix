@@ -11,7 +11,11 @@
 
   environment.systemPackages = [pkgs.ghostty.terminfo];
 
-  hardware.bluetooth.powerOnBoot = false;
+  hardware = {
+    enableAllFirmware = true;
+    bluetooth.powerOnBoot = false;
+  };
+
   boot.tmp.cleanOnBoot = true;
   # Not needed (already default? might be stateversion)
   services.dbus.implementation = "broker";
