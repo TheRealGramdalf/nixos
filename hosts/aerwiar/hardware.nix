@@ -7,7 +7,6 @@
   services.hardware.bolt.enable = true;
 
   hardware = {
-    enableAllFirmware = true;
     keyboard.qmk.enable = true;
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     bluetooth.enable = true;

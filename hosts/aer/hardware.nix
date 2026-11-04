@@ -13,8 +13,6 @@
     kernelModules = ["kvm-intel"];
   };
 
-  hardware.enableAllFirmware = true;
-
   fileSystems."/" = {
     device = "aer-zroot/system-state";
     fsType = "zfs";

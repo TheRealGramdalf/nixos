@@ -37,7 +37,6 @@ in {
   boot.extraModulePackages = [];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.enableAllFirmware = true;
 
   imports = [inputs.minegrub-theme.nixosModules.default];
   boot.loader.grub = {

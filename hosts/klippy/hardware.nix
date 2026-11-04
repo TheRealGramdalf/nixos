@@ -1,5 +1,4 @@
 {
-  hardware.enableAllFirmware = true;
   boot = {
     zfs = {
       devNodes = "/dev/disk/by-partlabel";
