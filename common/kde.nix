@@ -69,7 +69,7 @@
           publish = {
             enable = true;
             addresses = true;
-          };  
+          };
         }
       );
   };

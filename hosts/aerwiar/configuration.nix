@@ -35,7 +35,7 @@
     {
       hostName = "aer";
       protocol = "ssh-ng";
-      systems = [ "i686-linux" "x86_64-linux"];
+      systems = ["i686-linux" "x86_64-linux"];
       sshUser = "gramdalf";
       sshKey = "/home/gramdalf/.ssh/gramdalf-remote-build";
       supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
@@ -44,7 +44,7 @@
     }
   ];
   nix.distributedBuilds = true;
-    # optional, useful when the builder has a faster internet connection than yours
+  # optional, useful when the builder has a faster internet connection than yours
   nix.settings = {
     builders-use-substitutes = true;
   };
