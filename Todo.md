@@ -22,7 +22,7 @@ Add release note links
 - NixOS https://nixos.org/manual/nixos/stable/release-notes
 - Traefik https://doc.traefik.io/traefik/migrate/v3/
 - Grafana https://grafana.com/docs/grafana/latest/whatsnew/
-- Grafana Alloy https://grafana.com/docs/alloy/latest/release-notes/
+- Grafana Alloy https://github.com/grafana/alloy/blob/main/CHANGELOG.md
 - Grafana Loki https://grafana.com/docs/loki/latest/release-notes/ https://grafana.com/docs/loki/latest/setup/upgrade/
 
 
