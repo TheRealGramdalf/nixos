@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   boot = {
     loader.timeout = 0;
     zfs = {
@@ -23,7 +27,13 @@
     enableUserSlices = true;
     enableSystemSlice = true;
   };
-  environment.sessionVariables.KWIN_DRM_DISABLE_TRIPLE_BUFFERING = 1;
+
+  services.displayManager = {
+    sddm.enable = lib.mkForce false;
+    plasma-login-manager = {
+      enable = true;
+    };
+  };
 
   gtk.iconCache.enable = true;
   users = {
