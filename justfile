@@ -19,7 +19,7 @@ genguiso:
   nix build --option builders "" .#nixosConfigurations.guiso.config.system.build.isoImage
 
 checkhosts:
-  nix eval .#nixosConfigurations.aer.config.system.build.toplevel
-  nix eval .#nixosConfigurations.aerwiar.config.system.build.toplevel
-  nix eval .#nixosConfigurations.atreus.config.system.build.toplevel
-  nix eval .#nixosConfigurations.muffin-time.config.system.build.toplevel
+  nix eval .#nixosConfigurations.aer.config.system.build.toplevel --keep-going
+  nix eval .#nixosConfigurations.aerwiar.config.system.build.toplevel --keep-going
+  nix eval .#nixosConfigurations.atreus.config.system.build.toplevel --keep-going
+  nix eval .#nixosConfigurations.muffin-time.config.system.build.toplevel --keep-going
