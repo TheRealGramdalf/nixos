@@ -38,7 +38,8 @@
     mindwtr = {
       url = "github:therealgramdalf/mindwtr-flake";
       #url = "git+file:///home/gramdalf/Documents/mindwtr-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Bun update borked bun2nix
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
