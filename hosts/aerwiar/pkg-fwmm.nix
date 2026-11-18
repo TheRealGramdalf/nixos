@@ -13,7 +13,7 @@
   filedialpy ? null,
 }: let
   pname = "fwmm";
-  version = "7d1a08294a62c99a8ed23d090c3f92c5f186f580";
+  version = "1.0.3";
 
   pyWithLibs = python.buildEnv.override {
     extraLibs = [
@@ -32,8 +32,8 @@ in
     src = fetchFromGitHub {
       owner = "DedFishy";
       repo = "FWMM";
-      rev = version;
-      hash = "sha256-cXfoqYhnJ62OPSYuPsn0piEDO6Q+J6hTinF1j2Ix7Rc=";
+      rev = "v${version}";
+      hash = "sha256-rwPLB7VeakR84/VEopd9XXby05bujQOCfNLTDVQyz1Y=";
     };
 
     nativeBuildInputs = [
@@ -51,7 +51,7 @@ in
     '';
 
     meta = {
-      changelog = "https://github.com/DedFishy/FWMM/releases/tag/v1.0.2";
+      changelog = "https://github.com/DedFishy/FWMM/releases/tag/v${version}";
       homepage = "https://github.com/DedFishy/FWMM";
       description = "A utility to customize what is displayed on your Framework 16 LED matrix module using a widget-based system.";
       license = lib.licenses.mit;
