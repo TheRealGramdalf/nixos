@@ -16,10 +16,11 @@
   modulesPath,
   ...
 }: let
-  # Noah's public keys (not secrets).
+  # Noah's public keys (not secrets): two laptop keys and the Surface's.
   sshKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkhdWfoClZZU6IImO6f92Ayt7H63a5EZ/obLCstg+Sh noah@dell7506"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAbdx9MTfeHCXU4cRJft6pwtSubhZEzSWw2RPqU9gFA here-nor-there"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAbdx9MTfeHCXU4cRJft6pwtSubhZEzSWw2RPqU9gFA noah@dell7506-2"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/GrGHHSIzdJhmeEI6k5wdeGUeIrjXaq2dPwysXbRM7 noah@surface"
   ];
 in {
   imports = [
@@ -95,11 +96,13 @@ in {
   # --- SSH -----------------------------------------------------------------
   services.openssh = {
     enable = true;
-    openFirewall = false;
+    openFirewall = false; # port 22 is opened on tailscale0 only (above)
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
-      PermitRootLogin = "prohibit-password";
+      PermitRootLogin = "no";
+      AllowUsers = ["noah"];
+      X11Forwarding = false;
     };
   };
 
@@ -114,7 +117,6 @@ in {
     openssh.authorizedKeys.keys = sshKeys;
     linger = true; # keep user services (T3) running without a login
   };
-  users.users.root.openssh.authorizedKeys.keys = sshKeys;
   # Key-only, tailnet-only SSH, so no sudo password.
   security.sudo.wheelNeedsPassword = false;
 
