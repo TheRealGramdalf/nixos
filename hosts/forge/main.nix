@@ -2,8 +2,9 @@
 #
 # Size: 6 vCPU, 16 GiB RAM, 64 GiB virtio disk (set on the host side).
 # Build the boot disk:  nix build .#forge-image   ->  result/nixos.qcow2
-# The image is sparse (a few GiB on disk) and grows to 64 GiB.
-# It boots with UEFI (OVMF); the root fs grows to fill the disk on first boot.
+# The image is just big enough for the system. Grow it to 64 GiB before first
+# boot (qemu-img resize nixos.qcow2 64G); the root fs fills the disk on boot.
+# Boots with UEFI (OVMF).
 #
 # First boot: the console shows a Tailscale login URL. Send it to Noah;
 # once he approves it, he reaches the VM over his tailnet and takes it from there.
@@ -31,7 +32,6 @@ in {
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "26.05";
 
-  virtualisation.diskSize = 64 * 1024; # MiB
   image.baseName = lib.mkForce "nixos";
   boot.loader.efi.canTouchEfiVariables = false;
   boot.kernelParams = ["console=tty0" "console=ttyS0,115200"];
