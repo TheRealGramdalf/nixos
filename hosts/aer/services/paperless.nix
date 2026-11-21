@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   cfg = config.services.paperless;
   name = "paperless";
   port = "28981";
@@ -32,6 +36,9 @@ in {
     # The USER variable uses the SPN rather than UUID
     user = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
     group = "e89bf800-37ae-453b-8e9c-6b7f55dd82c6";
+    package = pkgs.paperless-ngx.overrideAttrs {
+      doCheck = false;
+    };
     settings = {
       # Postgres connection settings. Port is implicit, password is secret
       PAPERLESS_DBHOST = "localhost";
