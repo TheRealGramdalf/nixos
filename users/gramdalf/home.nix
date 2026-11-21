@@ -165,6 +165,7 @@
       tuxpaint
       nixd
       inputs.mindwtr.packages.x86_64-linux.mindwtr
+      wl-clipboard
       #zotero
     ];
   };
