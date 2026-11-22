@@ -197,6 +197,10 @@
           ./mods/nixos/main.nix
         ];
       };
+      # Noah's headless build VM (guest). Image: nix build .#forge-image
+      "forge" = nixosSystem {
+        modules = [./hosts/forge/main.nix];
+      };
       "iso" = nixosSystem {
         system = "x86_64-linux";
         specialArgs = {stability = "unstable";};
@@ -238,6 +242,7 @@
       tasmota-kuled = pkgs.callPackage ./pkgs/tasmota.nix {
         userConfig = builtins.readFile ./hosts/smarthome/kuled.h;
       };
+      forge-image = inputs.self.nixosConfigurations.forge.config.system.build.image;
       peetscastle = pkgs.callPackage ./hosts/peetscastle/main.nix {
         inherit inputs;
         inherit pkgs;
