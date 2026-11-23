@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   imports = [
     ./kanidm.nix
     ./traefik.nix
@@ -26,6 +26,4 @@
     ./mindwtr-web.nix
     ./languagetool.nix
   ];
-
-  services.nginx.enable = lib.mkForce false;
 }
