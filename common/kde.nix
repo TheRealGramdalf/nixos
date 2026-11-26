@@ -10,12 +10,8 @@
   };
   ##TODO check
   #qt.style = "breeze";
-  services.displayManager.sddm = {
-    # SDDM isn't enabled by the plasma6 module
-    enable = true;
-    # Enable Wayland in SDDM so the system doesn't need X11
-    wayland.enable = true;
-  };
+  
+  services.displayManager.plasma-login-manager.enable = true;
 
   networking = {
     # Required for KDE to control wifi via GUI
