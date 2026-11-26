@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   boot = {
@@ -26,13 +25,6 @@
   systemd.oomd = {
     enableUserSlices = true;
     enableSystemSlice = true;
-  };
-
-  services.displayManager = {
-    sddm.enable = lib.mkForce false;
-    plasma-login-manager = {
-      enable = true;
-    };
   };
 
   gtk.iconCache.enable = true;
